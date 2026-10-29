@@ -1,0 +1,957 @@
+/* Floating controls over the 3D stage. Geometry and tokens from Explorer.module.css (.root). */
+
+/* ---------- tool rail (house views) ---------- */
+
+.rail {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: calc(var(--inset) + var(--panel-w) + var(--gap));
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 5px;
+  border-radius: 22px;
+  transform: translateY(-50%);
+  background: var(--glass-bg-thin);
+  -webkit-backdrop-filter: var(--glass-blur-thin);
+  backdrop-filter: var(--glass-blur-thin);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow-thin);
+  transition:
+    left 700ms var(--ease-drawer),
+    top 700ms var(--ease-drawer),
+    transform 700ms var(--ease-drawer),
+    opacity 300ms var(--ease-out);
+}
+
+/* Panel rolled up: the rail moves to the stage's left edge, just under the bar. */
+@media (min-width: 900px) {
+  :global([data-panel="collapsed"]) .rail {
+    top: calc(var(--top) + var(--bar-h) + var(--gap));
+    left: var(--inset);
+    transform: none;
+  }
+}
+
+.railItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 72px;
+  min-height: 62px;
+  padding: 8px 4px;
+  border-radius: 17px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: var(--fg-muted);
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out),
+    box-shadow var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .railItem:hover {
+    color: var(--fg);
+    background: var(--fill-hover);
+  }
+}
+
+.railItem:active {
+  transform: scale(0.96);
+}
+
+.railItem[aria-pressed="true"] {
+  color: var(--fg);
+  font-weight: 600;
+  background: var(--chip);
+  box-shadow: var(--chip-shadow);
+}
+
+/* Immersive walk: the rail moves to the left edge where the panel was. */
+:global([data-immersive]) .rail {
+  left: var(--inset);
+}
+
+/* ---------- level pill (model view) ---------- */
+
+.floors {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  right: var(--inset);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: var(--glass-bg-thin);
+  -webkit-backdrop-filter: var(--glass-blur-thin);
+  backdrop-filter: var(--glass-blur-thin);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow-thin);
+}
+
+.floorStep,
+.floorItem {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  color: var(--fg-muted);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out),
+    box-shadow var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+.floorStep {
+  height: 32px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .floorStep:not(:disabled):hover,
+  .floorItem:hover {
+    color: var(--fg);
+    background: var(--fill-hover);
+  }
+}
+
+.floorStep:not(:disabled):active,
+.floorItem:active {
+  transform: scale(0.92);
+}
+
+.floorItem[aria-pressed="true"] {
+  color: var(--fg);
+  background: var(--chip);
+  box-shadow: var(--chip-shadow);
+}
+
+/* ---------- bottom bar: style | time of day | zoom ---------- */
+
+.bottomBar {
+  position: absolute;
+  z-index: 6;
+  bottom: calc(var(--dock) + var(--inset));
+  left: var(--free-center);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 6px;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  transition:
+    left 700ms var(--ease-drawer),
+    bottom 560ms var(--ease-drawer),
+    opacity 300ms var(--ease-out);
+}
+
+.bottomBar:empty {
+  display: none;
+}
+
+:global([data-immersive]) .bottomBar {
+  left: 50%;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.group + .group {
+  padding-left: 12px;
+  border-left: 1px solid var(--line);
+}
+
+.group:first-child:has(.swatch) {
+  padding-left: 4px;
+}
+
+/* ---------- finish swatches (bottom bar) ---------- */
+
+.swatch {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  box-shadow:
+    0 0 0 0.5px rgba(31, 31, 31, 0.18),
+    0 1px 3px rgba(31, 24, 18, 0.18);
+  transform: rotate(-30deg);
+  transition:
+    box-shadow var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+/* A comfortable hit area around the small dot. */
+.swatch::after {
+  content: "";
+  position: absolute;
+  inset: -6px -3px;
+  border-radius: 999px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .swatch:hover {
+    box-shadow:
+      0 0 0 1px rgba(31, 31, 31, 0.32),
+      0 2px 6px rgba(31, 24, 18, 0.2);
+  }
+}
+
+.swatch:active {
+  transform: rotate(-30deg) scale(0.9);
+}
+
+.swatch[aria-checked="true"] {
+  box-shadow:
+    0 0 0 1.5px var(--ink),
+    0 2px 6px rgba(31, 24, 18, 0.2);
+}
+
+.swatchName {
+  min-width: 128px;
+  padding: 0 4px 0 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--fg);
+}
+
+/* ---------- walk HUD ---------- */
+
+.walkTop {
+  position: absolute;
+  z-index: 7;
+  top: var(--inset);
+  left: var(--inset);
+  display: flex;
+  pointer-events: none;
+}
+
+.pill {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px 0 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  transition:
+    transform var(--dur-press) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pill:hover {
+    background: rgba(255, 255, 255, 0.78);
+  }
+}
+
+.pill:active {
+  transform: scale(0.96);
+}
+
+.pillSolid {
+  padding: 0 20px;
+  color: var(--page-white);
+  background: var(--ink);
+}
+
+/* Room-to-room jumps: one row per storey, top centre (the header steps aside in the walk). */
+.nodeBar {
+  position: absolute;
+  z-index: 7;
+  top: var(--inset);
+  left: 50%;
+  display: grid;
+  gap: 2px;
+  /* centred, clear of the back pill on the left (and the same margin on the right) */
+  max-width: calc(100% - 2 * (var(--inset) + 132px));
+  padding: 5px;
+  border-radius: 22px;
+  transform: translateX(-50%);
+  animation: hud-in 520ms var(--ease-out) both;
+}
+
+.nodeGroup {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nodeGroup::-webkit-scrollbar {
+  display: none;
+}
+
+.nodeGroup > span {
+  flex: none;
+  padding: 0 8px 0 12px;
+}
+
+.nodeGroup > button {
+  flex: none;
+  padding: 0 11px;
+}
+
+
+@keyframes hud-in {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+    scale: 0.98;
+  }
+}
+
+.minimap {
+  position: absolute;
+  z-index: 6;
+  left: var(--inset);
+  bottom: calc(var(--dock) + var(--inset));
+  padding: 7px;
+  border-radius: 20px;
+  animation: hud-rise 520ms var(--ease-out) both;
+}
+
+@keyframes hud-rise {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+    scale: 0.98;
+  }
+}
+
+/* Storey switch under the map, full width of the card. */
+.levelSwitch {
+  display: flex;
+  width: 100%;
+  margin-top: 7px;
+}
+
+.levelSwitch > button {
+  flex: 1 1 0;
+}
+
+.minimapInner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: inset 0 0 0 0.5px rgba(31, 31, 31, 0.1);
+}
+
+.minimapImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  transform-origin: 0 0;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+.minimapDot {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2.5px solid rgba(31, 31, 31, 0.78);
+  box-shadow: 0 1px 4px rgba(31, 24, 18, 0.3);
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    border-color var(--dur-ui) var(--ease-out);
+}
+
+.minimapDot::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+}
+
+.minimapDot[aria-current] {
+  background: var(--gold);
+  border-color: #fff;
+  box-shadow:
+    0 0 0 3px var(--gold-halo),
+    0 1px 4px rgba(31, 24, 18, 0.3);
+}
+
+.minimapMarker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* View cone pointing along +x of the marker's rotated frame. */
+.minimapMarker span {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  background: radial-gradient(circle at 0 50%, rgba(217, 163, 91, 0.85), rgba(217, 163, 91, 0) 72%);
+  clip-path: polygon(0 50%, 100% 8%, 100% 92%);
+}
+
+.minimapMarker::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--gold);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(31, 24, 18, 0.35);
+  z-index: 1;
+}
+
+.hint {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg);
+  white-space: nowrap;
+  translate: -50% -50%;
+  transition:
+    opacity 500ms var(--ease-out),
+    translate 500ms var(--ease-out),
+    scale 500ms var(--ease-out);
+}
+
+.hint[data-hidden] {
+  opacity: 0;
+  translate: -50% calc(-50% + 8px);
+  scale: 0.97;
+  pointer-events: none;
+}
+
+/* "Wizualizacja": bottom right, just left of the WhatsApp button. */
+.photoToggle {
+  position: absolute;
+  z-index: 8;
+  right: calc(var(--inset) + var(--fab) + 12px);
+  bottom: calc(var(--dock) + var(--inset) + (var(--fab) - 44px) / 2);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px 0 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  animation: hud-rise 520ms var(--ease-out) both;
+  transition:
+    transform var(--dur-press) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out),
+    color var(--dur-ui) var(--ease-out);
+}
+
+.photoToggle:active {
+  transform: scale(0.96);
+}
+
+.photoToggle[aria-pressed="true"] {
+  color: var(--page-white);
+  background: var(--ink);
+  border-color: transparent;
+}
+
+/* Dip through warm ivory, then reveal: the render's room differs slightly from the model, so the switch
+   is a deliberate transition rather than a crossfade that would show the frame jumping. */
+.photo {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  opacity: 0;
+  pointer-events: none;
+  background: #ebe6df;
+  transition: opacity 420ms var(--ease-in-out) 260ms;
+}
+
+.photo[data-visible] {
+  opacity: 1;
+  transition-delay: 0ms;
+}
+
+/* Fills the stage like the live view it replaces; renders are square, keep the room's centre. */
+.photo .photoImage {
+  object-fit: cover;
+  object-position: 50% 58%;
+  opacity: 0;
+  transition: opacity 520ms var(--ease-out);
+}
+
+.photo[data-visible] .photoImage {
+  opacity: 1;
+  transition-delay: 380ms;
+}
+
+.photoCaption {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--dock) + var(--inset) + 68px);
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--fg-muted);
+  background: rgba(250, 248, 245, 0.72);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  backdrop-filter: blur(16px) saturate(170%);
+  translate: -50% 0;
+}
+
+/* ---------- dissolve ---------- */
+
+.dissolve {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  transition: opacity 650ms var(--ease-out);
+}
+
+.dissolve[data-fading] {
+  opacity: 0;
+}
+
+.dissolveFrame {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- gallery: a light frosted room for the pictures ---------- */
+
+.gallery {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  gap: 14px;
+  padding: calc(var(--inset) + 64px) clamp(72px, 8vw, 140px) calc(var(--dock) + var(--inset) + 4px);
+  background: rgba(243, 240, 236, 0.9);
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
+  backdrop-filter: blur(40px) saturate(160%);
+  animation: galleryIn 420ms var(--ease-out);
+}
+
+@keyframes galleryIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.galleryFrame {
+  position: relative;
+  min-height: 0;
+  animation: galleryRise 520ms var(--ease-out);
+}
+
+@keyframes galleryRise {
+  from {
+    opacity: 0;
+    scale: 0.985;
+  }
+}
+
+.galleryImage {
+  object-fit: contain;
+  filter: drop-shadow(0 24px 40px rgba(31, 24, 18, 0.18));
+}
+
+/* Developer's plans are drawn on white: let the paper melt into the room. */
+.galleryImage[data-plan] {
+  filter: none;
+  mix-blend-mode: multiply;
+}
+
+.galleryCaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.galleryCaption span {
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.gallery .galleryPrev,
+.gallery .galleryNext,
+.gallery .galleryClose {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+}
+
+.gallery .galleryPrev {
+  left: var(--inset);
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.gallery .galleryNext {
+  right: var(--inset);
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.gallery .galleryClose {
+  right: var(--inset);
+  top: var(--inset);
+}
+
+.thumbs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.thumb {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 12px;
+  opacity: 0.5;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition:
+    opacity var(--dur-ui) var(--ease-out),
+    outline-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .thumb:hover {
+    opacity: 0.85;
+  }
+}
+
+.thumb:active {
+  transform: scale(0.95);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb[aria-current] {
+  opacity: 1;
+  outline-color: var(--ink);
+}
+
+/* ---------- phones ---------- */
+
+@media (max-width: 899px) {
+  /* Mode bar: equal segments (icon over a short label) across the width, under the header. */
+  .rail {
+    top: var(--top);
+    left: var(--inset);
+    right: var(--inset);
+    flex-direction: row;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 18px;
+    transform: none;
+  }
+
+  .railItem {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 3px;
+    width: auto;
+    min-height: 50px;
+    padding: 6px 4px;
+    border-radius: 14px;
+    font-size: 11px;
+  }
+
+  .railItem svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .railItem span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  :global([data-immersive]) .rail {
+    left: var(--inset);
+    top: calc(var(--inset) + env(safe-area-inset-top, 0px));
+  }
+
+  /* Level pill: vertical on the right, under the mode bar, in thumb reach. */
+  .floors {
+    top: calc(var(--top) + 60px + var(--gap));
+    right: var(--inset);
+    padding: 4px;
+    transform: none;
+  }
+
+  .floorStep {
+    display: none;
+  }
+
+  .floorItem {
+    width: 44px;
+    height: 44px;
+  }
+
+  .zoomGroup,
+  .bottomBar[data-zoom-only] {
+    display: none;
+  }
+
+  /* Bottom bar: the row above the sheet, left-aligned (the WhatsApp button holds the right end). */
+  .bottomBar {
+    left: var(--inset);
+    bottom: calc(var(--dock) + var(--inset) + var(--peek-h) + var(--gap));
+    gap: 8px;
+    max-width: calc(100% - 2 * var(--inset) - var(--fab) - var(--gap));
+    padding: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    transform: none;
+  }
+
+  .bottomBar::-webkit-scrollbar {
+    display: none;
+  }
+
+  :global([data-immersive]) .bottomBar {
+    left: var(--inset);
+    bottom: calc(var(--dock) + var(--inset) + (var(--fab) - 46px) / 2);
+  }
+
+  .group + .group {
+    padding-left: 8px;
+  }
+
+  .group:first-child:has(.swatch) {
+    padding-left: 6px;
+  }
+
+  .swatch {
+    width: 30px;
+    height: 30px;
+  }
+
+  .swatchName {
+    display: none;
+  }
+
+  /* Expanded sheet: everything floating over the stage steps aside. */
+  :global([data-explorer-panel][data-sheet="full"]) ~ .rail,
+  :global([data-explorer-panel][data-sheet="full"]) ~ .floors,
+  :global([data-explorer-panel][data-sheet="full"]) ~ .bottomBar {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .walkTop {
+    display: none;
+  }
+
+  /* Rooms: under the mode bar, each storey a row that scrolls sideways. */
+  .nodeBar {
+    top: calc(var(--inset) + env(safe-area-inset-top, 0px) + 60px + var(--gap));
+    left: var(--inset);
+    right: var(--inset);
+    max-width: none;
+    padding: 4px;
+    border-radius: 20px;
+    transform: none;
+  }
+
+  .nodeGroup > span {
+    padding: 0 6px 0 10px;
+  }
+
+  /* The row scrolls sideways here: its far edge fades instead of slicing a word. */
+  .nodeGroup {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    padding-right: 20px;
+  }
+
+  /* The minimap is drawn at 0.68: the storey switch is sized up so it still lands at ~40px. */
+  .levelSwitch > button {
+    min-height: 58px;
+    font-size: 18px;
+  }
+
+  .minimap {
+    transform: scale(0.68);
+    transform-origin: 0 100%;
+    bottom: calc(var(--dock) + var(--inset) + var(--fab) + var(--gap));
+  }
+
+  .photoToggle {
+    right: var(--inset);
+    bottom: calc(var(--dock) + var(--inset) + var(--fab) + var(--gap));
+  }
+
+  /* The walk hint wraps on narrow screens instead of running off the edges. */
+  .hint {
+    width: max-content;
+    max-width: calc(100% - 2 * var(--inset) - 24px);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .photoCaption {
+    bottom: calc(var(--dock) + var(--inset) + var(--fab) + 64px);
+  }
+
+  .gallery {
+    padding: calc(var(--inset) + 60px) var(--inset) calc(var(--dock) + var(--inset));
+  }
+
+  .gallery .galleryPrev,
+  .gallery .galleryNext {
+    width: 44px;
+    height: 44px;
+  }
+
+  .galleryCaption {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13.5px;
+  }
+
+  .thumbs {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------- preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .nodeBar,
+  .minimap,
+  .photoToggle,
+  .galleryFrame {
+    animation-name: fade-in;
+  }
+
+  .hint {
+    transition-property: opacity;
+  }
+
+  .hint[data-hidden] {
+    translate: -50% -50%;
+    scale: 1;
+  }
+
+  .rail,
+  .bottomBar {
+    transition-duration: 1ms, 1ms, 200ms;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .rail,
+  .floors {
+    border-color: rgba(31, 31, 31, 0.5);
+  }
+
+  .railItem[aria-pressed="true"],
+  .floorItem[aria-pressed="true"] {
+    color: var(--page-white);
+    background: var(--ink);
+  }
+}
+
+/* Model 3D and Spacer wait for the preload: greyed, no feedback (the pressed chip stays visible). */
+.railItem[aria-disabled="true"] {
+  cursor: progress;
+}
+
+.railItem[aria-disabled="true"] > * {
+  opacity: 0.42;
+}
+
+.railItem[aria-disabled="true"]:active {
+  transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .railItem[aria-disabled="true"]:hover {
+    color: var(--fg-muted);
+    background: none;
+  }
+
+  .railItem[aria-disabled="true"][aria-pressed="true"]:hover {
+    background: var(--chip);
+  }
+}

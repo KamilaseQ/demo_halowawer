@@ -1,0 +1,146 @@
+/* "Rzut" mode: a paper card with the developer's plan in the free stage area (right of the panel and rail). */
+.plan {
+  position: absolute;
+  z-index: 4;
+  top: var(--top, 80px);
+  /* clear of the WhatsApp button in the bottom-right corner */
+  right: calc(var(--inset, 16px) + var(--fab, 56px) + var(--gap, 12px));
+  bottom: calc(var(--dock, 0px) + var(--inset, 16px));
+  /* right of the rail: panel + gap + rail (72px items + 5px padding + 1px edge, both sides) + gap */
+  left: calc(var(--inset, 16px) + var(--panel-w, 392px) + var(--gap, 12px) * 2 + 84px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  justify-items: center;
+  gap: 10px;
+  animation: planIn 460ms var(--ease-out, ease-out) both;
+}
+
+/* Panel rolled up: right of the rail at the stage's left edge, below the bar. */
+@media (min-width: 900px) {
+  :global([data-panel="collapsed"]) .plan {
+    top: calc(var(--top, 80px) + var(--bar-h, 56px) + var(--gap, 12px));
+    left: calc(var(--inset, 16px) + var(--gap, 12px) + 84px);
+  }
+}
+
+/* Storey tabs: a thin glass pill over the scene. */
+.plan .tabs {
+  padding: 4px;
+  background: var(--glass-bg-thin, rgba(250, 248, 245, 0.72));
+  -webkit-backdrop-filter: blur(22px) saturate(175%);
+  backdrop-filter: blur(22px) saturate(175%);
+  border: 1px solid var(--glass-edge, rgba(255, 255, 255, 0.62));
+  box-shadow: var(--glass-shadow-thin, 0 16px 36px -18px rgba(31, 24, 18, 0.36));
+}
+
+/* The plan itself sits on paper: opaque, so it is never glass on glass. */
+.paper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg, 24px);
+  background: #fdfcfa;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 0 0 0.5px rgba(31, 24, 18, 0.1),
+    0 2px 6px rgba(31, 24, 18, 0.05),
+    0 34px 80px -34px rgba(31, 24, 18, 0.45);
+  cursor: zoom-in;
+}
+
+.paper[data-zoomed] {
+  cursor: zoom-out;
+}
+
+.image {
+  object-fit: contain;
+  padding: 2% 3%;
+  mix-blend-mode: multiply;
+  transition:
+    transform 520ms var(--ease-out, ease-out),
+    opacity 280ms var(--ease-out, ease-out);
+}
+
+/* Until the drawing is in: a quiet shimmer on the paper, never a blank white card. */
+.paper[data-loading] .image {
+  opacity: 0;
+}
+
+.paper[data-loading]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(31, 24, 18, 0.05) 50%, transparent 70%) 0 0 / 300% 100%;
+  animation: paperShimmer 1.4s linear infinite;
+}
+
+@keyframes paperShimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+/* Hint under the paper: a small glass pill so it reads over any scene. */
+.note {
+  margin: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fg-muted, #6f6a66);
+  background: rgba(250, 248, 245, 0.72);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  backdrop-filter: blur(16px) saturate(170%);
+  box-shadow: 0 0 0 0.5px rgba(31, 24, 18, 0.08);
+}
+
+@keyframes planIn {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+    filter: blur(4px);
+  }
+}
+
+@media (max-width: 899px) {
+  /* Between the mode bar and the row above the sheet. */
+  .plan {
+    left: var(--inset, 8px);
+    right: var(--inset, 8px);
+    top: calc(var(--top, 68px) + 60px + var(--gap, 8px));
+    bottom: calc(var(--dock, 0px) + var(--inset, 8px) + var(--peek-h, 250px) + var(--gap, 8px));
+    gap: 8px;
+  }
+
+  .paper {
+    border-radius: 20px;
+  }
+
+  .note {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plan {
+    animation: planFade 200ms ease both;
+  }
+
+  .image {
+    transition: none;
+  }
+
+  .paper[data-loading]::after {
+    animation: none;
+  }
+}
+
+@keyframes planFade {
+  from {
+    opacity: 0;
+  }
+}

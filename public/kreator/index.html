@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>html,body{margin:0}</style>
+<title>Wnętrza Halo Wawer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: start = bird's-eye view with a room list on the right; inside a room the render goes full screen
+   and choices live in a glass dock at the bottom (on phones the dock sits under the render). */
+:root{
+  --bg:#f3efe8; --card:#ffffff; --ink:#222220; --muted:#6c655c; --taupe:#a39588; --line:#e7e0d5;
+  --chip:#f4f0e9; --sel:#222220; --selInk:#ffffff; --gold:#d9a35b; --stageInk:#fbf7f0;
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151311; --card:#1d1a17; --ink:#f0ebe2; --muted:#a69d91; --taupe:#b8a998; --line:#332e29;
+  --chip:#26221e; --sel:#f0ebe2; --selInk:#1d1a17; --gold:#e0ad68; --stageInk:#fbf7f0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151311; --card:#1d1a17; --ink:#f0ebe2; --muted:#a69d91; --taupe:#b8a998; --line:#332e29;
+  --chip:#26221e; --sel:#f0ebe2; --selInk:#1d1a17; --gold:#e0ad68; --stageInk:#fbf7f0; color-scheme:dark}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit}
+.app{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 380px;grid-template-rows:minmax(0,1fr);height:100%;min-height:0}
+/* in a room: render on the left, finishes in their own column on the right (or full width when hidden) */
+body:not(.planmode) .app{grid-template-columns:minmax(0,1fr) 268px;background:#1f1a16}
+body.dockoff:not(.planmode) .app{grid-template-columns:minmax(0,1fr)}
+body:not(.planmode) .panel{display:none}
+/* stage */
+.stage{position:relative;overflow:hidden;background:#2a2420;min-height:0}
+.stage canvas,.stage img.orig{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .45s ease}
+.stage img.orig{opacity:0;pointer-events:none}
+.stage.comparing img.orig{opacity:1;transition:opacity .15s}
+.topbar{position:absolute;inset:0 0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:16px max(20px,env(safe-area-inset-left,0px)) 40px;color:var(--stageInk);
+  background:linear-gradient(rgba(20,14,10,.55),rgba(20,14,10,0));z-index:2}
+.brand{display:flex;align-items:center;gap:8px;font-weight:500;font-size:17px;letter-spacing:-.01em}
+.brand svg{width:20px;height:20px}
+.crumb{opacity:.75;font-size:13px}
+.crumb b{font-weight:600;opacity:1}
+.compare{position:absolute;right:max(20px,env(safe-area-inset-right,0px));top:14px;z-index:3;background:rgba(24,18,14,.58);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--stageInk);
+  border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 14px;font:500 12.5px var(--font);cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none}
+.compare:hover{background:rgba(24,18,14,.75)}
+.compare:focus-visible,.room:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+/* dock: a slim side rail with what you change in the room; it can be hidden to see the whole render */
+.dock{display:none}
+body:not(.planmode) .dock{display:flex}
+body.dockoff .dock{display:none}
+.dock{position:relative;z-index:1;align-self:start;min-height:0;max-height:calc(100% - 32px);margin:16px max(16px,env(safe-area-inset-right,0px)) 16px 16px;
+  flex-direction:column;gap:10px;padding:12px;border-radius:18px;background:#2b2420;border:1px solid rgba(255,255,255,.1);color:#fbf7f0;
+  box-shadow:0 24px 60px -34px rgba(0,0,0,.8)}
+.dtop{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-left:2px}
+.dtop b{font-size:13px;font-weight:600}
+.dhide{width:30px;height:30px;flex:none;display:grid;place-items:center;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:transparent;color:#fbf7f0;cursor:pointer}
+.dhide:hover{background:rgba(255,255,255,.1)}
+.dhide svg,.dopen svg{width:16px;height:16px}
+.dockhead{display:flex;flex-direction:column;gap:8px;min-width:0}
+.tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;padding:3px;border-radius:11px;background:rgba(255,255,255,.1)}
+.tabs button{border:0;background:transparent;color:#fbf7f0;font:600 12.5px var(--font);padding:7px 0;border-radius:8px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:#fbf7f0;color:#222220}
+.tabs button:focus-visible,.dreset:focus-visible,.dhide:focus-visible,.dopen:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#dockCur{min-width:0;font-size:12.5px;line-height:1.35;color:rgba(251,247,240,.85);padding-left:2px}
+.dreset{flex:none;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fbf7f0;border-radius:999px;padding:7px 12px;font:500 12.5px var(--font);cursor:pointer}
+.dreset:hover{background:rgba(255,255,255,.1)}
+.dnote{display:none}
+.tray{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 4px;overflow-y:auto;min-height:0;padding:6px 2px 4px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.3) transparent}
+.tray.list{grid-template-columns:minmax(0,1fr);gap:4px}
+.ti{min-width:0;border:0;background:none;color:inherit;padding:2px 0;cursor:pointer;font:inherit;text-align:center}
+.ti .vis{display:block;width:38px;height:38px;margin:0 auto;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.ti .lbl{display:block;margin-top:6px;font-size:10.5px;font-weight:600;line-height:1.2}
+.ti.big{display:flex;align-items:center;gap:10px;text-align:left;padding:4px;border-radius:12px}
+.ti.big:hover{background:rgba(255,255,255,.08)}
+.ti.big .vis{width:64px;height:42px;margin:0;flex:none;border-radius:8px;object-fit:cover;background:#3a332d}
+.ti .txt{display:block;min-width:0}
+.ti.big .lbl{margin:0;font-size:12px}
+.ti[aria-pressed="true"] .vis{box-shadow:0 0 0 2px rgba(24,18,14,.9),0 0 0 4px #fbf7f0}
+.ti small{display:block;font-size:10.5px;line-height:1.3;color:rgba(251,247,240,.72)}
+.ti:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:12px}
+.dopen{display:none;position:absolute;z-index:5;right:max(16px,env(safe-area-inset-right,0px));top:60px;align-items:center;gap:8px;height:40px;padding:0 14px 0 12px;
+  border-radius:999px;background:rgba(24,18,14,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fbf7f0;font:600 13px var(--font);cursor:pointer}
+.dopen:hover{background:rgba(24,18,14,.8)}
+body.dockoff:not(.planmode) .dopen{display:inline-flex}
+.loading{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;background:rgba(24,18,14,.62);color:var(--stageInk);
+  border-radius:999px;padding:8px 16px;font-size:12px;display:flex;gap:8px;align-items:center}
+.loading i{width:12px;height:12px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* panel */
+.panel{background:var(--card);border-left:1px solid var(--line);overflow-y:auto;min-height:0;
+  padding-block:24px 28px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:22px}
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe);font-weight:500}
+h1{margin:4px 0 6px;font-size:26px;font-weight:500;letter-spacing:-.02em;text-wrap:balance}
+.lead{margin:0;color:var(--muted);font-size:13.5px;max-width:34em}
+section{display:flex;flex-direction:column;gap:10px}
+.sechead{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.sechead h2{margin:0;font-size:13px;font-weight:600}
+.sechead output{font-size:12px;color:var(--muted)}
+.rooms{display:grid;grid-template-columns:1fr;gap:8px}
+.room{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;background:var(--chip);border:1px solid transparent;border-radius:12px;padding:6px 12px 6px 6px;cursor:pointer}
+.room img{width:76px;height:50px;object-fit:cover;border-radius:8px;display:block;background:var(--line)}
+.room b{display:block;font-weight:500;font-size:13.5px}
+.room small{display:block;color:var(--muted);font-size:12px}
+.room .plan{width:34px;height:42px}
+.room[aria-pressed="true"]{border-color:var(--sel);background:var(--card)}
+.note{font-size:11.5px;color:var(--muted);margin:0;border-top:1px solid var(--line);padding-top:14px}
+@media (max-width:900px){
+  html,body{height:auto}
+  .app{display:block;height:auto}
+  .stage{height:min(66vw,520px)}
+  body:not(.planmode) .app{display:flex;flex-direction:column;min-height:100svh}
+  body:not(.planmode) .stage{height:min(78vw,62svh);flex:none}
+  body:not(.planmode) .dock{flex:1}
+  .panel{border-left:0;overflow:visible}
+  .compare{top:auto;bottom:12px;right:12px;padding:7px 12px;font-size:12px}
+  /* phone: the dock becomes a plain card under the render, choices scroll sideways */
+  body.dockoff:not(.planmode) .dock{display:flex}
+  .dopen,.dtop{display:none!important}
+  .dock{position:static;width:auto;min-width:0;align-self:stretch;max-height:none;margin:0;border-radius:0;border:0;box-shadow:none;background:var(--card);color:var(--ink);
+    -webkit-backdrop-filter:none;backdrop-filter:none;padding:14px 0 calc(22px + env(safe-area-inset-bottom,0px))}
+  .dockhead{gap:10px;padding:0 16px}
+  .tabs{background:var(--chip);grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tabs button{color:var(--muted);padding:9px 0;font-size:13px}
+  .tabs button[aria-pressed="true"]{background:var(--sel);color:var(--selInk)}
+  #dockCur{color:var(--ink);font-weight:600;font-size:14px;padding:0}
+  .tray,.tray.list{display:flex;gap:10px;overflow-x:auto;overflow-y:visible;padding:4px 16px 2px;scrollbar-color:var(--line) transparent}
+  .ti{flex:none;width:70px}
+  .ti .vis{width:46px;height:46px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+  .ti .lbl{font-size:11.5px;margin-top:7px}
+  .ti.big{display:block;width:120px;text-align:center;padding:2px 0}
+  .ti.big:hover{background:none}
+  .ti.big .vis{width:116px;height:72px;margin:0 auto;border-radius:10px;background:var(--line)}
+  .ti.big .lbl{margin-top:7px;font-size:11.5px}
+  .ti[aria-pressed="true"] .vis{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--sel)}
+  .ti small{color:var(--muted)}
+  .dreset{align-self:flex-start;margin:2px 16px 0;border-color:var(--line);color:var(--ink)}
+  .dreset:hover{background:var(--chip)}
+  .dnote{display:block;margin:auto 16px 0;padding-top:18px;font-size:11.5px;color:var(--muted)}
+}
+/* aerial view: photoreal cutaway of the floor with clickable rooms */
+.aerial{position:absolute;inset:0;z-index:1;display:none;align-items:center;justify-content:center;background:#fbfaf7}
+.planmode .aerial{display:flex}
+.planmode .compare,.planmode .loading,.planmode .backbtn{display:none}
+.aerbox{position:relative;flex:none}
+.aerbox img{position:absolute;inset:0;width:100%;height:100%;display:block;-webkit-user-select:none;user-select:none;transition:opacity .35s}
+.aerbox svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.rm{fill:transparent;stroke:transparent;stroke-width:2;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .2s,stroke .2s;outline:none}
+.rm:hover,.rm:focus-visible,.rm.hot{fill:rgba(217,163,91,.3);stroke:var(--gold)}
+.rm.off{cursor:help}
+.rm.off:hover,.rm.off:focus-visible{fill:rgba(40,35,30,.1);stroke:rgba(40,35,30,.35)}
+#aerLbl{position:absolute;inset:0;pointer-events:none}
+.plbl{position:absolute;transform:translate(-50%,-50%);background:#fffffff2;color:#222;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;white-space:nowrap;box-shadow:0 6px 16px -8px #0008;transition:transform .2s}
+.plbl small{font-weight:500;color:#6c655c;margin-left:5px}
+.plbl.go{background:#222;color:#fff}.plbl.go small{color:#ffffffb3}
+.plbl.go::after{content:"→";margin-left:6px;color:var(--gold)}
+.plbl.off{background:#ffffffd0;color:#6c655c;font-weight:500;padding:3px 9px;font-size:11px}
+.plbl.hot{transform:translate(-50%,-50%) scale(1.08)}
+.floorsw{position:absolute;z-index:4;left:max(20px,env(safe-area-inset-left,0px));top:64px;display:none;gap:2px;padding:3px;border-radius:12px;background:rgba(24,18,14,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.planmode .floorsw{display:flex}
+.floorsw button{border:0;background:transparent;color:#fbf7f0;font:600 13px var(--font);padding:7px 14px;border-radius:9px;cursor:pointer}
+.floorsw button[aria-pressed="true"]{background:#fbf7f0;color:#222}
+.aerhint{position:absolute;z-index:4;left:50%;bottom:18px;transform:translateX(-50%);display:none;background:rgba(24,18,14,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fbf7f0;border-radius:999px;padding:8px 16px;font-size:12.5px;font-weight:500;white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis}
+.planmode .aerhint{display:block}
+.backbtn{position:absolute;z-index:4;left:max(20px,env(safe-area-inset-left,0px));top:64px;border:1px solid rgba(255,255,255,.4);background:rgba(24,18,14,.58);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fbf7f0;border-radius:999px;padding:8px 15px;font:600 12.5px var(--font);cursor:pointer}
+.backbtn:hover{background:rgba(24,18,14,.75)}
+.planmode .topbar{background:linear-gradient(rgba(20,14,10,.55),rgba(20,14,10,0))}
+.backbtn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (max-width:900px){.floorsw,.backbtn{top:52px}.plbl{font-size:10.5px;padding:3px 8px}.plbl small{display:none}.plbl.off{display:none}
+  .planmode .stage{height:min(86vw,560px)}.aerhint{font-size:11.5px;padding:6px 12px;bottom:10px}}
+@media (prefers-reduced-motion:reduce){.stage canvas,.stage img.orig{transition:none}.loading i{animation:none}}
+</style>
+
+
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+    <canvas id="cvA" width="2048" height="1360" aria-label="Wizualizacja wnętrza"></canvas>
+    <canvas id="cvB" width="2048" height="1360" aria-hidden="true" style="opacity:0"></canvas>
+    <img class="orig" id="orig" alt="Wersja wyjściowa: ciepła biel i dąb naturalny">
+    <div class="topbar">
+      <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 20V9l5-4 5 4v11M13 20V9l4-3 4 3v11M3 20h18"/></svg>Halo Wawer</div>
+      <span class="crumb">/ <b>Dom A</b> / wnętrza</span>
+    </div>
+    <button class="compare" id="compare" type="button">Przytrzymaj: wersja wyjściowa</button>
+    <div class="loading" id="loading"><i></i>Wczytywanie wizualizacji</div>
+    <div class="aerial" id="aerial">
+      <div class="aerbox" id="aerbox"><img id="aerImg" alt=""><svg id="aerSvg" viewBox="0 0 1 1" preserveAspectRatio="none" role="group" aria-label="Pomieszczenia na rzucie"></svg><div id="aerLbl"></div></div>
+    </div>
+    <div class="floorsw" id="floorsw" role="group" aria-label="Kondygnacja"><button type="button" data-pf="0">Parter</button><button type="button" data-pf="1">Piętro</button></div>
+    <div class="aerhint" id="aerhint" role="status">Kliknij pomieszczenie, aby wejść do środka</div>
+    <button class="backbtn" id="backbtn" type="button">← Dom z lotu ptaka</button>
+  </div>
+
+  <div class="dock" id="dock" role="region" aria-label="Wykończenie pokoju">
+    <div class="dtop"><b>Wykończenie</b>
+      <button class="dhide" id="dhide" type="button" aria-label="Ukryj panel, pokaż cały pokój" title="Ukryj panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="dockhead">
+      <div class="tabs" id="tabs" role="group" aria-label="Co zmieniasz">
+        <button type="button" data-tab="room">Pokój</button><button type="button" data-tab="style">Styl</button><button type="button" data-tab="wall">Ściany</button><button type="button" data-tab="floor">Podłoga</button>
+      </div>
+      <output id="dockCur" aria-live="polite"></output>
+    </div>
+    <div class="tray" id="tray"></div>
+    <button class="dreset" id="reset" type="button">Przywróć kolory</button>
+    <p class="dnote">Wizualizacje poglądowe. Ściany, okna i drzwi według projektu domu A, meble i dodatki przykładowe. Kolory farb i podłóg odwzorowane cyfrowo, w realnym świetle mogą wyglądać nieco inaczej.</p>
+  </div>
+
+  <button class="dopen" id="dopen" type="button" aria-label="Pokaż panel wykończenia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Wykończenie</button>
+
+  <aside class="panel">
+    <header>
+      <div class="eyebrow">Dom A · zabudowa bliźniacza · 119,51 m²</div>
+      <h1>Wybierz pomieszczenie</h1>
+      <p class="lead">Dom A z lotu ptaka, bez dachu i stropu. Kliknij pomieszczenie na rzucie, aby wejść do środka i zmienić aranżację, kolor ścian i podłogę.</p>
+    </header>
+
+    <section aria-labelledby="hRoom">
+      <div class="sechead"><h2 id="hRoom">Pomieszczenie</h2></div>
+      <div class="rooms" id="rooms"></div>
+    </section>
+
+    <p class="note">Wizualizacje poglądowe. Ściany, okna i drzwi według projektu domu A, meble i dodatki przykładowe. Kolory farb i podłóg odwzorowane cyfrowo, w realnym świetle mogą wyglądać nieco inaczej.</p>
+  </aside>
+</div>
+
+<script>
+const ASSET='wnetrza/out/';
+const asset=p=>ASSET+p;
+const ROOMS=[
+  {id:'salon',n:'Salon',sub:'Parter',area:'strefa dzienna 26,92 m²',floor:0,room:'living',cam:[390,180,90,790]},
+  {id:'kuchnia',n:'Kuchnia z jadalnią',sub:'Parter',area:'strefa dzienna 26,92 m²',floor:0,room:'living',cam:[395,640,20,300]},
+  {id:'sypialnia',n:'Sypialnia',sub:'Piętro',area:'12,92 m²',floor:1,room:'bed',cam:[395,455,90,700]}];
+const STYLES=[
+  {id:'s1',n:'Jasna skandynawska',d:'len, jasny dąb, boucle'},
+  {id:'s2',n:'Ciepła naturalna',d:'orzech, koniak, terakota'},
+  {id:'s3',n:'Grafitowa',d:'antracyt, czarny dąb, marmur'},
+  {id:'s4',n:'Japandi',d:'jesion, papier ryżowy, czerń'},
+  {id:'s5',n:'Klasyczna elegancka',d:'boucle, marmur, mosiądz'},
+  {id:'s6',n:'Hamptons',d:'biel, granat, rattan'}];
+const PAINTS=[['Biel','#f4f2ec'],['Ciepła biel','#ebe4d6'],['Len','#e2d9c8'],['Piasek','#d9c7a6'],['Szałwia','#a9ad94'],['Oliwka','#8c9470'],['Szarość','#c9cbb8'],['Grafit','#5a5a5c'],['Terakota','#c27a5a'],['Błękit','#a9bccd'],['Granat','#35475e'],['Pudrowy róż','#dcc0b8']];
+const FLOORS=[['Dąb naturalny','#d4ab74'],['Dąb bielony','#e6d6bc'],['Dąb miodowy','#c18a52'],['Dąb szary','#aaa194'],['Orzech','#7d5a3c'],['Dąb wędzony','#5a4434']];
+const WALL_REF='#ebe4d6', FLOOR_REF='#d4ab74'; // colours the AI renders were made with
+// floor plan of house A (cm, from the developer's plans); u = towards the street, v = along the facade
+const PLAN={Lu:1015,Lv:835,floors:[
+  {living:[45,30,410,790],corridor:[435,255,670,415],stairs:[435,30,540,255],tech:[560,30,656,240],wc:[690,30,850,174],hall:[690,195,850,415],garage:[435,435,970,790]},
+  {p3:[45,30,410,415],bed:[45,430,410,790],corridor:[435,255,655,535],bath:[435,555,655,790],p1:[690,30,970,410],p2:[690,430,970,790]}]};
+
+// rzut z lotu ptaka: obrys pomieszczeń w ułamkach obrazu (policzony z geometrii domu A w kamerze, z której powstał render)
+const AREAS={"f0":{"corridor":{"n":"Korytarz","a":3.92,"polys":[[[0.4903,0.3651],[0.4903,0.4979],[0.3602,0.4979],[0.3602,0.3651]]]},"stairs":{"n":"Schody","a":4.58,"polys":[[[0.4903,0.1782],[0.4903,0.3651],[0.4322,0.3651],[0.4322,0.1782]]]},"wc":{"n":"WC","a":2.41,"polys":[[[0.3492,0.1782],[0.3492,0.2978],[0.2606,0.2978],[0.2606,0.1782]]]},"hall":{"n":"Wiatrołap","a":3.7,"polys":[[[0.3492,0.3153],[0.3492,0.4979],[0.2606,0.4979],[0.2606,0.3153]]]},"garage":{"n":"Garaż","a":18.47,"polys":[[[0.4903,0.5145],[0.4903,0.8093],[0.1942,0.8093],[0.1942,0.5145]]]},"kuchnia":{"n":"Kuchnia z jadalnią","a":26.92,"polys":[[[0.7062,0.1782],[0.7062,0.5021],[0.5042,0.5021],[0.5042,0.1782]]]},"salon":{"n":"Salon","a":26.92,"polys":[[[0.7062,0.5021],[0.7062,0.8093],[0.5042,0.8093],[0.5042,0.5021]]]}},
+  "f1":{"p3":{"n":"Pokój 3","a":13.47,"polys":[[[0.7062,0.1782],[0.7062,0.4979],[0.5042,0.4979],[0.5042,0.1782]]]},"bed":{"n":"Sypialnia","a":12.92,"polys":[[[0.7062,0.5104],[0.7062,0.8093],[0.5042,0.8093],[0.5042,0.5104]]]},"corridor":{"n":"Korytarz","a":6.47,"polys":[[[0.4903,0.3651],[0.4903,0.5976],[0.3685,0.5976],[0.3685,0.3651]]]},"bath":{"n":"Łazienka","a":4.74,"polys":[[[0.4903,0.6142],[0.4903,0.8093],[0.3685,0.8093],[0.3685,0.6142]]]},"p1":{"n":"Pokój 1","a":10.93,"polys":[[[0.3492,0.1782],[0.3492,0.4938],[0.1942,0.4938],[0.1942,0.1782]]]},"p2":{"n":"Pokój 2","a":10.22,"polys":[[[0.3492,0.5104],[0.3492,0.8093],[0.1942,0.8093],[0.1942,0.5104]]]}}};
+const LINK={0:{kuchnia:'kuchnia',salon:'salon'},1:{bed:'sypialnia'}}; // pomieszczenia z gotowymi wizualizacjami
+const AER_K=1.06; // obrys liczony na podłodze; ściany na rzucie widać nieco szerzej (perspektywa z góry)
+
+const $=id=>document.getElementById(id);
+let state={room:'salon',style:'s1',wall:'Ciepła biel',floor:'Dąb naturalny',view:'plan',pf:0,tab:'style'};
+try{const s=JSON.parse(localStorage.getItem('halo-wnetrza')||'null');if(s)state={...state,...s};}catch(e){}
+const save=()=>{try{localStorage.setItem('halo-wnetrza',JSON.stringify(state));}catch(e){}};
+
+/* ---------- colour engine: repaint walls/floor in linear light, keeping the render's own light and shadow ---------- */
+const LIN=new Float32Array(256);for(let i=0;i<256;i++){const c=i/255;LIN[i]=c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4);}
+const SRGB=new Uint8ClampedArray(4096);for(let i=0;i<4096;i++){const v=i/4095;SRGB[i]=Math.round(255*(v<=.0031308?v*12.92:1.055*Math.pow(v,1/2.4)-.055));}
+const hexLin=h=>[1,3,5].map(i=>LIN[parseInt(h.substr(i,2),16)]);
+const ratio=(h,ref)=>{const a=hexLin(h),b=hexLin(ref);return a.map((v,i)=>v/b[i]);};
+const W=2048,H=1360,cache=new Map();
+function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error(src));i.src=src;});}
+function pixels(img){const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,W,H);return x.getImageData(0,0,W,H).data;}
+function view(key){
+  if(!cache.has(key))cache.set(key,(async()=>{const [b,m]=await Promise.all([loadImg(asset(key+'.jpg')),loadImg(asset(key+'-mask.png'))]);
+    const base=pixels(b),mk=pixels(m),wa=new Uint8Array(W*H),fa=new Uint8Array(W*H);
+    for(let i=0,p=0;i<W*H;i++,p+=4){wa[i]=mk[p];fa[i]=mk[p+1];}
+    return {base,wa,fa};})());
+  // w pamięci tylko kilka ostatnich widoków (każdy to ok. 17 MB pikseli); reszta czeka w pamięci podręcznej przeglądarki jako pliki
+  const v=cache.get(key);cache.delete(key);cache.set(key,v);while(cache.size>4)cache.delete(cache.keys().next().value);
+  return v;}
+const out=new ImageData(W,H);
+function paint(v,cv){
+  const rw=ratio(PAINTS.find(p=>p[0]===state.wall)[1],WALL_REF),rf=ratio(FLOORS.find(p=>p[0]===state.floor)[1],FLOOR_REF);
+  const o=out.data,{base,wa,fa}=v;
+  for(let i=0,p=0;i<W*H;i++,p+=4){const a=wa[i],b=fa[i];
+    if(a===0&&b===0){o[p]=base[p];o[p+1]=base[p+1];o[p+2]=base[p+2];o[p+3]=255;continue;}
+    const ka=a/255,kb=b/255;
+    for(let c=0;c<3;c++){let n=LIN[base[p+c]]*(1+ka*(rw[c]-1)+kb*(rf[c]-1));n=n>1?1:n;o[p+c]=SRGB[(n*4095)|0];}
+    o[p+3]=255;}
+  cv.getContext('2d').putImageData(out,0,0);}
+
+/* ---------- stage ---------- */
+let front=$('cvA'),back=$('cvB'),ticket=0;
+const key=()=>state.style+'-'+state.room;
+async function show(crossfade){
+  const t=++ticket;$('loading').hidden=cache.has(key())?true:false;
+  let v;try{v=await view(key());}catch(e){$('loading').hidden=false;$('loading').textContent='Nie udało się wczytać wizualizacji. Odśwież stronę.';return;}
+  if(t!==ticket)return;$('loading').hidden=true;
+  if(crossfade){paint(v,back);back.style.opacity=1;front.style.opacity=0;[front,back]=[back,front];front.removeAttribute('aria-hidden');back.setAttribute('aria-hidden','true');}
+  else paint(v,front);
+  $('orig').src=asset(key()+'.jpg');
+  describe();preloadRest();}
+let preloaded=false;
+function preloadRest(){if(preloaded)return;preloaded=true;
+  const keys=[];for(const s of STYLES)for(const r of ROOMS)keys.push(s.id+'-'+r.id);
+  (async()=>{for(const k of keys){if(cache.has(k))continue;await new Promise(r=>setTimeout(r,150));try{await Promise.all([loadImg(asset(k+'.jpg')),loadImg(asset(k+'-mask.png'))]);}catch(e){}}})();}
+function describe(){const r=ROOMS.find(x=>x.id===state.room),s=STYLES.find(x=>x.id===state.style);
+  front.setAttribute('aria-label','Wizualizacja: '+r.n+', aranżacja '+s.n+', ściany '+state.wall+', podłoga '+state.floor);}
+
+/* ---------- controls ---------- */
+function planSVG(r,big){
+  const f=PLAN.floors[r.floor],X=v=>PLAN.Lv-v,Y=u=>PLAN.Lu-u;let s='';
+  for(const [k,[u1,v1,u2,v2]] of Object.entries(f)){const on=k===r.room;
+    s+=`<rect x="${X(v2)}" y="${Y(u2)}" width="${v2-v1}" height="${u2-u1}" fill="${on?'var(--card)':'none'}" stroke="var(--taupe)" stroke-width="${on?14:8}"/>`;}
+  if(big){const [cu,cv,tu,tv]=r.cam,x=X(cv),y=Y(cu),a=Math.atan2(Y(tu)-y,X(tv)-x),h=37*Math.PI/180,L=330;
+    s+=`<path d="M${x} ${y} L${x+L*Math.cos(a-h)} ${y+L*Math.sin(a-h)} A${L} ${L} 0 0 1 ${x+L*Math.cos(a+h)} ${y+L*Math.sin(a+h)} Z" fill="var(--gold)" fill-opacity=".45"/><circle cx="${x}" cy="${y}" r="34" fill="var(--gold)" stroke="var(--card)" stroke-width="10"/>`;
+    s+=`<text x="${PLAN.Lv/2}" y="${PLAN.Lu+105}" text-anchor="middle" font-size="78" fill="var(--muted)" font-family="Inter,system-ui,sans-serif">ogród ↓</text>`;}
+  return `<svg viewBox="-20 -20 ${PLAN.Lv+40} ${PLAN.Lu+(big?150:40)}" ${big?'':'class="plan"'} aria-hidden="true">${s}</svg>`;}
+/* ---------- widok z lotu ptaka ---------- */
+function fitAerial(){const st=$('stage'),R=1.5,Wd=st.clientWidth-(st.clientWidth<700?8:24),Ht=st.clientHeight-(st.clientWidth<700?70:120);let w=Wd,h=w/R;if(h>Ht){h=Math.max(120,Ht);w=h*R;}const b=$('aerbox');b.style.width=Math.round(w)+'px';b.style.height=Math.round(h)+'px';}
+const HINT=()=>innerWidth<700?'Dotknij pomieszczenia':'Kliknij pomieszczenie, aby wejść do środka';
+let hintT=0;function hint(msg){const e=$('aerhint');e.textContent=msg;clearTimeout(hintT);hintT=setTimeout(()=>{e.textContent=HINT();},2600);}
+$('aerhint').textContent=HINT();
+function renderAerial(){const f=state.pf;
+  $('aerImg').src=asset('plan-ai-f'+f+'.jpg');$('aerImg').alt='Dom A z lotu ptaka, '+(f?'piętro':'parter')+', bez dachu i stropu';
+  for(const b of document.querySelectorAll('#floorsw button'))b.setAttribute('aria-pressed',+b.dataset.pf===f);
+  fitAerial();renderHotspots();}
+function renderHotspots(){const f=state.pf,svg=$('aerSvg'),lb=$('aerLbl');
+  svg.innerHTML='';lb.innerHTML='';
+  for(const [k,r] of Object.entries(AREAS['f'+f])){const go=LINK[f][k];
+    for(const poly of r.polys){const pts=poly.map(([x,y])=>[.5+(x-.5)*AER_K,.5+(y-.5)*AER_K]);
+      const cx=pts.reduce((s,q)=>s+q[0],0)/pts.length,cy=pts.reduce((s,q)=>s+q[1],0)/pts.length;
+      const el=document.createElement('div');el.className='plbl '+(go?'go':'off');el.textContent=r.n;el.style.left=(cx*100)+'%';el.style.top=(cy*100)+'%';
+      if(!go&&r.a>=3){const s=document.createElement('small');s.textContent=r.a.toLocaleString('pl-PL')+' m²';el.append(s);}lb.append(el);
+      const p=document.createElementNS('http://www.w3.org/2000/svg','polygon');p.setAttribute('points',pts.map(q=>q.join(',')).join(' '));
+      p.setAttribute('class','rm'+(go?'':' off'));p.setAttribute('tabindex','0');p.setAttribute('role','button');
+      p.setAttribute('aria-label',r.n+(go?': otwórz wizualizację':': wizualizacja w przygotowaniu'));
+      const act=()=>{if(go)enterRoom(go);else hint(r.n+' · wizualizacja w przygotowaniu');};
+      p.addEventListener('click',act);p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
+      p.addEventListener('pointerenter',()=>el.classList.add('hot'));p.addEventListener('pointerleave',()=>el.classList.remove('hot'));
+      p.addEventListener('focus',()=>el.classList.add('hot'));p.addEventListener('blur',()=>el.classList.remove('hot'));
+      svg.append(p);}}}
+function showPlan(f){state.view='plan';if(f!=null)state.pf=f;save();document.body.classList.add('planmode');renderAerial();sync();}
+function enterRoom(id){const r=ROOMS.find(x=>x.id===id);state.room=id;state.view='room';state.pf=r.floor;save();document.body.classList.remove('planmode');sync();show(true);}
+for(const b of document.querySelectorAll('#floorsw button'))b.onclick=()=>showPlan(+b.dataset.pf);
+$('backbtn').onclick=()=>showPlan(ROOMS.find(x=>x.id===state.room).floor);
+new ResizeObserver(fitAerial).observe($('stage'));
+function build(){
+  $('rooms').innerHTML='';
+  for(const r of ROOMS){const b=document.createElement('button');b.type='button';b.className='room';b.dataset.room=r.id;
+    b.innerHTML=`<img alt="" src="${asset(state.style+'-'+r.id+'.jpg')}"><span><b>${r.n}</b><small>${r.sub} · ${r.area}</small></span>${planSVG(r,false)}`;
+    b.onclick=()=>enterRoom(r.id);$('rooms').append(b);}
+  for(const b of document.querySelectorAll('#tabs button'))b.onclick=()=>{state.tab=b.dataset.tab;save();renderTray();};
+  // hide the side rail to see the whole room; the small button brings it back
+  const dockOff=on=>{state.dockOff=on;save();document.body.classList.toggle('dockoff',on);(on?$('dopen'):$('dhide')).focus();};
+  $('dhide').onclick=()=>dockOff(true);$('dopen').onclick=()=>dockOff(false);
+  document.body.classList.toggle('dockoff',!!state.dockOff);
+}
+/* ---------- dock: one row of choices for the chosen tab ---------- */
+const wood=c=>`repeating-linear-gradient(100deg,${c} 0 5px,color-mix(in srgb,${c} 86%,#000) 5px 6px,${c} 6px 11px)`;
+function trayItems(){const t=state.tab;
+  if(t==='room')return ROOMS.map(r=>({v:r.id,big:true,img:asset(state.style+'-'+r.id+'.jpg'),n:r.n,sub:r.floor?'piętro':'parter',on:r.id===state.room,
+    act:()=>{if(r.id!==state.room)enterRoom(r.id);}}));
+  if(t==='style')return STYLES.map(s=>({v:s.id,big:true,img:asset(s.id+'-'+state.room+'.jpg'),n:s.n,sub:s.d,on:s.id===state.style,
+    act:()=>{if(s.id===state.style)return;state.style=s.id;save();sync();show(true);}}));
+  if(t==='wall')return PAINTS.map(([n,c])=>({v:n,bg:c,n,on:n===state.wall,act:()=>{state.wall=n;save();sync();show(false);}}));
+  return FLOORS.map(([n,c])=>({v:n,bg:wood(c),n,on:n===state.floor,act:()=>{state.floor=n;save();sync();show(false);}}));}
+const TABN={room:'Pokój',style:'Styl',wall:'Ściany',floor:'Podłoga'};
+function renderTray(){const tray=$('tray');tray.innerHTML='';trayFor=state.tab+'|'+state.room+'|'+state.style;
+  for(const b of document.querySelectorAll('#tabs button'))b.setAttribute('aria-pressed',b.dataset.tab===state.tab);
+  tray.setAttribute('aria-label',TABN[state.tab]);tray.setAttribute('role','group');
+  tray.classList.toggle('list',state.tab==='room'||state.tab==='style');
+  for(const it of trayItems()){const b=document.createElement('button');b.type='button';b.className='ti'+(it.big?' big':'');b.dataset.v=it.v;
+    b.setAttribute('aria-pressed',it.on);
+    if(it.big){const im=document.createElement('img');im.className='vis';im.alt='';im.loading='lazy';im.src=it.img;b.append(im);}
+    else{const s=document.createElement('span');s.className='vis';s.style.background=it.bg;s.setAttribute('aria-hidden','true');b.append(s);}
+    const txt=document.createElement('span');txt.className='txt';
+    const l=document.createElement('span');l.className='lbl';l.textContent=it.n;txt.append(l);
+    if(it.sub){const sm=document.createElement('small');sm.textContent=it.sub;txt.append(sm);}
+    b.append(txt);b.onclick=it.act;tray.append(b);}
+  syncDock();}
+function syncDock(){const r=ROOMS.find(x=>x.id===state.room),s=STYLES.find(x=>x.id===state.style);
+  $('dockCur').textContent=state.tab==='room'?r.n+' · '+(r.floor?'piętro':'parter')+' · '+r.area:state.tab==='style'?'Aranżacja: '+s.n:state.tab==='wall'?'Ściany: '+state.wall:'Podłoga: '+state.floor;
+  const cur=state.tab==='room'?state.room:state.tab==='style'?state.style:state.tab==='wall'?state.wall:state.floor;
+  for(const b of document.querySelectorAll('#tray .ti'))b.setAttribute('aria-pressed',b.dataset.v===cur);}
+let trayFor='';
+function sync(){
+  for(const b of document.querySelectorAll('.room'))b.querySelector('img').src=asset(state.style+'-'+b.dataset.room+'.jpg');
+  // thumbnails in the tray depend on room/style, so rebuild only when those change
+  if(state.tab+'|'+state.room+'|'+state.style!==trayFor)renderTray();else syncDock();
+}
+// hold to compare with the starting colours
+const cmp=$('compare'),stage=$('stage');
+const on=e=>{e.preventDefault();stage.classList.add('comparing');},off=()=>stage.classList.remove('comparing');
+cmp.addEventListener('pointerdown',on);cmp.addEventListener('pointerup',off);cmp.addEventListener('pointerleave',off);cmp.addEventListener('pointercancel',off);
+cmp.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter')on(e);});cmp.addEventListener('keyup',off);
+$('reset').onclick=()=>{state.wall='Ciepła biel';state.floor='Dąb naturalny';save();sync();show(false);};
+if(!PAINTS.some(p=>p[0]===state.wall))state.wall='Ciepła biel';
+if(!FLOORS.some(p=>p[0]===state.floor))state.floor='Dąb naturalny';
+if(!ROOMS.some(r=>r.id===state.room))state.room='salon';
+if(!STYLES.some(s=>s.id===state.style))state.style='s1';
+if(!TABN[state.tab])state.tab='style';
+state.view='plan';if(state.pf!==0&&state.pf!==1)state.pf=0; // strona zawsze startuje od domu z lotu ptaka
+delete state.av;delete state.ok; // pozostałość po usuniętym obrocie 360°
+build();if(state.view==='plan')showPlan(state.pf);else sync();show(false);
+</script>
+
+</body>
+</html>

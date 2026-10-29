@@ -1,0 +1,17 @@
+import http from "node:http"; import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
+import { chromium } from "playwright-core";
+const root = path.dirname(fileURLToPath(import.meta.url));
+const ct = (p) => p.endsWith(".js") ? "text/javascript" : p.endsWith(".html") ? "text/html" : "application/octet-stream";
+const server = http.createServer((q, s) => { const p = path.resolve(root, "." + q.url.split("?")[0]); if (!fs.existsSync(p) || fs.statSync(p).isDirectory()) { s.writeHead(404); return s.end(); } s.writeHead(200, { "content-type": ct(p) }); fs.createReadStream(p).pipe(s); });
+await new Promise((r) => server.listen(0, r));
+const b = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"] });
+const pg = await b.newPage({ viewport: { width: 600, height: 1100 } });
+pg.on("pageerror", (e) => console.log("pageerror", e.message));
+await pg.goto(`http://localhost:${server.address().port}/impostor.html`);
+await pg.waitForFunction(() => window.ready === true, null, { timeout: 120000 });
+const { meta, png } = await pg.evaluate(() => ({ meta: window.meta, png: window.atlasPng }));
+const out = process.argv[2];
+fs.writeFileSync(path.join(out, "las-impostory.png"), Buffer.from(png.split(",")[1], "base64"));
+fs.writeFileSync(path.join(out, "las-impostory.json"), JSON.stringify({ atlas: "las-impostory.webp", cell: [512, 1024], grid: [4, 2], note: "uv = [u0, v0, du, dv] w konwencji three.js (v od dołu); kotwica: dół-środek komórki = podstawa pnia", cells: meta }, null, 1));
+console.log(meta.map((m) => `${m.cell} ${m.id} h=${m.heightM} cellW=${m.cellWidthM} crown=${m.crownWidthM}`).join("\n"));
+await b.close(); server.close();

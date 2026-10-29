@@ -1,0 +1,258 @@
+/* =========================================================================
+   HERO ON PHONES (max 760 px)
+   -------------------------------------------------------------------------
+   The desktop hero scales everything with --u (1/644 of the width), which
+   leaves 4-7 px type on a phone. Same fonts, colours and places; type and
+   controls get readable sizes. Desktop is untouched: everything below is
+   inside the media query, and .nav__tools / .menu only exist here.
+   ========================================================================= */
+
+.nav__tools,
+.menu { display: none; }
+
+@media (max-width: 760px) {
+  /* --- Nav ---------------------------------------------------------------- */
+  .nav { height: 68px; }
+
+  .nav__brand { left: 5.36%; gap: 6px; }
+  .nav__glyph { width: 20px; height: 19px; }
+  .nav__logotype { font-size: 17px; }
+
+  .nav__links,
+  .nav__cta { display: none; }
+
+  .nav__tools {
+    right: 5.36%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav__icon,
+  .nav__menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    background: rgba(24, 18, 14, 0.28);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--ivory);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav__icon { width: 40px; }
+  .nav__icon svg { width: 18px; height: 18px; }
+
+  .nav__menu {
+    gap: 8px;
+    padding: 0 14px 0 12px;
+    font: 500 14px/1 var(--font-ui);
+    cursor: pointer;
+  }
+
+  .nav__burger,
+  .nav__burger::before {
+    display: block;
+    width: 14px;
+    height: 1.5px;
+    border-radius: 1px;
+    background: currentColor;
+  }
+
+  .nav__burger { position: relative; translate: 0 -2.5px; }
+  .nav__burger::before { content: ""; position: absolute; top: 5px; }
+
+  /* the top scrim keeps the nav clear over bright frames */
+  .film__sticky::after { height: 130px; }
+
+  /* --- First frame's interface ----------------------------------------------
+     bottom up: card, social proof, copy; the thumbnails stay a desktop detail */
+  .thumbs { display: none; }
+
+  .card {
+    left: 5.36%;
+    right: 5.36%;
+    width: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 14px;
+    padding: 14px 14px 14px 16px;
+    border-radius: 14px;
+  }
+
+  .card__title { font-size: 15px; }
+  .card__address { grid-row: 2; margin-top: 4px; font-size: 13px; white-space: normal; }
+
+  .card__button {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    height: 44px;
+    margin: 0;
+    padding: 0 18px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+
+  .proof {
+    left: 5.36%;
+    bottom: calc(118px + env(safe-area-inset-bottom, 0px));
+    gap: 10px;
+  }
+
+  .proof__avatars img { width: 30px; height: 30px; border-width: 1.5px; }
+  .proof__avatars img + img { margin-left: -9px; }
+  .proof__text { font-size: 13px; line-height: 1.25; }
+
+  .intro {
+    left: 5.36%;
+    right: 5.36%;
+    bottom: calc(168px + env(safe-area-inset-bottom, 0px));
+    font-size: 15px;
+    line-height: 1.55;
+    white-space: normal;
+    text-wrap: pretty;
+  }
+
+  /* the desktop line breaks are tuned to the wide frame; on a phone the copy flows */
+  .intro br { display: none; }
+
+  .hero__scrim {
+    background:
+      linear-gradient(to top, rgba(22, 17, 12, 0.72) 0%, rgba(22, 17, 12, 0.45) 30%, rgba(22, 17, 12, 0) 52%);
+  }
+
+  /* --- Chapters ------------------------------------------------------------- */
+  .chapter {
+    left: 5.36%;
+    right: 5.36%;
+    width: auto;
+    bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .chapter::before { inset: -60% -20% -40% -20%; }
+  .chapter__eyebrow { margin-bottom: 8px; font-size: 11px; }
+  .chapter__title { font-size: 28px; line-height: 1.08; }
+  .chapter__text { margin-top: 10px; font-size: 15px; line-height: 1.55; }
+
+  /* --- Menu sheet ------------------------------------------------------------ */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    padding: calc(84px + env(safe-area-inset-top, 0px)) 7% calc(32px + env(safe-area-inset-bottom, 0px));
+    background: rgba(24, 18, 14, 0.94);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    color: var(--ivory);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s var(--ease-out), visibility 0s linear 0.35s;
+  }
+
+  .menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.35s var(--ease-out);
+  }
+
+  html.menu-open { overflow: hidden; }
+
+  .menu__close {
+    position: absolute;
+    top: calc(14px + env(safe-area-inset-top, 0px));
+    right: 5.36%;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .menu__close span,
+  .menu__close span::before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 16px;
+    height: 1.5px;
+    background: var(--ivory);
+    translate: -50% -50%;
+    rotate: 45deg;
+  }
+
+  .menu__close span::before { content: ""; rotate: 90deg; translate: -50% -50%; left: 50%; top: 50%; }
+
+  .menu__links {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu__links li {
+    opacity: 0;
+    translate: 0 14px;
+    transition: opacity 0.5s var(--ease-out), translate 0.6s var(--ease-out);
+  }
+
+  .menu.is-open .menu__links li {
+    opacity: 1;
+    translate: 0 0;
+    transition-delay: calc(0.06s + var(--i) * 0.05s);
+  }
+
+  .menu__links a {
+    display: block;
+    padding: 8px 0;
+    color: var(--ivory);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+
+  .menu__links a[aria-current="page"] { color: var(--gold); }
+
+  .menu__actions {
+    display: grid;
+    gap: 14px;
+    margin-top: auto;
+  }
+
+  .menu__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 52px;
+    border-radius: 12px;
+    background: var(--ivory);
+    color: #1f1f1f;
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  .menu__cta .icon-arrow { width: 16px; height: 16px; }
+
+  .menu__phone {
+    text-align: center;
+    color: rgba(243, 238, 232, 0.8);
+    font-size: 15px;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .menu,
+  .menu__links li { transition: none !important; translate: none; opacity: 1; }
+  .menu:not(.is-open) { opacity: 0; }
+}

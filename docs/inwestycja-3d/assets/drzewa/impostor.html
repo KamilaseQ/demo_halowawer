@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body style="margin:0;background:#888">
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
+
+// Impostor atlas for the distant forest: each cell is an orthographic side view of one tree, soft
+// overcast light (no sun direction baked in), transparent background. Cells 512 × 1024, 4 × 2 grid.
+const CW = 512, CH = 1024, COLS = 4, ROWS = 2;
+const CELLS = [
+  ["sosna-1", 0], ["sosna-2", 0], ["sosna-3", 0], ["brzoza-1", 0],
+  ["sosna-1", 1.9], ["sosna-2", 2.4], ["sosna-3", 1.3], ["brzoza-2", 0.7],
+];
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true, premultipliedAlpha: false });
+renderer.setSize(CW, CH);
+renderer.setClearColor(0x000000, 0);
+renderer.toneMapping = THREE.NoToneMapping;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene();
+scene.add(new THREE.HemisphereLight("#ffffff", "#9a9a90", 2.2));
+const key = new THREE.DirectionalLight("#ffffff", 1.1);
+key.position.set(0, 30, 40); // from the viewer, slightly above: the side facing the camera is lit
+scene.add(key);
+const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync("/out/final/trees.glb");
+const root = gltf.scene.getObjectByName("halo-wawer-trees");
+const atlas = document.createElement("canvas");
+atlas.width = CW * COLS; atlas.height = CH * ROWS;
+const ctx = atlas.getContext("2d");
+const meta = [];
+for (let i = 0; i < CELLS.length; i++) {
+  const [id, yaw] = CELLS[i];
+  const tree = root.getObjectByName(id).clone(true);
+  tree.position.set(0, 0, 0);
+  tree.rotation.y = yaw;
+  scene.add(tree);
+  const box = new THREE.Box3().setFromObject(tree);
+  const h = box.max.y - box.min.y;
+  const w = Math.max(box.max.x - box.min.x, box.max.z - box.min.z);
+  // Fit the tree into the cell keeping metres square: the cell is 1:2, height governs.
+  // Fit height or crown width, whichever is tighter for a 1:2 cell; base of the trunk on the cell's bottom edge.
+  let halfH = (h / 2) * 1.02, halfW = halfH * (CW / CH);
+  if (w / 2 * 1.04 > halfW) { halfW = (w / 2) * 1.04; halfH = halfW * (CH / CW); }
+  const cam = new THREE.OrthographicCamera(-halfW, halfW, halfH, -halfH, 0.1, 200);
+  cam.position.set((box.max.x + box.min.x) / 2, box.min.y + halfH, 60);
+  cam.lookAt((box.max.x + box.min.x) / 2, box.min.y + halfH, 0);
+  renderer.render(scene, cam);
+  ctx.drawImage(renderer.domElement, (i % COLS) * CW, Math.floor(i / COLS) * CH);
+  scene.remove(tree);
+  meta.push({ cell: i, id, yaw: +yaw.toFixed(2), uv: [(i % COLS) / COLS, 1 - (Math.floor(i / COLS) + 1) / ROWS, 1 / COLS, 1 / ROWS], heightM: +h.toFixed(2), cellWidthM: +(halfW * 2).toFixed(2), crownWidthM: +w.toFixed(2) });
+}
+window.meta = meta;
+window.atlasPng = atlas.toDataURL("image/png");
+window.ready = true;
+</script>
+</body>
+</html>

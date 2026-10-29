@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>html,body{margin:0;background:#cfd8de}canvas{display:block}</style>
+<script type="importmap">
+{ "imports": {
+  "three": "/node_modules/three/build/three.module.js",
+  "three/addons/": "/node_modules/three/examples/jsm/",
+  "ez-tree": "/node_modules/@dgreenheck/ez-tree/build/ez-tree.es.js"
+} }
+</script>
+</head>
+<body>
+<script type="module">
+import * as THREE from "three";
+import { Tree, TreePreset } from "ez-tree";
+window.PRESETS = TreePreset;
+import { GLTFExporter } from "three/addons/exporters/GLTFExporter.js";
+import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
+
+// Species recipes: EZ-Tree preset + overrides tuned for the Mazovian pine/birch woods around Wawer.
+const RECIPES = window.RECIPES;
+
+const W = innerWidth, H = innerHeight;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.toneMapping = THREE.NeutralToneMapping;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color("#cdd9e2");
+scene.fog = new THREE.Fog("#dfe4e2", 80, 260);
+const camera = new THREE.PerspectiveCamera(32, W / H, 0.5, 1000);
+
+const sun = new THREE.DirectionalLight("#fff1dc", 3.2);
+sun.position.set(-40, 45, 35);
+sun.castShadow = true;
+sun.shadow.mapSize.set(4096, 4096);
+Object.assign(sun.shadow.camera, { left: -60, right: 60, top: 60, bottom: -60, near: 1, far: 200 });
+sun.shadow.bias = -0.0004;
+sun.shadow.normalBias = 0.04;
+scene.add(sun);
+scene.add(new THREE.HemisphereLight("#d6e4f0", "#6f7d52", 0.9));
+
+const hdr = await new RGBELoader().loadAsync("/hdri.hdr");
+hdr.mapping = THREE.EquirectangularReflectionMapping;
+scene.environment = hdr;
+scene.environmentIntensity = 0.6;
+
+const ground = new THREE.Mesh(new THREE.CircleGeometry(300, 64).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: "#8fa266", roughness: 1 }));
+ground.receiveShadow = true;
+scene.add(ground);
+
+const made = [];
+window.stats = [];
+let x = -((RECIPES.length - 1) * 14) / 2;
+for (const r of RECIPES) {
+  const tree = new Tree();
+  tree.loadPreset(r.preset);
+  tree.options.seed = r.seed;
+  const o = tree.options;
+  // Deep-merge overrides.
+  (function merge(dst, src) { for (const k in src) { if (src[k] && typeof src[k] === "object" && !Array.isArray(src[k]) && dst[k] && typeof dst[k] === "object") merge(dst[k], src[k]); else dst[k] = src[k]; } })(o, r.options || {});
+  tree.generate();
+  tree.traverse((m) => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
+  // Normalise to the target height (metres).
+  const box = new THREE.Box3().setFromObject(tree);
+  const h = box.max.y - box.min.y;
+  const s = r.height / h;
+  tree.scale.setScalar(s);
+  tree.position.set(x, -box.min.y * s, 0);
+  tree.name = r.id;
+  scene.add(tree);
+  let tris = 0, leafTris = 0;
+  tree.traverse((m) => { if (m.isMesh) { const n = (m.geometry.index ? m.geometry.index.count : m.geometry.attributes.position.count) / 3; tris += n; if (/leaf|leaves/i.test(m.name) || m.material?.alphaTest > 0 || m.material?.transparent) leafTris += n; } });
+  window.stats.push({ id: r.id, preset: r.preset, rawHeight: +h.toFixed(2), scale: +s.toFixed(3), tris, leafTris, meshes: tree.children.map((c) => c.name || c.type) });
+  made.push({ r, tree });
+  x += 14;
+}
+
+window.shot = (eye, target) => {
+  camera.position.set(...eye);
+  camera.lookAt(...target);
+  renderer.render(scene, camera);
+  return renderer.domElement.toDataURL("image/jpeg", 0.88);
+};
+
+window.exportOne = async (id) => {
+  const { tree } = made.find((m) => m.r.id === id);
+  const clone = tree.clone(true);
+  clone.position.set(0, clone.position.y, 0);
+  const exporter = new GLTFExporter();
+  const buf = await exporter.parseAsync(clone, { binary: true, onlyVisible: true });
+  const bytes = new Uint8Array(buf);
+  let s = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(s);
+};
+
+// All species in one GLB: one root node per tree id at the origin, real metres, so shared bark/leaf
+// textures can be deduplicated in a single file.
+window.exportAll = async () => {
+  const root = new THREE.Group();
+  root.name = "halo-wawer-trees";
+  for (const { r, tree } of made) {
+    const c = tree.clone(true);
+    c.position.set(0, c.position.y, 0);
+    c.name = r.id;
+    c.userData = { species: r.id.split("-")[0], height: r.height };
+    root.add(c);
+  }
+  const buf = await new GLTFExporter().parseAsync(root, { binary: true, onlyVisible: true });
+  const bytes = new Uint8Array(buf);
+  let s = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(s);
+};
+window.ready = true;
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+/* =========================================================================
+   HERO: full-bleed first frame (layout of the Homevia reference, content
+   and photos of Osiedle Halo Wawer)
+   ========================================================================= */
+
+.hero {
+  /* The hero is the pinned film stage: exactly one window tall. */
+  --hero-h: 100vh;
+
+  /* The landing page IS the film's first frame. The film (16:9) covers the
+     stage, so its frame box is --fw x --fh at --fx / --fy. The houses cutout
+     (2048 x 1360) sits pixel-exact on the houses of that frame (pixel-matched:
+     74.8 % of the frame width, top-left at -0.1 % / 9.0 %), so the wordmark can
+     hide behind the roofs. cqw / cqh: the stage box (.hero__static is the
+     container), so the scrollbar never shifts the cutout off the film. The
+     ridge of the tallest segment is 300/1360 = 0.2206 down the image. */
+  --fw: max(100cqw, calc(100cqh * 16 / 9));
+  --fh: calc(var(--fw) * 9 / 16);
+  --fx: calc((100cqw - var(--fw)) / 2);
+  --fy: calc((100cqh - var(--fh)) / 2);
+  --villa-w: calc(var(--fw) * 0.748);
+  --villa-h: calc(var(--villa-w) * 0.6641);            /* 1360 / 2048 */
+  --villa-x: calc(var(--fx) - var(--fw) * 0.001);
+  --villa-y: calc(var(--fy) + var(--fh) * 0.090);
+  --ridge-line: calc(var(--villa-y) + var(--villa-h) * 0.2206);
+
+  /* Wordmark baseline: a little below the ridge so the left segment's roof
+     and chimney cover the foot of "Ha" (the reference hides the foot of its
+     letters behind the roof and the tree). */
+  --wm-baseline: calc(var(--ridge-line) + 2.6vw);
+
+  /* Wordmark: as large as fits between the nav and the baseline, capped at 16.4vw
+     ("Halo Wawer" is 3 glyphs longer than "Homevia", ink must end before 94.6 %). */
+  --wm-scale: 0.88;                       /* a touch smaller than the full fit; the baseline stays on the roofs */
+  --wm-size: calc(var(--wm-scale) * max(7vw, min(15.9vw, calc((var(--wm-baseline) - 7.3vw) / 0.7275))));
+  --wm-weight: 600;
+  --wm-tracking: -0.032em;                /* tighter than the reference: 10 glyphs must end before 94.6 % */
+  --wm-left: 5.36%;
+  --wm-top: rgba(255, 249, 240, 0.58);    /* cap top: ghosted cream, tone-on-tone with the sky */
+  --wm-mid: rgba(255, 246, 232, 0.40);
+  --wm-bottom: rgba(255, 240, 220, 0.08); /* baseline: almost the sky tone */
+
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #6f9ed0;
+  background-image: linear-gradient(to bottom, #2f6fc2 0%, #6fa0d8 42%, #cfd4d6 68%, #e8c9a0 82%, #d9c8a4 100%);
+}
+
+/* --- Layer 0: sky plate (16:9, covers the hero) ---------------------------- */
+.hero__sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* the film is the sky: the old sky plate only shows when there is no film
+   (reduced motion, or .is-lite when the film failed to load) */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.is-lite) .hero__sky { visibility: hidden; }
+}
+
+/* --- Layer 2: houses cutout, laid exactly on the film's first frame -------- */
+.hero__villa {
+  position: absolute;
+  left: var(--villa-x);
+  top: var(--villa-y);
+  z-index: 2;
+  width: var(--villa-w);
+  max-width: none;
+  height: auto;
+  /* the right edge of the photo dissolves into the sky plate (it ends on pine trees) */
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 90%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 90%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* --- Layer 1: wordmark ---------------------------------------------------- */
+.hero__stage {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wordmark {
+  --wm-pad: 0.06em;
+  --wm-cap: calc(var(--wm-pad) + 0.1363em);   /* cap top, from box top  */
+  --wm-base: calc(var(--wm-pad) + 0.8638em);  /* baseline, from box top */
+
+  position: absolute;
+  top: calc(var(--wm-baseline) - var(--wm-base));
+  left: var(--wm-left);
+  margin: 0 0 0 -0.07em;                      /* cancel the H's left side bearing */
+  padding: var(--wm-pad) 0;
+
+  font-family: var(--font-wordmark);
+  font-size: var(--wm-size);
+  font-weight: var(--wm-weight);
+  line-height: 1;
+  letter-spacing: var(--wm-tracking);
+  white-space: nowrap;
+
+  color: #ece4d8; /* fallback if background-clip:text is unsupported */
+  background-image: linear-gradient(
+    to bottom,
+    var(--wm-top) var(--wm-cap),
+    var(--wm-mid) calc((var(--wm-cap) + var(--wm-base)) / 2),
+    var(--wm-bottom) var(--wm-base)
+  );
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .wordmark {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* =========================================================================
+   LAYER 3: INTERFACE
+   ========================================================================= */
+
+/* Legibility scrim for the bottom-left copy and the social proof: the
+   reference sits them on dark pool water, our garden is bright, so a soft
+   dark gradient takes the water's job. Sits above the scene, below the UI. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 62% 42% at 14% 100%, rgba(22, 17, 12, 0.62), rgba(22, 17, 12, 0) 100%),
+    radial-gradient(ellipse 34% 26% at 50% 100%, rgba(22, 17, 12, 0.5), rgba(22, 17, 12, 0) 100%),
+    linear-gradient(to top, rgba(22, 17, 12, 0.42) 0%, rgba(22, 17, 12, 0) 24%);
+}
+
+/* The still's interface (copy, proof, thumbnails, card) shares one layer:
+   the scroll fades that layer as a whole, so each item keeps its own
+   entrance animation. Same stacking as before (z 3, above cutout and scrim). */
+.hero__ui {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero__ui > * { pointer-events: auto; }
+.hero__ui.is-off > * { pointer-events: none; }
+
+.nav,
+.intro,
+.proof,
+.thumbs,
+.card {
+  position: absolute;
+  z-index: 3;
+}
+
+/* --- Nav: floats on the sky, vertical centre at 24.5 ref px ---------------- */
+.nav {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(49 * var(--u));
+  z-index: 6;
+}
+
+.nav > * {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.nav__brand {
+  left: 4.89%;
+  display: flex;
+  align-items: center;
+  gap: calc(2.3 * var(--u));
+  color: var(--ivory);
+}
+
+.nav__glyph {
+  width: calc(14 * var(--u));
+  height: calc(13.5 * var(--u));
+  color: #f4ede2;
+  opacity: 0.9;
+}
+
+.nav__logotype {
+  font-size: calc(12 * var(--u));
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.nav__links {
+  left: 35.1%;
+  width: 27.95%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__links a {
+  display: block;
+  font-size: calc(7.6 * var(--u));
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(243, 238, 232, 0.72);
+  transition: color 0.35s ease;
+}
+
+.nav__links a.is-active,
+.nav__links a:hover {
+  color: #f8f3ed;
+}
+
+.nav__cta {
+  right: 4.97%;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6.5 * var(--u));
+  height: calc(24 * var(--u));
+  padding: 0 calc(10 * var(--u)) 0 calc(8.6 * var(--u));
+  border: 0;
+  border-radius: calc(4 * var(--u));
+  /* the gold of every call to action under the film */
+  background: linear-gradient(180deg, #e1c286 -40%, #c48931 60%, #b8893f 140%);
+  box-shadow: 0 6px 18px -8px rgba(196, 137, 49, 0.8);
+  color: #1b1408;
+  font-size: calc(7.7 * var(--u));
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nav__cta:hover {
+  background: linear-gradient(180deg, #ecd3a0 -40%, #cf9741 60%, #c39448 140%);
+}
+
+.icon-arrow {
+  width: calc(8 * var(--u));
+  height: calc(8 * var(--u));
+}
+
+/* --- Paragraph: last baseline 25.5 ref px above the hero bottom ----------- */
+.intro {
+  left: 4.95%;
+  bottom: calc(21.85 * var(--u));
+  margin: 0;
+  font-size: calc(7.5 * var(--u));
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ivory-copy);
+  white-space: nowrap;
+  text-shadow: 0 0.05em 0.5em rgba(30, 26, 20, 0.35);
+}
+
+/* --- Social proof ---------------------------------------------------------- */
+.proof {
+  left: 41.62%;
+  bottom: calc(22 * var(--u));
+  display: flex;
+  align-items: center;
+  gap: calc(6 * var(--u));
+}
+
+.proof__avatars {
+  display: flex;
+}
+
+.proof__avatars img {
+  position: relative;
+  width: calc(16.5 * var(--u));
+  height: calc(16.5 * var(--u));
+  border: max(1px, calc(0.6 * var(--u))) solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  object-fit: cover;
+  background: #cbbdb2;
+}
+
+.proof__avatars img + img {
+  margin-left: calc(-4.75 * var(--u));
+}
+
+.proof__text {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: calc(7 * var(--u));
+  font-weight: 400;
+  line-height: 1.19;
+  letter-spacing: 0.025em;
+  color: var(--ivory-copy);
+  white-space: nowrap;
+  text-shadow: 0 0.05em 0.5em rgba(30, 26, 20, 0.35);
+}
+
+/* --- Frosted thumbnail stack ---------------------------------------------- */
+.thumbs {
+  left: 75.78%;
+  width: 19.25%;
+  bottom: calc(104 * var(--u));
+  height: calc(120 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(5 * var(--u));
+  padding: calc(5 * var(--u));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: calc(8 * var(--u));
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.thumbs__img {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  border: max(1px, calc(1.1 * var(--u))) solid rgba(255, 255, 255, 0.55);
+  border-radius: calc(6 * var(--u));
+  object-fit: cover;
+  background: #8e8580;
+}
+
+/* --- White info card -------------------------------------------------------- */
+.card {
+  left: 75.93%;
+  width: 18.9%;
+  bottom: calc(23 * var(--u));
+  padding: calc(11.5 * var(--u)) calc(8.6 * var(--u)) calc(9 * var(--u));
+  border-radius: calc(6 * var(--u));
+  background: #ffffff;
+}
+
+.card__title {
+  margin: 0;
+  font-size: calc(7.5 * var(--u));
+  font-weight: 500;
+  line-height: 1.2;
+  color: #1f1f1f;
+  white-space: nowrap;
+}
+
+.card__address {
+  margin: calc(5.9 * var(--u)) 0 0;
+  font-size: calc(6.7 * var(--u));
+  font-weight: 400;
+  line-height: 1.2;
+  color: #a0a0a0;
+  white-space: nowrap;
+}
+
+.card__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(22 * var(--u));
+  margin-top: calc(9.5 * var(--u));
+  border-radius: calc(5 * var(--u));
+  background: #222222;
+  color: #f2f2f2;
+  font-size: calc(7.5 * var(--u));
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.card__button:hover {
+  background: #2e2e2e;
+}

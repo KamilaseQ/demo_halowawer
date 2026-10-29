@@ -1,0 +1,209 @@
+/* =========================================================================
+   LEAD FORM: name, phone, house, one consent. Shared by the home page's
+   contact section and the 3D explorer's sheet, so it carries its own tokens
+   (falling back to the contact section's when it sits there).
+   tone dark (default): ivory on dark glass, like the contact buttons;
+   tone light: ink on white, for light panels.
+   ========================================================================= */
+
+.lead {
+  --lead-fg: var(--ivory, #f3eee8);
+  --lead-muted: rgba(243, 238, 232, 0.75);
+  --lead-field: rgba(20, 18, 24, 0.45);
+  --lead-line: rgba(243, 238, 232, 0.4);
+  --lead-line-hover: rgba(243, 238, 232, 0.7);
+  --lead-btn: var(--ivory, #f3eee8);
+  --lead-btn-hover: #ffffff;
+  --lead-btn-ink: #1f1f1f;
+  --lead-h: var(--h-button, 3rem);
+  --lead-fs: var(--fs-button, 1rem);
+  --lead-fs-small: var(--fs-small, 0.9rem);
+  --lead-r: var(--r-line, 0.6rem);
+  --lead-r-button: var(--r-button, 0.6rem);
+
+  margin-top: clamp(1.75rem, calc(20 * var(--u)), 4rem);
+  max-width: 46rem;
+  color: var(--lead-fg);
+  font-family: var(--font-ui);
+}
+
+.lead--light {
+  --lead-fg: #1f1f1f;
+  --lead-muted: #6f6a66;
+  --lead-field: #ffffff;
+  --lead-line: rgba(31, 31, 31, 0.18);
+  --lead-line-hover: rgba(31, 31, 31, 0.42);
+  --lead-btn: #222222;
+  --lead-btn-hover: #2e2e2e;
+  --lead-btn-ink: #f2f2f2;
+}
+
+.lead--bare { margin-top: 0; }
+
+.lead__title {
+  margin: 0 0 clamp(0.75rem, calc(7 * var(--u)), 1.2rem);
+  font-size: var(--lead-fs-small);
+  color: var(--lead-muted);
+}
+
+.lead__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(0.6rem, calc(6 * var(--u)), 1rem);
+}
+
+.lead__field {
+  display: grid;
+  gap: 0.45em;
+  min-width: 0;
+}
+
+.lead__label {
+  font-size: clamp(0.7rem, calc(5.6 * var(--u)), 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lead-muted);
+}
+
+.lead__input {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--lead-h);
+  padding: 0 1em;
+  border: 1px solid var(--lead-line);
+  border-radius: var(--lead-r);
+  background: var(--lead-field);
+  color: var(--lead-fg);
+  font: inherit;
+  font-size: var(--lead-fs);
+  line-height: 1.2;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lead__input::placeholder { color: var(--lead-muted); opacity: 0.6; }
+.lead__input:hover { border-color: var(--lead-line-hover); }
+
+.lead__input:focus-visible {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(217, 163, 91, 0.28);
+}
+
+select.lead__input {
+  appearance: none;
+  padding-right: 2.4em;
+  background-image: linear-gradient(45deg, transparent 50%, var(--lead-fg) 50%), linear-gradient(135deg, var(--lead-fg) 50%, transparent 50%);
+  background-position: calc(100% - 1.25em) 52%, calc(100% - 0.95em) 52%;
+  background-size: 0.32em 0.32em, 0.32em 0.32em;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+select.lead__input option { color: #1f1f1f; }
+
+.lead__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-top: clamp(0.9rem, calc(8 * var(--u)), 1.4rem);
+}
+
+.lead__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65em;
+  max-width: 30em;
+  font-size: clamp(0.78rem, calc(6.2 * var(--u)), 1.05rem);
+  line-height: 1.45;
+  color: var(--lead-muted);
+  cursor: pointer;
+}
+
+.lead__consent input {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+  margin: 0.15em 0 0;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+/* the contact section's ivory button, carried here so the form works anywhere */
+.lead__submit {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--lead-h);
+  padding: 0 1.6em;
+  border: 1px solid transparent;
+  border-radius: var(--lead-r-button);
+  background: var(--lead-btn);
+  color: var(--lead-btn-ink);
+  font: inherit;
+  font-size: var(--lead-fs);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.lead__submit:hover { background: var(--lead-btn-hover); }
+.lead__submit:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.lead__submit[disabled] { opacity: 0.6; cursor: progress; }
+
+.lead__error {
+  margin: 0.9em 0 0;
+  font-size: var(--lead-fs-small);
+  color: #f3c6a8;
+}
+
+.lead__error a { color: inherit; }
+
+/* sent: the promise of a call back */
+.lead__done {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9em;
+  margin-top: clamp(1.75rem, calc(20 * var(--u)), 4rem);
+  max-width: 34em;
+  padding: 1.1em 1.3em;
+  border: 1px solid var(--lead-line);
+  border-radius: var(--lead-r);
+  background: var(--lead-field);
+  color: var(--lead-fg);
+  font-family: var(--font-ui);
+  font-size: var(--fs-body, 1rem);
+  line-height: 1.5;
+  animation: lead-done 0.6s var(--ease-out) both;
+}
+
+.lead__done strong { display: block; font-weight: 600; }
+.lead__done span { color: var(--lead-muted); }
+
+.lead__check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.9em;
+  height: 1.9em;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #fffaf3;
+}
+
+.lead__check svg { width: 55%; height: 55%; }
+
+@keyframes lead-done {
+  from { opacity: 0; translate: 0 0.5rem; }
+}
+
+@media (max-width: 760px) {
+  .lead__grid { grid-template-columns: minmax(0, 1fr); }
+  .lead__submit { width: 100%; }
+}
+
+.lead--light .lead__error { color: #a5442a; }

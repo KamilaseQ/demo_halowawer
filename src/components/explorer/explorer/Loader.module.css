@@ -1,0 +1,90 @@
+/* Glass card over the poster, centred in the free stage area; materialises in and out
+   (blur + scale + opacity together, along the same path). */
+.loader {
+  position: absolute;
+  z-index: 8;
+  left: var(--free-center, 50%);
+  top: 50%;
+  width: min(340px, calc(100vw - 48px));
+  padding: 26px 28px 22px;
+  border-radius: 24px;
+  translate: -50% -50%;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur, blur(28px) saturate(180%));
+  backdrop-filter: var(--glass-blur, blur(28px) saturate(180%));
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+  text-align: center;
+  transition:
+    opacity 600ms var(--ease-out),
+    scale 600ms var(--ease-out),
+    filter 600ms var(--ease-out);
+}
+
+.loader[data-hidden] {
+  opacity: 0;
+  scale: 0.96;
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.wordmark {
+  margin: 0 0 18px;
+  font-family: var(--font-wordmark, var(--font-sans));
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.032em;
+  color: var(--fg);
+}
+
+.track {
+  height: 2px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.bar {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  transform-origin: left center;
+  transition: transform 400ms var(--ease-out);
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: var(--fg-muted);
+}
+
+.pct {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+/* Phones: centred in the stage between the header and the sheet. */
+@media (max-width: 899px) {
+  .loader {
+    left: 50%;
+    top: calc(var(--top) + (100% - var(--top) - var(--peek-h, 250px) - var(--inset)) / 2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader,
+  .bar {
+    transition: opacity 200ms ease;
+  }
+
+  .loader[data-hidden] {
+    scale: 1;
+    filter: none;
+  }
+}

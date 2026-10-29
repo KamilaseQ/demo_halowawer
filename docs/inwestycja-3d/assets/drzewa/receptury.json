@@ -1,0 +1,262 @@
+{
+ "trees": [
+  {
+   "id": "sosna-1",
+   "preset": "Pine Large",
+   "seed": 5,
+   "height": 21,
+   "options": {
+    "bark": {
+     "tint": 15250570
+    },
+    "branch": {
+     "levels": 2,
+     "start": {
+      "1": 0.62,
+      "2": 0.2
+     },
+     "children": {
+      "0": 16,
+      "1": 5
+     },
+     "angle": {
+      "1": 80,
+      "2": 48
+     },
+     "length": {
+      "1": 32,
+      "2": 12
+     },
+     "radius": {
+      "0": 1.0,
+      "1": 0.42,
+      "2": 0.55
+     },
+     "gnarliness": {
+      "0": 0.03,
+      "1": 0.22,
+      "2": 0.15
+     },
+     "force": {
+      "strength": 0.006
+     }
+    },
+    "leaves": {
+     "start": 0.35,
+     "count": 14,
+     "size": 4.2,
+     "angle": 24,
+     "tint": 11388072
+    }
+   }
+  },
+  {
+   "id": "sosna-2",
+   "preset": "Pine Large",
+   "seed": 131,
+   "height": 17,
+   "options": {
+    "bark": {
+     "tint": 15250570
+    },
+    "branch": {
+     "levels": 2,
+     "start": {
+      "1": 0.62,
+      "2": 0.2
+     },
+     "children": {
+      "0": 16,
+      "1": 5
+     },
+     "angle": {
+      "1": 80,
+      "2": 48
+     },
+     "length": {
+      "1": 32,
+      "2": 12
+     },
+     "radius": {
+      "0": 1.0,
+      "1": 0.42,
+      "2": 0.55
+     },
+     "gnarliness": {
+      "0": 0.03,
+      "1": 0.22,
+      "2": 0.15
+     },
+     "force": {
+      "strength": 0.006
+     }
+    },
+    "leaves": {
+     "start": 0.35,
+     "count": 14,
+     "size": 4.2,
+     "angle": 24,
+     "tint": 11388072
+    }
+   }
+  },
+  {
+   "id": "sosna-3",
+   "preset": "Pine Large",
+   "seed": 97,
+   "height": 18,
+   "options": {
+    "bark": {
+     "tint": 15250570
+    },
+    "branch": {
+     "levels": 2,
+     "start": {
+      "1": 0.62,
+      "2": 0.2
+     },
+     "children": {
+      "0": 16,
+      "1": 5
+     },
+     "angle": {
+      "1": 80,
+      "2": 48
+     },
+     "length": {
+      "1": 32,
+      "2": 12
+     },
+     "radius": {
+      "0": 1.0,
+      "1": 0.42,
+      "2": 0.55
+     },
+     "gnarliness": {
+      "0": 0.03,
+      "1": 0.22,
+      "2": 0.15
+     },
+     "force": {
+      "strength": 0.006
+     }
+    },
+    "leaves": {
+     "start": 0.35,
+     "count": 14,
+     "size": 4.2,
+     "angle": 24,
+     "tint": 11388072
+    }
+   }
+  },
+  {
+   "id": "brzoza-1",
+   "preset": "Aspen Large",
+   "seed": 7,
+   "height": 15,
+   "options": {
+    "branch": {
+     "start": {
+      "1": 0.38
+     },
+     "children": {
+      "0": 16,
+      "1": 7
+     },
+     "force": {
+      "strength": -0.012
+     },
+     "length": {
+      "1": 22,
+      "2": 13
+     }
+    },
+    "leaves": {
+     "tint": 9880686,
+     "count": 22,
+     "size": 3.0
+    }
+   }
+  },
+  {
+   "id": "brzoza-2",
+   "preset": "Aspen Large",
+   "seed": 53,
+   "height": 13,
+   "options": {
+    "branch": {
+     "start": {
+      "1": 0.34
+     },
+     "children": {
+      "0": 14,
+      "1": 7
+     },
+     "force": {
+      "strength": -0.016
+     },
+     "length": {
+      "1": 20,
+      "2": 12
+     }
+    },
+    "leaves": {
+     "tint": 9880686,
+     "count": 22,
+     "size": 3.0
+    }
+   }
+  },
+  {
+   "id": "dab-1",
+   "preset": "Oak Large",
+   "seed": 5,
+   "height": 16,
+   "options": {
+    "leaves": {
+     "tint": 14281912
+    }
+   }
+  },
+  {
+   "id": "lipa-1",
+   "preset": "Ash Large",
+   "seed": 9,
+   "height": 14,
+   "options": {
+    "leaves": {
+     "tint": 15201504
+    }
+   }
+  }
+ ],
+ "shots": [
+  [
+   "final-lineup",
+   [
+    0,
+    11,
+    88
+   ],
+   [
+    0,
+    9,
+    0
+   ]
+  ],
+  [
+   "final-aerial",
+   [
+    40,
+    58,
+    80
+   ],
+   [
+    0,
+    5,
+    0
+   ]
+  ]
+ ]
+}

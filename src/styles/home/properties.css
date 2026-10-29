@@ -1,0 +1,63 @@
+/* --- Domy: white cards, photo, name and price, kind, chips -------------------- */
+.property__body { padding: 1.1rem 0.75rem 0.85rem; }
+
+.property__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.property__title,
+.post__title {
+  margin: 0;
+  font-size: var(--fs-card);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.property__price {
+  flex: none;
+  margin: 0;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-weight: 800;
+  color: var(--gold-mid);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.property__kind {
+  margin: 0.3rem 0 0;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--copy);
+}
+
+.property__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 1rem;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.property__more svg {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.property__more:hover { color: var(--gold-lo); }
+.property__more:hover svg { transform: translateX(4px); }
+.property__more:focus-visible { outline: 3px solid var(--gold-hi); outline-offset: 4px; border-radius: 4px; }

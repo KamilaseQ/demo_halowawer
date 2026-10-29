@@ -1,0 +1,182 @@
+/* =========================================================================
+   SCROLL FILM: tall track, pinned stage, film under the static hero
+   ========================================================================= */
+
+.film {
+  position: relative;
+  height: 760vh;                        /* first 3 % of the travel: the copy fades off the first frame; then 6.4 window heights drive the 24 s walk-in film */
+}
+
+/* Everything that fades off the first frame before the film moves */
+.hero__villa,
+.wordmark,
+.hero__scrim,
+.hero__ui {
+  will-change: opacity;
+}
+
+.film__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* The film sits under the static hero; JS fades the static hero out over the
+   first few percent of scroll, revealing the film's identical first frame. */
+.hero__film {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #2f5f9e;
+}
+
+.hero__static {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  container-type: size;                 /* cqw / cqh in the hero variables = this box, the same box the film covers */
+}
+
+/* soft top scrim over the film so the nav stays clear of ceiling lights indoors */
+.film__sticky::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(70 * var(--u));
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(24, 17, 13, 0.34), rgba(24, 17, 13, 0));
+}
+
+/* --- Chapters ------------------------------------------------------------- */
+.chapters {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.chapter {
+  position: absolute;
+  left: 5.36%;
+  bottom: calc(26 * var(--u));
+  width: min(38vw, 36em);
+  opacity: 0;
+  color: var(--ivory);
+  text-shadow: 0 0.05em 0.6em rgba(20, 16, 14, 0.45);
+  will-change: opacity, transform;
+}
+
+/* soft dark scrim behind each chapter so it stays legible over the bright garden;
+   it fades in and out with its chapter */
+.chapter::before {
+  content: "";
+  position: absolute;
+  inset: -45% -55% -60% -30%;
+  z-index: -1;
+  background: radial-gradient(ellipse 62% 58% at 38% 58%, rgba(24, 17, 13, 0.62), rgba(24, 17, 13, 0) 74%);
+  pointer-events: none;
+}
+
+.chapter__eyebrow {
+  margin: 0 0 calc(4 * var(--u));
+  font-size: calc(6.5 * var(--u));
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f6f1ea;
+}
+
+.chapter__title {
+  margin: 0;
+  font-size: calc(24 * var(--u));
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+
+.chapter__text {
+  margin: calc(6 * var(--u)) 0 0;
+  max-width: 30em;
+  font-size: calc(7.5 * var(--u));
+  line-height: 1.6;
+  color: var(--ivory-copy);
+}
+
+/* --- Start-frame capture (?capture): only the composed scene remains ------- */
+.is-capture .nav,
+.is-capture .hero__scrim,
+.is-capture .wordmark,
+.is-capture .hero__ui,
+.is-capture .chapters,
+.is-capture .hero__film,
+.is-capture .wa-fab,
+.is-capture .mbar,
+.is-capture .preloader {
+  visibility: hidden;
+}
+
+/* --- Lite mode: no film, chapters as plain sections ------------------------
+   With reduced motion (CSS, right from the first paint), and as .is-lite when
+   the film failed to load (set by the film controller). */
+@media (prefers-reduced-motion: reduce) {
+  .film { height: auto; }
+  .film__sticky { position: relative; height: auto; overflow: visible; }
+  .hero { height: auto; overflow: hidden; }
+  .hero__film { display: none; }
+  .hero__static { position: relative; height: 100vh; overflow: hidden; opacity: 1 !important; }
+  .chapters {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2.5rem;
+    padding: 4rem 5.36%;
+    background: #f6ede1;              /* the cream of the sections under it */
+    pointer-events: auto;
+  }
+  .chapter {
+    position: static;
+    width: auto;
+    opacity: 1 !important;
+    transform: none !important;
+    color: #1f1f1f;
+    text-shadow: none;
+  }
+  .chapter::before { display: none; }
+  .chapter__eyebrow { color: #8a7f75; font-size: 0.8rem; }
+  .chapter__title { font-size: clamp(1.6rem, 2.4vw, 2.4rem); }
+  .chapter__text { color: #555; font-size: 1rem; }
+}
+
+.is-lite .film { height: auto; }
+.is-lite .film__sticky { position: relative; height: auto; overflow: visible; }
+.is-lite .hero { height: auto; overflow: hidden; }
+.is-lite .hero__film { display: none; }
+.is-lite .hero__static { position: relative; height: 100vh; overflow: hidden; opacity: 1 !important; }
+.is-lite .chapters {
+  position: static;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 2.5rem;
+  padding: 4rem 5.36%;
+  background: #f6ede1;              /* the cream of the sections under it */
+  pointer-events: auto;
+}
+.is-lite .chapter {
+  position: static;
+  width: auto;
+  opacity: 1 !important;
+  transform: none !important;
+  color: #1f1f1f;
+  text-shadow: none;
+}
+.is-lite .chapter::before { display: none; }
+.is-lite .chapter__eyebrow { color: #8a7f75; font-size: 0.8rem; }
+.is-lite .chapter__title { font-size: clamp(1.6rem, 2.4vw, 2.4rem); }
+.is-lite .chapter__text { color: #555; font-size: 1rem; }

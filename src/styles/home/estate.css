@@ -1,0 +1,379 @@
+/* =========================================================================
+   OSIEDLE W 3D: teaser of the 3D estate explorer (/domy)
+   -------------------------------------------------------------------------
+   A calm frame of the whole estate with seven glass labels on the roofs
+   (G F E | D C | B A from the west). Hover or tap a house: the panel shows
+   it; click: the explorer opens on that house. One button, no controls.
+   Pin positions are fractions of the photo (aspect locked), so they stay on
+   the roofs at every width; lifts are fractions of the photo height.
+   ========================================================================= */
+
+/* the viewer sits in a white card, like the configurator under it */
+.estate__viewer {
+  position: relative;
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: var(--r-card);
+  background: #ffffff;
+  box-shadow: var(--card-shadow);
+}
+
+.estate__stage {
+  --stage-h: 66.41cqw;                   /* 1461 / 2200 of the stage width */
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 2200 / 1461;
+  border-radius: var(--r-photo);
+  background: var(--photo-fill);
+  container-type: inline-size;
+}
+
+/* --- Scene: the photo and its labels move as one (scroll drift, pointer sway),
+   so the roof points never slip off the roofs ------------------------------ */
+.estate__scene {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.02);                /* a little bleed for the pointer sway */
+  translate: calc(var(--mx, 0) * -0.6%) calc(var(--my, 0) * -0.6%);
+}
+
+.estate__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* scroll-driven drift on the compositor (no JS); browsers without view
+   timelines simply get the still frame */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .estate__scene {
+      animation: estate-drift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
+/* the unveil settles the whole scene from its zoom, not only the photo */
+@media (scripting: enabled) {
+  :root .estate__stage.reveal-img .estate__photo { scale: none; }
+  :root .estate__stage.reveal-img .estate__scene { scale: 1.08; transition: scale 1.6s var(--ease-out); }
+  :root .estate__stage.reveal-img.is-in .estate__scene { scale: 1; }
+}
+
+@keyframes estate-drift {
+  from { transform: translate3d(0, -2.5%, 0) scale(1.07); }
+  to   { transform: translate3d(0, 2.5%, 0) scale(1.07); }
+}
+
+/* soft sky scrim so the white labels read on the brightest part of the sunset */
+.estate__stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(24, 17, 13, 0.18), rgba(24, 17, 13, 0) 38%);
+}
+
+/* --- Pins -------------------------------------------------------------------- */
+.estate__pins {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pin {
+  --lift-now: var(--lift);
+  position: absolute;
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  width: 0;
+  height: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.pin__link {
+  display: block;
+  color: var(--ink);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+/* roof point */
+.pin__dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: clamp(0.5rem, 0.8cqw, 0.75rem);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0.22em rgba(255, 255, 255, 0.32), 0 0.15em 0.6em rgba(20, 14, 10, 0.35);
+}
+
+.pin--available .pin__dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.12em rgba(255, 255, 255, 0.9);
+  opacity: 0;
+}
+
+/* leader line from the roof up to the label */
+.pin__line {
+  position: absolute;
+  left: -0.5px;
+  bottom: 0;
+  width: 1px;
+  height: calc(var(--lift-now) * var(--stage-h));
+  transform-origin: bottom;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.55));
+}
+
+/* the label: a glass card, title + one line (inspiration: floating building tags) */
+.pin__card {
+  position: absolute;
+  left: 0;
+  bottom: calc(var(--lift-now) * var(--stage-h));
+  translate: var(--card-x, -50%) 0;
+  display: grid;
+  justify-items: center;
+  gap: 0.28em;
+  padding: 0.72em 1em 0.78em;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 0.8em;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+  backdrop-filter: blur(14px) saturate(1.35);
+  box-shadow: 0 0.9em 2.2em -1.1em rgba(31, 24, 18, 0.55);
+  color: var(--ink);
+  font-size: clamp(0.875rem, 1.02cqw, 1rem);
+  line-height: 1.15;
+  white-space: nowrap;
+  transition:
+    transform 0.45s var(--ease-out),
+    background-color 0.35s ease,
+    box-shadow 0.45s var(--ease-out);
+}
+
+.pin__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: 1.08em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pin__name::before {
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 0.2em rgba(217, 163, 91, 0.25);
+}
+
+.pin__meta {
+  color: var(--grey-copy);
+  font-size: 0.95em;
+  font-variant-numeric: tabular-nums;
+}
+
+.pin--sold .pin__card { background: rgba(255, 255, 255, 0.8); }
+.pin--sold .pin__name { color: rgba(31, 31, 31, 0.78); }
+.pin--sold .pin__name::before { background: #a39588; box-shadow: 0 0 0 0.2em rgba(163, 149, 136, 0.22); }
+.pin--sold .pin__dot { background: rgba(255, 255, 255, 0.7); }
+
+/* hover / focus / tapped: the label lifts, the others step back */
+.pin.is-active .pin__card,
+.pin__link:focus-visible .pin__card {
+  transform: translateY(-0.25em);
+  background: #fff;
+  box-shadow: 0 1.2em 2.6em -1.1em rgba(31, 24, 18, 0.6);
+}
+
+.pin__link:focus-visible .pin__card { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.estate__pins.has-active .pin:not(.is-active) { opacity: 0.42; }
+
+/* --- Small stages: labels shrink to the letter -------------------------------- */
+@container (max-width: 980px) {
+  .pin { --lift-now: var(--lift-sm); }
+  .pin__card {
+    padding: 0.42em 0.66em 0.44em;
+    border-radius: 999px;
+    font-size: clamp(0.8125rem, 2.6cqw, 0.95rem);
+  }
+  .pin__name::before { width: 0.42em; height: 0.42em; }
+  .pin__prefix,
+  .pin__meta { display: none; }
+}
+
+/* --- Panel: the estate at a glance, or the house under the pointer ------------ */
+.estate__panel {
+  position: absolute;
+  right: clamp(0.9rem, 2.2vw, 2rem);
+  bottom: clamp(0.9rem, 2.2vw, 2rem);
+  z-index: 3;
+  width: min(25rem, 34%);
+  padding: clamp(1rem, 1.6vw, 1.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--r-photo);
+  background: rgba(24, 18, 14, 0.58);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  color: #fbf7f0;
+  box-shadow: 0 24px 60px -34px rgba(0, 0, 0, 0.8);
+}
+
+.estate__panel-body {
+  min-height: 7.6em;
+  font-size: var(--fs-small);
+}
+
+/* each house (or the summary) comes in fresh when it changes */
+.estate__panel-body > * { animation: estate-swap 0.5s var(--ease-out) both; }
+
+@keyframes estate-swap {
+  from { opacity: 0; translate: 0 0.4em; }
+}
+
+.estate__panel-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(251, 247, 240, 0.72);
+}
+
+.estate__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  letter-spacing: 0.06em;
+  color: #fbf7f0;
+}
+
+.estate__status::before {
+  content: "";
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 0.22em rgba(217, 163, 91, 0.3);
+}
+
+.estate__status--sold::before { background: #a39588; box-shadow: 0 0 0 0.22em rgba(163, 149, 136, 0.3); }
+
+.estate__panel-title {
+  margin: 0.45em 0 0;
+  font-size: var(--fs-card);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.estate__panel-facts {
+  margin: 0.55em 0 0;
+  color: rgba(251, 247, 240, 0.82);
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+
+.estate__panel-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 0.7em;
+  margin: 0.7em 0 0;
+  padding-top: 0.7em;
+  border-top: 1px solid rgba(251, 247, 240, 0.18);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.estate__panel-price small {
+  font-size: 0.88em;
+  font-weight: 400;
+  color: rgba(251, 247, 240, 0.7);
+}
+
+.estate__panel-hint {
+  margin: 0.7em 0 0;
+  color: rgba(251, 247, 240, 0.6);
+  font-size: 0.9em;
+}
+
+.estate__cta {
+  width: 100%;
+  margin-top: clamp(0.9rem, 1.4vw, 1.25rem);
+}
+
+/* phones and tablets: the panel sits under the photo */
+@media (max-width: 900px) {
+  .estate__panel {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    margin-top: 10px;
+    background: #2b2420;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .estate__panel-body { min-height: 0; }
+}
+
+/* --- Entrance: the photo unveils (.reveal-img), then the labels rise on their lines */
+@media (scripting: enabled) {
+  :root .estate__stage:not(.is-in) .pin { opacity: 0; }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  :root .estate__stage.is-in .pin__dot {
+    animation: pin-pop 0.6s var(--ease-out) both;
+    animation-delay: calc(0.55s + var(--i) * 85ms);
+  }
+
+  :root .estate__stage.is-in .pin__line {
+    animation: pin-grow 0.9s var(--ease-out) both;
+    animation-delay: calc(0.65s + var(--i) * 85ms);
+  }
+
+  :root .estate__stage.is-in .pin__card {
+    animation: pin-rise 0.85s var(--ease-out) both;
+    animation-delay: calc(0.95s + var(--i) * 85ms);
+  }
+
+  /* available houses breathe: a slow ring off the roof point */
+  :root .estate__stage.is-in .pin--available .pin__dot::after {
+    animation: pin-ping 3.2s var(--ease-out) infinite;
+    animation-delay: calc(2.4s + var(--i) * 240ms);
+  }
+}
+
+@keyframes pin-pop { from { opacity: 0; scale: 0; } }
+@keyframes pin-grow { from { scale: 1 0; } }
+@keyframes pin-rise { from { opacity: 0; translate: var(--card-x, -50%) 0.8em; } }
+@keyframes pin-ping {
+  0% { opacity: 0.9; scale: 1; }
+  70%, 100% { opacity: 0; scale: 3.2; }
+}

@@ -1,0 +1,53 @@
+/* =========================================================================
+   Halo Wawer: design tokens and reset (every route)
+   -------------------------------------------------------------------------
+   Units
+   - Horizontal positions: % of the hero width.
+   - Everything else (type, heights, vertical offsets, radii): --u, one
+     reference pixel = 1/644 of the viewport width (reference 644 x 451).
+   Fonts come from next/font (src/app/fonts.ts) as --font-jakarta / --font-inter.
+   ========================================================================= */
+
+:root {
+  --u: calc(100vw / 644);
+
+  --font-ui: var(--font-jakarta), "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* the hero wordmark keeps Inter: its size and baseline (behind the roofs) are tuned to Inter's metrics */
+  --font-wordmark: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --gold: #d9a35b;
+
+  --ivory: #f3eee8;          /* logotype, button label */
+  --ivory-copy: #f1ebe5;     /* paragraph, social proof */
+  --page-white: #fefefe;
+
+  --hl-color: rgba(217, 163, 91, 0.42);
+  --status-available: #6f9b5c;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;        /* the oversized wordmark must never cause a horizontal scrollbar */
+}
+
+body {
+  margin: 0;
+  background: var(--page-white);
+  color: #1f1f1f;
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+}

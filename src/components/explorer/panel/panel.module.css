@@ -1,0 +1,872 @@
+/* Panel content on light glass: quiet hierarchy, ink text, numbers in tabular figures. */
+
+.scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 22px 22px 26px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(31, 31, 31, 0.16) transparent;
+}
+
+/* New route content settles in rather than snapping (the stage dissolves at the same time).
+   Not on the first server paint: the title must paint immediately (it is the LCP element). */
+:global([data-navigated]) .scroll {
+  animation: panelIn 560ms var(--ease-out) both;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global([data-navigated]) .scroll {
+    animation-name: panelFade;
+  }
+
+  @keyframes panelFade {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+.head {
+  margin-bottom: 20px;
+}
+
+/* Eyebrow: uppercase, open tracking at small size, taupe (deepened for glass). */
+.kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.5em;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--taupe-ink);
+}
+
+/* Titles: tight display tracking, as on the home page. */
+.title {
+  margin-top: 8px;
+  font-family: var(--font-ui);
+  font-size: clamp(1.7rem, 1.35rem + 0.75vw, 2rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.038em;
+  color: var(--fg);
+}
+
+.lede {
+  margin-top: 10px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--fg-muted);
+}
+
+/* ---------- status ---------- */
+
+/* "Dostępny" carries a gold dot; "Sprzedany" is quiet text without one. */
+.kicker [data-status="available"]::before,
+.rowMeta [data-status="available"]::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 0.5em;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 0 0 2.5px var(--gold-halo);
+  vertical-align: 0.12em;
+}
+
+.kicker [data-status="available"] {
+  color: var(--fg);
+}
+
+.kicker [data-status="reserved"],
+.rowMeta [data-status="reserved"] {
+  color: var(--taupe-ink);
+}
+
+.kicker [data-status="sold"] {
+  color: var(--fg-faint);
+}
+
+/* ---------- house list ---------- */
+
+.listHead,
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.05fr) minmax(0, 1.05fr) minmax(0, 1.1fr);
+  align-items: baseline;
+  column-gap: 8px;
+}
+
+.listHead {
+  padding: 0 10px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  border-bottom: 1px solid var(--line);
+}
+
+.listHead span:not(:first-child),
+.num {
+  text-align: right;
+}
+
+/* Plain rows split by inset hairlines (no cards); a hovered row brightens and its hairlines step aside. */
+.list > li {
+  position: relative;
+}
+
+.list > li + li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: 1px;
+  background: var(--line-soft);
+  pointer-events: none;
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+
+.list > li:hover::before,
+.list > li:hover + li::before,
+.list > li:has(> [data-hover])::before,
+.list > li:has(> [data-hover]) + li::before {
+  opacity: 0;
+}
+
+.row {
+  width: 100%;
+  min-height: 54px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  text-align: left;
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+/* Hover here, on the photo or in 3D: the row brightens on the glass. */
+.row:hover,
+.row[data-hover] {
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.row:active {
+  transform: scale(0.985);
+}
+
+.rowName {
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--fg);
+}
+
+/* Second line across the whole row: status, then an optional highlight chip. */
+.rowMeta {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.rowMeta small {
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--fg-muted);
+}
+
+.rowTag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #7d5520;
+  background: rgba(217, 163, 91, 0.18);
+  box-shadow: inset 0 0 0 0.5px rgba(217, 163, 91, 0.45);
+}
+
+.num {
+  font-size: 13.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--fg);
+}
+
+/* Sold houses stay as proof of demand, but recede. */
+.row[data-sold] .rowName,
+.row[data-sold] .num,
+.row[data-sold] .rowMeta {
+  color: var(--fg-muted);
+  opacity: 0.6;
+}
+
+.row[data-dim] {
+  opacity: 0.38;
+}
+
+.floorGroup {
+  padding-top: 16px;
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+
+.floorLabel {
+  padding: 0 10px 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--taupe-ink);
+}
+
+/* ---------- house card ---------- */
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px 6px;
+  margin: -6px 0 16px -6px;
+  font-size: 12.5px;
+  color: var(--fg-faint);
+}
+
+.crumbs [aria-current] {
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+.crumb {
+  padding: 6px 8px;
+  border-radius: 999px;
+  color: var(--fg-muted);
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 12px 0 8px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--fg);
+  background: rgba(31, 31, 31, 0.05);
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .crumb:hover {
+    color: var(--fg);
+    background: var(--fill-hover);
+  }
+
+  .back:hover {
+    background: rgba(255, 255, 255, 0.85);
+  }
+}
+
+.back:active {
+  transform: scale(0.96);
+}
+
+/* House list: the eyebrow row carries the roll-up chevron at its right end. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: -8px -8px -4px 0;
+}
+
+/* Roll the panel up: a quiet 32px chevron, last in the first row (after sharing). */
+.collapse {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: var(--fg-muted);
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .collapse:hover {
+    color: var(--fg);
+    background: var(--fill-hover);
+  }
+}
+
+.collapse:active {
+  transform: scale(0.92);
+}
+
+/* Share: a quiet icon at the end of the breadcrumb row; "Skopiowano link" appears beside it. */
+.shareWrap {
+  position: relative;
+  display: inline-flex;
+  margin-left: auto;
+}
+
+.shareIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  color: var(--fg-muted);
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shareIcon:hover {
+    color: var(--fg);
+    background: var(--fill-hover);
+  }
+}
+
+.shareIcon:active {
+  transform: scale(0.92);
+}
+
+.toast {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 6px);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--page-white);
+  background: var(--ink);
+  box-shadow: 0 8px 20px -8px rgba(31, 24, 18, 0.5);
+  opacity: 0;
+  translate: 6px -50%;
+  scale: 0.96;
+  pointer-events: none;
+  transition:
+    opacity 220ms var(--ease-out),
+    translate 320ms var(--ease-out),
+    scale 320ms var(--ease-out);
+}
+
+.toast:empty {
+  padding: 0;
+}
+
+.toast[data-visible] {
+  opacity: 1;
+  translate: 0 -50%;
+  scale: 1;
+}
+
+/* Sold house: the note and the way to the twin that is still on offer. */
+.soldNote {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+}
+
+.seeHouse {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px 0 16px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 0 0 1px rgba(31, 31, 31, 0.14),
+    0 1px 2px rgba(31, 24, 18, 0.06);
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+.seeHouse svg {
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .seeHouse:hover {
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .seeHouse:hover svg {
+    transform: translateX(2px);
+  }
+}
+
+.seeHouse:active {
+  transform: scale(0.97);
+}
+
+.price {
+  padding: 16px 0 4px;
+  border-top: 1px solid var(--line);
+}
+
+.priceMain {
+  font-family: var(--font-ui);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+.priceSub {
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+}
+
+.details {
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.details + .details {
+  margin-top: 0;
+}
+
+.details summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  border-radius: 8px;
+}
+
+.details summary::-webkit-details-marker {
+  display: none;
+}
+
+.details summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--dur-ui) var(--ease-out);
+  opacity: 0.55;
+}
+
+.details[open] summary::after {
+  transform: rotate(225deg) translateY(-2px);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.table + .table {
+  margin-top: 6px;
+}
+
+.table caption {
+  padding: 8px 0 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.table td {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--fg-muted);
+}
+
+.table td:not(:first-child) {
+  text-align: right;
+  font-weight: 500;
+  color: var(--fg);
+}
+
+.table small {
+  color: var(--fg-faint);
+}
+
+.fine {
+  margin-top: 10px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--fg-faint);
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 6px 0 4px;
+  border-top: 1px solid var(--line);
+}
+
+.specs > div {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.specs > div:nth-child(odd) {
+  padding-right: 12px;
+  border-right: 1px solid var(--line);
+}
+
+.specs > div:nth-child(even) {
+  padding-left: 14px;
+}
+
+.specs dt {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+}
+
+.specs dd {
+  margin-top: 3px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+.specs dd small {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--fg-muted);
+}
+
+.block {
+  padding-top: 18px;
+}
+
+.blockTitle {
+  margin: 16px 0 10px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--taupe-ink);
+}
+
+.block > .blockTitle:first-child {
+  margin-top: 0;
+}
+
+/* Finish styles: radio cards; the chosen one is a white chip with a gold edge. */
+.finishes {
+  display: grid;
+  gap: 4px;
+}
+
+.finish {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-items: center;
+  min-height: 54px;
+  padding: 9px 12px;
+  border-radius: 14px;
+  text-align: left;
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    box-shadow var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .finish:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.finish:active {
+  transform: scale(0.985);
+}
+
+.finish[aria-checked="true"] {
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow:
+    inset 0 0 0 1.5px var(--gold),
+    var(--chip-shadow);
+}
+
+.swatches {
+  grid-row: span 2;
+  display: flex;
+}
+
+.swatches i {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 0.5px rgba(31, 31, 31, 0.16);
+}
+
+.swatches i + i {
+  margin-left: -6px;
+}
+
+.finishName {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.finishTag {
+  font-size: 11.5px;
+  color: var(--fg-muted);
+}
+
+.plans {
+  display: grid;
+  gap: 8px;
+}
+
+.plan {
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow:
+    0 0 0 0.5px rgba(31, 31, 31, 0.08),
+    0 6px 18px -10px rgba(31, 24, 18, 0.22);
+}
+
+.plan img {
+  width: 100%;
+  height: auto;
+}
+
+.plan figcaption {
+  padding: 6px 12px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+.docs {
+  display: grid;
+  margin-bottom: 6px;
+}
+
+.docs a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 42px;
+  font-size: 13px;
+  font-weight: 500;
+  border-top: 1px solid var(--line-soft);
+  transition: color var(--dur-ui) var(--ease-out);
+}
+
+/* Opens in a new tab. */
+.docs a::after {
+  content: "↗";
+  font-size: 13px;
+  color: var(--fg-faint);
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    transform var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .docs a:hover::after {
+    color: var(--fg);
+    transform: translate(2px, -2px);
+  }
+}
+
+.share {
+  margin-top: 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    text-decoration-color var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .share:hover {
+    color: var(--fg);
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ---------- actions: gold "Umów prezentację" + WhatsApp outline, always in reach ---------- */
+
+.cta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.42));
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-btn);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    color var(--dur-ui) var(--ease-out),
+    border-color var(--dur-ui) var(--ease-out),
+    box-shadow var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+.ctaBtn:active {
+  transform: scale(0.97);
+}
+
+.ctaSolid {
+  color: var(--ink);
+  background: var(--gold);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 8px 20px -10px rgba(170, 112, 40, 0.7);
+}
+
+.ctaOutline {
+  color: var(--fg);
+  border-color: rgba(31, 31, 31, 0.22);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ctaSolid:hover {
+    background: var(--gold-hover);
+  }
+
+  .ctaOutline:hover {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(31, 31, 31, 0.32);
+  }
+}
+
+.ctaSolid:active {
+  background: var(--gold-press);
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .mobileOnly {
+    display: block;
+  }
+
+  .scroll {
+    padding: 16px 16px 20px;
+  }
+
+  .head {
+    margin-bottom: 14px;
+  }
+
+  .title {
+    margin-top: 6px;
+    font-size: 1.5rem;
+  }
+
+  .price {
+    padding-top: 12px;
+  }
+
+  .priceMain {
+    font-size: 1.5rem;
+  }
+
+  .cta {
+    padding: 10px 10px 10px;
+  }
+
+  .ctaBtn {
+    min-height: 48px;
+    padding: 0 16px;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .ctaOutline {
+    border-color: var(--ink);
+  }
+
+  .row[data-sold] .rowName,
+  .row[data-sold] .num,
+  .row[data-sold] .rowMeta {
+    opacity: 1;
+  }
+}

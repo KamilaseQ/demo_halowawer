@@ -1,0 +1,615 @@
+{
+  "generated": "2026-10-27",
+  "license": "All assets CC0-1.0 (public domain). See /3d/CREDITS.md.",
+  "conventions": {
+    "units": "meters",
+    "upAxis": "+Y",
+    "modelOrigin": "Poly Haven pivots: base at y=0, roughly centred in X/Z (exact extents in bboxMin/bboxMax).",
+    "normalMaps": "OpenGL convention (+Y up; Poly Haven nor_gl / ambientCG NormalGL) - matches three.js defaults, no normalScale flip needed.",
+    "colorSpaces": "color.jpg = sRGB (texture.colorSpace = SRGBColorSpace); normal/rough/ao = linear (NoColorSpace).",
+    "roughAo": "rough.jpg and ao.jpg are separate single-channel grayscale JPGs (no packed ARM). three.js reads roughness from G and AO from R - grayscale works for both.",
+    "tiling": "Use RepeatWrapping; repeat = surfaceSizeMeters / realWorldSizeMeters. ambientCG sizes are unknown unless listed; suggestedSizeMetersEstimate is an eyeballed estimate.",
+    "gltf": "GLBs use EXT_meshopt_compression + KHR_mesh_quantization + EXT_texture_webp (1024 px). The loader needs MeshoptDecoder (drei useGLTF enables it by default). No Draco."
+  },
+  "textures": {
+    "herringbone_parquet": {
+      "name": "Herringbone Parquet",
+      "files": {
+        "color": "/3d/textures/herringbone_parquet/color.jpg",
+        "normal": "/3d/textures/herringbone_parquet/normal.jpg",
+        "rough": "/3d/textures/herringbone_parquet/rough.jpg",
+        "ao": "/3d/textures/herringbone_parquet/ao.jpg"
+      },
+      "res": "2k",
+      "pixels": [
+        2048,
+        2048
+      ],
+      "realWorldSizeMeters": [
+        3.4,
+        3.4
+      ],
+      "source": "https://polyhaven.com/a/herringbone_parquet",
+      "author": "Jenelle van Heerden (Processing), Sergej Majboroda (Photography)",
+      "license": "CC0-1.0",
+      "role": "Floor: herringbone oak parquet, coated/satin finish (living room + kitchen).",
+      "bytes": 2175965
+    },
+    "oak_veneer_01": {
+      "name": "Oak Veneer 01",
+      "files": {
+        "color": "/3d/textures/oak_veneer_01/color.jpg",
+        "normal": "/3d/textures/oak_veneer_01/normal.jpg",
+        "rough": "/3d/textures/oak_veneer_01/rough.jpg",
+        "ao": "/3d/textures/oak_veneer_01/ao.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": [
+        1.83,
+        1.83
+      ],
+      "source": "https://polyhaven.com/a/oak_veneer_01",
+      "author": "Jenelle van Heerden",
+      "license": "CC0-1.0",
+      "role": "Light/warm natural oak veneer: tall oak cabinet, cabinetry, chair/table wood.",
+      "bytes": 705063
+    },
+    "black_oak_veneer": {
+      "name": "Black Oak Veneer",
+      "files": {
+        "color": "/3d/textures/black_oak_veneer/color.jpg",
+        "normal": "/3d/textures/black_oak_veneer/normal.jpg",
+        "rough": "/3d/textures/black_oak_veneer/rough.jpg",
+        "ao": "/3d/textures/black_oak_veneer/ao.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": [
+        1.0,
+        1.0
+      ],
+      "source": "https://polyhaven.com/a/black_oak_veneer",
+      "author": "Jenelle van Heerden",
+      "license": "CC0-1.0",
+      "role": "Dark smoked/fumed-oak veneer for the 'dark' finish style (cabinet fronts, floor alternative).",
+      "bytes": 571524
+    },
+    "marble004": {
+      "name": "Marble 004",
+      "files": {
+        "color": "/3d/textures/marble004/color.jpg",
+        "normal": "/3d/textures/marble004/normal.jpg",
+        "rough": "/3d/textures/marble004/rough.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": null,
+      "suggestedSizeMetersEstimate": 2.0,
+      "source": "https://ambientcg.com/view?id=Marble004",
+      "author": "ambientCG (Lennart Demes)",
+      "license": "CC0-1.0",
+      "role": "Warm-white marble with soft grey veins: kitchen backsplash / countertop.",
+      "notes": "No AO map provided by source. Poly Haven has no clean warm-white slab marble, hence ambientCG.",
+      "bytes": 516931
+    },
+    "marble016": {
+      "name": "Marble 016",
+      "files": {
+        "color": "/3d/textures/marble016/color.jpg",
+        "normal": "/3d/textures/marble016/normal.jpg",
+        "rough": "/3d/textures/marble016/rough.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": null,
+      "suggestedSizeMetersEstimate": 1.5,
+      "source": "https://ambientcg.com/view?id=Marble016",
+      "author": "ambientCG (Lennart Demes)",
+      "license": "CC0-1.0",
+      "role": "Black marble with fine white veins (Nero Marquina look): 'dark' finish style counters/backsplash; also usable as large-format terrace slabs.",
+      "notes": "No AO map provided by source.",
+      "bytes": 388673
+    },
+    "granite_tile": {
+      "name": "Granite Tile",
+      "files": {
+        "color": "/3d/textures/granite_tile/color.jpg",
+        "normal": "/3d/textures/granite_tile/normal.jpg",
+        "rough": "/3d/textures/granite_tile/rough.jpg",
+        "ao": "/3d/textures/granite_tile/ao.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": [
+        2.3,
+        2.3
+      ],
+      "source": "https://polyhaven.com/a/granite_tile",
+      "author": "Charlotte Baglioni",
+      "license": "CC0-1.0",
+      "role": "Dark grey granite/slate floor tiles with grout (~0.46 m tiles, 5x5 per texture repeat): terrace floor.",
+      "bytes": 639199
+    },
+    "travertine009": {
+      "name": "Travertine 009",
+      "files": {
+        "color": "/3d/textures/travertine009/color.jpg",
+        "normal": "/3d/textures/travertine009/normal.jpg",
+        "rough": "/3d/textures/travertine009/rough.jpg",
+        "ao": "/3d/textures/travertine009/ao.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": [
+        1.2,
+        1.2
+      ],
+      "source": "https://ambientcg.com/view?id=Travertine009",
+      "author": "ambientCG (Lennart Demes)",
+      "license": "CC0-1.0",
+      "role": "Light beige vein-cut travertine: 'stone' finish style (floor / backsplash / counter).",
+      "notes": "Poly Haven has no travertine, hence ambientCG.",
+      "bytes": 203471
+    },
+    "terrazzo013": {
+      "name": "Terrazzo 013",
+      "files": {
+        "color": "/3d/textures/terrazzo013/color.jpg",
+        "normal": "/3d/textures/terrazzo013/normal.jpg",
+        "rough": "/3d/textures/terrazzo013/rough.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": null,
+      "suggestedSizeMetersEstimate": 0.8,
+      "source": "https://ambientcg.com/view?id=Terrazzo013",
+      "author": "ambientCG (Lennart Demes)",
+      "license": "CC0-1.0",
+      "role": "White terrazzo with muted multicolour chips: side table / accent surfaces.",
+      "notes": "No AO map provided by source. Poly Haven terrazzo is brown/weathered, hence ambientCG.",
+      "bytes": 389890
+    },
+    "curly_teddy_natural": {
+      "name": "Curly Teddy Natural",
+      "files": {
+        "color": "/3d/textures/curly_teddy_natural/color.jpg",
+        "normal": "/3d/textures/curly_teddy_natural/normal.jpg",
+        "rough": "/3d/textures/curly_teddy_natural/rough.jpg",
+        "ao": "/3d/textures/curly_teddy_natural/ao.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": [
+        0.336,
+        0.331
+      ],
+      "source": "https://polyhaven.com/a/curly_teddy_natural",
+      "author": "colormass (Photography), Rico Cilliers (Processing)",
+      "license": "CC0-1.0",
+      "role": "Off-white curly teddy / boucle fabric: modular sofa upholstery.",
+      "notes": "Source pixels were 1024x1009; resampled to 1024x1024 (tiling preserved). realWorldSizeMeters keeps the source aspect.",
+      "bytes": 946464
+    },
+    "fabric036": {
+      "name": "Fabric 036",
+      "files": {
+        "color": "/3d/textures/fabric036/color.jpg",
+        "normal": "/3d/textures/fabric036/normal.jpg",
+        "rough": "/3d/textures/fabric036/rough.jpg",
+        "ao": "/3d/textures/fabric036/ao.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": null,
+      "suggestedSizeMetersEstimate": 0.3,
+      "source": "https://ambientcg.com/view?id=Fabric036",
+      "author": "ambientCG (Lennart Demes)",
+      "license": "CC0-1.0",
+      "role": "Plain linen weave, neutral light grey: cushions, curtains, chair seats. Colour map is GRAYSCALE so it can be tinted via material.color (e.g. oat / greige).",
+      "notes": "Poly Haven has no neutral linen (rough_linen is blue, terlenka is a smooth twill), hence ambientCG.",
+      "bytes": 1601468
+    },
+    "plaster001": {
+      "name": "Plaster 001",
+      "files": {
+        "color": "/3d/textures/plaster001/color.jpg",
+        "normal": "/3d/textures/plaster001/normal.jpg",
+        "rough": "/3d/textures/plaster001/rough.jpg"
+      },
+      "res": "1k",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "realWorldSizeMeters": null,
+      "suggestedSizeMetersEstimate": 2.0,
+      "source": "https://ambientcg.com/view?id=Plaster001",
+      "author": "ambientCG (Lennart Demes)",
+      "license": "CC0-1.0",
+      "role": "Subtle white fine plaster: walls (use the colour map, or only normal/rough with a flat paint colour).",
+      "notes": "No AO map provided by source. Poly Haven plasters are weathered/dirty, hence ambientCG.",
+      "bytes": 919018
+    }
+  },
+  "hdri": {
+    "zawiszy_czarnego": {
+      "name": "Zawiszy Czarnego",
+      "files": {
+        "hdr": "/3d/hdri/zawiszy_czarnego_1k.hdr",
+        "background": "/3d/hdri/zawiszy_czarnego_bg.jpg"
+      },
+      "mood": "day",
+      "res": {
+        "hdr": "1k (1024x512)",
+        "background": "4096x2048 tonemapped JPG (sRGB)"
+      },
+      "notes": "Bright partly-cloudy afternoon in Klodzko (Poland): street with mature trees and a pre-war brick/plaster building, lots of sky. Soft low-contrast light (peak luminance ~39, no hard sun) - add a DirectionalLight if sun patches are wanted. Use the .hdr for scene.environment (PMREM) and the _bg.jpg (EquirectangularReflectionMapping, SRGBColorSpace) as the visible window view.",
+      "source": "https://polyhaven.com/a/zawiszy_czarnego",
+      "author": "Grzegorz Wronkowski",
+      "license": "CC0-1.0",
+      "bytes": 3543470
+    },
+    "golden_bay": {
+      "name": "Golden Bay",
+      "files": {
+        "hdr": "/3d/hdri/golden_bay_1k.hdr",
+        "background": "/3d/hdri/golden_bay_bg.jpg"
+      },
+      "mood": "dusk",
+      "res": {
+        "hdr": "1k (1024x512)",
+        "background": "4096x2048 tonemapped JPG (sRGB)"
+      },
+      "notes": "Blue-hour waterfront in Rostock (Germany): modern residential blocks with lit windows, warm street lamps, deep blue sky. Lamp hotspots are extremely bright (peak ~25000) - use a lowish environmentIntensity and/or rely on interior lights. The Poly Haven tonemapped background is brighter than a real dusk exposure; lower backgroundIntensity (~0.4-0.7) for an evening mood.",
+      "source": "https://polyhaven.com/a/golden_bay",
+      "author": "Greg Zaal",
+      "license": "CC0-1.0",
+      "bytes": 2583526
+    },
+    "studio_small_08": {
+      "name": "Studio Small 08",
+      "files": {
+        "hdr": "/3d/hdri/studio_small_08_1k.hdr"
+      },
+      "mood": "studio",
+      "res": {
+        "hdr": "1k (1024x512)"
+      },
+      "notes": "Soft, low-contrast neutral studio (large softboxes + octabox) for the white-model building maquette. Lighting only, no background plate.",
+      "source": "https://polyhaven.com/a/studio_small_08",
+      "author": "Sergej Majboroda",
+      "license": "CC0-1.0",
+      "bytes": 1508872
+    }
+  },
+  "models": {
+    "potted_plant_01": {
+      "name": "Potted Plant 01",
+      "file": "/3d/models/potted_plant_01.glb",
+      "bbox": [
+        0.587,
+        1.336,
+        0.634
+      ],
+      "bboxMin": [
+        -0.3384,
+        0.0,
+        -0.3637
+      ],
+      "bboxMax": [
+        0.249,
+        1.3365,
+        0.2699
+      ],
+      "triangles": 153761,
+      "bytes": 1626900,
+      "notes": "Large floor plant (~1.34 m) with lush scalloped leaves in a terracotta pedestal pot. HEAVY: ~154k triangles - consider a simplified LOD for mobile. Leaves material alphaMode MASK, double-sided.",
+      "source": "https://polyhaven.com/a/potted_plant_01",
+      "author": "Rico Cilliers",
+      "license": "CC0-1.0"
+    },
+    "potted_plant_02": {
+      "name": "Potted Plant 02",
+      "file": "/3d/models/potted_plant_02.glb",
+      "bbox": [
+        0.701,
+        0.841,
+        0.657
+      ],
+      "bboxMin": [
+        -0.3967,
+        0.0001,
+        -0.4203
+      ],
+      "bboxMax": [
+        0.3045,
+        0.8412,
+        0.2371
+      ],
+      "triangles": 69345,
+      "bytes": 888380,
+      "notes": "Medium floor plant (~0.84 m), alocasia-like veined leaves in a round terracotta pot (~69k triangles). Leaves alphaMode MASK.",
+      "source": "https://polyhaven.com/a/potted_plant_02",
+      "author": "Rico Cilliers",
+      "license": "CC0-1.0"
+    },
+    "potted_plant_04": {
+      "name": "Potted Plant 04",
+      "file": "/3d/models/potted_plant_04.glb",
+      "bbox": [
+        0.168,
+        0.267,
+        0.185
+      ],
+      "bboxMin": [
+        -0.0839,
+        0.0004,
+        -0.0839
+      ],
+      "bboxMax": [
+        0.0839,
+        0.2678,
+        0.1008
+      ],
+      "triangles": 8697,
+      "bytes": 399032,
+      "notes": "Small tabletop succulent (zebra haworthia) in a matte white ceramic pot (~0.27 m).",
+      "source": "https://polyhaven.com/a/potted_plant_04",
+      "author": "James Ray Cock",
+      "license": "CC0-1.0"
+    },
+    "modern_arm_chair_01": {
+      "name": "Modern Arm Chair 01",
+      "file": "/3d/models/modern_arm_chair_01.glb",
+      "bbox": [
+        0.82,
+        1.023,
+        0.987
+      ],
+      "bboxMin": [
+        -0.4068,
+        0.0004,
+        -0.5754
+      ],
+      "bboxMax": [
+        0.4135,
+        1.0232,
+        0.4111
+      ],
+      "triangles": 7029,
+      "bytes": 315264,
+      "notes": "Modern armchair: oak frame + black leather cushions. Front faces +Z (backrest toward -Z). Lounge armchair, not a dining chair.",
+      "source": "https://polyhaven.com/a/modern_arm_chair_01",
+      "author": "Vibrant Nordic",
+      "license": "CC0-1.0"
+    },
+    "side_table_01": {
+      "name": "Side Table 01",
+      "file": "/3d/models/side_table_01.glb",
+      "bbox": [
+        0.55,
+        0.551,
+        0.45
+      ],
+      "bboxMin": [
+        -0.275,
+        -0.0024,
+        -0.225
+      ],
+      "bboxMax": [
+        0.275,
+        0.5483,
+        0.225
+      ],
+      "triangles": 2542,
+      "bytes": 188956,
+      "notes": "Minimalist oak side table with two shelves (W 0.55 x H 0.55 x D 0.45 m).",
+      "source": "https://polyhaven.com/a/side_table_01",
+      "author": "James Ray Cock",
+      "license": "CC0-1.0"
+    },
+    "outdoor_table_chair_set_01": {
+      "name": "Outdoor Table Chair Set 01",
+      "file": "/3d/models/outdoor_table_chair_set_01.glb",
+      "bbox": [
+        0.742,
+        0.859,
+        1.717
+      ],
+      "bboxMin": [
+        -0.4255,
+        -0.006,
+        -0.8111
+      ],
+      "bboxMax": [
+        0.3161,
+        0.8527,
+        0.9062
+      ],
+      "triangles": 9600,
+      "bytes": 412388,
+      "notes": "Terrace bistro set: folding table + 2 folding chairs (wood slats, black metal frame), laid out along Z. Two meshes (table, chairs).",
+      "source": "https://polyhaven.com/a/outdoor_table_chair_set_01",
+      "author": "James Ray Cock",
+      "license": "CC0-1.0"
+    },
+    "ceramic_vase_01": {
+      "name": "Ceramic Vase 01",
+      "file": "/3d/models/ceramic_vase_01.glb",
+      "bbox": [
+        0.204,
+        0.4,
+        0.204
+      ],
+      "bboxMin": [
+        -0.1018,
+        0.0012,
+        -0.1018
+      ],
+      "bboxMax": [
+        0.1018,
+        0.4015,
+        0.1018
+      ],
+      "triangles": 9784,
+      "bytes": 102108,
+      "notes": "Tall glossy white ceramic vase with fluted rim (0.40 m).",
+      "source": "https://polyhaven.com/a/ceramic_vase_01",
+      "author": "James Ray Cock",
+      "license": "CC0-1.0"
+    },
+    "ceramic_vase_02": {
+      "name": "Ceramic Vase 02",
+      "file": "/3d/models/ceramic_vase_02.glb",
+      "bbox": [
+        0.218,
+        0.309,
+        0.218
+      ],
+      "bboxMin": [
+        -0.1092,
+        0.0011,
+        -0.1092
+      ],
+      "bboxMax": [
+        0.1092,
+        0.3103,
+        0.1092
+      ],
+      "triangles": 10678,
+      "bytes": 288720,
+      "notes": "Matte white clay vase, rounded silhouette (0.31 m).",
+      "source": "https://polyhaven.com/a/ceramic_vase_02",
+      "author": "James Ray Cock",
+      "license": "CC0-1.0"
+    },
+    "ceramic_vase_03": {
+      "name": "Ceramic Vase 03",
+      "file": "/3d/models/ceramic_vase_03.glb",
+      "bbox": [
+        0.112,
+        0.414,
+        0.112
+      ],
+      "bboxMin": [
+        -0.0561,
+        0.0,
+        -0.0561
+      ],
+      "bboxMax": [
+        0.0561,
+        0.4144,
+        0.0561
+      ],
+      "triangles": 6694,
+      "bytes": 289012,
+      "notes": "Tall square matte white vase (0.41 m).",
+      "source": "https://polyhaven.com/a/ceramic_vase_03",
+      "author": "James Ray Cock",
+      "license": "CC0-1.0"
+    },
+    "wooden_bowl_01": {
+      "name": "Wooden Bowl 01",
+      "file": "/3d/models/wooden_bowl_01.glb",
+      "bbox": [
+        0.313,
+        0.094,
+        0.309
+      ],
+      "bboxMin": [
+        -0.1568,
+        0.0006,
+        -0.1539
+      ],
+      "bboxMax": [
+        0.1562,
+        0.0942,
+        0.1552
+      ],
+      "triangles": 14058,
+      "bytes": 317844,
+      "notes": "Hand-carved rustic wooden bowl (dia ~0.31 m) - fruit bowl.",
+      "source": "https://polyhaven.com/a/wooden_bowl_01",
+      "author": "Oliver Harries",
+      "license": "CC0-1.0"
+    },
+    "food_pears_asian_01": {
+      "name": "Pears Asian 01",
+      "file": "/3d/models/food_pears_asian_01.glb",
+      "bbox": [
+        0.126,
+        0.071,
+        0.167
+      ],
+      "bboxMin": [
+        -0.0797,
+        -0.0,
+        -0.1007
+      ],
+      "bboxMax": [
+        0.0464,
+        0.0712,
+        0.0663
+      ],
+      "triangles": 11702,
+      "bytes": 180048,
+      "notes": "Cluster of 5 Asian pears; footprint fits inside wooden_bowl_01.",
+      "source": "https://polyhaven.com/a/food_pears_asian_01",
+      "author": "Amal Kumar",
+      "license": "CC0-1.0"
+    },
+    "standing_picture_frame_01": {
+      "name": "Standing Picture Frame 01",
+      "file": "/3d/models/standing_picture_frame_01.glb",
+      "bbox": [
+        0.1,
+        0.25,
+        0.201
+      ],
+      "bboxMin": [
+        -0.0616,
+        -0.0005,
+        -0.1004
+      ],
+      "bboxMax": [
+        0.0386,
+        0.2492,
+        0.1004
+      ],
+      "triangles": 1574,
+      "bytes": 142628,
+      "notes": "Standing black picture frame with white mat and B/W photo; artwork faces +X (slightly tilted up). Glass is alphaMode BLEND.",
+      "source": "https://polyhaven.com/a/standing_picture_frame_01",
+      "author": "James Ray Cock",
+      "license": "CC0-1.0"
+    }
+  }
+}

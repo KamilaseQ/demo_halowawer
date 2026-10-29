@@ -1,0 +1,153 @@
+/* "Umów prezentację" over the scene. Tokens from Explorer.module.css (.root): the dialog sits in its DOM. */
+
+.sheet {
+  width: min(460px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100svh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  overflow: auto;
+  overscroll-behavior: contain;
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  transition:
+    opacity 260ms var(--ease-out),
+    translate 380ms var(--ease-out),
+    scale 380ms var(--ease-out),
+    overlay 260ms allow-discrete,
+    display 260ms allow-discrete;
+}
+
+.sheet:not([open]) {
+  opacity: 0;
+  translate: 0 10px;
+  scale: 0.98;
+}
+
+@starting-style {
+  .sheet[open] {
+    opacity: 0;
+    translate: 0 10px;
+    scale: 0.98;
+  }
+}
+
+.sheet::backdrop {
+  background: rgba(24, 20, 16, 0.22);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.body {
+  padding: 22px 22px 24px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.context {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+
+.close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: -6px -8px 0 0;
+  border-radius: 999px;
+  color: var(--fg-muted);
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .close:hover {
+    color: var(--fg);
+    background: var(--fill-hover);
+  }
+}
+
+.close:active {
+  transform: scale(0.92);
+}
+
+/* The form's three-up row is for the wide home section; in the sheet the fields stack. */
+.body :global(.lead__grid) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Phones: a bottom sheet. */
+@media (max-width: 899px) {
+  .sheet {
+    width: 100%;
+    max-height: calc(100svh - var(--top, 68px));
+    margin: auto 0 0;
+    border-bottom: 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .sheet:not([open]) {
+    translate: 0 40px;
+    scale: 1;
+  }
+
+  @starting-style {
+    .sheet[open] {
+      translate: 0 40px;
+      scale: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .sheet:not([open]) {
+    translate: none;
+    scale: none;
+    transition-property: opacity, overlay, display;
+  }
+
+  @starting-style {
+    .sheet[open] {
+      translate: none;
+      scale: none;
+    }
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .sheet {
+    background: rgba(248, 246, 243, 0.98);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

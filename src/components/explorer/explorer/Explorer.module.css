@@ -1,0 +1,710 @@
+/* ==========================================================================
+   Explorer: full-viewport 3D stage with floating light "tempered glass" layers.
+   Desktop: header bar on top, panel left, tool rail beside it, level pill right.
+   Mobile: panel becomes a bottom sheet; controls sit in the row above it.
+
+   Every token the explorer uses is defined here, on its root: the page does not
+   depend on (or leak into) the site's global stylesheet.
+   ========================================================================== */
+
+.root {
+  /* --- palette (the home page's brand tokens) --- */
+  --ink: #1f1f1f;
+  --fg: #1f1f1f;
+  --fg-muted: #6f6a66;
+  --fg-faint: #857e78;
+  --taupe: #a39588;
+  /* taupe deepened for small caps on light glass (the brand taupe reads ~2.6:1 there) */
+  --taupe-ink: #85776a;
+  --gold: #d9a35b;
+  --gold-hover: #e0ad68;
+  --gold-press: #cc9550;
+  --gold-halo: rgba(217, 163, 91, 0.42);
+  --ivory: #f3eee8;
+  --warm-white: #f7f6f4;
+  --page-white: #fefefe;
+  --line: rgba(31, 31, 31, 0.12);
+  --line-soft: rgba(31, 31, 31, 0.07);
+  --fill: rgba(31, 31, 31, 0.05);
+  --fill-hover: rgba(255, 255, 255, 0.58);
+
+  /* --- material: light tempered glass in two thicknesses ---
+     regular: large surfaces (panel, loader, gallery chrome): more blur, deeper shadow
+     thin:    controls floating over the scene (rail, pills, bars, labels) */
+  --glass-bg: rgba(250, 248, 245, 0.74);
+  --glass-bg-thin: rgba(250, 248, 245, 0.66);
+  --glass-blur: blur(36px) saturate(185%);
+  --glass-blur-thin: blur(22px) saturate(175%);
+  --glass-edge: rgba(255, 255, 255, 0.62);
+  /* light catching the top edge + a hairline that keeps the edge over bright scenes + depth */
+  --glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 0 0 0.5px rgba(31, 24, 18, 0.08),
+    0 2px 6px rgba(31, 24, 18, 0.05),
+    0 34px 80px -34px rgba(31, 24, 18, 0.42);
+  --glass-shadow-thin:
+    inset 0 1px 0 rgba(255, 255, 255, 0.88),
+    0 0 0 0.5px rgba(31, 24, 18, 0.08),
+    0 16px 36px -18px rgba(31, 24, 18, 0.36);
+  /* a raised chip on glass (selected segment, rail item, level) */
+  --chip: #ffffff;
+  --chip-shadow:
+    0 0 0 0.5px rgba(31, 24, 18, 0.06),
+    0 1px 2px rgba(31, 24, 18, 0.08),
+    0 4px 12px -4px rgba(31, 24, 18, 0.16);
+
+  /* --- type --- */
+  --font-ui: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-ui);
+  --font-wordmark: var(--font-inter), "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tracking-eyebrow: 0.16em;
+
+  /* --- motion: critically damped, no bounce --- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-ui: 200ms;
+  --dur-press: 140ms;
+
+  /* --- geometry --- */
+  --inset: 16px;
+  --gap: 12px;
+  --panel-w: clamp(344px, 26vw, 392px);
+  /* the rolled-up panel: one line */
+  --bar-h: 56px;
+  --header-top: 12px;
+  --header-h: 56px;
+  /* top edge of everything under the header */
+  --top: calc(var(--header-top) + var(--header-h) + 10px);
+  --dock: 0px;
+  --fab: 56px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-btn: 14px;
+  /* centre of the stage area right of the panel and rail */
+  --free-center: calc(var(--inset) + var(--panel-w) + var(--gap) + (100% - var(--inset) * 2 - var(--panel-w) - var(--gap)) / 2);
+
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+  overflow: clip;
+  background: #ece8e2;
+  color: var(--fg);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  isolation: isolate;
+}
+
+/* The header height for PhotoEntry's framing (read from <html>, so a plain px value). */
+:root:has(.root) {
+  --explorer-header: 76px;
+}
+
+/* Local reset, in a layer so every component rule (any specificity) wins over it. */
+@layer explorer-reset {
+  .root button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .root button:disabled {
+    cursor: default;
+    opacity: 0.32;
+  }
+
+  .root ul,
+  .root ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .root h1,
+  .root h2,
+  .root h3,
+  .root p,
+  .root dl,
+  .root dd,
+  .root figure {
+    margin: 0;
+  }
+
+  .root a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .root table {
+    border-collapse: collapse;
+  }
+
+  .root :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+
+.stage canvas {
+  display: block;
+}
+
+/* 3D-anchored DOM labels (SceneLabels); under the dissolve so they never pop during transitions. */
+.labels {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 600ms var(--ease-out);
+}
+
+/* They arrive with the scene, not over the poster. */
+.labels[data-hidden] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 900ms var(--ease-out);
+}
+
+/* Loading: the poster recedes behind a soft ivory veil so the glass loader card reads. */
+.poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(247, 246, 244, 0.42), rgba(247, 246, 244, 0.18) 40%, rgba(247, 246, 244, 0.32));
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.poster[data-loading]::after {
+  opacity: 1;
+}
+
+.poster[data-hidden] {
+  opacity: 0;
+}
+
+.posterImage {
+  object-fit: cover;
+}
+
+.poster[data-fit="contain"] .posterImage {
+  object-fit: contain;
+  padding: calc(var(--top) + 16px) 24px 24px calc(var(--panel-w) + 120px);
+}
+
+/* ---------- site nav (shared component; here it steps aside in the walk) ---------- */
+
+.nav {
+  transition:
+    transform 640ms var(--ease-drawer),
+    opacity 420ms var(--ease-out);
+}
+
+.root[data-immersive] .nav {
+  transform: translateY(calc(-100% - var(--header-top) - 6px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- panel (desktop: left column; phones: bottom sheet) ---------- */
+
+.panel {
+  position: absolute;
+  z-index: 5;
+  top: var(--top);
+  left: var(--inset);
+  bottom: var(--inset);
+  width: var(--panel-w);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+  /* an inset() at rest, so rolling up interpolates the clip instead of snapping */
+  clip-path: inset(0 0 0 0 round var(--radius-lg));
+  transition:
+    transform 700ms var(--ease-drawer),
+    opacity 320ms var(--ease-out),
+    filter 500ms var(--ease-out),
+    clip-path 320ms var(--ease-out);
+}
+
+/* The content rides up with the clip, so the panel reads as rolling up, not as being cut. */
+.panel > * {
+  transition: translate 320ms var(--ease-out);
+}
+
+/* Immersive walk: the panel leaves the way it came (to the left) and returns along the same path. */
+.root[data-immersive] .panel {
+  transform: translateX(calc(-100% - var(--inset) - 8px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*
+ * Rolled up: the glass clips from the bottom up to the bar's height (paint only, no layout per frame) and
+ * fades under the bar, which takes over in the same place.
+ */
+.panel[data-collapsed] {
+  clip-path: inset(0 0 calc(100% - var(--bar-h)) 0 round var(--radius-lg));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 700ms var(--ease-drawer),
+    opacity 200ms linear 120ms,
+    filter 500ms var(--ease-out),
+    clip-path 320ms var(--ease-out);
+}
+
+.panel[data-collapsed] > * {
+  translate: 0 -16px;
+}
+
+.bar {
+  position: absolute;
+  z-index: 6;
+  top: var(--top);
+  left: var(--inset);
+  width: var(--panel-w);
+  height: var(--bar-h);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px 0 20px;
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    opacity 200ms var(--ease-out) 100ms,
+    transform 700ms var(--ease-drawer);
+}
+
+.bar[data-hidden] {
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 120ms var(--ease-out),
+    transform 700ms var(--ease-drawer);
+}
+
+.root[data-immersive] .bar {
+  transform: translateX(calc(-100% - var(--inset) - 8px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.barText {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.barDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin: 0 0.55em 0.12em 0;
+  border-radius: 999px;
+  vertical-align: middle;
+  background: var(--gold);
+}
+
+.barDot[data-status="reserved"] {
+  background: var(--taupe-ink);
+}
+
+.barDot[data-status="sold"] {
+  background: var(--fg-faint);
+}
+
+.barIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: var(--fg-muted);
+  transition:
+    color var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bar:hover .barIcon {
+    color: var(--fg);
+    background: var(--fill-hover);
+  }
+}
+
+.bar:active .barIcon {
+  transform: scale(0.92);
+}
+
+.barGrip {
+  display: none;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* With the panel rolled up the stage is the whole width. */
+.root[data-panel="collapsed"] {
+  --free-center: 50%;
+}
+
+@media (min-width: 900px) {
+  .root[data-panel="collapsed"] .caption {
+    left: calc(var(--inset) + 8px);
+  }
+
+  .root[data-panel="collapsed"] .poster[data-fit="contain"] .posterImage {
+    padding-left: 120px;
+  }
+}
+
+.grabber {
+  display: none;
+}
+
+/* Bottom-left of the free stage area, legible over both the photo and the maquette. */
+.caption {
+  position: absolute;
+  z-index: 6;
+  left: calc(var(--inset) + var(--panel-w) + 24px);
+  bottom: calc(var(--dock) + var(--inset) + 16px);
+  transition: left 320ms var(--ease-out);
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(31, 31, 31, 0.72);
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.7),
+    0 1px 10px rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+
+/* Model hint, just above the bottom controls (never over the model's labels); leaves on first touch. */
+.hint {
+  position: absolute;
+  z-index: 6;
+  bottom: calc(var(--dock) + var(--inset) + 68px);
+  left: var(--free-center);
+  margin: 0;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg);
+  white-space: nowrap;
+  pointer-events: none;
+  translate: -50% 0;
+  transition:
+    opacity 500ms var(--ease-out),
+    translate 500ms var(--ease-out),
+    scale 500ms var(--ease-out);
+}
+
+.hint[data-hidden] {
+  opacity: 0;
+  translate: -50% 8px;
+  scale: 0.97;
+}
+
+/* "Wczytuję…": only when a scene change takes longer than a blink. */
+.start {
+  position: absolute;
+  z-index: 6;
+  left: var(--free-center);
+  bottom: calc(var(--dock) + var(--inset) + 68px);
+  min-height: 42px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg);
+  translate: -50% 0;
+}
+
+p.start {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+p.start[data-delayed] {
+  animation: start-in 260ms var(--ease-out) 700ms both;
+}
+
+@keyframes start-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+.posterPicture img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- phones ---------- */
+
+@media (max-width: 899px) {
+  .root {
+    --inset: 8px;
+    --gap: 8px;
+    --header-top: 8px;
+    --header-h: 52px;
+    --top: calc(var(--header-top) + var(--header-h) + 8px);
+    --dock: env(safe-area-inset-bottom, 0px);
+    /* collapsed sheet; every bottom row sits on --peek-h, which drops to the bar when the sheet is hidden */
+    --peek-base: 250px;
+    --peek-h: var(--peek-base);
+    --bar-h: 48px;
+    --fab: 52px;
+    --radius-lg: 22px;
+    min-height: 560px;
+  }
+
+  :root:has(.root) {
+    --explorer-header: 68px;
+  }
+
+  /* Bottom sheet: collapsed shows name · price · CTA so the model keeps most of the screen. */
+  .panel {
+    --full-h: calc(100svh - var(--top) - var(--dock) - var(--inset));
+    top: auto;
+    right: var(--inset);
+    width: auto;
+    bottom: calc(var(--dock) + var(--inset));
+    height: var(--peek-base);
+    border-radius: var(--radius-lg);
+    transition:
+      height 560ms var(--ease-drawer),
+      transform 700ms var(--ease-drawer),
+      opacity 500ms var(--ease-out);
+  }
+
+  .panel[data-sheet="full"] {
+    height: var(--full-h);
+  }
+
+  .panel[data-sheet="peek"] > div {
+    overflow: hidden;
+  }
+
+  .panel[data-sheet="peek"] [data-peek-hide] {
+    display: none;
+  }
+
+  /* Collapsed sheet: content fades out at the lower edge instead of slicing a row through its letters. */
+  .panel[data-sheet="peek"] > div {
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 44px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 44px), transparent);
+  }
+
+  .grabber {
+    display: grid;
+    place-items: center;
+    flex: none;
+    height: 28px;
+    margin-bottom: -12px;
+    touch-action: none;
+    cursor: grab;
+  }
+
+  .grabber span {
+    width: 36px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(31, 31, 31, 0.2);
+    transition: background-color var(--dur-ui) var(--ease-out);
+  }
+
+  .grabber:active span {
+    background: rgba(31, 31, 31, 0.34);
+  }
+
+  .root[data-immersive] .panel {
+    transform: translateY(calc(100% + var(--dock) + 16px));
+  }
+
+  .root[data-panel="collapsed"] {
+    --peek-h: var(--bar-h);
+  }
+
+  /* Hidden sheet: it slides down out of view; a one-line bar with a grip stays at the bottom edge. */
+  .panel[data-collapsed] {
+    opacity: 1;
+    clip-path: inset(0 0 0 0 round var(--radius-lg));
+    transform: translateY(calc(100% + var(--dock) + 16px));
+    transition:
+      height 560ms var(--ease-drawer),
+      transform 560ms var(--ease-drawer),
+      opacity 320ms var(--ease-out);
+  }
+
+  .panel[data-collapsed] > * {
+    translate: none;
+  }
+
+  .bar {
+    top: auto;
+    right: var(--inset);
+    bottom: calc(var(--dock) + var(--inset));
+    width: auto;
+    padding: 6px 8px 0 18px;
+    font-size: 14px;
+  }
+
+  .root[data-immersive] .bar {
+    transform: translateY(calc(100% + var(--dock) + 16px));
+  }
+
+  .barArea {
+    display: none;
+  }
+
+  .barGrip {
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 36px;
+    height: 5px;
+    margin-left: -18px;
+    border-radius: 999px;
+    background: rgba(31, 31, 31, 0.2);
+  }
+
+  /* the sheet comes back up */
+  .barIcon {
+    rotate: 180deg;
+  }
+
+  .poster[data-fit="contain"] .posterImage {
+    padding: calc(var(--top) + 64px) 16px calc(var(--peek-h) + 24px);
+  }
+
+  .caption {
+    display: none;
+  }
+
+  .hint,
+  .start {
+    left: 50%;
+    bottom: calc(var(--dock) + var(--inset) + var(--peek-h) + 72px);
+  }
+}
+
+/* ---------- preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .poster,
+  .poster::after {
+    transition-property: opacity;
+    transition-duration: 200ms;
+  }
+
+  .root[data-immersive] .panel {
+    transform: none;
+  }
+
+  /* Rolling up and down happens at once: a short fade, no clip or slide. */
+  .panel[data-collapsed],
+  .bar,
+  .bar[data-hidden] {
+    transition-property: opacity;
+    transition-duration: 120ms;
+    transition-delay: 0s;
+  }
+
+  .panel > *,
+  .caption {
+    transition: none;
+  }
+
+  .hint {
+    transition-property: opacity;
+  }
+
+  .hint[data-hidden] {
+    translate: -50% 0;
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .root {
+    --glass-bg: rgba(248, 246, 243, 0.97);
+    --glass-bg-thin: rgba(248, 246, 243, 0.96);
+    --glass-blur: none;
+    --glass-blur-thin: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .root {
+    --glass-bg: #fbfaf8;
+    --glass-bg-thin: #fbfaf8;
+    --glass-blur: none;
+    --glass-blur-thin: none;
+    --glass-edge: rgba(31, 31, 31, 0.55);
+    --fg-muted: #4a4542;
+    --fg-faint: #5c5651;
+    --taupe-ink: #5f5348;
+    --line: rgba(31, 31, 31, 0.35);
+  }
+}

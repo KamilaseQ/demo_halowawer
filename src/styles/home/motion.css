@@ -1,0 +1,143 @@
+/* =========================================================================
+   MOTION: hero entrance and scroll-in animations of the sections
+   -------------------------------------------------------------------------
+   Words rise out of a mask one after another, a highlight is drawn under the
+   key words, copy fades up out of a soft blur, photos are unveiled from
+   below, cards come in staggered. Everything is gated by @media (scripting: enabled),
+   so without JS the page is simply visible. The classes are in the markup;
+   src/components/motion/RevealObserver.tsx adds .is-in.
+   ========================================================================= */
+
+/* --- Hero entrance (end state = the composed first frame, unchanged) -------
+   Starts when the preloader lifts (.is-loaded), bottom first like the
+   curtain: the still's interface settles in, the wordmark rises from behind
+   the roofs (the cutout sits in front of it), the nav drops in last. Opacity
+   of these layers stays free for the scroll fades: those write to .wordmark
+   and .hero__ui, the entrance animates .hero__stage and .hero__ui's children. */
+@media (prefers-reduced-motion: no-preference) {
+  .is-loaded:not(.is-lite):not(.is-capture) .hero__ui > * {
+    animation: hero-settle 1.2s var(--ease-out) both;
+    animation-delay: calc(0.15s + var(--i, 0) * 90ms);
+  }
+
+  .is-loaded:not(.is-lite):not(.is-capture) .hero__stage {
+    animation: hero-rise 1.8s var(--ease-out) 0.3s both;
+  }
+
+  .is-loaded:not(.is-lite):not(.is-capture) .nav {
+    animation: hero-drop 1.2s var(--ease-out) 0.55s both;
+  }
+}
+
+@keyframes hero-rise {
+  from { opacity: 0; translate: 0 3.4vw; }
+}
+
+@keyframes hero-drop {
+  from { opacity: 0; translate: 0 calc(-8 * var(--u)); }
+}
+
+@keyframes hero-settle {
+  from { opacity: 0; translate: 0 calc(9 * var(--u)); filter: blur(4px); }
+}
+
+/* --- The gold half of a title (<Highlight>), on its own line (sections.css) -- */
+.hl {
+  color: #b07a2a;
+  background: linear-gradient(180deg, #cf9845 0%, #b8822f 55%, #9c6a24 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Titles: every word rises out of its own mask ---------------------------- */
+.split .w {
+  display: inline-block;
+  overflow: hidden;
+  overflow: clip;
+  vertical-align: top;
+  padding: 0.08em 0.03em 0.17em;
+  margin: -0.08em -0.03em -0.17em;
+}
+
+/* Gated on scripting: without JS everything is simply visible. :root keeps the
+   specificity the old `.js` prefix had, so the cascade is unchanged. */
+@media (scripting: enabled) {
+  :root .split .w > * {
+    display: inline-block;
+    transform: translateY(112%);
+    transition: transform 0.95s var(--ease-out) calc(var(--wi) * 60ms);
+  }
+
+  .split.is-in .w > * { transform: none; }
+
+  /* --- Copy and cards: fade up out of a soft blur ------------------------------ */
+  :root .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(6px);
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 1s var(--ease-out),
+      filter 0.8s var(--ease-out);
+    transition-delay: var(--d, 0ms);
+  }
+
+  .reveal.is-in { opacity: 1; transform: none; filter: none; }
+
+  /* elements with their own hover transitions keep them after the reveal */
+  :root .reveal.sec__link,
+  :root .reveal.button-gold {
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 1s var(--ease-out),
+      filter 0.8s var(--ease-out),
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease;
+    transition-delay: var(--d, 0ms), var(--d, 0ms), var(--d, 0ms), 0s, 0s, 0s;
+  }
+
+  :root .distances li.reveal {
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 1s var(--ease-out),
+      filter 0.8s var(--ease-out),
+      padding 0.45s var(--ease-out),
+      color 0.3s ease;
+    transition-delay: var(--d, 0ms), var(--d, 0ms), var(--d, 0ms), 0s, 0s;
+  }
+
+  /* --- Photos: unveiled from below, settling from a slight zoom ---------------- */
+  :root .reveal-img {
+    clip-path: inset(12% 0 0 0 round var(--r-photo));
+    transition: clip-path 1.2s var(--ease-out) var(--d, 0ms);
+  }
+
+  .reveal-img.is-in { clip-path: inset(0 0 0 0 round var(--r-photo)); }
+
+  :root .reveal-img img,
+  :root img.reveal-img {
+    scale: 1.08;
+    transition: scale 1.6s var(--ease-out) var(--d, 0ms), transform 0.9s var(--ease-out);
+  }
+
+  :root .reveal-img.is-in img,
+  img.reveal-img.is-in { scale: 1; }
+}
+
+/* --- Reduced motion: everything simply visible ---------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-img,
+  .reveal-img img,
+  img.reveal-img,
+  .split .w > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    scale: 1 !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,436 @@
+/* =========================================================================
+   CONTENT SECTIONS below the film: shared frame, type and primitives
+   -------------------------------------------------------------------------
+   The studio's newer language (halo-wawer47): every section opens on a warm
+   photograph that dissolves into cream under a centred two-tone title
+   (near-black, then gold); the content sits on white cards with a soft warm
+   shadow; actions are gold. One family, set bold: titles 800, controls 700,
+   running text 600.
+   ========================================================================= */
+
+.estate,
+.kreator,
+.properties,
+.about,
+.blog,
+.location,
+.contact {
+  --ink: #1c1a17;              /* titles, card headings, numbers */
+  --copy: #5a5f6c;             /* running text */
+  --grey-copy: var(--copy);
+  --brown: #8f6a35;            /* small capitals */
+  --cream: #f6ede1;            /* section ground */
+  --cream-2: #fbf6ef;          /* chips, stat tiles */
+  --gold-hi: #e1c286;
+  --gold-mid: #c48931;
+  --gold-lo: #b8893f;
+  --gold-ink: #1b1408;         /* label on gold */
+  --gold-fill: linear-gradient(180deg, var(--gold-hi) -30%, var(--gold-mid) 55%, var(--gold-lo) 130%);
+  --gold-fill-hover: linear-gradient(180deg, #ecd3a0 -30%, #cf9741 55%, #c39448 130%);
+  --hairline: rgba(30, 40, 60, 0.1);
+  --photo-fill: #e8dccb;
+  --card-shadow: 0 1px 2px rgba(80, 52, 20, 0.06), 0 24px 60px -28px rgba(80, 52, 20, 0.38);
+  --card-shadow-hover: 0 1px 2px rgba(80, 52, 20, 0.06), 0 34px 70px -30px rgba(80, 52, 20, 0.5);
+
+  --fs-eyebrow: 0.74rem;
+  --fs-body: clamp(1rem, 1.1vw, 1.12rem);
+  --fs-small: 0.92rem;
+  --fs-title: clamp(2.1rem, 4.3vw, 4.25rem);
+  --fs-card: clamp(1.15rem, 1.45vw, 1.45rem);
+  --fs-button: 0.98rem;
+
+  --pad-x: max(16px, 5.36%);
+  --wide: 82rem;               /* cards and grids */
+  --gap: clamp(1.1rem, 1.8vw, 1.75rem);
+  --r-card: 24px;
+  --r-photo: 16px;
+  --r-button: 14px;
+  --r-line: 14px;
+  --h-button: 3.2rem;
+
+  position: relative;
+  isolation: isolate;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.estate,
+.kreator,
+.properties,
+.about,
+.blog,
+.location {
+  padding: clamp(3.5rem, 5.5vw, 6rem) var(--pad-x) clamp(2.75rem, 4vw, 4.25rem);
+}
+
+/* Sections under the film start skipped by the renderer (a light first
+   render), then PrerenderSections lays them out one by one in idle moments
+   (mostly under the preloader) and marks them .is-rendered. Never left to
+   the scroll: unskipping a section mid-scroll cost 100-470 ms frames (4x CPU).
+   Anchor jumps render everything first (SmoothScroll, .cv-all) so they land
+   exactly. Not the teaser right under the film: it is laid out at load. */
+.home > section:not(.estate),
+.contact {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1100px;
+}
+
+.home > section.is-rendered,
+.contact.is-rendered,
+.cv-all .home > section,
+.cv-all .contact { content-visibility: visible; }
+
+/* --- Opening photograph: full width behind the title, a low-sun glow at one
+   side (alternating section by section), dissolving into cream before the
+   cards. The colour grade is baked into the files, nothing filters at run time. */
+.sec__bg {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: min(72svh, 660px);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sec__bg img { object-fit: cover; }
+
+.sec__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 34% 58% at var(--gx, 85%) var(--gy, 30%), rgba(238, 170, 74, 0.27) 0%, rgba(240, 186, 104, 0.13) 45%, rgba(240, 186, 104, 0) 100%),
+    radial-gradient(ellipse 42% 32% at 50% 27%, rgba(251, 245, 236, 0.78) 0%, rgba(251, 245, 236, 0.4) 55%, rgba(251, 245, 236, 0) 100%),
+    linear-gradient(to bottom, var(--cream) 0%, rgba(243, 227, 201, 0.49) 9%, rgba(243, 227, 201, 0.4) 32%, rgba(246, 236, 222, 0.71) 62%, var(--cream) 92%);
+}
+
+/* houses behind the title: a wider, denser pool of light under it */
+.sec__bg--strong::after {
+  background:
+    radial-gradient(ellipse 30% 55% at var(--gx, 85%) var(--gy, 30%), rgba(238, 170, 74, 0.25) 0%, rgba(240, 186, 104, 0.12) 45%, rgba(240, 186, 104, 0) 100%),
+    radial-gradient(ellipse 52% 40% at 50% 28%, rgba(251, 246, 239, 0.94) 0%, rgba(251, 246, 239, 0.7) 50%, rgba(251, 246, 239, 0) 100%),
+    linear-gradient(to bottom, var(--cream) 0%, rgba(243, 227, 201, 0.42) 9%, rgba(243, 227, 201, 0.26) 30%, rgba(246, 236, 222, 0.64) 62%, var(--cream) 92%);
+}
+
+/* the estate at dusk behind the call card: lighter wash, taller */
+.sec__bg--dusk { height: min(80svh, 720px); }
+.sec__bg--dusk::after {
+  background:
+    radial-gradient(ellipse 34% 60% at var(--gx, 82%) var(--gy, 18%), rgba(238, 170, 74, 0.27) 0%, rgba(240, 186, 104, 0.12) 45%, rgba(240, 186, 104, 0) 100%),
+    linear-gradient(to bottom, var(--cream) 0%, rgba(243, 227, 201, 0.35) 14%, rgba(243, 227, 201, 0.14) 30%, rgba(246, 236, 222, 0.22) 62%, var(--cream) 96%);
+}
+
+.estate { --gx: 12%; --gy: 30%; }
+.kreator { --gx: 88%; --gy: 24%; }
+.properties { --gx: 10%; --gy: 34%; }
+.about { --gx: 90%; --gy: 30%; }
+.blog { --gx: 12%; --gy: 26%; }
+.location { --gx: 86%; --gy: 38%; }
+.contact { --gx: 82%; --gy: 18%; }
+
+/* --- Shared section header: centred, two-tone title ------------------------ */
+.sec__head {
+  max-width: 52rem;
+  margin: 0 auto clamp(1.75rem, 2.8vw, 2.6rem);
+  text-align: center;
+}
+
+.sec__title,
+.contact__title {
+  margin: 0;
+  font-size: var(--fs-title);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* the gold part of a title (<Highlight>) starts its own line */
+.sec__title .w:has(> .hl),
+.contact__title .w:has(> .hl) { display: block; }
+
+.sec__lead {
+  max-width: 38rem;
+  margin: 0.9rem auto 0;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: 1.65;
+  color: var(--copy);
+}
+
+.sec__lead,
+.contact__text,
+.post__title,
+.stat__label { text-wrap: pretty; }
+
+/* the house mark above a title, drawn line by line once the title shows */
+.sec__mark {
+  display: block;
+  width: clamp(36px, 3.2vw, 48px);
+  height: auto;
+  margin: 0 auto 0.6rem;
+  overflow: visible;
+}
+
+.sec__mark path {
+  fill: none;
+  stroke: var(--gold-mid);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.2s;
+}
+
+.sec__mark path:nth-child(2) { transition-delay: 0.45s; }
+.sec__mark path:nth-child(3) { transition-delay: 0.8s; }
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  :is(.sec__head, .contact__lede):has(> .split:not(.is-in)) .sec__mark path { stroke-dashoffset: 1; }
+}
+
+/* --- Cards ------------------------------------------------------------------- */
+.sec__card {
+  position: relative;
+  border-radius: var(--r-card);
+  background: #ffffff;
+  box-shadow: var(--card-shadow);
+}
+
+/* cards in a grid lift on hover once they are in */
+@media (scripting: enabled) {
+  :root .sec__card.reveal {
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 1s var(--ease-out),
+      filter 0.8s var(--ease-out),
+      box-shadow 0.4s ease;
+    transition-delay: var(--d, 0ms), var(--d, 0ms), var(--d, 0ms), 0s;
+  }
+}
+
+.sec__card.reveal.is-in:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--card-shadow-hover);
+  transition-delay: 0s;
+}
+
+/* photo + content in one card (O osiedlu, Lokalizacja) */
+.split-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 12px clamp(1.25rem, 3vw, 3rem) 12px 12px;
+}
+
+.split-card--rev {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  padding: 12px 12px 12px clamp(1.25rem, 3vw, 3rem);
+}
+
+.split-card__photo {
+  position: relative;
+  align-self: stretch;
+  min-height: 22rem;
+  overflow: hidden;
+  border-radius: var(--r-photo);
+  background: var(--photo-fill);
+}
+
+.split-card__photo img { object-fit: cover; }
+
+.split-card__body {
+  min-width: 0;
+  padding-block: clamp(1rem, 2vw, 2rem);
+}
+
+/* --- Pills and chips ---------------------------------------------------------- */
+.pill {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 0.95em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.pill--ok::before {
+  content: "";
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: #5e9b55;
+  box-shadow: 0 0 0 0.22em rgba(94, 155, 85, 0.2);
+}
+
+.pill--gold {
+  position: static;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold-mid));
+  color: var(--gold-ink);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0 0;
+  padding: 1rem 0 0;
+  list-style: none;
+  border-top: 1px solid var(--hairline);
+}
+
+.chips li {
+  padding: 0.42em 0.8em;
+  border-radius: 999px;
+  background: var(--cream-2);
+  box-shadow: inset 0 0 0 1px rgba(143, 106, 53, 0.16);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4a4f5b;
+}
+
+/* --- Buttons ------------------------------------------------------------------ */
+.sec__link,
+.button-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  min-height: var(--h-button);
+  padding: 0 1.6em;
+  border: 1px solid transparent;
+  border-radius: var(--r-button);
+  font-size: var(--fs-button);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* secondary: a line on white glass */
+.sec__link {
+  flex: none;
+  border-color: rgba(28, 26, 23, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--ink);
+}
+
+.sec__link:hover { border-color: var(--ink); background: #ffffff; }
+
+/* primary: gold */
+.button-gold {
+  margin-top: 1.8rem;
+  background: var(--gold-fill);
+  color: var(--gold-ink);
+  box-shadow: 0 10px 24px -12px rgba(156, 106, 36, 0.7);
+}
+
+.button-gold:hover { background: var(--gold-fill-hover); }
+
+.sec__link:focus-visible,
+.button-gold:focus-visible { outline: 3px solid var(--gold-hi); outline-offset: 3px; }
+
+.sec__link .icon-arrow,
+.contact__button .icon-arrow {
+  width: 1em;
+  height: 1em;
+}
+
+/* a row of follow-up actions under a section */
+.sec__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: clamp(1.4rem, 2.2vw, 2rem);
+}
+
+.sec__actions--center { justify-content: center; }
+.sec__actions .button-gold { margin-top: 0; }
+
+/* arrows nudge toward where they point */
+.sec__link .icon-arrow,
+.contact__button .icon-arrow,
+.nav__cta .icon-arrow { transition: transform 0.4s var(--ease-out); }
+
+.sec__link:hover .icon-arrow,
+.contact__button:hover .icon-arrow,
+.nav__cta:hover .icon-arrow { transform: translate(0.12em, -0.12em); }
+
+.sec__link,
+.button-gold,
+.contact__button { transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+
+/* --- Photos in cards ------------------------------------------------------------ */
+.property__photo,
+.post__photo {
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  background: var(--photo-fill);
+}
+
+.property__photo { aspect-ratio: 4 / 4.2; }
+.post__photo { aspect-ratio: 3 / 2; }
+
+/* --- Card grids (Domy, Wnętrza) -------------------------------------------- */
+.properties__grid,
+.blog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  max-width: var(--wide);
+  margin: 0 auto;
+}
+
+.property,
+.post { padding: 10px; }
+
+.property__media,
+.post__media {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--r-photo);
+  background: var(--photo-fill);
+}
+
+.property__media .property__photo,
+.post__media .post__photo {
+  transition: transform 0.9s var(--ease-out), scale 1.6s var(--ease-out);
+}
+
+.property:hover .property__photo,
+.post:hover .post__photo { transform: scale(1.04); }
+
+@media (max-width: 1000px) {
+  .split-card,
+  .split-card--rev { grid-template-columns: minmax(0, 1fr); padding: 10px 10px 1.25rem; }
+  .split-card--rev .split-card__photo { order: -1; }
+  .split-card__body { padding: 0.5rem 0.9rem 0; }
+  .split-card__photo { min-height: 0; aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 760px) {
+  .properties__grid,
+  .blog__grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .sec__link,
+  .button-gold { white-space: normal; text-align: center; }
+}

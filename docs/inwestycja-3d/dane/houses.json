@@ -1,0 +1,931 @@
+{
+ "meta": {
+  "source": "https://senn.pl/inwestycje/osiedle-halo-wawer (+ /dom-a…f, rzuty, karty PDF)",
+  "fetched": "2026-10-28",
+  "author": "demo-halowawer-bd (research/UX)",
+  "units": "m², zł brutto; pzt w metrach: x = wschód, z = południe, origin = NW narożnik domu G (±0,3 m, z PZT 21,5 px/m); sitePlan w pikselach obrazu 1920×1248",
+  "pricePerM2Rule": "Deweloper liczy zł/m² od powierzchni użytkowej wg PN-ISO 9836:2022-07, czyli BEZ klatki schodowej (4,58 m²) i bez poddasza nieużytkowego: cena / (pow. − 4,58). Wyświetlać wartość z danych z groszami (np. 14 008,53), nie liczyć ani nie zaokrąglać do złotych.",
+  "notes": [
+   "Miejsca postojowe: bliźniak = garaż + 1 m.p., szeregowiec = 2 m.p. Ceny nieznane (senn.pl ich nie publikuje), punkt otwarty przed publikacją. W UI tylko pole `parking`, bez ceny i bez sformułowania 'w cenie' (decyzja usera 28.10).",
+   "Historia cen: jedyny wpis 24.04.2026 (start sprzedaży) dla A, B, D, E, F.",
+   "C i G sprzedane: senn.pl nie pokazuje ich cen; G nie ma rzutów (404); C ma rzut A.",
+   "Powierzchnie dokładne z tabeli i kart; marketingowe '120 m²' / '100 m²' / 'ogród do 180 m²' tylko w copy z 'ok.'.",
+   "roofColor z drona 04.2026 (osiedle/estate-8.jpg); przypisanie do domów: pewność średnia."
+  ]
+ },
+ "investment": {
+  "name": "Osiedle Halo Wawer",
+  "developer": "Senn Development",
+  "address": "ul. Borków 24B, 04-786 Warszawa (Zerzeń, Wawer)",
+  "coords": {
+   "lat": 52.18928,
+   "lon": 21.14675,
+   "source": "OSM Nominatim"
+  },
+  "salesStart": "2026-04-24",
+  "completion": "2026-11",
+  "floorHeight": 2.64,
+  "orientation": {
+   "gardens": "S (azymut ~180°)",
+   "fronts": "N (dojazd ciągiem pieszo-jezdnym od północy)",
+   "entry": "wjazd/wyjazd od wschodu, przy domu A",
+   "rowAxis": "z zachodu na wschód: G F E (szereg) · D C (bliźniak) · B A (bliźniak)"
+  },
+  "phone": "+48 733 80 90 90",
+  "sitePlanImage": {
+   "src": "zrodla/plan/site-plan.png",
+   "width": 1920,
+   "height": 1248,
+   "view": "z lotu ptaka od frontu (kamera od północy, wschód po lewej)"
+  },
+  "features": [
+   "ogrzewanie podłogowe w całym domu",
+   "podwójna ściana międzylokalowa 43 cm",
+   "okna przesuwne HS na ogród",
+   "światłowód",
+   "poddasze do 50 m²",
+   "ogrody od południa"
+  ]
+ },
+ "layouts": {
+  "A": {
+   "family": "blizniak",
+   "note": "Dom A i C: ten sam rzut (identyczne pliki). Wschodnia połowa bliźniaka, ściana wspólna od zachodu.",
+   "plans": {
+    "parter": "dom-a-parter.png",
+    "pietro": "dom-a-pietro.png",
+    "poddasze": "dom-a-poddasze.png"
+   },
+   "floors": [
+    {
+     "id": "parter",
+     "label": "Parter",
+     "rooms": [
+      {
+       "no": "0.01",
+       "name": "Wiatrołap",
+       "area": 3.7
+      },
+      {
+       "no": "0.02",
+       "name": "WC",
+       "area": 2.41
+      },
+      {
+       "no": "0.03",
+       "name": "Korytarz",
+       "area": 3.92
+      },
+      {
+       "no": "0.04",
+       "name": "Pomieszczenie techniczne",
+       "area": 0.76
+      },
+      {
+       "no": "0.05",
+       "name": "Schody",
+       "area": 4.58
+      },
+      {
+       "no": "0.06",
+       "name": "Strefa dzienna",
+       "area": 26.92,
+       "note": "salon + jadalnia + kuchnia, wyjście HS na taras"
+      },
+      {
+       "no": "0.07",
+       "name": "Garaż",
+       "area": 18.47
+      }
+     ],
+     "outdoor": [
+      {
+       "no": "-",
+       "name": "Taras (do aranżacji indywidualnej)",
+       "area": 6.98
+      },
+      {
+       "no": "-",
+       "name": "Zadaszenie nad wejściem",
+       "area": 3.42
+      }
+     ],
+     "total": 60.76
+    },
+    {
+     "id": "pietro",
+     "label": "Piętro",
+     "rooms": [
+      {
+       "no": "1.01",
+       "name": "Korytarz",
+       "area": 6.47
+      },
+      {
+       "no": "1.02",
+       "name": "Pokój 1",
+       "area": 10.93,
+       "note": "okno na front (N)"
+      },
+      {
+       "no": "1.03",
+       "name": "Pokój 2",
+       "area": 10.22,
+       "note": "okno na front (N)"
+      },
+      {
+       "no": "1.04",
+       "name": "Łazienka",
+       "area": 4.74,
+       "note": "okno, wanna"
+      },
+      {
+       "no": "1.05",
+       "name": "Sypialnia",
+       "area": 12.92,
+       "note": "okno na ogród (S)"
+      },
+      {
+       "no": "1.06",
+       "name": "Pokój 3",
+       "area": 13.47,
+       "note": "okno na ogród (S)"
+      }
+     ],
+     "total": 58.75
+    },
+    {
+     "id": "poddasze",
+     "label": "Poddasze",
+     "usable": false,
+     "rooms": [
+      {
+       "no": "2.01",
+       "name": "Poddasze nieużytkowe",
+       "area": null,
+       "note": "obrys wewn. ok. 6,87 × 7,32 m; wyłaz z korytarza piętra; schody samonośne do własnego montażu"
+      }
+     ],
+     "total": null
+    }
+   ],
+   "usableTotal": 119.51
+  },
+  "B": {
+   "family": "blizniak",
+   "note": "Dom B i D: ten sam rzut. Zachodnia połowa bliźniaka (lustro A z innym położeniem kuchni i garażu), ściana wspólna od wschodu.",
+   "plans": {
+    "parter": "dom-b-parter.png",
+    "pietro": "dom-b-pietro.png",
+    "poddasze": "dom-b-poddasze.png"
+   },
+   "floors": [
+    {
+     "id": "parter",
+     "label": "Parter",
+     "rooms": [
+      {
+       "no": "0.01",
+       "name": "Wiatrołap",
+       "area": 3.7
+      },
+      {
+       "no": "0.02",
+       "name": "WC",
+       "area": 2.34
+      },
+      {
+       "no": "0.03",
+       "name": "Korytarz",
+       "area": 3.92
+      },
+      {
+       "no": "0.04",
+       "name": "Pomieszczenie techniczne",
+       "area": 0.76
+      },
+      {
+       "no": "0.05",
+       "name": "Schody",
+       "area": 4.58
+      },
+      {
+       "no": "0.06",
+       "name": "Strefa dzienna",
+       "area": 27.26,
+       "note": "salon + jadalnia + kuchnia, wyjście HS na taras"
+      },
+      {
+       "no": "0.07",
+       "name": "Garaż",
+       "area": 18.47,
+       "note": "przejście do korytarza"
+      }
+     ],
+     "outdoor": [
+      {
+       "no": "-",
+       "name": "Taras (do aranżacji indywidualnej)",
+       "area": 6.98
+      },
+      {
+       "no": "-",
+       "name": "Zadaszenie nad wejściem",
+       "area": 3.28
+      }
+     ],
+     "total": 61.03
+    },
+    {
+     "id": "pietro",
+     "label": "Piętro",
+     "rooms": [
+      {
+       "no": "1.01",
+       "name": "Korytarz",
+       "area": 6.47
+      },
+      {
+       "no": "1.02",
+       "name": "Sypialnia",
+       "area": 13.81,
+       "note": "okno na ogród (S)"
+      },
+      {
+       "no": "1.03",
+       "name": "Pokój 1",
+       "area": 12.92,
+       "note": "okno na ogród (S)"
+      },
+      {
+       "no": "1.04",
+       "name": "Łazienka",
+       "area": 4.74,
+       "note": "okno, wanna"
+      },
+      {
+       "no": "1.05",
+       "name": "Pokój hobby",
+       "area": 10.22,
+       "note": "okno na front (N)"
+      },
+      {
+       "no": "1.06",
+       "name": "Pokój 2",
+       "area": 10.58,
+       "note": "okno na front (N)"
+      }
+     ],
+     "total": 58.74
+    },
+    {
+     "id": "poddasze",
+     "label": "Poddasze",
+     "usable": false,
+     "rooms": [
+      {
+       "no": "2.01",
+       "name": "Poddasze nieużytkowe",
+       "area": null,
+       "note": "obrys wewn. 6,87 × 7,32 m; linie wysokości 140/180/220/225 cm; płaski strop ok. 2,25 m na szer. 1,03 m"
+      }
+     ],
+     "total": null
+    }
+   ],
+   "usableTotal": 119.77
+  },
+  "E": {
+   "family": "szeregowiec",
+   "note": "Szeregowiec skrajny (wschodni koniec szeregu G-F-E). Okna także w ścianie szczytowej.",
+   "plans": {
+    "parter": "dom-e-parter.png",
+    "pietro": "dom-e-pietro.png",
+    "poddasze": "dom-e-poddasze.png"
+   },
+   "floors": [
+    {
+     "id": "parter",
+     "label": "Parter",
+     "rooms": [
+      {
+       "no": "0.01",
+       "name": "Wiatrołap",
+       "area": 3.89
+      },
+      {
+       "no": "0.02",
+       "name": "WC",
+       "area": 2.57
+      },
+      {
+       "no": "0.03",
+       "name": "Pomieszczenie techniczne",
+       "area": 0.76
+      },
+      {
+       "no": "0.04",
+       "name": "Schody",
+       "area": 4.58
+      },
+      {
+       "no": "0.05",
+       "name": "Strefa dzienna",
+       "area": 29.61,
+       "note": "salon + jadalnia, wyjście HS na taras"
+      },
+      {
+       "no": "0.06",
+       "name": "Aneks kuchenny",
+       "area": 7.86,
+       "note": "okno na front"
+      }
+     ],
+     "outdoor": [
+      {
+       "no": "-",
+       "name": "Taras (do aranżacji indywidualnej)",
+       "area": 7.12
+      },
+      {
+       "no": "-",
+       "name": "Zadaszenie nad wejściem",
+       "area": 6.96
+      }
+     ],
+     "total": 49.27
+    },
+    {
+     "id": "pietro",
+     "label": "Piętro",
+     "rooms": [
+      {
+       "no": "1.01",
+       "name": "Korytarz",
+       "area": 5.28
+      },
+      {
+       "no": "1.02",
+       "name": "Pokój 1",
+       "area": 10.15
+      },
+      {
+       "no": "1.03",
+       "name": "Pokój 2",
+       "area": 9.75
+      },
+      {
+       "no": "1.04",
+       "name": "Łazienka",
+       "area": 4.41,
+       "note": "okno w szczycie, wanna"
+      },
+      {
+       "no": "1.05",
+       "name": "Sypialnia",
+       "area": 10.86
+      },
+      {
+       "no": "1.06",
+       "name": "Pokój 3",
+       "area": 10.08
+      }
+     ],
+     "total": 50.53
+    },
+    {
+     "id": "poddasze",
+     "label": "Poddasze",
+     "usable": false,
+     "rooms": [
+      {
+       "no": "2.01",
+       "name": "Poddasze nieużytkowe",
+       "area": null,
+       "note": "obrys wewn. ok. 6,59 × 6,61 m"
+      }
+     ],
+     "total": null
+    }
+   ],
+   "usableTotal": 99.8
+  },
+  "F": {
+   "family": "szeregowiec",
+   "note": "Szeregowiec środkowy (ściany wspólne z E i G).",
+   "plans": {
+    "parter": "dom-f-parter.png",
+    "pietro": "dom-f-pietro.png",
+    "poddasze": "dom-f-poddasze.png"
+   },
+   "floors": [
+    {
+     "id": "parter",
+     "label": "Parter",
+     "rooms": [
+      {
+       "no": "0.01",
+       "name": "Wiatrołap",
+       "area": 3.89
+      },
+      {
+       "no": "0.02",
+       "name": "WC",
+       "area": 2.57
+      },
+      {
+       "no": "0.03",
+       "name": "Pomieszczenie techniczne",
+       "area": 0.76
+      },
+      {
+       "no": "0.04",
+       "name": "Schody",
+       "area": 4.58
+      },
+      {
+       "no": "0.05",
+       "name": "Strefa dzienna",
+       "area": 30.63,
+       "note": "salon + jadalnia, wyjście HS na taras"
+      },
+      {
+       "no": "0.06",
+       "name": "Aneks kuchenny",
+       "area": 8.43,
+       "note": "okno na front"
+      }
+     ],
+     "outdoor": [
+      {
+       "no": "-",
+       "name": "Taras (do aranżacji indywidualnej)",
+       "area": 7.12
+      },
+      {
+       "no": "-",
+       "name": "Zadaszenie nad wejściem",
+       "area": 7.09
+      }
+     ],
+     "total": 50.86
+    },
+    {
+     "id": "pietro",
+     "label": "Piętro",
+     "rooms": [
+      {
+       "no": "1.01",
+       "name": "Korytarz",
+       "area": 5.77
+      },
+      {
+       "no": "1.02",
+       "name": "Pokój 1",
+       "area": 10.84
+      },
+      {
+       "no": "1.03",
+       "name": "Pokój 2",
+       "area": 9.5
+      },
+      {
+       "no": "1.04",
+       "name": "Łazienka",
+       "area": 4.41
+      },
+      {
+       "no": "1.05",
+       "name": "Sypialnia",
+       "area": 10.86
+      },
+      {
+       "no": "1.06",
+       "name": "Pokój 3",
+       "area": 10.73
+      }
+     ],
+     "total": 52.11
+    },
+    {
+     "id": "poddasze",
+     "label": "Poddasze",
+     "usable": false,
+     "rooms": [
+      {
+       "no": "2.01",
+       "name": "Poddasze nieużytkowe",
+       "area": null
+      }
+     ],
+     "total": null
+    }
+   ],
+   "usableTotal": 102.97
+  }
+ },
+ "houses": [
+  {
+   "id": "A",
+   "slug": "a",
+   "layout": "A",
+   "type": "blizniak",
+   "status": "available",
+   "area": 119.51,
+   "garden": 98.82,
+   "rooms": 5,
+   "parking": "Garaż + 1 miejsce",
+   "attic": {
+    "area": 49.27,
+    "maxHeight": 2.25,
+    "label": "Poddasze nieużytkowe"
+   },
+   "price": 1610000,
+   "pricePerM2": 14008.53,
+   "priceHistory": [
+    {
+     "date": "2026-04-24",
+     "price": 1610000,
+     "pricePerM2": 14008.53
+    }
+   ],
+   "files": {
+    "card": "zrodla/pdf/dom-a.pdf",
+    "plans": {
+     "parter": "zrodla/rzuty/dom-a-parter.png",
+     "pietro": "zrodla/rzuty/dom-a-pietro.png",
+     "poddasze": "zrodla/rzuty/dom-a-poddasze.png",
+     "ogrodek": "zrodla/rzuty/dom-a-ogrodek.png",
+     "pzt": "zrodla/rzuty/dom-a-pzt.png"
+    }
+   },
+   "sitePlan": {
+    "path": "M336 541L334 534L318 532L306 534L301 522.5L281 526L285 537L168 556L162 545.5L143 548.5L141 552L145 561.5L120 566L122 633.5L71 718.5L115.5 709L77 796L370.5 738.5L327.5 647.5L316 546L336 541Z",
+    "marker": [
+     220,
+     520
+    ]
+   },
+   "pzt": {
+    "x0": 65.26,
+    "z0": 12.0,
+    "w": 8.23,
+    "d": 10.05
+   },
+   "roofColor": "szalwia"
+  },
+  {
+   "id": "B",
+   "slug": "b",
+   "layout": "B",
+   "type": "blizniak",
+   "status": "available",
+   "area": 119.77,
+   "garden": 93.67,
+   "rooms": 5,
+   "parking": "Garaż + 1 miejsce",
+   "attic": {
+    "area": 49.27,
+    "maxHeight": 2.25,
+    "label": "Poddasze nieużytkowe"
+   },
+   "price": 1600000,
+   "pricePerM2": 13890.09,
+   "priceHistory": [
+    {
+     "date": "2026-04-24",
+     "price": 1600000,
+     "pricePerM2": 13890.09
+    }
+   ],
+   "files": {
+    "card": "zrodla/pdf/dom-b.pdf",
+    "plans": {
+     "parter": "zrodla/rzuty/dom-b-parter.png",
+     "pietro": "zrodla/rzuty/dom-b-pietro.png",
+     "poddasze": "zrodla/rzuty/dom-b-poddasze.png",
+     "ogrodek": "zrodla/rzuty/dom-b-ogrodek.png",
+     "pzt": "zrodla/rzuty/dom-b-pzt.png"
+    }
+   },
+   "sitePlan": {
+    "path": "M334 528.5V533L336 541.5L316 546.5L328 647L376.5 750.5L571 703L575.5 720.5L646.5 703L604.5 559L525 576L508.5 519.5L497.5 514L481.5 515.5L478.5 505L461.5 508L464.5 519.5L356.5 538L353.5 526L334 528.5Z",
+    "marker": [
+     410,
+     500
+    ]
+   },
+   "pzt": {
+    "x0": 57.26,
+    "z0": 10.74,
+    "w": 8.23,
+    "d": 9.86
+   },
+   "roofColor": "jasny"
+  },
+  {
+   "id": "C",
+   "slug": "c",
+   "layout": "A",
+   "type": "blizniak",
+   "status": "sold",
+   "area": 119.51,
+   "garden": 85.33,
+   "rooms": 5,
+   "parking": "Garaż + 1 miejsce",
+   "attic": {
+    "area": 49.27,
+    "maxHeight": 2.25,
+    "label": "Poddasze nieużytkowe"
+   },
+   "price": null,
+   "pricePerM2": null,
+   "priceHistory": [],
+   "files": {
+    "card": "zrodla/pdf/dom-c.pdf",
+    "plans": {
+     "parter": "zrodla/rzuty/dom-c-parter.png",
+     "pietro": "zrodla/rzuty/dom-c-pietro.png",
+     "poddasze": "zrodla/rzuty/dom-c-poddasze.png",
+     "ogrodek": "zrodla/rzuty/dom-c-ogrodek.png",
+     "pzt": "zrodla/rzuty/dom-c-pzt.png"
+    }
+   },
+   "sitePlan": {
+    "path": "M605 559L646.5 703L739.5 679L745.5 694.5L889.5 657L884.5 559.5L850.5 472.5L833 475V468L830.5 464L816.5 466V478L726.5 494L727 486L725 483L710 486V498.5L697.5 501.5L689.5 508L697 552.5L605 559Z",
+    "marker": [
+     780,
+     465
+    ]
+   },
+   "pzt": {
+    "x0": 39.72,
+    "z0": 7.49,
+    "w": 8.23,
+    "d": 10.0
+   },
+   "roofColor": "szampan"
+  },
+  {
+   "id": "D",
+   "slug": "d",
+   "layout": "B",
+   "type": "blizniak",
+   "status": "available",
+   "area": 119.77,
+   "garden": 86.27,
+   "rooms": 5,
+   "parking": "Garaż + 1 miejsce",
+   "attic": {
+    "area": 49.27,
+    "maxHeight": 2.25,
+    "label": "Poddasze nieużytkowe"
+   },
+   "price": 1590000,
+   "pricePerM2": 13803.28,
+   "priceHistory": [
+    {
+     "date": "2026-04-24",
+     "price": 1590000,
+     "pricePerM2": 13803.28
+    }
+   ],
+   "files": {
+    "card": "zrodla/pdf/dom-d.pdf",
+    "plans": {
+     "parter": "zrodla/rzuty/dom-d-parter.png",
+     "pietro": "zrodla/rzuty/dom-d-pietro.png",
+     "poddasze": "zrodla/rzuty/dom-d-poddasze.png",
+     "ogrodek": "zrodla/rzuty/dom-d-ogrodek.png",
+     "pzt": "zrodla/rzuty/dom-d-pzt.png"
+    }
+   },
+   "sitePlan": {
+    "path": "M858.5 483.5L856 485L884.5 559.5L889.5 657L899.5 672L1056.5 632.5L1068 644.5L1125 629L1027 519.5L997.5 457.5L981.5 460.5V453L978.5 450L965 453V463.5L884 478V470.5L880.5 467.5L867 470.5V482L858.5 483.5Z",
+    "marker": [
+     940,
+     445
+    ]
+   },
+   "pzt": {
+    "x0": 31.67,
+    "z0": 5.95,
+    "w": 8.23,
+    "d": 10.09
+   },
+   "roofColor": "jasny"
+  },
+  {
+   "id": "E",
+   "slug": "e",
+   "layout": "E",
+   "type": "szeregowiec",
+   "status": "available",
+   "area": 99.8,
+   "garden": 78.41,
+   "rooms": 5,
+   "parking": "2 miejsca postojowe",
+   "attic": {
+    "area": 42.88,
+    "maxHeight": 2.25,
+    "label": "Poddasze nieużytkowe"
+   },
+   "price": 1490000,
+   "pricePerM2": 15647.97,
+   "priceHistory": [
+    {
+     "date": "2026-04-24",
+     "price": 1490000,
+     "pricePerM2": 15647.97
+    }
+   ],
+   "files": {
+    "card": "zrodla/pdf/dom-e.pdf",
+    "plans": {
+     "parter": "zrodla/rzuty/dom-e-parter.png",
+     "pietro": "zrodla/rzuty/dom-e-pietro.png",
+     "poddasze": "zrodla/rzuty/dom-e-poddasze.png",
+     "ogrodek": "zrodla/rzuty/dom-e-ogrodek.png",
+     "pzt": "zrodla/rzuty/dom-e-pzt.png"
+    }
+   },
+   "sitePlan": {
+    "path": "M1308 596.5L1332 504.5L1287 427L1177.5 448L1128 460L1124.5 507L1024.5 514.5L1026.5 518.5L1125 629L1191.5 611.5L1205 622.5L1308 596.5Z",
+    "marker": [
+     1230,
+     410
+    ]
+   },
+   "pzt": {
+    "x0": 14.79,
+    "z0": 2.93,
+    "w": 7.63,
+    "d": 9.67
+   },
+   "roofColor": "jasny"
+  },
+  {
+   "id": "F",
+   "slug": "f",
+   "layout": "F",
+   "type": "szeregowiec",
+   "status": "available",
+   "area": 102.97,
+   "garden": 38.26,
+   "rooms": 5,
+   "parking": "2 miejsca postojowe",
+   "attic": {
+    "area": 44.3,
+    "maxHeight": 2.25,
+    "label": "Poddasze nieużytkowe"
+   },
+   "price": 1450000,
+   "pricePerM2": 14737.27,
+   "priceHistory": [
+    {
+     "date": "2026-04-24",
+     "price": 1450000,
+     "pricePerM2": 14737.27
+    }
+   ],
+   "files": {
+    "card": "zrodla/pdf/dom-f.pdf",
+    "plans": {
+     "parter": "zrodla/rzuty/dom-f-parter.png",
+     "pietro": "zrodla/rzuty/dom-f-pietro.png",
+     "poddasze": "zrodla/rzuty/dom-f-poddasze.png",
+     "ogrodek": "zrodla/rzuty/dom-f-ogrodek.png",
+     "pzt": "zrodla/rzuty/dom-f-pzt.png"
+    }
+   },
+   "sitePlan": {
+    "path": "M1425 578.5L1325.5 609L1308.5 596L1332 505L1293.5 438L1303 436.5L1403.5 416L1451.5 490.5L1425 578.5ZM1425 578.5L1439.5 592L1609.5 539.5L1574 517.5L1602 508.5L1667.5 543.5L1638 557.5L1608 539L1439.5 591.5L1425 578.5Z",
+    "marker": [
+     1350,
+     390
+    ]
+   },
+   "pzt": {
+    "x0": 7.44,
+    "z0": 1.44,
+    "w": 7.53,
+    "d": 9.67
+   },
+   "roofColor": "szalwia"
+  },
+  {
+   "id": "G",
+   "slug": "g",
+   "layout": null,
+   "type": "szeregowiec",
+   "status": "sold",
+   "area": 100.86,
+   "garden": 184.87,
+   "rooms": 5,
+   "parking": "2 miejsca postojowe",
+   "attic": {
+    "area": null,
+    "maxHeight": null,
+    "label": "Poddasze nieużytkowe"
+   },
+   "price": null,
+   "pricePerM2": null,
+   "priceHistory": [],
+   "files": {
+    "card": null,
+    "plans": null
+   },
+   "sitePlan": {
+    "path": "M1422 425L1412.5 427.5L1451.5 490.5L1424.5 578L1439.5 592L1573.5 551L1603.5 571.5L1638 557.5L1573.5 518L1547.5 525L1566 477.5L1515 406L1422 425Z",
+    "marker": [
+     1470,
+     375
+    ]
+   },
+   "pzt": {
+    "x0": 0.0,
+    "z0": 0.0,
+    "w": 7.63,
+    "d": 9.67
+   },
+   "roofColor": "szampan",
+   "layoutNote": "Brak rzutów na senn.pl (404). Do makiety: lustro E (skrajny, zachodni koniec szeregu)."
+  }
+ ],
+ "styles": [
+  {
+   "id": "s1",
+   "name": "Jasna skandynawska",
+   "desc": "len, jasny dąb, bouclé",
+   "swatches": [
+    "#e2d9c8",
+    "#d4ab74",
+    "#f1ece3"
+   ],
+   "scenario": "Rodzina 2+2"
+  },
+  {
+   "id": "s4",
+   "name": "Japandi",
+   "desc": "jesion, papier ryżowy, czerń",
+   "swatches": [
+    "#cdb48e",
+    "#efe7d8",
+    "#23211f"
+   ],
+   "scenario": "Para + gabinet"
+  },
+  {
+   "id": "s3",
+   "name": "Grafitowa",
+   "desc": "antracyt, czarny dąb, marmur",
+   "swatches": [
+    "#3b3b3d",
+    "#5a4434",
+    "#e7e4df"
+   ],
+   "scenario": "Para + pokój gościnny"
+  }
+ ],
+ "timeOfDay": [
+  {
+   "id": "rano",
+   "label": "Rano",
+   "date": "2027-09-21T08:30+02:00",
+   "sunAzimuth": 114.4,
+   "sunElevation": 18.7,
+   "threeDir": [
+    0.863,
+    0.32,
+    0.391
+   ],
+   "note": "niskie słońce z ESE: oświetla szczyty wschodnie i muska ogrody"
+  },
+  {
+   "id": "dzien",
+   "label": "Dzień",
+   "date": "2027-09-21T15:30+02:00",
+   "sunAzimuth": 232.4,
+   "sunElevation": 26.1,
+   "threeDir": [
+    -0.712,
+    0.44,
+    0.548
+   ],
+   "note": "ciepłe popołudnie z SW: słońce wpada przez okno HS do salonu (52° od normalnej elewacji S); zgodne z renderami Kreatora i hero"
+  },
+  {
+   "id": "noc",
+   "label": "Noc",
+   "date": "2027-09-21T19:15+02:00",
+   "sunAzimuth": 279.6,
+   "sunElevation": -6.6,
+   "threeDir": [
+    -0.979,
+    -0.115,
+    -0.166
+   ],
+   "note": "niebieska godzina: niebo zmierzchu + ciepłe światła w oknach i kule ogrodowe (jak visualization-2/-6)"
+  }
+ ]
+}

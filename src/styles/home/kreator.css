@@ -1,0 +1,56 @@
+/* --- Kreator wnętrz (right under the 3D teaser) -----------------------------
+   The configurator is its own full-screen app with global styles, so it lives
+   in an isolated frame (public/kreator/index.html), loaded only when the
+   section comes near, so it never slows the film down. It sits in a white card. */
+.kreator__card {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.kreator__frame {
+  position: relative;
+  overflow: hidden;
+  height: clamp(560px, calc(100vh - 7rem), 920px);
+  border-radius: var(--r-photo);
+  background: #2a2420;
+}
+
+.kreator__frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out);
+}
+
+.kreator__frame.is-ready iframe { opacity: 1; }
+
+.kreator__wait {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0.6em 1.2em;
+  border-radius: 999px;
+  background: rgba(24, 18, 14, 0.62);
+  color: #fbf7f0;
+  font-size: var(--fs-small);
+  white-space: nowrap;
+  transition: opacity 0.4s ease;
+}
+
+.kreator__frame.is-ready .kreator__wait { opacity: 0; pointer-events: none; }
+
+.kreator .sec__actions { justify-content: center; }
+
+/* phones: the configurator stacks render + choices, the frame follows its height (JS) */
+@media (max-width: 900px) {
+  .kreator { padding-left: max(10px, 2.5%); padding-right: max(10px, 2.5%); }
+  .kreator .sec__head,
+  .kreator .sec__actions { padding: 0 var(--pad-x); }
+  .kreator__card { padding: 6px; border-radius: 18px; }
+  .kreator__frame { height: 640px; border-radius: 12px; }
+}

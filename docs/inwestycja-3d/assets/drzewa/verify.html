@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>html,body{margin:0;background:#cfd8de}canvas{display:block}</style>
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
+import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
+
+const W = innerWidth, H = innerHeight;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.toneMapping = THREE.NeutralToneMapping;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color("#d9e1e4");
+scene.fog = new THREE.Fog("#e3e3dc", 90, 320);
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.5, 2000);
+// Sun from the "Dzień" preset (21.09 15:30, az 232°, el 26°) in x = E, y = up, z = S.
+const sun = new THREE.DirectionalLight("#ffe7c7", 3.4);
+sun.position.set(-0.712, 0.44, 0.548).multiplyScalar(120);
+sun.castShadow = true;
+sun.shadow.mapSize.set(4096, 4096);
+Object.assign(sun.shadow.camera, { left: -90, right: 90, top: 90, bottom: -90, near: 1, far: 400 });
+sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.05;
+scene.add(sun);
+scene.add(new THREE.HemisphereLight("#dbe6ef", "#7d8a5c", 0.85));
+const hdr = await new RGBELoader().loadAsync("/hdri.hdr");
+hdr.mapping = THREE.EquirectangularReflectionMapping;
+scene.environment = hdr; scene.environmentIntensity = 0.55;
+
+const ground = new THREE.Mesh(new THREE.CircleGeometry(400, 64).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: "#93a86a", roughness: 1 }));
+ground.receiveShadow = true; scene.add(ground);
+// Stand-in houses: a row like G F E | D C | B A (8 × 10 m, ridge ~9 m).
+const clay = new THREE.MeshStandardMaterial({ color: "#ece6dc", roughness: 0.9 });
+for (const [x, z] of [[0, 0], [7.6, 1.4], [15.2, 2.9], [31.7, 6], [40, 7.5], [57.3, 10.7], [65.5, 12]]) {
+  const b = new THREE.Mesh(new THREE.BoxGeometry(7.8, 6, 10), clay); b.position.set(x + 3.9, 3, z + 5); b.castShadow = b.receiveShadow = true; scene.add(b);
+  const roof = new THREE.Mesh(new THREE.CylinderGeometry(5.6, 5.6, 7.8, 3, 1, false), new THREE.MeshStandardMaterial({ color: "#c9c1b0", roughness: 0.6 }));
+  roof.rotation.z = Math.PI / 2; roof.rotation.y = 0; roof.scale.set(1, 1, 0.92); roof.position.set(x + 3.9, 7.4, z + 5); roof.castShadow = true; scene.add(roof);
+}
+
+const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync("/out/final/trees.glb");
+const root = gltf.scene.getObjectByName("halo-wawer-trees") || gltf.scene;
+const species = {};
+root.children.forEach((c) => (species[c.name] = c));
+window.info = {
+  names: Object.keys(species),
+  mats: [...new Set([]).add(0)].length,
+  materials: (() => { const m = new Map(); gltf.scene.traverse((o) => o.isMesh && m.set(o.material.name || o.material.uuid.slice(0, 6), { type: o.material.type, alphaTest: o.material.alphaTest, side: o.material.side, transparent: o.material.transparent })); return [...m.values()]; })(),
+};
+const place = (id, x, z, s = 1, rot = 0) => {
+  const t = species[id].clone(true);
+  t.position.set(x, 0, z); t.scale.multiplyScalar(s); t.rotation.y = rot;
+  t.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  scene.add(t);
+};
+// A pine wood edge to the north, birch groups between the segments, oaks and a lime in the south meadow.
+const rnd = (() => { let s = 7; return () => ((s = (s * 16807) % 2147483647) / 2147483647); })();
+const pines = ["sosna-1", "sosna-2", "sosna-3"];
+for (let i = 0; i < 26; i++) place(pines[i % 3], -30 + i * 4.6 + rnd() * 2, -26 - rnd() * 14 + i * 0.5, 0.85 + rnd() * 0.3, rnd() * 6.28);
+for (const [x, z] of [[25, 2], [27.5, 5], [50.5, 8.5], [52, 4]]) place(rnd() < 0.5 ? "brzoza-1" : "brzoza-2", x, z, 0.9 + rnd() * 0.2, rnd() * 6.28);
+place("dab-1", 8, 34, 1.05, 1.1); place("lipa-1", 46, 40, 1, 2.3); place("dab-1", 78, 36, 0.9, 4.2);
+place("brzoza-1", -8, 22, 1, 0.4);
+
+window.shot = (eye, target) => { camera.position.set(...eye); camera.lookAt(...target); renderer.render(scene, camera); return renderer.domElement.toDataURL("image/jpeg", 0.9); };
+window.ready = true;
+</script>
+</body>
+</html>

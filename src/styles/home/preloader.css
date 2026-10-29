@@ -1,0 +1,116 @@
+/* =========================================================================
+   PRELOADER: ivory overlay while the hero film loads into memory
+   The page is fully rendered underneath (SEO, link previews); this only
+   covers it. The curtain lifts upward, the hero's entrance plays under it.
+   ========================================================================= */
+
+/* the page is locked while the overlay is up (no script needed before paint) */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  html:has(.preloader:not(.is-lifting):not(.is-fading)) {
+    overflow: hidden;
+    scrollbar-gutter: stable;   /* no width jump when the scrollbar comes back */
+  }
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--ivory);
+  color: #1f1f1f;
+  clip-path: inset(0 0 0 0);
+  touch-action: none;
+}
+
+.is-lite .preloader { display: none; }
+
+@media (scripting: none), (prefers-reduced-motion: reduce) {
+  .preloader { display: none; }
+}
+
+.preloader__inner {
+  width: min(30rem, 78vw);
+  animation: preloader-in 0.9s var(--ease-out) both;
+}
+
+@keyframes preloader-in {
+  from { opacity: 0; translate: 0 0.6rem; }
+}
+
+.preloader__mark {
+  display: flex;
+  align-items: center;
+  gap: 0.32em;
+  margin: 0;
+  font-family: var(--font-wordmark);
+  font-size: clamp(2rem, 5.2vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.032em;
+  white-space: nowrap;
+}
+
+.preloader__glyph {
+  flex: none;
+  width: 0.78em;
+  height: 0.75em;
+  color: var(--gold);
+}
+
+.preloader__bar {
+  position: relative;
+  height: 1px;
+  margin-top: clamp(1.25rem, 2.6vw, 2rem);
+  overflow: hidden;
+  background: rgba(31, 31, 31, 0.12);
+}
+
+.preloader__bar span {
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform-origin: left center;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.preloader__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.9em 0 0;
+  font-size: clamp(0.78rem, 1vw, 0.95rem);
+  letter-spacing: 0.02em;
+  color: #6f6a66;
+}
+
+.preloader__pct {
+  color: #1f1f1f;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- exit ------------------------------------------------------------------ */
+/* the page is live the moment the exit starts: the overlay never takes a click */
+.preloader.is-lifting,
+.preloader.is-fading { pointer-events: none; }
+
+.preloader.is-lifting {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.8s var(--ease-in-out);
+}
+
+.preloader.is-lifting .preloader__inner {
+  opacity: 0;
+  translate: 0 -1.2rem;
+  transition: opacity 0.35s ease, translate 0.6s var(--ease-out);
+}
+
+.preloader.is-fading {
+  opacity: 0;
+  transition: opacity 0.32s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader.is-lifting { clip-path: none; opacity: 0; transition: opacity 0.32s ease; }
+}

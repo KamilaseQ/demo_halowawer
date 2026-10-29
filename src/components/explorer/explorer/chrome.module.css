@@ -1,0 +1,288 @@
+/* Explorer chrome: the slim header bar and the WhatsApp button. Tokens from Explorer.module.css (.root). */
+
+/* ---------- header ---------- */
+
+.header {
+  position: absolute;
+  z-index: 9;
+  top: var(--header-top);
+  left: var(--inset);
+  right: var(--inset);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 8px 0 20px;
+  border-radius: 18px;
+  background: var(--glass-bg-thin);
+  -webkit-backdrop-filter: var(--glass-blur-thin);
+  backdrop-filter: var(--glass-blur-thin);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow-thin);
+  transition:
+    transform 640ms var(--ease-drawer),
+    opacity 420ms var(--ease-out);
+}
+
+/* Immersive walk: the bar leaves upwards and comes back the same way. */
+:global([data-immersive]) .header {
+  transform: translateY(calc(-100% - var(--header-top) - 6px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-family: var(--font-wordmark);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.032em;
+  white-space: nowrap;
+  color: var(--fg);
+  border-radius: 8px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px 0 12px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--fg);
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+.phone svg {
+  color: var(--fg-muted);
+}
+
+/* Concentric with the bar: 18px outer radius - 8px padding. */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--gold);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 6px 16px -8px rgba(170, 112, 40, 0.75);
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    transform var(--dur-press) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .phone:hover {
+    background: var(--fill-hover);
+  }
+
+  .cta:hover {
+    background: var(--gold-hover);
+  }
+}
+
+.phone:active,
+.cta:active {
+  transform: scale(0.97);
+}
+
+.cta:active {
+  background: var(--gold-press);
+}
+
+@media (max-width: 899px) {
+  .header {
+    gap: 8px;
+    padding: 0 6px 0 16px;
+    border-radius: 16px;
+  }
+
+  .wordmark {
+    font-size: 18px;
+  }
+
+  /* Phone: the icon alone, a 40px round target. */
+  .phone {
+    justify-content: center;
+    width: 40px;
+    padding: 0;
+    border-radius: 999px;
+  }
+
+  .phone span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .phone svg {
+    color: var(--fg);
+  }
+
+  .cta {
+    min-height: 40px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- WhatsApp: gold circle, bottom right ---------- */
+
+.fab {
+  position: absolute;
+  z-index: 9;
+  right: var(--inset);
+  bottom: calc(var(--dock) + var(--inset));
+  display: grid;
+  place-items: center;
+  width: var(--fab);
+  height: var(--fab);
+  border-radius: 50%;
+  color: #fffaf3;
+  background: var(--gold);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 14px 30px -12px rgba(120, 78, 28, 0.6);
+  animation: fab-in 600ms var(--ease-out) 300ms both;
+  transition:
+    background-color var(--dur-ui) var(--ease-out),
+    scale var(--dur-press) var(--ease-out),
+    bottom 560ms var(--ease-drawer),
+    opacity 300ms var(--ease-out);
+}
+
+@keyframes fab-in {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+
+.fab svg {
+  width: 46%;
+  height: 46%;
+}
+
+/* Label slides out on hover (pointer devices only). */
+.fabLabel {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--fg);
+  background: var(--glass-bg-thin);
+  -webkit-backdrop-filter: var(--glass-blur-thin);
+  backdrop-filter: var(--glass-blur-thin);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow-thin);
+  opacity: 0;
+  translate: 8px -50%;
+  scale: 0.96;
+  pointer-events: none;
+  transition:
+    opacity 260ms var(--ease-out),
+    translate 380ms var(--ease-out),
+    scale 380ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fab:hover {
+    background: var(--gold-hover);
+    scale: 1.04;
+  }
+
+  .fab:hover .fabLabel,
+  .fab:focus-visible .fabLabel {
+    opacity: 1;
+    translate: 0 -50%;
+    scale: 1;
+  }
+}
+
+.fab:active {
+  scale: 0.95;
+  background: var(--gold-press);
+}
+
+.fab:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (max-width: 899px) {
+  /* The row above the sheet, right end. */
+  .fab {
+    bottom: calc(var(--dock) + var(--inset) + var(--peek-h) + var(--gap));
+  }
+
+  :global([data-immersive]) .fab {
+    bottom: calc(var(--dock) + var(--inset));
+  }
+
+  /* The house sheet already carries WhatsApp beside the main CTA. */
+  .fab[data-in-sheet],
+  :global([data-explorer-panel][data-sheet="full"]) ~ .fab {
+    opacity: 0;
+    scale: 0.6;
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: opacity 200ms ease;
+  }
+
+  :global([data-immersive]) .header {
+    transform: none;
+  }
+
+  .fab {
+    animation-name: fab-fade;
+  }
+
+  @keyframes fab-fade {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+@media (prefers-contrast: more) {
+  .header {
+    border-color: rgba(31, 31, 31, 0.5);
+  }
+}

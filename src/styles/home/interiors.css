@@ -1,0 +1,11 @@
+/* --- Wnętrza: room cards, floor pill on the photo ------------------------------ */
+.post__body { padding: 1.05rem 0.75rem 0.9rem; }
+
+.post__meta {
+  margin: 0 0 0.35rem;
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brown);
+}
