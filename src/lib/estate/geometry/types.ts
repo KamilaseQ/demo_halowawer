@@ -161,6 +161,8 @@ export type HouseModel = {
     nodes: WalkNode[];
     /** Per-house room names where a house names the same rooms differently (A/C vs B/D upstairs). */
     labels?: Partial<Record<HouseId, Record<string, string>>>;
+    /** Outdoor walk over uneven ground: the eye follows the terrain (clicked point + eyeHeight), not a storey. */
+    terrain?: boolean;
   };
   shots: {
     /** Whole house from the garden side. */
@@ -170,6 +172,11 @@ export type HouseModel = {
   };
   /** Plan-space bounds [minX, minY, maxX, maxY] including terraces. */
   bounds: [number, number, number, number];
+  /**
+   * "bor2": the developer's interior GLB (geometry/bor2.ts). Its model lives in estate space (identity house
+   * frame, never mirrored by the renderer: mirrors are baked into the transform); no zones or walls.
+   */
+  source?: "bor2";
 };
 
 /** How a house's plan space is placed in the estate. */

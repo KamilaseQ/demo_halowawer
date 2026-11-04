@@ -1,0 +1,2457 @@
+{
+ "opis": "Ujęcia przy gruncie (sweep)",
+ "kadr": {
+  "w": 960,
+  "h": 540
+ },
+ "pozy": [
+  {
+   "id": "grunt-plot-01-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    11.99,
+    1.81,
+    -53.7
+   ],
+   "cel": [
+    19.31,
+    1.56,
+    -44.11
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-01-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    11.99,
+    2.86,
+    -53.7
+   ],
+   "cel": [
+    19.31,
+    1.81,
+    -44.11
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-01-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    11.9,
+    1.81,
+    -46.6
+   ],
+   "cel": [
+    16.16,
+    1.61,
+    -49.22
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    11.9,
+    2.86,
+    -46.6
+   ],
+   "cel": [
+    16.16,
+    1.71,
+    -49.22
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-02-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    19.45,
+    1.83,
+    -70.06
+   ],
+   "cel": [
+    17.78,
+    1.58,
+    -58.12
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-02-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    19.45,
+    2.88,
+    -70.06
+   ],
+   "cel": [
+    17.78,
+    1.83,
+    -58.12
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-02-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    14.34,
+    1.83,
+    -65.13
+   ],
+   "cel": [
+    19.2,
+    1.63,
+    -63.95
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-02-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    14.34,
+    2.88,
+    -65.13
+   ],
+   "cel": [
+    19.2,
+    1.73,
+    -63.95
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-03-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    37.02,
+    1.81,
+    -46.27
+   ],
+   "cel": [
+    25.02,
+    1.56,
+    -47.43
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-03-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    37.02,
+    2.86,
+    -46.27
+   ],
+   "cel": [
+    25.02,
+    1.81,
+    -47.43
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-03-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    31.88,
+    1.81,
+    -51.16
+   ],
+   "cel": [
+    30.9,
+    1.61,
+    -46.26
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-03-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    31.88,
+    2.86,
+    -51.16
+   ],
+   "cel": [
+    30.9,
+    1.71,
+    -46.26
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-04-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    40.17,
+    1.3,
+    -66.22
+   ],
+   "cel": [
+    28.15,
+    1.05,
+    -67.18
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-04-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    40.17,
+    2.35,
+    -66.22
+   ],
+   "cel": [
+    28.15,
+    1.3,
+    -67.18
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-04-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    34.94,
+    1.3,
+    -71.03
+   ],
+   "cel": [
+    34.05,
+    1.1,
+    -66.11
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-04-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    34.94,
+    2.35,
+    -71.03
+   ],
+   "cel": [
+    34.05,
+    1.2,
+    -66.11
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-05-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    51.68,
+    1.65,
+    -44.35
+   ],
+   "cel": [
+    39.64,
+    1.4,
+    -43.61
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-05-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    51.68,
+    2.7,
+    -44.35
+   ],
+   "cel": [
+    39.64,
+    1.65,
+    -43.61
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-05-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    45.45,
+    1.65,
+    -38.38
+   ],
+   "cel": [
+    45.64,
+    1.45,
+    -43.38
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-05-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    45.45,
+    2.7,
+    -38.38
+   ],
+   "cel": [
+    45.64,
+    1.55,
+    -43.38
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-06-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    54.93,
+    1.3,
+    -63.53
+   ],
+   "cel": [
+    42.91,
+    1.05,
+    -64.49
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-06-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    54.93,
+    2.35,
+    -63.53
+   ],
+   "cel": [
+    42.91,
+    1.3,
+    -64.49
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-06-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    49.7,
+    1.3,
+    -68.34
+   ],
+   "cel": [
+    48.81,
+    1.1,
+    -63.42
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-06-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    49.7,
+    2.35,
+    -68.34
+   ],
+   "cel": [
+    48.81,
+    1.2,
+    -63.42
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-07-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    60.21,
+    1.51,
+    -54.09
+   ],
+   "cel": [
+    59.49,
+    1.31,
+    -49.14
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-07-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    60.21,
+    2.56,
+    -54.09
+   ],
+   "cel": [
+    59.49,
+    1.41,
+    -49.14
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-08-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    74.46,
+    1.3,
+    -61.52
+   ],
+   "cel": [
+    62.42,
+    1.05,
+    -62.21
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-08-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    74.46,
+    2.35,
+    -61.52
+   ],
+   "cel": [
+    62.42,
+    1.3,
+    -62.21
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-08-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    69.13,
+    1.3,
+    -66.21
+   ],
+   "cel": [
+    68.35,
+    1.1,
+    -61.27
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-08-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    69.13,
+    2.35,
+    -66.21
+   ],
+   "cel": [
+    68.35,
+    1.2,
+    -61.27
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-09-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    76.13,
+    1.4,
+    -39.66
+   ],
+   "cel": [
+    64.12,
+    1.15,
+    -38.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-09-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    76.13,
+    2.45,
+    -39.66
+   ],
+   "cel": [
+    64.12,
+    1.4,
+    -38.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-09-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    70.08,
+    1.4,
+    -33.51
+   ],
+   "cel": [
+    70.12,
+    1.2,
+    -38.51
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-09-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    70.08,
+    2.45,
+    -33.51
+   ],
+   "cel": [
+    70.12,
+    1.3,
+    -38.51
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-10-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    71.06,
+    1.44,
+    -82.14
+   ],
+   "cel": [
+    70.02,
+    1.19,
+    -70.12
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-10-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    71.06,
+    2.49,
+    -82.14
+   ],
+   "cel": [
+    70.02,
+    1.44,
+    -70.12
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-10-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    66.22,
+    1.44,
+    -76.95
+   ],
+   "cel": [
+    71.13,
+    1.24,
+    -76.02
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-10-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    66.22,
+    2.49,
+    -76.95
+   ],
+   "cel": [
+    71.13,
+    1.34,
+    -76.02
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-11-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    88.93,
+    1.3,
+    -57.35
+   ],
+   "cel": [
+    76.91,
+    1.05,
+    -58.31
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-11-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    88.93,
+    2.35,
+    -57.35
+   ],
+   "cel": [
+    76.91,
+    1.3,
+    -58.31
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-11-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    83.7,
+    1.3,
+    -62.16
+   ],
+   "cel": [
+    82.81,
+    1.1,
+    -57.24
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-11-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    83.7,
+    2.35,
+    -62.16
+   ],
+   "cel": [
+    82.81,
+    1.2,
+    -57.24
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-12-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    90.86,
+    1.18,
+    -36.64
+   ],
+   "cel": [
+    78.84,
+    0.93,
+    -35.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-12-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    90.86,
+    2.23,
+    -36.64
+   ],
+   "cel": [
+    78.84,
+    1.18,
+    -35.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-12-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    84.92,
+    1.18,
+    -40.54
+   ],
+   "cel": [
+    84.84,
+    0.98,
+    -35.54
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-12-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    84.92,
+    2.23,
+    -40.54
+   ],
+   "cel": [
+    84.84,
+    1.08,
+    -35.54
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-13-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    103.69,
+    1.3,
+    -54.67
+   ],
+   "cel": [
+    91.67,
+    1.05,
+    -55.63
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-13-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    103.69,
+    2.35,
+    -54.67
+   ],
+   "cel": [
+    91.67,
+    1.3,
+    -55.63
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-13-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    98.46,
+    1.3,
+    -59.48
+   ],
+   "cel": [
+    97.57,
+    1.1,
+    -54.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-13-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    98.46,
+    2.35,
+    -59.48
+   ],
+   "cel": [
+    97.57,
+    1.2,
+    -54.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-14-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    105.71,
+    1.05,
+    -32.27
+   ],
+   "cel": [
+    93.8,
+    0.8,
+    -34.19
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-14-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    105.71,
+    2.1,
+    -32.27
+   ],
+   "cel": [
+    93.8,
+    1.05,
+    -34.19
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-14-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    98.31,
+    1.05,
+    -27.82
+   ],
+   "cel": [
+    99.6,
+    0.85,
+    -32.65
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-14-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    98.31,
+    2.1,
+    -27.82
+   ],
+   "cel": [
+    99.6,
+    0.95,
+    -32.65
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-15-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    118.22,
+    1.01,
+    -37.28
+   ],
+   "cel": [
+    107.92,
+    0.76,
+    -43.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-15-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    118.22,
+    2.06,
+    -37.28
+   ],
+   "cel": [
+    107.92,
+    1.01,
+    -43.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-15-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    115.72,
+    1.01,
+    -43.93
+   ],
+   "cel": [
+    112.71,
+    0.81,
+    -39.94
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-15-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    115.72,
+    2.06,
+    -43.93
+   ],
+   "cel": [
+    112.71,
+    0.91,
+    -39.94
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-01-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    24.97,
+    1.55,
+    -68.78
+   ],
+   "cel": [
+    16.07,
+    1.3,
+    -60.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-01-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    24.97,
+    2.6,
+    -68.78
+   ],
+   "cel": [
+    16.07,
+    1.55,
+    -60.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-01-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    17.89,
+    1.55,
+    -68.24
+   ],
+   "cel": [
+    20.88,
+    1.35,
+    -64.23
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    17.89,
+    2.6,
+    -68.24
+   ],
+   "cel": [
+    20.88,
+    1.45,
+    -64.23
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-02-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    41.53,
+    1.43,
+    -67.6
+   ],
+   "cel": [
+    30.01,
+    1.18,
+    -64.04
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-02-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    41.53,
+    2.48,
+    -67.6
+   ],
+   "cel": [
+    30.01,
+    1.43,
+    -64.04
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-02-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    34.9,
+    1.43,
+    -70.13
+   ],
+   "cel": [
+    35.89,
+    1.23,
+    -65.23
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-02-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    34.9,
+    2.48,
+    -70.13
+   ],
+   "cel": [
+    35.89,
+    1.33,
+    -65.23
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-03-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    58.41,
+    1.24,
+    -61.06
+   ],
+   "cel": [
+    46.36,
+    0.99,
+    -61.63
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-03-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    58.41,
+    2.29,
+    -61.06
+   ],
+   "cel": [
+    46.36,
+    1.24,
+    -61.63
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-03-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    53.03,
+    1.24,
+    -65.7
+   ],
+   "cel": [
+    52.3,
+    1.04,
+    -60.75
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-03-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    53.03,
+    2.29,
+    -65.7
+   ],
+   "cel": [
+    52.3,
+    1.14,
+    -60.75
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-04-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    73.98,
+    1.1,
+    -61.06
+   ],
+   "cel": [
+    61.97,
+    0.85,
+    -59.98
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-04-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    73.98,
+    2.15,
+    -61.06
+   ],
+   "cel": [
+    61.97,
+    1.1,
+    -59.98
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-04-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    68.02,
+    1.1,
+    -64.92
+   ],
+   "cel": [
+    67.97,
+    0.9,
+    -59.92
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-04-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    68.02,
+    2.15,
+    -64.92
+   ],
+   "cel": [
+    67.97,
+    1.0,
+    -59.92
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-05-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    88.8,
+    0.94,
+    -54.99
+   ],
+   "cel": [
+    76.74,
+    0.69,
+    -55.16
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-05-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    88.8,
+    1.99,
+    -54.99
+   ],
+   "cel": [
+    76.74,
+    0.94,
+    -55.16
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-05-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    83.27,
+    0.94,
+    -59.45
+   ],
+   "cel": [
+    82.7,
+    0.74,
+    -54.48
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-05-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    83.27,
+    1.99,
+    -59.45
+   ],
+   "cel": [
+    82.7,
+    0.84,
+    -54.48
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-06-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    104.47,
+    0.79,
+    -51.36
+   ],
+   "cel": [
+    92.43,
+    0.54,
+    -52.16
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-06-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    104.47,
+    1.84,
+    -51.36
+   ],
+   "cel": [
+    92.43,
+    0.79,
+    -52.16
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-06-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    99.18,
+    0.79,
+    -56.1
+   ],
+   "cel": [
+    98.35,
+    0.59,
+    -51.17
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-06-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    99.18,
+    1.84,
+    -56.1
+   ],
+   "cel": [
+    98.35,
+    0.69,
+    -51.17
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-07-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    108.8,
+    0.67,
+    -47.3
+   ],
+   "cel": [
+    110.48,
+    0.42,
+    -35.35
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-07-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    108.8,
+    1.72,
+    -47.3
+   ],
+   "cel": [
+    110.48,
+    0.67,
+    -35.35
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-07-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    115.24,
+    0.67,
+    -41.55
+   ],
+   "cel": [
+    110.24,
+    0.47,
+    -41.35
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-07-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    115.24,
+    1.72,
+    -41.55
+   ],
+   "cel": [
+    110.24,
+    0.57,
+    -41.35
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-01-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    13.76,
+    1.6,
+    -62.53
+   ],
+   "cel": [
+    25.76,
+    1.35,
+    -63.73
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-01-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    13.76,
+    2.65,
+    -62.53
+   ],
+   "cel": [
+    25.76,
+    1.6,
+    -63.73
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-01-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    19.76,
+    1.6,
+    -58.73
+   ],
+   "cel": [
+    19.76,
+    1.4,
+    -63.73
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    19.76,
+    2.65,
+    -58.73
+   ],
+   "cel": [
+    19.76,
+    1.5,
+    -63.73
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-02-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    32.5,
+    1.26,
+    -62.36
+   ],
+   "cel": [
+    32.41,
+    1.01,
+    -50.3
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-02-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    32.5,
+    2.31,
+    -62.36
+   ],
+   "cel": [
+    32.41,
+    1.26,
+    -50.3
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-02-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    28.08,
+    1.26,
+    -56.81
+   ],
+   "cel": [
+    33.05,
+    1.06,
+    -56.27
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-02-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    28.08,
+    2.31,
+    -56.81
+   ],
+   "cel": [
+    33.05,
+    1.16,
+    -56.27
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-03-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    46.29,
+    1.28,
+    -43.63
+   ],
+   "cel": [
+    46.63,
+    1.08,
+    -48.62
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-03-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    46.29,
+    2.33,
+    -43.63
+   ],
+   "cel": [
+    46.63,
+    1.18,
+    -48.62
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-04-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    66.67,
+    1.04,
+    -54.37
+   ],
+   "cel": [
+    54.69,
+    0.79,
+    -55.77
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-04-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    66.67,
+    2.09,
+    -54.37
+   ],
+   "cel": [
+    54.69,
+    1.04,
+    -55.77
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-04-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    61.62,
+    1.04,
+    -59.36
+   ],
+   "cel": [
+    60.55,
+    0.84,
+    -54.48
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-04-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    61.62,
+    2.09,
+    -59.36
+   ],
+   "cel": [
+    60.55,
+    0.94,
+    -54.48
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-05-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    72.75,
+    1.0,
+    -39.11
+   ],
+   "cel": [
+    74.14,
+    0.8,
+    -43.91
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-05-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    72.75,
+    2.05,
+    -39.11
+   ],
+   "cel": [
+    74.14,
+    0.9,
+    -43.91
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-06-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    89.17,
+    0.46,
+    -50.49
+   ],
+   "cel": [
+    89.1,
+    0.26,
+    -45.49
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-06-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    89.17,
+    1.51,
+    -50.49
+   ],
+   "cel": [
+    89.1,
+    0.36,
+    -45.49
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-07-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    108.62,
+    0.73,
+    -37.99
+   ],
+   "cel": [
+    96.75,
+    0.48,
+    -40.11
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-07-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    108.62,
+    1.78,
+    -37.99
+   ],
+   "cel": [
+    96.75,
+    0.73,
+    -40.11
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-07-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    101.16,
+    0.73,
+    -33.66
+   ],
+   "cel": [
+    102.52,
+    0.53,
+    -38.47
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-07-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    101.16,
+    1.78,
+    -33.66
+   ],
+   "cel": [
+    102.52,
+    0.63,
+    -38.47
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-08-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    119.6,
+    0.61,
+    -51.89
+   ],
+   "cel": [
+    108.89,
+    0.36,
+    -46.34
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-08-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    119.6,
+    1.66,
+    -51.89
+   ],
+   "cel": [
+    108.89,
+    0.61,
+    -46.34
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-08-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    112.62,
+    0.61,
+    -53.21
+   ],
+   "cel": [
+    114.47,
+    0.41,
+    -48.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-08-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    112.62,
+    1.66,
+    -53.21
+   ],
+   "cel": [
+    114.47,
+    0.51,
+    -48.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-09-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    121.64,
+    0.6,
+    -27.77
+   ],
+   "cel": [
+    111.29,
+    0.35,
+    -33.95
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-09-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    121.64,
+    1.65,
+    -27.77
+   ],
+   "cel": [
+    111.29,
+    0.6,
+    -33.95
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-09-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    119.09,
+    0.6,
+    -34.4
+   ],
+   "cel": [
+    116.11,
+    0.4,
+    -30.38
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-09-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    119.09,
+    1.65,
+    -34.4
+   ],
+   "cel": [
+    116.11,
+    0.5,
+    -30.38
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-01-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    34.2,
+    1.36,
+    -44.65
+   ],
+   "cel": [
+    34.5,
+    1.16,
+    -49.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    34.2,
+    2.41,
+    -44.65
+   ],
+   "cel": [
+    34.5,
+    1.26,
+    -49.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-02-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    57.8,
+    1.36,
+    -46.43
+   ],
+   "cel": [
+    45.84,
+    1.11,
+    -48.01
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-02-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    57.8,
+    2.41,
+    -46.43
+   ],
+   "cel": [
+    45.84,
+    1.36,
+    -48.01
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-02-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    50.54,
+    1.36,
+    -41.77
+   ],
+   "cel": [
+    51.68,
+    1.16,
+    -46.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-02-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    50.54,
+    2.41,
+    -41.77
+   ],
+   "cel": [
+    51.68,
+    1.26,
+    -46.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-03-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    66.88,
+    1.08,
+    -37.97
+   ],
+   "cel": [
+    66.69,
+    0.88,
+    -42.97
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-03-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    66.88,
+    2.13,
+    -37.97
+   ],
+   "cel": [
+    66.69,
+    0.98,
+    -42.97
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-04-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    93.48,
+    0.77,
+    -33.43
+   ],
+   "cel": [
+    92.72,
+    0.57,
+    -38.37
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-04-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    93.48,
+    1.82,
+    -33.43
+   ],
+   "cel": [
+    92.72,
+    0.67,
+    -38.37
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-01-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    19.18,
+    1.61,
+    -69.95
+   ],
+   "cel": [
+    17.95,
+    1.36,
+    -57.95
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-01-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    19.18,
+    2.66,
+    -69.95
+   ],
+   "cel": [
+    17.95,
+    1.61,
+    -57.95
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-01-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    14.25,
+    1.61,
+    -64.83
+   ],
+   "cel": [
+    19.15,
+    1.41,
+    -63.83
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    14.25,
+    2.66,
+    -64.83
+   ],
+   "cel": [
+    19.15,
+    1.51,
+    -63.83
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-02-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    31.95,
+    1.5,
+    -60.63
+   ],
+   "cel": [
+    31.77,
+    1.3,
+    -55.63
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-02-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    31.95,
+    2.55,
+    -60.63
+   ],
+   "cel": [
+    31.77,
+    1.4,
+    -55.63
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-03-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    62.98,
+    1.21,
+    -52.26
+   ],
+   "cel": [
+    51.58,
+    0.96,
+    -48.32
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-03-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    62.98,
+    2.26,
+    -52.26
+   ],
+   "cel": [
+    51.58,
+    1.21,
+    -48.32
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-03-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    58.57,
+    1.21,
+    -44.85
+   ],
+   "cel": [
+    57.42,
+    1.01,
+    -49.71
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-03-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    58.57,
+    2.26,
+    -44.85
+   ],
+   "cel": [
+    57.42,
+    1.11,
+    -49.71
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-04-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    88.95,
+    0.95,
+    -47.74
+   ],
+   "cel": [
+    77.57,
+    0.7,
+    -43.77
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-04-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    88.95,
+    2.0,
+    -47.74
+   ],
+   "cel": [
+    77.57,
+    0.95,
+    -43.77
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-04-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    84.57,
+    0.95,
+    -40.31
+   ],
+   "cel": [
+    83.4,
+    0.75,
+    -45.17
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-04-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    84.57,
+    2.0,
+    -40.31
+   ],
+   "cel": [
+    83.4,
+    0.85,
+    -45.17
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-05-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    114.04,
+    0.52,
+    -52.73
+   ],
+   "cel": [
+    102.02,
+    0.27,
+    -53.69
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-05-wzdluz-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    114.04,
+    1.57,
+    -52.73
+   ],
+   "cel": [
+    102.02,
+    0.52,
+    -53.69
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-05-poprzek-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    108.81,
+    0.52,
+    -57.54
+   ],
+   "cel": [
+    107.92,
+    0.32,
+    -52.62
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-05-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    108.81,
+    1.57,
+    -57.54
+   ],
+   "cel": [
+    107.92,
+    0.42,
+    -52.62
+   ],
+   "yfov": 50
+  }
+ ]
+}

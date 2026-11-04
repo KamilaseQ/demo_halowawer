@@ -26,6 +26,8 @@ export type HouseFrame = {
 const UP = new THREE.Vector3(0, 1, 0);
 
 export function houseFrame(id: HouseId, model: HouseModel | null): HouseFrame {
+  // BOR2 interiors are modelled in estate space: house space is estate space.
+  if (model?.source === "bor2") return { id, mirrored: false, origin: new THREE.Vector3(), rotationY: 0 };
   const p = PLACEMENTS[id];
   const lift = model ? -model.ground : 0.18;
   return { id, mirrored: p.mirrored, origin: new THREE.Vector3(p.position[0], p.position[1] + lift, p.position[2]), rotationY: p.rotationY };

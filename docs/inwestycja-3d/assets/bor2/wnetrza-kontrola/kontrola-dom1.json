@@ -1,0 +1,538 @@
+{
+ "dom": "G",
+ "punkty": {
+  "PKT_JADALNIA": {
+   "pozycja": [
+    36.9,
+    51.4,
+    2.48
+   ],
+   "dziury_promienie": 3,
+   "dziury_przyklady": [
+    [
+     39.73,
+     59.78,
+     2.84
+    ],
+    [
+     39.44,
+     59.78,
+     2.45
+    ],
+    [
+     33.39,
+     53.42,
+     1.64
+    ]
+   ],
+   "wysokosc_w_swietle": 2.62,
+   "sufit": "TYNK"
+  },
+  "PKT_KORYTARZ": {
+   "pozycja": [
+    37.4,
+    54.9,
+    5.44
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.603,
+   "sufit": "TYNK"
+  },
+  "PKT_KUCHNIA": {
+   "pozycja": [
+    39.4,
+    57.75,
+    2.48
+   ],
+   "dziury_promienie": 181,
+   "dziury_przyklady": [
+    [
+     39.5,
+     59.78,
+     3.01
+    ],
+    [
+     39.06,
+     59.78,
+     3.0
+    ],
+    [
+     39.78,
+     59.78,
+     2.99
+    ],
+    [
+     39.33,
+     59.78,
+     2.97
+    ],
+    [
+     38.88,
+     59.78,
+     2.97
+    ],
+    [
+     39.61,
+     59.78,
+     2.95
+    ],
+    [
+     38.38,
+     59.78,
+     2.99
+    ],
+    [
+     39.17,
+     59.78,
+     2.93
+    ],
+    [
+     38.7,
+     59.78,
+     2.94
+    ],
+    [
+     39.44,
+     59.78,
+     2.91
+    ],
+    [
+     38.16,
+     59.78,
+     2.97
+    ],
+    [
+     38.99,
+     59.78,
+     2.9
+    ]
+   ],
+   "wysokosc_w_swietle": 1.916,
+   "sufit": "TYNK"
+  },
+  "PKT_LAZIENKA": {
+   "pozycja": [
+    39.0,
+    55.6,
+    5.44
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.59,
+   "sufit": "TYNK"
+  },
+  "PKT_POKOJ_1": {
+   "pozycja": [
+    36.4,
+    57.0,
+    5.44
+   ],
+   "dziury_promienie": 2,
+   "dziury_przyklady": [
+    [
+     34.45,
+     59.78,
+     5.83
+    ],
+    [
+     34.43,
+     59.78,
+     4.78
+    ]
+   ],
+   "wysokosc_w_swietle": 2.603,
+   "sufit": "TYNK"
+  },
+  "PKT_POKOJ_2": {
+   "pozycja": [
+    38.1,
+    57.2,
+    5.44
+   ],
+   "dziury_promienie": 2,
+   "dziury_przyklady": [
+    [
+     39.88,
+     59.78,
+     5.87
+    ],
+    [
+     39.89,
+     59.78,
+     4.24
+    ]
+   ],
+   "wysokosc_w_swietle": 2.588,
+   "sufit": "TYNK"
+  },
+  "PKT_POKOJ_DZIECKA": {
+   "pozycja": [
+    36.6,
+    52.9,
+    5.44
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.6,
+   "sufit": "TYNK"
+  },
+  "PKT_SALON": {
+   "pozycja": [
+    39.3,
+    55.6,
+    2.48
+   ],
+   "dziury_promienie": 19,
+   "dziury_przyklady": [
+    [
+     39.11,
+     59.78,
+     2.97
+    ],
+    [
+     39.33,
+     59.78,
+     2.85
+    ],
+    [
+     39.54,
+     59.78,
+     2.74
+    ],
+    [
+     39.2,
+     59.78,
+     2.67
+    ],
+    [
+     39.76,
+     59.78,
+     2.62
+    ],
+    [
+     38.85,
+     59.78,
+     2.6
+    ],
+    [
+     39.41,
+     59.78,
+     2.55
+    ],
+    [
+     39.06,
+     59.78,
+     2.48
+    ],
+    [
+     39.62,
+     59.78,
+     2.44
+    ],
+    [
+     39.28,
+     59.78,
+     2.37
+    ],
+    [
+     39.84,
+     59.78,
+     2.32
+    ],
+    [
+     38.93,
+     59.78,
+     2.29
+    ]
+   ],
+   "wysokosc_w_swietle": 1.72,
+   "sufit": "TYNK"
+  },
+  "PKT_SYPIALNIA": {
+   "pozycja": [
+    38.0,
+    51.3,
+    5.44
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.59,
+   "sufit": "TYNK"
+  },
+  "PKT_WEJSCIE": {
+   "pozycja": [
+    36.2,
+    57.8,
+    2.48
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.96,
+   "sufit": "PODLOGA"
+  }
+ },
+ "okna": [
+  {
+   "szyba": {
+    "x": [
+     33.64,
+     33.64
+    ],
+    "y": [
+     51.34,
+     53.26
+    ],
+    "z": [
+     0.97,
+     2.98
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.012,
+   "rama_zakres": [
+    51.744,
+    53.018
+   ],
+   "rama_z": [
+    0.842,
+    2.972
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     34.58,
+     36.55
+    ],
+    "y": [
+     50.4,
+     50.4
+    ],
+    "z": [
+     4.12,
+     5.93
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.044,
+   "rama_zakres": [
+    34.897,
+    35.606
+   ],
+   "rama_z": [
+    3.957,
+    5.585
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     34.58,
+     36.55
+    ],
+    "y": [
+     59.49,
+     59.49
+    ],
+    "z": [
+     4.12,
+     5.93
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.014,
+   "rama_zakres": [
+    34.48,
+    36.66
+   ],
+   "rama_z": [
+    4.0,
+    6.04
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     34.63,
+     37.63
+    ],
+    "y": [
+     50.42,
+     50.42
+    ],
+    "z": [
+     0.97,
+     2.98
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.002,
+   "rama_zakres": [
+    34.576,
+    37.189
+   ],
+   "rama_z": [
+    0.83,
+    2.907
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     37.78,
+     39.75
+    ],
+    "y": [
+     50.4,
+     50.4
+    ],
+    "z": [
+     4.12,
+     5.93
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.044,
+   "rama_zakres": [
+    38.097,
+    38.806
+   ],
+   "rama_z": [
+    3.957,
+    5.585
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     37.78,
+     39.75
+    ],
+    "y": [
+     59.49,
+     59.49
+    ],
+    "z": [
+     4.12,
+     5.93
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.014,
+   "rama_zakres": [
+    37.68,
+    39.86
+   ],
+   "rama_z": [
+    4.0,
+    6.04
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     38.86,
+     39.75
+    ],
+    "y": [
+     50.4,
+     50.4
+    ],
+    "z": [
+     0.97,
+     2.98
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.044,
+   "rama_zakres": [
+    39.227,
+    39.526
+   ],
+   "rama_z": [
+    0.842,
+    2.972
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     38.98,
+     39.7
+    ],
+    "y": [
+     58.27,
+     58.27
+    ],
+    "z": [
+     2.21,
+     2.93
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.126,
+   "rama_zakres": [
+    38.836,
+    39.543
+   ],
+   "rama_z": [
+    2.346,
+    2.688
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     40.68,
+     40.68
+    ],
+    "y": [
+     54.41,
+     55.13
+    ],
+    "z": [
+     5.16,
+     5.88
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.037,
+   "rama_zakres": [
+    54.33,
+    55.21
+   ],
+   "rama_z": [
+    5.08,
+    5.96
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     40.7,
+     40.7
+    ],
+    "y": [
+     52.28,
+     53.1
+    ],
+    "z": [
+     1.57,
+     3.58
+    ]
+   },
+   "rama": null,
+   "uwaga": "BRAK RAMY we wnetrzu"
+  },
+  {
+   "szyba": {
+    "x": [
+     40.7,
+     40.7
+    ],
+    "y": [
+     54.16,
+     55.13
+    ],
+    "z": [
+     1.52,
+     3.53
+    ]
+   },
+   "rama": null,
+   "uwaga": "BRAK RAMY we wnetrzu"
+  }
+ ]
+}

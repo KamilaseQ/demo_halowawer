@@ -1,5 +1,6 @@
 import { FINISHES, houses } from "./data";
 import type { FinishId, House, HouseId, LevelId } from "./types";
+import { hasBor2Interior } from "./geometry/bor2";
 
 export * from "./types";
 export {
@@ -35,8 +36,9 @@ export function isFinishId(value: string | null | undefined): value is FinishId 
 /** Layouts that ship with a full 3D interior (dollhouse + walk). Grows per iteration. */
 export const LAYOUTS_WITH_3D = new Set<House["layout"]>(["b"]);
 
+/** A walkable 3D interior: the developer's BOR2 model (geometry/bor2.ts) or a traced layout. */
 export function has3dInterior(house: House) {
-  return LAYOUTS_WITH_3D.has(house.layout);
+  return hasBor2Interior(house.id) || LAYOUTS_WITH_3D.has(house.layout);
 }
 
 export const LEVELS: { id: LevelId; label: string; short: string }[] = [

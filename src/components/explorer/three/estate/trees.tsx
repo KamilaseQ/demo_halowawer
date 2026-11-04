@@ -4,6 +4,8 @@ import { useGLTF } from "@react-three/drei";
 import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { deviceTier } from "../../tier";
+import { perfFlag } from "../../perf";
+import { coverage } from "../coverage";
 import { rng } from "./builder";
 import { forestSpots, NEAR_BELT } from "./forest";
 import { corridorClearance } from "./landscape";
@@ -21,7 +23,10 @@ import { TREES } from "./plan";
 
 const URL = "/explorer/3d/models/drzewa.glb";
 
-type Species = "sosna-1" | "sosna-2" | "sosna-3" | "brzoza-1" | "brzoza-2" | "dab-1" | "lipa-1";
+export type Species = "sosna-1" | "sosna-2" | "sosna-3" | "brzoza-1" | "brzoza-2" | "dab-1" | "lipa-1";
+
+/** A tree placed by the BOR2 model (ZIELEN_ZNACZNIKI): estate XZ, height in metres, turn. */
+export type MarkedTree = { species: Species; x: number; z: number; h: number; rot: number };
 
 /** Model heights, metres (each tree stands at its node origin). */
 const HEIGHT: Record<Species, number> = {
@@ -75,13 +80,15 @@ function inOverview(x: number, z: number, pad: number) {
   return Math.min(dist(a, b), dist(b, c), dist(c, a)) < pad;
 }
 
-function placements(): Placed[] {
+function placements(marked?: MarkedTree[]): Placed[] {
   const r = rng(2121);
   const out: Placed[] = [];
-  const add = (species: Species, x: number, z: number, h: number, shadow: boolean) =>
-    out.push({ species, x, z, scale: (h / HEIGHT[species]) * (0.95 + r() * 0.1), rot: r() * Math.PI * 2, shadow, tint: r() });
+  const add = (species: Species, x: number, z: number, h: number, shadow: boolean, rot = r() * Math.PI * 2) =>
+    out.push({ species, x, z, scale: (h / HEIGHT[species]) * (0.95 + r() * 0.1), rot, shadow, tint: r() });
 
-  for (const t of TREES) {
+  // The BOR2 model places the estate's own trees; the curated list belongs to the procedural plots.
+  if (marked) for (const t of marked) add(t.species, t.x, t.z, t.h, true, t.rot);
+  for (const t of marked ? [] : TREES) {
     // Same guard as the procedural trees had: nothing tall in a house-view corridor.
     if (corridorClearance(t.x, t.z) <= (t.kind === "birch" ? 3.2 : 4.2)) continue;
     // Behind the row (north of the street facades) trees frame the view; in front of it they would block it.
@@ -89,10 +96,11 @@ function placements(): Placed[] {
     const species: Species = t.kind === "pine" ? (`sosna-${(t.seed % 3) + 1}` as Species) : (`brzoza-${(t.seed % 2) + 1}` as Species);
     add(species, t.x, t.z, t.h, true);
   }
-  for (const s of SOLITAIRES) if (corridorClearance(s.x, s.z) > 7 && !inOverview(s.x, s.z, 6)) add(s.species, s.x, s.z, s.h, true);
+  if (!marked) for (const s of SOLITAIRES) if (corridorClearance(s.x, s.z) > 7 && !inOverview(s.x, s.z, 6)) add(s.species, s.x, s.z, s.h, true);
 
   // Near woodland belt with real models on capable devices (the far ring stays procedural: forest.ts).
-  if (deviceTier() === "full") {
+  // The near belt of model trees belongs to the procedural ring; around BOR2 the OSM woods stand as impostors.
+  if (deviceTier() === "full" && !perfFlag("nobelt") && !marked) {
     for (const s of forestSpots()) {
       if (s.d >= NEAR_BELT) continue;
       const species: Species = s.kind === "pine" ? (`sosna-${1 + Math.floor(s.r * 3)}` as Species) : s.r > 0.6 ? "brzoza-1" : s.r > 0.3 ? "lipa-1" : "brzoza-2";
@@ -124,7 +132,7 @@ function speciesParts(scene: THREE.Object3D): Record<Species, Part[]> {
         m.roughness = 0.82;
         m.envMapIntensity = 0.7;
         // Smooth cut-out edges under MSAA, and crowns that stay full at a distance.
-        if (m.alphaTest > 0) m.alphaToCoverage = true;
+        if (m.alphaTest > 0) coverage(m);
         m.onBeforeCompile = (s) => {
           patchNoFlip(s);
           patchCoverage(s);
@@ -170,12 +178,12 @@ function Instances({ part, list, shadow }: { part: Part; list: Placed[]; shadow:
 }
 
 /** All model trees of the estate (near trees cast shadows, the woodland belt does not). */
-export function EstateTrees() {
+export function EstateTrees({ marked }: { marked?: MarkedTree[] }) {
   // Meshopt-compressed GLB with WebP textures; the loading gate waits for it like any other asset.
   const { scene } = useGLTF(URL, false, true);
   const parts = useMemo(() => speciesParts(scene), [scene]);
   const groups = useMemo(() => {
-    const all = placements();
+    const all = perfFlag("notrees") ? [] : placements(marked);
     const out: { key: string; part: Part; list: Placed[]; shadow: boolean }[] = [];
     for (const species of SPECIES) {
       for (const shadow of [true, false]) {
@@ -185,7 +193,7 @@ export function EstateTrees() {
       }
     }
     return out;
-  }, [parts]);
+  }, [parts, marked]);
   return (
     <group name="estate-trees">
       {groups.map((g) => (

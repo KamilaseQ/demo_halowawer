@@ -8,7 +8,7 @@ import type { HouseModel, LevelId } from "@/lib/estate/geometry/types";
 import { planVec } from "../space";
 import { nodeLabel } from "@/lib/estate/geometry";
 import type { HouseId } from "@/lib/estate";
-import { cameraControls } from "../camera/controls";
+import { cameraControls, walkClip } from "../camera/controls";
 import { SceneLabels, type SceneLabel } from "../labels/SceneLabels";
 import { useExplorer } from "../../state/store";
 
@@ -53,8 +53,22 @@ export function useFloorPointer(model: HouseModel, enabled: boolean) {
         // Eye height above the clicked level (walking onto the terrace or across a storey keeps the eye level).
         const levelId = (e.object.userData.level ?? 0) as LevelId;
         const elevation = model.levels.find((l) => l.level === levelId)?.elevation ?? 0;
+        // A floor of another storey (seen down the stairwell): take the stairs, i.e. arrive at that storey's
+        // walk point nearest to the click (the walk boundary holds the eye on its current storey).
+        const eyeY = c.getPosition(new THREE.Vector3()).y;
+        const standing = [...model.levels].reverse().find((l) => eyeY - l.elevation > 0.5)?.level ?? 0;
+        if (levelId !== standing) {
+          const near = model.walk.nodes
+            .filter((n) => n.level === levelId)
+            .sort((a, b) => Math.hypot(a.position[0] - e.point.x, a.position[1] - e.point.z) - Math.hypot(b.position[0] - e.point.x, b.position[1] - e.point.z))[0];
+          if (near) useExplorer.getState().goToNode(near.id);
+          return;
+        }
         c.smoothTime = 0.42;
-        void c.moveTo(e.point.x, elevation + model.walk.eyeHeight, e.point.z, true);
+        // Outdoors the eye follows the ground under the click; walls and fences stop it (walk clipper).
+        const to = new THREE.Vector3(e.point.x, (model.walk.terrain ? e.point.y : elevation) + model.walk.eyeHeight, e.point.z);
+        walkClip()?.(c.getPosition(new THREE.Vector3()), to);
+        void c.moveTo(to.x, to.y, to.z, true);
         useExplorer.setState({ node: null, photo: false });
         state.current.pulse = 1;
         invalidate();
@@ -93,7 +107,7 @@ export function WalkCursor({ state, enabled }: { state: MutableRefObject<CursorS
   });
 
   return (
-    <group ref={group} visible={false}>
+    <group ref={group} visible={false} userData={{ source: "ui" }}>
       <mesh rotation-x={-Math.PI / 2} renderOrder={5}>
         <ringGeometry args={[0.42, 0.5, 48]} />
         <meshBasicMaterial color="#f3eee6" transparent opacity={0.9} depthWrite={false} toneMapped={false} />
@@ -134,7 +148,7 @@ export function Hotspots({ model, house, level, mirrored, visible, showLabels }:
     [nodes, mirrored, elevation, model, house, current],
   );
   return (
-    <group>
+    <group userData={{ source: "ui" }}>
       {nodes.map((n) => (
         <Hotspot
           key={n.id}

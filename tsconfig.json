@@ -43,7 +43,9 @@
     ".next-furn/types/**/*.ts",
     ".next-furn/dev/types/**/*.ts",
     ".next-lab/types/**/*.ts",
-    ".next-lab/dev/types/**/*.ts"
+    ".next-lab/dev/types/**/*.ts",
+    ".next-opt/types/**/*.ts",
+    ".next-opt/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

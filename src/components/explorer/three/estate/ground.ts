@@ -372,7 +372,22 @@ float gLine(float d, float w) { return 1.0 - smoothstep(w, w + fwidth(d) * 1.5, 
       );
   };
   mat.customProgramCacheKey = () => "estate-ground";
+  mat.userData.nearRect = uniforms.uNearRect.value;
+  mat.userData.pitch = uniforms.uPitch.value;
   return { material: mat, textures: [near, ao, grassTex, meadowTex] };
+}
+
+/**
+ * The painted near field (lawns, beds and contact shading of the procedural plots) on or off. Off under the
+ * BOR2 model: its plots and houses stand ±0.5 m from the painted ones, so the field stays plain meadow and the
+ * model brings its own lawns. A uniform change, no recompilation.
+ */
+export function groundNearField(material: THREE.Material, on: boolean) {
+  const rect = material.userData.nearRect as THREE.Vector4 | undefined;
+  if (rect) rect.set(on ? NEAR.x0 : 1e6, on ? NEAR.z0 : 1e6, NEAR.w, NEAR.d);
+  // The painted football pitch too: the OSM neighbourhood (okolica.glb) brings the real one as a grey ghost.
+  const pitch = material.userData.pitch as THREE.Vector4 | undefined;
+  if (pitch) pitch.set(PITCH.cx, PITCH.cz, on ? PITCH.w : 0, on ? PITCH.d : 0);
 }
 
 /** The ground disc (XZ plane, y = 0), centred on the estate. */

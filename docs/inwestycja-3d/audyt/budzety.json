@@ -1,0 +1,6 @@
+{
+ "opis": "Budżety plików GLB dla testu dostawy (test_glb.py). Wartości robocze audytora — do potwierdzenia przez 55 (L5). Przekroczenie = ostrzeżenie, nie blokada (optymalizacje zamrożone decyzją klienta 04.11.2026).",
+ "zewnetrze": {"MB": 12, "trojkaty_plik": 600000, "trojkaty_rysowane": 1500000, "tekstura_px": 2048},
+ "wnetrze": {"MB": 15, "trojkaty_plik": 1500000, "trojkaty_rysowane": 2000000, "tekstura_px": 2048},
+ "inne": {"MB": 10, "trojkaty_plik": 500000, "trojkaty_rysowane": 1000000, "tekstura_px": 2048}
+}

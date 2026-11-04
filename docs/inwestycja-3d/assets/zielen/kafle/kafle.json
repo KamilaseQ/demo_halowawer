@@ -1,0 +1,173 @@
+{
+ "kepa_sina_a": {
+  "px": [
+   512,
+   256
+  ],
+  "m_per_px": 0.0012890625,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "trawa_wys_a": {
+  "px": [
+   512,
+   1024
+  ],
+  "m_per_px": 0.0012109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "bylina_roz": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0015625,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "krzew_liscie": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.00109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "kepa_sina_b": {
+  "px": [
+   512,
+   256
+  ],
+  "m_per_px": 0.0012890625,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "kepa_sina_c": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0012109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "trawa_wys_b": {
+  "px": [
+   512,
+   1024
+  ],
+  "m_per_px": 0.0012109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "liscie_bylin": {
+  "px": [
+   512,
+   256
+  ],
+  "m_per_px": 0.0012109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "bylina_biala_a": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0012109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "bylina_biala_b": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0013671875,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "bylina_fiolet_a": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0012109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "bylina_fiolet_b": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0012109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "grab_liscie": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0009765625,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "krzew_kwiaty": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.00109375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "kepa_sina_gora": {
+  "px": [
+   256,
+   256
+  ],
+  "m_per_px": 0.001953125,
+  "base_px": 0,
+  "widok": "top"
+ },
+ "bylina_zolta_a": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0012890625,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "bylina_zolta_b": {
+  "px": [
+   512,
+   512
+  ],
+  "m_per_px": 0.0013671875,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "podszyt_a": {
+  "px": [
+   512,
+   256
+  ],
+  "m_per_px": 0.001484375,
+  "base_px": 8,
+  "widok": "side"
+ },
+ "podszyt_b": {
+  "px": [
+   256,
+   256
+  ],
+  "m_per_px": 0.001796875,
+  "base_px": 8,
+  "widok": "side"
+ }
+}

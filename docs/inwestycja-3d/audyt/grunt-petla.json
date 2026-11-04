@@ -1,0 +1,315 @@
+{
+ "opis": "Ujęcia przy gruncie (pętla)",
+ "kadr": {
+  "w": 960,
+  "h": 540
+ },
+ "pozy": [
+  {
+   "id": "grunt-plot-15-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    118.22,
+    1.01,
+    -37.28
+   ],
+   "cel": [
+    107.92,
+    0.76,
+    -43.56
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-15-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    115.72,
+    2.06,
+    -43.93
+   ],
+   "cel": [
+    112.71,
+    0.91,
+    -39.94
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-01-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    11.99,
+    1.81,
+    -53.7
+   ],
+   "cel": [
+    19.31,
+    1.56,
+    -44.11
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-plot-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-plot",
+   "pozycja": [
+    11.9,
+    2.86,
+    -46.6
+   ],
+   "cel": [
+    16.16,
+    1.71,
+    -49.22
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-07-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    108.8,
+    0.67,
+    -47.3
+   ],
+   "cel": [
+    110.48,
+    0.42,
+    -35.35
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-07-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    115.24,
+    1.72,
+    -41.55
+   ],
+   "cel": [
+    110.24,
+    0.57,
+    -41.35
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-01-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    24.97,
+    1.55,
+    -68.78
+   ],
+   "cel": [
+    16.07,
+    1.3,
+    -60.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-geokrata-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-geokrata",
+   "pozycja": [
+    17.89,
+    2.6,
+    -68.24
+   ],
+   "cel": [
+    20.88,
+    1.45,
+    -64.23
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-09-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    121.64,
+    0.6,
+    -27.77
+   ],
+   "cel": [
+    111.29,
+    0.35,
+    -33.95
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-09-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    119.09,
+    1.65,
+    -34.4
+   ],
+   "cel": [
+    116.11,
+    0.5,
+    -30.38
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-01-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    13.76,
+    1.6,
+    -62.53
+   ],
+   "cel": [
+    25.76,
+    1.35,
+    -63.73
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-sciezka-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-sciezka",
+   "pozycja": [
+    19.76,
+    2.65,
+    -58.73
+   ],
+   "cel": [
+    19.76,
+    1.5,
+    -63.73
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-04-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    93.48,
+    1.82,
+    -33.43
+   ],
+   "cel": [
+    92.72,
+    0.67,
+    -38.37
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-taras-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-taras",
+   "pozycja": [
+    34.2,
+    2.41,
+    -44.65
+   ],
+   "cel": [
+    34.5,
+    1.26,
+    -49.64
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-05-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    114.04,
+    0.52,
+    -52.73
+   ],
+   "cel": [
+    102.02,
+    0.27,
+    -53.69
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-05-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    108.81,
+    1.57,
+    -57.54
+   ],
+   "cel": [
+    107.92,
+    0.42,
+    -52.62
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-01-wzdluz-060",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    19.18,
+    1.61,
+    -69.95
+   ],
+   "cel": [
+    17.95,
+    1.36,
+    -57.95
+   ],
+   "yfov": 50
+  },
+  {
+   "id": "grunt-murek-01-poprzek-165",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "grunt-murek",
+   "pozycja": [
+    14.25,
+    2.66,
+    -64.83
+   ],
+   "cel": [
+    19.15,
+    1.51,
+    -63.83
+   ],
+   "yfov": 50
+  }
+ ]
+}

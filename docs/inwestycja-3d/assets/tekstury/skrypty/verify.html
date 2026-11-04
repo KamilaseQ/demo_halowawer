@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>html,body{margin:0;background:#cfd8de}canvas{display:block}</style>
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<script type="module">
+// Stanowisko testowe tekstur elewacji (three.js z node_modules projektu, ten sam IBL i światło "Dzień"
+// co w eksploratorze: HDRI zawiszy_czarnego, słońce #ffe2c2 4,4, env 0,95, odbicie [#c9d8ee, #a8916e, 1,5],
+// Neutral tone mapping). Ściana 8 × 6 m (tynk), brama 2,5 × 2,2 m we wnęce, okna z ramą 6 cm,
+// dach z blachy na rąbek 35°. window.shot(nazwa, {bare}) zwraca dataURL.
+import * as THREE from "three";
+import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
+
+const T = "/docs/inwestycja-3d/assets/tekstury/";
+const BASE_LIN = Math.pow((0xe6 / 255 + 0.055) / 1.055, 2.4); // poziom map kolorów (README)
+const W = innerWidth, H = innerHeight;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.toneMapping = THREE.NeutralToneMapping;
+renderer.toneMappingExposure = 1.0;
+document.body.appendChild(renderer.domElement);
+const maxAniso = renderer.capabilities.getMaxAnisotropy();
+
+const scene = new THREE.Scene();
+const hdr = await new HDRLoader().loadAsync("/public/explorer/3d/hdri/zawiszy_czarnego_512.hdr");
+hdr.mapping = THREE.EquirectangularReflectionMapping;
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromEquirectangular(hdr).texture;
+scene.environmentIntensity = 0.95;
+scene.background = new THREE.Color("#a9c3df");
+
+// słońce: 40° do płaszczyzny ściany (50° od normalnej), z lewej, wysokość 30°
+const sunDir = new THREE.Vector3(-0.58, 0.5, 0.643).normalize();
+const sun = new THREE.DirectionalLight("#ffe2c2", 4.4);
+sun.position.copy(sunDir).multiplyScalar(30);
+sun.castShadow = true;
+sun.shadow.mapSize.set(4096, 4096);
+Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, near: 1, far: 80 });
+sun.shadow.bias = -0.0002; sun.shadow.normalBias = 0.02;
+scene.add(sun, sun.target, new THREE.HemisphereLight("#c9d8ee", "#a8916e", 1.5));
+
+const loader = new THREE.TextureLoader();
+async function tex(path, srgb) {
+  try {
+    const t = await loader.loadAsync(T + path);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.anisotropy = maxAniso;
+    t.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+    return t;
+  } catch { return null; }
+}
+async function set(name, ext = { color: "webp", normal: "jpg", roughness: "webp" }) {
+  const [map, normalMap, roughnessMap] = await Promise.all([
+    tex(`${name}/${name}_color.${ext.color}`, true), tex(`${name}/${name}_normal.${ext.normal}`, false), tex(`${name}/${name}_roughness.${ext.roughness}`, false),
+  ]);
+  return map || normalMap ? { map, normalMap, roughnessMap } : null;
+}
+const sets = { tynk: await set("tynk"), brama: await set("brama"), aluminium: await set("aluminium"), blacha: await set("blacha"), plyty: await set("plyty") };
+
+// kolor domu -> baseColorFactor = kolor_lin / BASE_LIN (tekstury mają średnio #e6e6e6)
+function factor(hex) { return new THREE.Color(hex).multiplyScalar(1 / BASE_LIN); }
+const mats = [];
+function mat(setName, hex, rough, normalScale, fallbackRough, extra = {}) {
+  const s = sets[setName];
+  const tex = { color: factor(hex), roughness: rough, ...s, normalScale: new THREE.Vector2(normalScale, normalScale), ...extra };
+  const bare = { color: new THREE.Color(hex), roughness: fallbackRough, ...extra };
+  const m = new THREE.MeshStandardMaterial(s ? tex : bare);
+  m.userData = { tex: s ? tex : bare, bare };
+  mats.push(m);
+  return m;
+}
+const P = new URLSearchParams(location.search);
+const ns = (k, d) => (P.has(k) ? +P.get(k) : d);
+const plaster = mat("tynk", P.get("tynkColor") || "#b0a9a1", 1.0, ns("nsTynk", 1.0), 0.92);
+const gateM = mat("brama", "#8a857b", 1.0, ns("nsBrama", 1.0), 0.65);
+const frameM = mat("aluminium", "#4b4038", 1.0, ns("nsAlu", 1.0), 0.48);
+const roofM = mat("blacha", "#c3b69b", 1.0, ns("nsBlacha", 1.0), 0.42);
+const paveM = mat("plyty", "#b4b0a8", 1.0, 1.0, 0.85);
+const glassM = new THREE.MeshPhysicalMaterial({ color: "#1d2326", roughness: 0.04, metalness: 0.0, envMapIntensity: 1.4 });
+const groundM = new THREE.MeshStandardMaterial({ color: "#7d8a5c", roughness: 1 });
+
+// UV w metrach / kafel, liczone z położenia i normalnej ściany (box mapping)
+function boxUV(geo, tileU, tileV, origin = [0, 0, 0]) {
+  const p = geo.attributes.position, n = geo.attributes.normal, uv = geo.attributes.uv;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i) + origin[0], y = p.getY(i) + origin[1], z = p.getZ(i) + origin[2];
+    const ax = Math.abs(n.getX(i)), ay = Math.abs(n.getY(i)), az = Math.abs(n.getZ(i));
+    let u, v;
+    if (az >= ax && az >= ay) { u = x; v = y; } else if (ax >= ay) { u = z; v = y; } else { u = x; v = z; }
+    uv.setXY(i, u / tileU, v / tileV);
+  }
+  uv.needsUpdate = true;
+  return geo;
+}
+function box(w, h, d, x, y, z, m, tile = [1.5, 1.5]) {
+  const g = new THREE.BoxGeometry(w, h, d).translate(x, y, z);
+  boxUV(g, tile[0], tile[1]);
+  const mesh = new THREE.Mesh(g, m);
+  mesh.castShadow = mesh.receiveShadow = true;
+  scene.add(mesh);
+  return mesh;
+}
+
+// ---- ściana 8 × 6 m (front z = 0), grubość 0,3 m, otwory: brama i dwa okna
+const WALL = { x0: -4, x1: 4, h: 6, t: 0.3 };
+const GATE = { x0: -3.4, x1: -0.9, y1: 2.2, recess: 0.22 };
+const WIN = [{ x0: 0.6, x1: 2.8, y0: 0.55, y1: 2.35 }, { x0: 0.6, x1: 2.8, y0: 3.55, y1: 5.15 }, { x0: -3.4, x1: -0.9, y0: 3.55, y1: 5.15 }];
+{
+  // ściana z kawałków wokół otworów (UV z położenia => ciągły tynk)
+  const holes = [{ x0: GATE.x0, x1: GATE.x1, y0: 0, y1: GATE.y1 }, ...WIN];
+  const xs = [...new Set([WALL.x0, WALL.x1, ...holes.flatMap((h) => [h.x0, h.x1])])].sort((a, b) => a - b);
+  const ys = [...new Set([0, WALL.h, ...holes.flatMap((h) => [h.y0, h.y1])])].sort((a, b) => a - b);
+  for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < ys.length - 1; j++) {
+    const cx = (xs[i] + xs[i + 1]) / 2, cy = (ys[j] + ys[j + 1]) / 2;
+    if (holes.some((h) => cx > h.x0 && cx < h.x1 && cy > h.y0 && cy < h.y1)) continue;
+    box(xs[i + 1] - xs[i], ys[j + 1] - ys[j], WALL.t, cx, cy, -WALL.t / 2, plaster);
+  }
+}
+// brama: płyta 2,5 × 2,2 m cofnięta o 0,22 m; UV 0..1 na całą bramę (repeat.y = 1 => 4 segmenty od krawędzi)
+{
+  const g = new THREE.PlaneGeometry(GATE.x1 - GATE.x0, GATE.y1);
+  g.translate((GATE.x0 + GATE.x1) / 2, GATE.y1 / 2, -GATE.recess);
+  const m = new THREE.Mesh(g, gateM); m.receiveShadow = true; scene.add(m);
+}
+// okna: rama 6 cm (głębokość 7 cm) + słupek, szkło, cofnięte o 0,12 m
+for (const w of WIN) {
+  const z = -0.12, f = 0.06, d = 0.07, tile = [0.5, 0.5];
+  const cx = (w.x0 + w.x1) / 2, cy = (w.y0 + w.y1) / 2, ww = w.x1 - w.x0, hh = w.y1 - w.y0;
+  box(ww, f, d, cx, w.y1 - f / 2, z, frameM, tile);
+  box(ww, f, d, cx, w.y0 + f / 2, z, frameM, tile);
+  box(f, hh - 2 * f, d, w.x0 + f / 2, cy, z, frameM, tile);
+  box(f, hh - 2 * f, d, w.x1 - f / 2, cy, z, frameM, tile);
+  const mx = w.x0 + ww * 0.42;
+  box(f * 1.4, hh - 2 * f, d, mx, cy, z, frameM, tile);
+  box(ww * 0.42 - f * 1.7, f, d * 0.8, (w.x0 + f + mx - f * 0.7) / 2, w.y0 + hh * 0.5, z, frameM, tile);
+  const gl = new THREE.Mesh(new THREE.PlaneGeometry(ww - 2 * f, hh - 2 * f), glassM);
+  gl.position.set(cx, cy, z - 0.01); scene.add(gl);
+  // parapet blaszany
+  box(ww + 0.04, 0.015, 0.16, cx, w.y0 - 0.008, -0.04, frameM, tile);
+}
+// dach: 35°, okap na 6,0 m, połać 4,5 m w głąb, rąbki co 0,5 m w geometrii (UV: V wzdłuż spadku, kafel 1 m)
+{
+  const ang = THREE.MathUtils.degToRad(35), L = 4.5, Wd = 8.4;
+  const roof = new THREE.Group();
+  roof.position.set(0, WALL.h + 0.02, 0.15);
+  roof.rotation.x = -(Math.PI / 2 - ang);  // płaszczyzna XY obrócona: +Y lokalnie = w górę spadku
+  const g = new THREE.PlaneGeometry(Wd, L).translate(0, L / 2, 0);
+  const uv = g.attributes.uv, p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) uv.setXY(i, p.getX(i) / 1.0, p.getY(i) / 1.0);
+  const sheet = new THREE.Mesh(g, roofM); sheet.receiveShadow = sheet.castShadow = true; roof.add(sheet);
+  const seamM = roofM.clone(); seamM.normalMap = null; mats.push(seamM); seamM.userData = roofM.userData;
+  for (let x = -Wd / 2 + 0.2; x < Wd / 2; x += 0.5) {
+    const s = new THREE.Mesh(new THREE.BoxGeometry(0.02, L, 0.028).translate(x, L / 2, 0.014), seamM);
+    s.castShadow = s.receiveShadow = true; roof.add(s);
+  }
+  // obróbka okapu
+  const e = new THREE.Mesh(new THREE.BoxGeometry(Wd, 0.06, 0.05).translate(0, 0, 0.0), seamM); roof.add(e);
+  scene.add(roof);
+  // próbka dachu przy ziemi (do zbliżenia): 3 × 2,4 m pod 35°
+  const sample = new THREE.Group();
+  sample.position.set(7.5, 0.4, 2.5); sample.rotation.set(-(Math.PI / 2 - ang), -0.5, 0, "YXZ");
+  const g2 = new THREE.PlaneGeometry(3, 2.4).translate(0, 1.2, 0);
+  const u2 = g2.attributes.uv, p2 = g2.attributes.position;
+  for (let i = 0; i < p2.count; i++) u2.setXY(i, p2.getX(i), p2.getY(i));
+  const sm = new THREE.Mesh(g2, roofM); sm.receiveShadow = sm.castShadow = true; sample.add(sm);
+  for (let x = -1.3; x < 1.5; x += 0.5) {
+    const s = new THREE.Mesh(new THREE.BoxGeometry(0.02, 2.4, 0.028).translate(x, 1.2, 0.014), seamM);
+    s.castShadow = s.receiveShadow = true; sample.add(s);
+  }
+  scene.add(sample);
+}
+// teren: trawnik + taras z płyt przed oknem parteru
+{
+  const gr = new THREE.Mesh(new THREE.PlaneGeometry(80, 80).rotateX(-Math.PI / 2), groundM);
+  gr.receiveShadow = true; scene.add(gr);
+  const g = new THREE.PlaneGeometry(4.8, 3.6).rotateX(-Math.PI / 2).translate(1.6, 0.012, 1.8);
+  const uv = g.attributes.uv, p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) uv.setXY(i, p.getX(i) / 1.2, p.getZ(i) / 1.2);
+  const pv = new THREE.Mesh(g, paveM); pv.receiveShadow = true; scene.add(pv);
+}
+
+const camera = new THREE.PerspectiveCamera(50, W / H, 0.05, 500);
+const VIEWS = {
+  // oczy 1,65 m
+  d1: { pos: [-0.35, 1.65, 1.0], at: [-1.05, 1.45, -0.1], fov: 50 },
+  d3: { pos: [0.2, 1.65, 3.0], at: [-0.9, 1.75, 0], fov: 50 },
+  d8: { pos: [0.3, 1.65, 8.0], at: [0.0, 3.2, 0], fov: 50 },
+  okno: { pos: [2.3, 1.65, 0.9], at: [2.2, 1.35, -0.1], fov: 50 },
+  dach: { pos: [6.2, 1.65, 5.6], at: [7.4, 1.0, 2.6], fov: 50 },
+  wzdluz: { pos: [5.5, 1.65, 3.2], at: [-2.0, 2.6, 0], fov: 50 },
+  kafle: { pos: [0.0, 3.0, 9.5], at: [0.0, 3.0, 0], fov: 40 },
+  taras: { pos: [3.6, 1.65, 4.4], at: [1.6, 0.0, 1.8], fov: 50 },
+};
+window.shot = (name, opts = {}) => {
+  const v = VIEWS[name];
+  if (!v) return null;
+  for (const m of mats) { const src = opts.bare ? m.userData.bare : m.userData.tex; for (const k of ["map", "normalMap", "roughnessMap"]) m[k] = src[k] ?? null; m.color.copy(src.color); m.roughness = src.roughness; if (src.normalScale) m.normalScale.copy(src.normalScale); m.needsUpdate = true; }
+  camera.fov = v.fov; camera.position.set(...v.pos); camera.lookAt(...v.at); camera.updateProjectionMatrix();
+  renderer.render(scene, camera);
+  return renderer.domElement.toDataURL("image/jpeg", 0.93);
+};
+window.info = { sets: Object.fromEntries(Object.entries(sets).map(([k, v]) => [k, !!v])), maxAniso };
+window.ready = true;
+</script>
+</body>
+</html>

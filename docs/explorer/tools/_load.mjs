@@ -4,7 +4,7 @@
 import { chromium } from "playwright-core";
 const [, , url, profile = "desktop", runs = "2"] = process.argv;
 const mobile = profile === "mobile";
-const browser = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"] });
+const browser = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--no-proxy-server"] });
 const out = [];
 for (let r = 0; r < +runs; r++) {
   const context = await browser.newContext(

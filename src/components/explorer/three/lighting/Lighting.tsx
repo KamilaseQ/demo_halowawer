@@ -9,6 +9,7 @@ import { useExplorer } from "../../state/store";
 import { Deferred } from "../loading";
 import { DAYLIGHT } from "./daylight";
 import { useShadowCache } from "./shadows";
+import { perfFlag } from "../../perf";
 import { deviceTier } from "../../tier";
 import { Sky } from "./Sky";
 
@@ -158,7 +159,7 @@ export function Lighting({ interior, center, extent, spaceRotation }: Props) {
       <directionalLight
         ref={sun}
         target={sunTarget}
-        castShadow
+        castShadow={!perfFlag("noshadow")}
         shadow-mapSize={deviceTier() === "lite" ? [1024, 1024] : [2048, 2048]}
         shadow-radius={interior ? 5 : 4}
         shadow-blurSamples={12}

@@ -5,7 +5,7 @@ const [, , url, wait = "20000"] = process.argv;
 const browser = await chromium.launch({
   executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
-  args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"],
+  args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--no-proxy-server"],
 });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 page.on("pageerror", (e) => console.log("[pageerror]", e.message.slice(0, 600), "\n", (e.stack ?? "").split("\n").slice(0, 6).join("\n")));

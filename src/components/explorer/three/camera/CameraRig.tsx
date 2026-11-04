@@ -8,15 +8,16 @@ import { damp } from "maath/easing";
 import { getHouse, type HouseId, type LevelId } from "@/lib/estate";
 import { PLACEMENTS } from "@/lib/estate/geometry/site";
 import type { HouseModel } from "@/lib/estate/geometry/types";
+import { estateWalkModel, modelMirrored } from "@/lib/estate/geometry";
 import { houseFrame, mirrorNode, shotVecs, toEstate, toHouse, type HouseFrame } from "../space";
-import { registerCameraControls } from "./controls";
+import { registerCameraControls, walkClip } from "./controls";
 import { ESTATE_INTRO, ESTATE_LIMITS, ESTATE_SHOT, nodeLook, shotLook, verticalFov, type Look } from "./shots";
 import { useExplorer } from "../../state/store";
 
 const { ACTION } = CameraControlsImpl;
 
 export type Rig = "estate" | "house" | "walk";
-const spaceOf = (rig: Rig) => (rig === "estate" ? "estate" : "house");
+type Space = "estate" | "house";
 
 /** Field of view per rig. Walk derives vertical FOV from a fixed horizontal FOV (stable across aspect ratios). */
 function targetFov(rig: Rig, aspect: number, nodeHfov?: number) {
@@ -56,7 +57,9 @@ function configure(c: CameraControlsImpl, rig: Rig, model: HouseModel | null, mi
       const elevation = model.levels.find((l) => l.level === walkLevel)?.elevation ?? 0;
       const eye = elevation + model.walk.eyeHeight;
       const [z0, z1] = mirrored ? [-y1, -y0] : [y0, y1];
-      c.setBoundary(new THREE.Box3(new THREE.Vector3(x0, eye - 0.6, z0), new THREE.Vector3(x1, eye + 0.2, z1)));
+      // Outdoors the eye rides the terrain (the walk clipper sets its height): only a loose vertical band.
+      const [ylo, yhi] = model.walk.terrain ? [0.5, 4.5] : [eye - 0.6, eye + 0.2];
+      c.setBoundary(new THREE.Box3(new THREE.Vector3(x0, ylo, z0), new THREE.Vector3(x1, yhi, z1)));
     }
     return;
   }
@@ -88,6 +91,11 @@ function genericHouseShot(id: HouseId): Look {
 
 function lookFor(rig: Rig, house: HouseId | null, model: HouseModel | null, mirrored: boolean, level: LevelId | null, node: string | null): Look | null {
   if (rig === "estate") return shotLook(ESTATE_SHOT);
+  // The estate walk has no house: its points carry their own eye heights.
+  if (rig === "walk" && model?.walk.terrain) {
+    const n = model.walk.nodes.find((x) => x.id === node) ?? model.walk.nodes.find((x) => x.id === model.walk.start)!;
+    return nodeLook(n, model.walk.eyeHeight, 0);
+  }
   if (!house) return null;
   if (rig === "house") {
     if (!model) return genericHouseShot(house);
@@ -116,7 +124,7 @@ export function rigFor(view: string, mode: string): Rig {
   return mode === "walk" ? "walk" : "house";
 }
 
-export function CameraRig({ model }: { model: HouseModel | null }) {
+export function CameraRig({ model: houseModel }: { model: HouseModel | null }) {
   const ref = useRef<CameraControlsImpl>(null);
   const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera;
   const size = useThree((s) => s.size);
@@ -130,8 +138,13 @@ export function CameraRig({ model }: { model: HouseModel | null }) {
   const house = useExplorer((s) => s.house);
   const entry = useExplorer((s) => s.entry);
   const ready = useExplorer((s) => s.ready);
-  const rig: Rig = rigFor(view, mode === "walk" && !model ? "model" : mode);
-  const mirrored = house ? (getHouse(house)?.mirrored ?? false) : false;
+  const shot = useExplorer((s) => s.shot);
+  // The estate has its own walk (BOR2 scene cameras, terrain, collisions); in a house the house's model.
+  const estateWalk = view === "estate" && mode === "walk";
+  const model = estateWalk ? estateWalkModel() : houseModel;
+  const rig: Rig = estateWalk && model ? "walk" : rigFor(view, mode === "walk" && !model ? "model" : mode);
+  const space: Space = view === "estate" ? "estate" : "house";
+  const mirrored = house ? modelMirrored(getHouse(house), model) : false;
   const walkLevel: LevelId = (model?.walk.nodes.find((n) => n.id === node)?.level ?? 0) as LevelId;
 
   useEffect(() => {
@@ -140,13 +153,39 @@ export function CameraRig({ model }: { model: HouseModel | null }) {
   }, []);
 
   const lastRig = useRef<Rig | null>(null);
+  const lastSpace = useRef<Space | null>(null);
   const lastHouse = useRef<HouseId | null>(null);
   // The estate opens on a slow fly-in once, the first time the 3D maquette is shown.
   const introPending = useRef(true);
 
+  // QA framing: hold the render's camera exactly (no limits, no transition), flag it once a frame shows it.
   useEffect(() => {
     const c = ref.current;
-    if (!c) return;
+    if (!c || !shot) return;
+    c.setBoundary(undefined);
+    c.minDistance = 0;
+    c.maxDistance = Infinity;
+    c.minPolarAngle = 0;
+    c.maxPolarAngle = Math.PI;
+    const [px, py, pz] = shot.position;
+    const [tx, ty, tz] = shot.target;
+    void c.setLookAt(px, py, pz, tx, ty, tz, false);
+    useExplorer.setState({ shotReady: false });
+    invalidate();
+    let frames = 0;
+    let raf = 0;
+    const tick = () => {
+      if (++frames >= 4 && useExplorer.getState().settled) useExplorer.setState({ shotReady: true });
+      else raf = requestAnimationFrame(tick);
+      invalidate();
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [shot, rig, ready, invalidate]);
+
+  useEffect(() => {
+    const c = ref.current;
+    if (!c || useExplorer.getState().shot) return;
     const prev = lastRig.current;
     const changingRig = prev !== rig;
     // A cleared node in walk mode means free walking: keep the user's pose.
@@ -155,9 +194,10 @@ export function CameraRig({ model }: { model: HouseModel | null }) {
     if (!look) return;
 
     // Crossing between estate space and house space: re-express the pose first.
-    const frameHouse = rig === "estate" ? lastHouse.current : house;
-    if (prev && frameHouse && spaceOf(prev) !== spaceOf(rig)) handoff(c, houseFrame(frameHouse, model), spaceOf(rig));
+    const frameHouse = space === "estate" ? lastHouse.current : house;
+    if (prev && frameHouse && lastSpace.current && lastSpace.current !== space) handoff(c, houseFrame(frameHouse, houseModel), space);
     lastRig.current = rig;
+    lastSpace.current = space;
     if (house) lastHouse.current = house;
     c.normalizeRotations();
     configure(c, rig, model, mirrored, level, walkLevel);
@@ -186,7 +226,7 @@ export function CameraRig({ model }: { model: HouseModel | null }) {
       });
     invalidate();
     // nodeRequest re-runs the effect when the same node is requested again.
-  }, [rig, model, mirrored, level, node, nodeRequest, house, walkLevel, entry, ready, invalidate]);
+  }, [rig, space, model, houseModel, mirrored, level, node, nodeRequest, house, walkLevel, entry, ready, invalidate]);
 
   // Keyboard walking: arrows / WASD step and turn (desktop + accessibility).
   useEffect(() => {
@@ -205,7 +245,10 @@ export function CameraRig({ model }: { model: HouseModel | null }) {
         // Horizontal step along the view azimuth; eye height stays fixed (camera-controls forward() would follow pitch).
         const target = c.getTarget(new THREE.Vector3(), true);
         const a = c.azimuthAngle;
-        void c.moveTo(target.x - Math.sin(a) * step, target.y, target.z - Math.cos(a) * step, true);
+        const to = new THREE.Vector3(target.x - Math.sin(a) * step, target.y, target.z - Math.cos(a) * step);
+        // Outdoors walls, fences and the terrain have the last word.
+        walkClip()?.(target, to);
+        void c.moveTo(to.x, to.y, to.z, true);
       }
       if (turn) void c.rotate(turn, 0, true);
       if (useExplorer.getState().node !== null) useExplorer.setState({ node: null, photo: false });
@@ -298,6 +341,20 @@ export function CameraRig({ model }: { model: HouseModel | null }) {
   useFrame((_, dt) => {
     const W = size.width;
     const H = size.height;
+    if (shot) {
+      // The render's lens: vertical FOV, near plane, vertical shift (+ = horizon lower, more sky).
+      // eslint-disable-next-line react-hooks/immutability -- the three.js camera is mutable by design, not React state
+      camera.fov = shot.yfov;
+      camera.near = shot.near;
+      camera.aspect = W / H;
+      camera.clearViewOffset();
+      camera.updateProjectionMatrix();
+      // eslint-disable-next-line react-hooks/immutability -- the three.js camera is mutable by design, not React state
+      camera.projectionMatrix.elements[9] += 2 * shot.shift;
+      camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
+      return;
+    }
+    if (camera.near !== 0.05) camera.near = 0.05;
     const nodeHfov = rig === "walk" ? model?.walk.nodes.find((n) => n.id === node)?.hfov : undefined;
     const fov = targetFov(rig, W / Math.max(1, H), nodeHfov);
     // First-person views stay on-axis; orbit views centre in the free region.
@@ -305,7 +362,7 @@ export function CameraRig({ model }: { model: HouseModel | null }) {
     const goal = { x: -((l + r) / 2 - W / 2), y: -((t + b) / 2 - H / 2) };
     if (!win.current) {
       win.current = { ...goal };
-      // eslint-disable-next-line react-hooks/immutability -- the three.js camera is mutable by design, not React state
+       
       camera.fov = fov;
     }
     const w = win.current;

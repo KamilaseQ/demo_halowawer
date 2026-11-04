@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getHouse, has3dInterior, type HouseId } from "@/lib/estate";
-import { levelModel, modelFor, nodeLabel } from "@/lib/estate/geometry";
+import { levelModel, modelFor, modelMirrored, nodeLabel } from "@/lib/estate/geometry";
 import type { HouseModel, LevelId } from "@/lib/estate/geometry/types";
 import { readPose } from "../three/camera/controls";
 import { useExplorer } from "../state/store";
@@ -151,7 +151,9 @@ export function WalkHud() {
   const model = useMemo(() => (house && has3dInterior(house) ? modelFor(house) : null), [house]);
   const level = (model?.walk.nodes.find((n) => n.id === node)?.level ?? 0) as LevelId;
   const walking = !!model && mode === "walk";
-  const still = walking ? renderFor(node, finish) : null;
+  // The Kreator renders belong to the traced layout's rooms; BOR2 interiors have no stills yet.
+  const still = walking && model.source !== "bor2" ? renderFor(node, finish) : null;
+  const mirrored = modelMirrored(house, model);
 
   // The hint explains the live scene, so it waits for it (the loading poster carries its own note).
   useEffect(() => {
@@ -178,7 +180,7 @@ export function WalkHud() {
 
       {walking && (
         <>
-          <MiniMap model={model} level={level} mirrored={house.mirrored} houseId={house.id} />
+          {!!levelModel(model, level)?.plan.src && <MiniMap model={model} level={level} mirrored={mirrored} houseId={house.id} />}
           <NodeBar model={model} house={house.id} />
           <p className={`${styles.hint} ${ui.glassLight}`} data-hidden={!hint || undefined} onPointerDown={() => setHint(false)}>
             Przeciągnij, aby się rozejrzeć · {coarse ? "Dotknij podłogi" : "Kliknij podłogę"}, aby przejść
@@ -203,7 +205,7 @@ export function WalkHud() {
                 fill
                 sizes="100vw"
                 className={styles.photoImage}
-                style={house.mirrored ? { transform: "scaleX(-1)" } : undefined}
+                style={mirrored ? { transform: "scaleX(-1)" } : undefined}
               />
               <span className={styles.photoCaption}>Wizualizacja · przykładowa aranżacja</span>
             </div>

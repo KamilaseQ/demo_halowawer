@@ -1,0 +1,804 @@
+{
+ "opis": "Stały zestaw ujęć porównawczych BOR2 ↔ rendery/zdjęcia dewelopera (test odbioru wyglądu). Każde ujęcie: jawna poza kamery w układzie GLB, gotowa do odtworzenia w three.js.",
+ "data": "2026-11-04",
+ "autor": "sesja 3d-kamil-e3 (kontrola wizualna)",
+ "uklad": "glTF Y-up, metry, wspólny dla bor2-zewnetrze / dom1 / dom2. Oś X = geograficzny wschód (georeferencja OSM, b6), −Z = północ (ulica), +Z = południe (ogrody). Kamery ręczne estate-* dopasowano wizualnie — ich jawne pozycje nie zależą od konwencji azymutu.",
+ "domy": {
+  "G": "DOM_G w v5 — domki__Component#40 (szereg zach., x 33,4–41,0) = dom1 wnętrz",
+  "F": "DOM_F w v5 — domki__Component#39 (szereg środk., x 40,9–48,5)",
+  "E": "DOM_E w v5 — domki__Component#35 (szereg wsch., x 48,4–56,0)",
+  "D": "DOM_D w v5 — domki__Component#94 (bliźniak 1 zach., x 65,6–73,8)",
+  "C": "DOM_C w v5 — domki__Component#119 (bliźniak 1 wsch., x 73,8–82,0)",
+  "B": "DOM_B w v5 — domki__Component#57 (bliźniak 2 zach., x 91,6–99,8) = dom2 wnętrz",
+  "A": "DOM_A w v5 — domki__Component#88_1..8 (bliźniak 2 wsch., x 99,8–108,0) — bohater /domy"
+ },
+ "konwencje": {
+  "pozycja/kierunek/cel": "metry w układzie GLB; cel = pozycja + 10 m wzdłuż kierunku (kamera pozioma, gdy kierunek.y = 0 — piony równoległe).",
+  "yfov": "pionowe FOV [°] dla kadru o proporcjach kadr.w/kadr.h.",
+  "shift": "pionowe przesunięcie obiektywu (shift lens), ułamek wysokości kadru; + = obraz w dół (więcej nieba). three.js: po updateProjectionMatrix() camera.projectionMatrix.elements[9] += 2*shift (lub setViewOffset).",
+  "near": "płaszczyzna near [m] — zastępuje przekroje i ukryte warstwy scen SketchUpa, których eksport nie przenosi.",
+  "ukryj": "obiekty do ukrycia w tym ujęciu (render dewelopera ich nie pokazuje).",
+  "dopasowanie": "dobre = obrys i kadr zgodne w granicach kilku %; przybliżone = ten sam widok, różnice kadru/pozycji widoczne."
+ },
+ "podglady": "Światło podglądu = verify.html (NeutralToneMapping, RoomEnvironment 0,6, słońce #ffe7c7 ×3, hemi 0,8). Podglądy oceniają geometrię i kadr; światło i materiały ocenia się na docelowej scenie.",
+ "dom2_glb": "bor2-wnetrze-dom2.glb nie ma jeszcze w repo. Podglądy z eksportu: blender --background bor2-wnetrze-dom2.blend --python blend_to_glb.py -- bor2-wnetrze-dom2.glb (opcje domyślne, 28,8 MB).",
+ "ujecia": [
+  {
+   "render": "visualization-1.jpg",
+   "plik_renderu": "public/explorer/gallery/visualization-1.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": "W5",
+   "kamera_threejs": "W5",
+   "kadr": {
+    "w": 1920,
+    "h": 1248
+   },
+   "pozycja": [
+    99.817,
+    1.775,
+    -20.083
+   ],
+   "kierunek": [
+    -0.0014,
+    0,
+    -1
+   ],
+   "cel": [
+    99.803,
+    1.775,
+    -30.083
+   ],
+   "yfov": 45,
+   "shift": 0.27,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Kamera SKP W5 (elewacja ogrodowa bliźniaka B/A) cofnięta o 6,1 m, yfov 45°, shift obiektywu 0,27.",
+   "podglad": "podglad/porownanie-visualization-1.jpg"
+  },
+  {
+   "render": "visualization-2.jpg",
+   "plik_renderu": "public/explorer/gallery/visualization-2.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": "W3",
+   "kamera_threejs": "W3",
+   "kadr": {
+    "w": 1920,
+    "h": 1248
+   },
+   "pozycja": [
+    85.389,
+    1.65,
+    -24.794
+   ],
+   "kierunek": [
+    0.5861,
+    0,
+    -0.8102
+   ],
+   "cel": [
+    91.25,
+    1.65,
+    -32.896
+   ],
+   "yfov": 45,
+   "shift": 0.2,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Bliźniak od SW (szczyt zachodni z drzwiami). Render to wieczór: test światła Noc.",
+   "podglad": "podglad/porownanie-visualization-2.jpg"
+  },
+  {
+   "render": "visualization-3.jpg",
+   "plik_renderu": "public/explorer/gallery/visualization-3.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": "W4",
+   "kamera_threejs": "W4",
+   "kadr": {
+    "w": 1920,
+    "h": 1248
+   },
+   "pozycja": [
+    73.38,
+    1.95,
+    -73.651
+   ],
+   "kierunek": [
+    0.0095,
+    0,
+    1
+   ],
+   "cel": [
+    73.475,
+    1.95,
+    -63.651
+   ],
+   "yfov": 45,
+   "shift": 0.27,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Elewacja frontowa bliźniaka D/C (garaże).",
+   "podglad": "podglad/porownanie-visualization-3.jpg"
+  },
+  {
+   "render": "visualization-4.jpg",
+   "plik_renderu": "public/explorer/gallery/visualization-4.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": "Scene 2",
+   "kamera_threejs": "Scene 2",
+   "kadr": {
+    "w": 1920,
+    "h": 1248
+   },
+   "pozycja": [
+    122.333,
+    1.65,
+    -67.009
+   ],
+   "kierunek": [
+    -0.7911,
+    0,
+    0.6117
+   ],
+   "cel": [
+    114.422,
+    1.65,
+    -60.892
+   ],
+   "yfov": 45,
+   "shift": 0.2,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Od NE wzdłuż ulicy; w renderze szczyt A widoczny szerzej (kamera dewelopera bardziej od południa).",
+   "podglad": "podglad/porownanie-visualization-4.jpg"
+  },
+  {
+   "render": "visualization-5.jpg",
+   "plik_renderu": "public/explorer/gallery/visualization-5.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1192
+   },
+   "pozycja": [
+    55.953,
+    4.5,
+    -78.839
+   ],
+   "kierunek": [
+    -0.4147,
+    0,
+    0.91
+   ],
+   "cel": [
+    51.806,
+    4.5,
+    -69.739
+   ],
+   "yfov": 40,
+   "shift": 0.22,
+   "near": 0.05,
+   "ukryj": [
+    "KONTEKST_6"
+   ],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Brak kamery SKP. Szereg G/F/E od ulicy. Z tego miejsca kadr zasłania dom sąsiada (KONTEKST_6 (w starym GLB Group#3), czerwony dach) — render dewelopera go pomija, tu ukryty.",
+   "podglad": "podglad/porownanie-visualization-5.jpg"
+  },
+  {
+   "render": "visualization-6.jpg",
+   "plik_renderu": "public/explorer/gallery/visualization-6.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": "W7",
+   "kamera_threejs": "W7",
+   "kadr": {
+    "w": 1920,
+    "h": 1248
+   },
+   "pozycja": [
+    31.875,
+    2.375,
+    -22.05
+   ],
+   "kierunek": [
+    0.6124,
+    0,
+    -0.7905
+   ],
+   "cel": [
+    37.999,
+    2.375,
+    -29.955
+   ],
+   "yfov": 58.75,
+   "shift": 0.28,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Rząd domów od strony ogrodów o zmierzchu: test światła Noc.",
+   "podglad": "podglad/porownanie-visualization-6.jpg"
+  },
+  {
+   "render": "estate-1.jpg",
+   "plik_renderu": "public/explorer/gallery/estate-1.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1440
+   },
+   "pozycja": [
+    8.151,
+    19.523,
+    -47.617
+   ],
+   "kierunek": [
+    0.9135,
+    -0.4067,
+    -0.008
+   ],
+   "cel": [
+    17.286,
+    15.456,
+    -47.697
+   ],
+   "yfov": 56.5,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Zdjęcie z drona 04.2026, kamera ręczna. Test okolicy: dom z czerwonym dachem, ogrodzenie, droga.",
+   "podglad": "podglad/porownanie-estate-1.jpg"
+  },
+  {
+   "render": "estate-2.jpg",
+   "plik_renderu": "public/explorer/gallery/estate-2.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1440
+   },
+   "pozycja": [
+    62.334,
+    7.882,
+    -37.845
+   ],
+   "kierunek": [
+    -0.6889,
+    -0.2588,
+    -0.677
+   ],
+   "cel": [
+    55.445,
+    5.294,
+    -44.615
+   ],
+   "yfov": 56.5,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Szereg od SE (szczyt E + ogrody).",
+   "podglad": "podglad/porownanie-estate-2.jpg"
+  },
+  {
+   "render": "estate-3.jpg",
+   "plik_renderu": "public/explorer/gallery/estate-3.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1440
+   },
+   "pozycja": [
+    72.337,
+    15.267,
+    -24.875
+   ],
+   "kierunek": [
+    0.0693,
+    -0.4695,
+    -0.8802
+   ],
+   "cel": [
+    73.03,
+    10.572,
+    -33.677
+   ],
+   "yfov": 56.5,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Bliźniak D/C od ogrodu.",
+   "podglad": "podglad/porownanie-estate-3.jpg"
+  },
+  {
+   "render": "estate-4.jpg",
+   "plik_renderu": "public/explorer/gallery/estate-4.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1440
+   },
+   "pozycja": [
+    18.589,
+    18,
+    -69.716
+   ],
+   "kierunek": [
+    0.7137,
+    -0.5,
+    0.4905
+   ],
+   "cel": [
+    25.726,
+    13.0,
+    -64.811
+   ],
+   "yfov": 56.5,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Szereg od NW (G: garaż od ulicy, drzwi w szczycie).",
+   "podglad": "podglad/porownanie-estate-4.jpg"
+  },
+  {
+   "render": "estate-5.jpg",
+   "plik_renderu": "public/explorer/gallery/estate-5.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1440
+   },
+   "pozycja": [
+    24.935,
+    8.806,
+    -38.181
+   ],
+   "kierunek": [
+    0.836,
+    -0.2419,
+    -0.4925
+   ],
+   "cel": [
+    33.295,
+    6.387,
+    -43.106
+   ],
+   "yfov": 56.5,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Szereg od SW wzdłuż ogrodów.",
+   "podglad": "podglad/porownanie-estate-5.jpg"
+  },
+  {
+   "render": "estate-6.jpg",
+   "plik_renderu": "public/explorer/gallery/estate-6.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1440
+   },
+   "pozycja": [
+    111.017,
+    21.284,
+    -62.94
+   ],
+   "kierunek": [
+    -0.4339,
+    -0.6428,
+    0.6313
+   ],
+   "cel": [
+    106.678,
+    14.856,
+    -56.627
+   ],
+   "yfov": 56.5,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Bliźniak B/A od NE; w rzeczywistości dach A zielony (sage).",
+   "podglad": "podglad/porownanie-estate-6.jpg"
+  },
+  {
+   "render": "estate-7.jpg",
+   "plik_renderu": "public/explorer/gallery/estate-7.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1440
+   },
+   "pozycja": [
+    16.7,
+    25,
+    -47.622
+   ],
+   "kierunek": [
+    0.866,
+    -0.5,
+    -0.0076
+   ],
+   "cel": [
+    25.36,
+    20.0,
+    -47.698
+   ],
+   "yfov": 56.5,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Od zachodu wzdłuż rzędu.",
+   "podglad": "podglad/porownanie-estate-7.jpg"
+  },
+  {
+   "render": "estate-8.jpg",
+   "plik_renderu": "public/explorer/gallery/estate-8.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-zewnetrze-v5.glb",
+   "kamera_skp": null,
+   "kamera_threejs": null,
+   "kadr": {
+    "w": 1920,
+    "h": 1440
+   },
+   "pozycja": [
+    73.329,
+    95.942,
+    -47.621
+   ],
+   "kierunek": [
+    -0.0347,
+    -0.9994,
+    -0.004
+   ],
+   "cel": [
+    72.982,
+    85.948,
+    -47.661
+   ],
+   "yfov": 56.5,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Prawie pionowo z góry, góra kadru = zachód. Test rozstawu grup domów.",
+   "podglad": "podglad/porownanie-estate-8.jpg"
+  },
+  {
+   "render": "interior-4.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-4.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom1.glb",
+   "kamera_skp": "C2.2 - WIZ 3_Salon 5 alt",
+   "kamera_threejs": "C22_-_WIZ_3_Salon_5_alt",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    37.294,
+    2.08,
+    -48.895
+   ],
+   "kierunek": [
+    -0.0002,
+    0,
+    -1
+   ],
+   "cel": [
+    37.292,
+    2.08,
+    -58.895
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 1.9,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Kamera stoi na tarasie; w SKP przednia ściana wycięta przekrojem — tu near=1,9 m.",
+   "podglad": "podglad/porownanie-interior-4.jpg"
+  },
+  {
+   "render": "interior-5.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-5.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom1.glb",
+   "kamera_skp": "C2.2 - WIZ 2_Salon 4",
+   "kamera_threejs": "C22_-_WIZ_2_Salon_4",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    39.906,
+    2.1,
+    -50.771
+   ],
+   "kierunek": [
+    -0.6676,
+    0,
+    -0.7446
+   ],
+   "cel": [
+    33.23,
+    2.1,
+    -58.217
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Render szerszy (~+15% FOV).",
+   "podglad": "podglad/porownanie-interior-5.jpg"
+  },
+  {
+   "render": "interior-6.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-6.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom1.glb",
+   "kamera_skp": "C2.2 - WIZ 1_SALON 2 alt",
+   "kamera_threejs": "C22_-_WIZ_1_SALON_2_alt",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    39.171,
+    2.1,
+    -55.939
+   ],
+   "kierunek": [
+    -0.2694,
+    0,
+    0.963
+   ],
+   "cel": [
+    36.477,
+    2.1,
+    -46.309
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "",
+   "podglad": "podglad/porownanie-interior-6.jpg"
+  },
+  {
+   "render": "interior-8.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-8.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom1.glb",
+   "kamera_skp": "C2.2 - Pokój dziecięcy",
+   "kamera_threejs": "C22_-_Pokój_dziecięcy",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    37.049,
+    4.863,
+    -53.611
+   ],
+   "kierunek": [
+    -0.7783,
+    0,
+    0.6278
+   ],
+   "cel": [
+    29.266,
+    4.863,
+    -47.333
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Nisza-domek w BOR2 czarna, w renderze jasny dąb.",
+   "podglad": "podglad/porownanie-interior-8.jpg"
+  },
+  {
+   "render": "interior-10.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-10.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom1.glb",
+   "kamera_skp": "C2.2 Sypialnia główna",
+   "kamera_threejs": "C22_Sypialnia_główna",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    37.098,
+    4.798,
+    -53.406
+   ],
+   "kierunek": [
+    0.7729,
+    0,
+    0.6346
+   ],
+   "cel": [
+    44.827,
+    4.798,
+    -47.06
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "'Sypialnia główna 1' prawie identyczna. NIE 'główna 2' (tam zamknięta szafa zamiast otwartego regału).",
+   "podglad": "podglad/porownanie-interior-10.jpg"
+  },
+  {
+   "render": "interior-1.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-1.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom2.glb",
+   "kamera_skp": "A2 -Salon 1",
+   "kamera_threejs": "A2_-Salon_1",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    95.477,
+    1.65,
+    -44.322
+   ],
+   "kierunek": [
+    0.0001,
+    0,
+    1
+   ],
+   "cel": [
+    95.478,
+    1.65,
+    -34.322
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 2.5,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Kamera za zabudową; w SKP ukryta warstwa/przekrój — tu near=2,5 m.",
+   "podglad": "podglad/porownanie-interior-1.jpg"
+  },
+  {
+   "render": "interior-2.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-2.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom2.glb",
+   "kamera_skp": "A2 - Salon 3",
+   "kamera_threejs": "A2_-_Salon_3",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    98.971,
+    1.65,
+    -41.271
+   ],
+   "kierunek": [
+    -1,
+    0,
+    -0.0017
+   ],
+   "cel": [
+    88.971,
+    1.65,
+    -41.288
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "",
+   "podglad": "podglad/porownanie-interior-2.jpg"
+  },
+  {
+   "render": "interior-3.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-3.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom2.glb",
+   "kamera_skp": "A2 - Salon 4",
+   "kamera_threejs": "A2_-_Salon_4",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    95.81,
+    1.65,
+    -37.464
+   ],
+   "kierunek": [
+    0.0005,
+    0,
+    -1
+   ],
+   "cel": [
+    95.815,
+    1.65,
+    -47.464
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 2.5,
+   "ukryj": [],
+   "dopasowanie": "dobre",
+   "uwagi": "Kamera za ścianą; near=2,5 m.",
+   "podglad": "podglad/porownanie-interior-3.jpg"
+  },
+  {
+   "render": "interior-7.jpg",
+   "plik_renderu": "public/explorer/gallery/interior-7.jpg",
+   "glb": "docs/inwestycja-3d/assets/bor2/bor2-wnetrze-dom2.glb",
+   "kamera_skp": "A2 - Sypialnia główna 3",
+   "kamera_threejs": "A2_-_Sypialnia_główna_3",
+   "kadr": {
+    "w": 1920,
+    "h": 1080
+   },
+   "pozycja": [
+    95.973,
+    4.479,
+    -39.657
+   ],
+   "kierunek": [
+    0.7964,
+    0,
+    -0.6047
+   ],
+   "cel": [
+    103.937,
+    4.479,
+    -45.704
+   ],
+   "yfov": 51.95,
+   "shift": 0,
+   "near": 0.05,
+   "ukryj": [],
+   "dopasowanie": "przybliżone",
+   "uwagi": "Render szerszy i cofnięty (widać drzwi po lewej).",
+   "podglad": "podglad/porownanie-interior-7.jpg"
+  }
+ ],
+ "bez_kamery": [
+  {
+   "render": "interior-9.jpg",
+   "uwagi": "Pokój dziecka w domu B (dom2). Brak kamery SKP; ustawić ręcznie po wyeksportowaniu pokoju."
+  }
+ ],
+ "rozbieznosci_z_mapowaniem_wykonawcy_wnetrz": [
+  "interior-4 = WIZ 3_Salon 5 alt, interior-5 = WIZ 2_Salon 4 (u wykonawcy zamienione; numery wg public/explorer/gallery).",
+  "interior-1 = A2 -Salon 1 + near 2,5 m (frontalnie na HS), nie A2 - Salon 2.",
+  "interior-3 = A2 - Salon 4 + near 2,5 m, nie A2 - Salon 5.",
+  "interior-10 = C2.2 Sypialnia główna (otwarty regał po lewej), nie Sypialnia główna 2 (zamknięta szafa)."
+ ],
+ "zmiany": [
+  "2026-11-04 17:50: GLB zewnętrza → v5 (nazwy węzłów DOM_A…G, KONTEKST_1…8, OGRODZENIA, TARASY, ZIELEN, ZIEMIA); 'ukryj' vis-5 = KONTEKST_6.",
+  "2026-11-04 18:30: korekta opisu układu (X = wschód, nie 100,5°); pozy bez zmian."
+ ]
+}

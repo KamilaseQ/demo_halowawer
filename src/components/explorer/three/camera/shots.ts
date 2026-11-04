@@ -12,7 +12,7 @@ export const LOOK_DISTANCE = 0.01;
  * and fence reads (what is being bought: a house with its garden to the south), low enough that the pine
  * belt and a band of sky stay in the top of the frame.
  */
-export const ESTATE_SHOT: CameraShot = { position: [100, 26, 86], target: [36, 6, 0] };
+export const ESTATE_SHOT: CameraShot = { position: [98, 44, 86], target: [38, 4, 4] };
 
 /**
  * Where the opening fly-over starts: the developer's aerial photo viewpoint (street side, from the NE),

@@ -1,0 +1,222 @@
+{
+ "opis": "Przypisanie znaczników ZIELEN_ZNACZNIKI (bor2-zewnetrze-v5.glb; v4 ma te same 874 znaczniki) do wariantów z rosliny.glb. v3 (kontrakt jak v2): + PODSZYT, + BYLINA_ZOLTA, kostrzewa srebrzysto-zielona ~35-40 % pasa. Implementacja referencyjna: rozmiesc.mjs (używana przez podglad.html).",
+ "plik_glb": "docs/inwestycja-3d/assets/zielen/rosliny.glb",
+ "znaczniki": {
+  "wezel": "ZIELEN_ZNACZNIKI (bor2-zewnetrze-v4..v9; v9 ma 1168 znaczników, te same prefiksy)",
+  "nazwy": "PREFIKS_numer bez podtypów: TRAWA_001..399, BYLINA_001..415, KRZEW_001..014, ZYWOPLOT_001..035, DRZEWO_{SOSNA|BRZOZA|LISCIASTE|OZDOBNE}_01.. (11)",
+  "pozycja": "podstawa rośliny na gruncie (układ glTF Y-up, metry)",
+  "obrot": "losowy obrót wokół Y (także przy ZYWOPLOT - patrz niżej)",
+  "skala": "jednolita, 0,71–1,30 = mnożnik wielkości od projektanta zieleni"
+ },
+ "wybor": {
+  "hash": "FNV-1a 32-bit z napisu -> u = h / 2^32 (rozmiesc.mjs: u01)",
+  "plamy": "TRAWA i BYLINA: typ rośliny (np. BYLINA_FIOLET) losowany raz na komórkę siatki plamy_m x plamy_m (u01('PREFIKS:ix:iz')) -> rośliny tworzą plamy jednego gatunku jak na rabatach z renderów, a nie konfetti; ułamek 'domieszka' znaczników losuje typ niezależnie (u01(nazwa + '#t')).",
+  "wariant": "w obrębie typu: u01(nazwa + '#v') -> równo między warianty",
+  "skala_koncowa": "skala znacznika x mnożnik, mnożnik = lerp(skala[0], skala[1], u01(nazwa + '#s'))",
+  "obrot": "obrót znacznika (losowy) - dla traw, bylin i krzewów wystarczy"
+ },
+ "prefiksy": {
+  "TRAWA": {
+   "plamy_m": 2.6,
+   "domieszka": 0.22,
+   "typy": [
+    {
+     "typ": "TRAWA_NISKA",
+     "waga": 0.42,
+     "warianty": [
+      "TRAWA_NISKA_1",
+      "TRAWA_NISKA_2",
+      "TRAWA_NISKA_3"
+     ],
+     "skala": [
+      1.0,
+      1.35
+     ],
+     "uwagi": "kostrzewa sina (srebrzysto-zielona): grupa 2-3 kęp ~0,3 m wys. (_3 z kłosami do 0,45 m), ~1,0-1,2 m średnicy"
+    },
+    {
+     "typ": "TRAWA_WYSOKA",
+     "waga": 0.43,
+     "warianty": [
+      "TRAWA_WYSOKA_1",
+      "TRAWA_WYSOKA_2",
+      "TRAWA_WYSOKA_3"
+     ],
+     "skala": [
+      0.75,
+      1.0
+     ],
+     "uwagi": "trzcinnik 'Karl Foerster' (_1, 0,96 m), rozplenica (_2, 0,85 m), mieszana (_3); zielono-słomkowe; ze skalą 0,55-1,25 m"
+    },
+    {
+     "typ": "BYLINA_ZOLTA",
+     "waga": 0.15,
+     "warianty": [
+      "BYLINA_ZOLTA_1",
+      "BYLINA_ZOLTA_2",
+      "BYLINA_ZOLTA_3"
+     ],
+     "skala": [
+      0.95,
+      1.2
+     ],
+     "uwagi": "żółte byliny w pasie traw jak na visualization-1"
+    }
+   ]
+  },
+  "BYLINA": {
+   "plamy_m": 2.2,
+   "domieszka": 0.25,
+   "typy": [
+    {
+     "typ": "BYLINA_BIALA",
+     "waga": 0.27,
+     "warianty": [
+      "BYLINA_BIALA_1",
+      "BYLINA_BIALA_2",
+      "BYLINA_BIALA_3"
+     ],
+     "skala": [
+      1.0,
+      1.25
+     ],
+     "uwagi": "grupy 2-3 roślin: gaura/floks (_1, _2), gaura z kocimiętką (_3); 0,44-0,49 m"
+    },
+    {
+     "typ": "BYLINA_ZOLTA",
+     "waga": 0.23,
+     "warianty": [
+      "BYLINA_ZOLTA_1",
+      "BYLINA_ZOLTA_2",
+      "BYLINA_ZOLTA_3"
+     ],
+     "skala": [
+      0.95,
+      1.2
+     ],
+     "uwagi": "krwawnik 'Moonshine' (_1), rudbekia (_2), mieszana (_3); 0,44-0,52 m"
+    },
+    {
+     "typ": "BYLINA_ROZ",
+     "waga": 0.22,
+     "warianty": [
+      "BYLINA_ROZ_1",
+      "BYLINA_ROZ_2",
+      "BYLINA_ROZ_3"
+     ],
+     "skala": [
+      0.95,
+      1.2
+     ],
+     "uwagi": "grupy 2-3 roślin: jeżówka purpurowa (_3 z kocimiętką); 0,59-0,67 m"
+    },
+    {
+     "typ": "BYLINA_FIOLET",
+     "waga": 0.28,
+     "warianty": [
+      "BYLINA_FIOLET_1",
+      "BYLINA_FIOLET_2",
+      "BYLINA_FIOLET_3"
+     ],
+     "skala": [
+      1.0,
+      1.3
+     ],
+     "uwagi": "grupy 2-3 roślin: szałwia 'Caradonna' (_1), kocimiętka/lawenda (_2), mieszana (_3); 0,35-0,43 m"
+    }
+   ]
+  },
+  "KRZEW": {
+   "typy": [
+    {
+     "typ": "KRZEW",
+     "waga": 1,
+     "warianty": [
+      "KRZEW_1",
+      "KRZEW_1",
+      "KRZEW_2",
+      "KRZEW_3"
+     ],
+     "skala": [
+      0.95,
+      1.15
+     ],
+     "uwagi": "kulisty ~1 m: drobnolistny (_1, x2 częściej), grabowy (_2, 0,9 m), kwitnący na biało (_3, 1,1 m)"
+    }
+   ]
+  },
+  "ZYWOPLOT": {
+   "szpalery": "znaczniki co 1,0 m w prostych rzędach (3–5 szt.). Rząd = znaczniki połączone sąsiedztwem <= 1,2 m. Obrót znacznika jest LOSOWY - nie używać: obrót Y = kierunek rzędu, atan2(-(z2 - z1), x2 - x1) do najbliższego sąsiada (lokalne +X modułu = wzdłuż rzędu); +PI dla co drugiego modułu (moduł jest symetryczny, ukrywa powtórzenie).",
+   "gatunek_rzedu": "u01('ZYWOPLOT:' + nazwa pierwszego znacznika rzędu) < 0.75 -> grab (ZYWOPLOT_1 albo ZYWOPLOT_2 losowo na moduł: u01(nazwa + '#h') < 0,5), inaczej ligustr (ZYWOPLOT_3) - cały rząd jednego gatunku",
+   "skala": "x i z = 1 (moduł 1,0 x 0,6 m zachodzi na sąsiada ~10 cm; skalowanie długości robiłoby szpary), y = skala znacznika (0,9–1,1) -> 1,1–1,4 m",
+   "typy": [
+    {
+     "typ": "ZYWOPLOT",
+     "waga": 1,
+     "warianty": [
+      "ZYWOPLOT_1",
+      "ZYWOPLOT_2",
+      "ZYWOPLOT_3"
+     ],
+     "skala": [
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  },
+  "PODSZYT": {
+   "podszyt": true,
+   "pod": [
+    "TRAWA",
+    "BYLINA"
+   ],
+   "liczba": "2 + (u01(nazwa + '#p') < 0,5 ? 1 : 0) instancji na znacznik (śr. 2,5)",
+   "odleglosc_m": [
+    0.25,
+    0.7
+   ],
+   "polozenie": "kąt = 2 PI u01(nazwa + '#pa' + k), odległość = lerp(odleglosc_m, u01(nazwa + '#pr' + k)) od znacznika; y = y znacznika; obrót = 2 PI u01(nazwa + '#po' + k)",
+   "typy": [
+    {
+     "typ": "PODSZYT",
+     "waga": 1,
+     "warianty": [
+      "PODSZYT_1",
+      "PODSZYT_2",
+      "PODSZYT_3"
+     ],
+     "skala": [
+      1.1,
+      1.6
+     ],
+     "uwagi": "niska trawa łąkowa 0,2-0,35 m, zielono-słomkowa; 24-40 trójkątów - zwiera pas w ciągłą łąkę ozdobną"
+    }
+   ],
+   "uwagi": "nie zależy od skali znacznika (skala = tylko mnożnik z 'skala'); znaczniki nie są osobnymi węzłami - instancje dodaje runtime",
+   "min": 2,
+   "p_dodatkowej": 0.5
+  },
+  "DRZEWO_SOSNA": {
+   "pomin": true,
+   "uwagi": "drzewa zostają z public/explorer/3d/models/drzewa.glb (Bor2Planting.tsx treeOf)"
+  },
+  "DRZEWO_BRZOZA": {
+   "pomin": true
+  },
+  "DRZEWO_LISCIASTE": {
+   "pomin": true
+  },
+  "DRZEWO_OZDOBNE": {
+   "pomin": true,
+   "uwagi": "drzewka ozdobnego (wiśnia/klon) nie ma w tym zestawie - patrz README"
+  }
+ },
+ "material": {
+  "nazwa": "rosliny (jeden na cały plik)",
+  "alfa": "MASK, alphaCutoff 0,5, doubleSided",
+  "kolor": "baseColorTexture = atlas 2048x2048 WebP x COLOR_0 (cień wnętrza kępy i odcień wariantu, three.js: vertexColors - mnoży się też z instanceColor)",
+  "normalne": "własne, ku górze i na zewnątrz bryły (kopuła / kula / prostopadłościan) - przy DoubleSide użyć patchNoFlip (materials.ts), jak liście drzew w trees.tsx; zalecane też alphaToCoverage + patchCoverage"
+ },
+ "wersja": "v3"
+}

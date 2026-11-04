@@ -19,8 +19,8 @@ export type DaylightPreset = {
 };
 
 /**
- * Compass sun position → estate-space direction. Estate +X points to azimuth ESTATE_AZIMUTH_X (≈100.5°,
- * ESE along the row), +Z to +90° from it (SSW, the gardens). Late-October Warsaw: low sun all day.
+ * Compass sun position → estate-space direction. Estate +X points to azimuth ESTATE_AZIMUTH_X (90°: east,
+ * BOR2 is georeferenced square to north), +Z to +90° from it (south, the gardens).
  */
 function sun(azimuth: number, altitude: number): Vec3 {
   const a = ((azimuth - ESTATE_AZIMUTH_X) * Math.PI) / 180;

@@ -1,0 +1,1788 @@
+{
+ "opis": "Pozy kamer systematycznego przeglądu (sweep) osiedla BOR2, układ GLB (Y w górę, metry).",
+ "kadr": {
+  "w": 960,
+  "h": 720
+ },
+ "pozy": [
+  {
+   "id": "A-N-oko",
+   "dom": "A",
+   "azymut": 0,
+   "rodzaj": "oko",
+   "pozycja": [
+    101.401,
+    1.75,
+    -56.033
+   ],
+   "cel": [
+    103.9,
+    2.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-N-gora",
+   "dom": "A",
+   "azymut": 0,
+   "rodzaj": "gora",
+   "pozycja": [
+    100.744,
+    13.6,
+    -59.58
+   ],
+   "cel": [
+    103.9,
+    3.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-NE-oko",
+   "dom": "A",
+   "azymut": 45,
+   "rodzaj": "oko",
+   "pozycja": [
+    112.104,
+    1.75,
+    -54.487
+   ],
+   "cel": [
+    103.9,
+    2.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-NE-gora",
+   "dom": "A",
+   "azymut": 45,
+   "rodzaj": "gora",
+   "pozycja": [
+    113.71,
+    13.6,
+    -56.824
+   ],
+   "cel": [
+    103.9,
+    3.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-E-oko",
+   "dom": "A",
+   "azymut": 90,
+   "rodzaj": "oko",
+   "pozycja": [
+    116.635,
+    1.75,
+    -44.91
+   ],
+   "cel": [
+    103.9,
+    2.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-E-gora",
+   "dom": "A",
+   "azymut": 90,
+   "rodzaj": "gora",
+   "pozycja": [
+    120.93,
+    13.6,
+    -45.706
+   ],
+   "cel": [
+    103.9,
+    3.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-SE-oko",
+   "dom": "A",
+   "azymut": 135,
+   "rodzaj": "oko",
+   "pozycja": [
+    115.635,
+    1.75,
+    -34.485
+   ],
+   "cel": [
+    103.9,
+    2.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-SE-gora",
+   "dom": "A",
+   "azymut": 135,
+   "rodzaj": "gora",
+   "pozycja": [
+    118.174,
+    13.6,
+    -32.74
+   ],
+   "cel": [
+    103.9,
+    3.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-S-oko",
+   "dom": "A",
+   "azymut": 180,
+   "rodzaj": "oko",
+   "pozycja": [
+    106.399,
+    1.75,
+    -29.067
+   ],
+   "cel": [
+    103.9,
+    2.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-S-gora",
+   "dom": "A",
+   "azymut": 180,
+   "rodzaj": "gora",
+   "pozycja": [
+    107.056,
+    13.6,
+    -25.52
+   ],
+   "cel": [
+    103.9,
+    3.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-SW-oko",
+   "dom": "A",
+   "azymut": 225,
+   "rodzaj": "oko",
+   "pozycja": [
+    95.696,
+    1.75,
+    -30.613
+   ],
+   "cel": [
+    103.9,
+    2.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "A-SW-gora",
+   "dom": "A",
+   "azymut": 225,
+   "rodzaj": "gora",
+   "pozycja": [
+    94.09,
+    13.6,
+    -28.276
+   ],
+   "cel": [
+    103.9,
+    3.6,
+    -42.55
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-N-oko",
+   "dom": "B",
+   "azymut": 0,
+   "rodzaj": "oko",
+   "pozycja": [
+    93.201,
+    1.75,
+    -57.533
+   ],
+   "cel": [
+    95.7,
+    2.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-N-gora",
+   "dom": "B",
+   "azymut": 0,
+   "rodzaj": "gora",
+   "pozycja": [
+    92.544,
+    13.6,
+    -61.08
+   ],
+   "cel": [
+    95.7,
+    3.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-NE-oko",
+   "dom": "B",
+   "azymut": 45,
+   "rodzaj": "oko",
+   "pozycja": [
+    103.904,
+    1.75,
+    -55.987
+   ],
+   "cel": [
+    95.7,
+    2.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-NE-gora",
+   "dom": "B",
+   "azymut": 45,
+   "rodzaj": "gora",
+   "pozycja": [
+    105.51,
+    13.6,
+    -58.324
+   ],
+   "cel": [
+    95.7,
+    3.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-S-oko",
+   "dom": "B",
+   "azymut": 180,
+   "rodzaj": "oko",
+   "pozycja": [
+    98.199,
+    1.75,
+    -30.567
+   ],
+   "cel": [
+    95.7,
+    2.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-S-gora",
+   "dom": "B",
+   "azymut": 180,
+   "rodzaj": "gora",
+   "pozycja": [
+    98.856,
+    13.6,
+    -27.02
+   ],
+   "cel": [
+    95.7,
+    3.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-SW-oko",
+   "dom": "B",
+   "azymut": 225,
+   "rodzaj": "oko",
+   "pozycja": [
+    87.496,
+    1.75,
+    -32.113
+   ],
+   "cel": [
+    95.7,
+    2.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-SW-gora",
+   "dom": "B",
+   "azymut": 225,
+   "rodzaj": "gora",
+   "pozycja": [
+    85.89,
+    13.6,
+    -29.776
+   ],
+   "cel": [
+    95.7,
+    3.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-W-oko",
+   "dom": "B",
+   "azymut": 270,
+   "rodzaj": "oko",
+   "pozycja": [
+    82.965,
+    1.75,
+    -41.69
+   ],
+   "cel": [
+    95.7,
+    2.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-W-gora",
+   "dom": "B",
+   "azymut": 270,
+   "rodzaj": "gora",
+   "pozycja": [
+    78.67,
+    13.6,
+    -40.894
+   ],
+   "cel": [
+    95.7,
+    3.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-NW-oko",
+   "dom": "B",
+   "azymut": 315,
+   "rodzaj": "oko",
+   "pozycja": [
+    83.965,
+    1.75,
+    -52.115
+   ],
+   "cel": [
+    95.7,
+    2.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "B-NW-gora",
+   "dom": "B",
+   "azymut": 315,
+   "rodzaj": "gora",
+   "pozycja": [
+    81.426,
+    13.6,
+    -53.86
+   ],
+   "cel": [
+    95.7,
+    3.6,
+    -44.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-N-oko",
+   "dom": "C",
+   "azymut": 0,
+   "rodzaj": "oko",
+   "pozycja": [
+    75.401,
+    2.05,
+    -60.633
+   ],
+   "cel": [
+    77.9,
+    2.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-N-gora",
+   "dom": "C",
+   "azymut": 0,
+   "rodzaj": "gora",
+   "pozycja": [
+    74.744,
+    13.9,
+    -64.18
+   ],
+   "cel": [
+    77.9,
+    3.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-NE-oko",
+   "dom": "C",
+   "azymut": 45,
+   "rodzaj": "oko",
+   "pozycja": [
+    86.104,
+    2.05,
+    -59.087
+   ],
+   "cel": [
+    77.9,
+    2.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-NE-gora",
+   "dom": "C",
+   "azymut": 45,
+   "rodzaj": "gora",
+   "pozycja": [
+    87.71,
+    13.9,
+    -61.424
+   ],
+   "cel": [
+    77.9,
+    3.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-E-oko",
+   "dom": "C",
+   "azymut": 90,
+   "rodzaj": "oko",
+   "pozycja": [
+    90.635,
+    2.05,
+    -49.51
+   ],
+   "cel": [
+    77.9,
+    2.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-E-gora",
+   "dom": "C",
+   "azymut": 90,
+   "rodzaj": "gora",
+   "pozycja": [
+    94.93,
+    13.9,
+    -50.306
+   ],
+   "cel": [
+    77.9,
+    3.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-SE-oko",
+   "dom": "C",
+   "azymut": 135,
+   "rodzaj": "oko",
+   "pozycja": [
+    89.635,
+    2.05,
+    -39.085
+   ],
+   "cel": [
+    77.9,
+    2.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-SE-gora",
+   "dom": "C",
+   "azymut": 135,
+   "rodzaj": "gora",
+   "pozycja": [
+    92.174,
+    13.9,
+    -37.34
+   ],
+   "cel": [
+    77.9,
+    3.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-S-oko",
+   "dom": "C",
+   "azymut": 180,
+   "rodzaj": "oko",
+   "pozycja": [
+    80.399,
+    2.05,
+    -33.667
+   ],
+   "cel": [
+    77.9,
+    2.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-S-gora",
+   "dom": "C",
+   "azymut": 180,
+   "rodzaj": "gora",
+   "pozycja": [
+    81.056,
+    13.9,
+    -30.12
+   ],
+   "cel": [
+    77.9,
+    3.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-SW-oko",
+   "dom": "C",
+   "azymut": 225,
+   "rodzaj": "oko",
+   "pozycja": [
+    69.696,
+    2.05,
+    -35.213
+   ],
+   "cel": [
+    77.9,
+    2.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "C-SW-gora",
+   "dom": "C",
+   "azymut": 225,
+   "rodzaj": "gora",
+   "pozycja": [
+    68.09,
+    13.9,
+    -32.876
+   ],
+   "cel": [
+    77.9,
+    3.9,
+    -47.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-N-oko",
+   "dom": "D",
+   "azymut": 0,
+   "rodzaj": "oko",
+   "pozycja": [
+    67.201,
+    2.05,
+    -62.133
+   ],
+   "cel": [
+    69.7,
+    2.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-N-gora",
+   "dom": "D",
+   "azymut": 0,
+   "rodzaj": "gora",
+   "pozycja": [
+    66.544,
+    13.9,
+    -65.68
+   ],
+   "cel": [
+    69.7,
+    3.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-NE-oko",
+   "dom": "D",
+   "azymut": 45,
+   "rodzaj": "oko",
+   "pozycja": [
+    77.904,
+    2.05,
+    -60.587
+   ],
+   "cel": [
+    69.7,
+    2.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-NE-gora",
+   "dom": "D",
+   "azymut": 45,
+   "rodzaj": "gora",
+   "pozycja": [
+    79.51,
+    13.9,
+    -62.924
+   ],
+   "cel": [
+    69.7,
+    3.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-S-oko",
+   "dom": "D",
+   "azymut": 180,
+   "rodzaj": "oko",
+   "pozycja": [
+    72.199,
+    2.05,
+    -35.167
+   ],
+   "cel": [
+    69.7,
+    2.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-S-gora",
+   "dom": "D",
+   "azymut": 180,
+   "rodzaj": "gora",
+   "pozycja": [
+    72.856,
+    13.9,
+    -31.62
+   ],
+   "cel": [
+    69.7,
+    3.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-SW-oko",
+   "dom": "D",
+   "azymut": 225,
+   "rodzaj": "oko",
+   "pozycja": [
+    61.496,
+    2.05,
+    -36.713
+   ],
+   "cel": [
+    69.7,
+    2.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-SW-gora",
+   "dom": "D",
+   "azymut": 225,
+   "rodzaj": "gora",
+   "pozycja": [
+    59.89,
+    13.9,
+    -34.376
+   ],
+   "cel": [
+    69.7,
+    3.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-W-oko",
+   "dom": "D",
+   "azymut": 270,
+   "rodzaj": "oko",
+   "pozycja": [
+    56.965,
+    2.05,
+    -46.29
+   ],
+   "cel": [
+    69.7,
+    2.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-W-gora",
+   "dom": "D",
+   "azymut": 270,
+   "rodzaj": "gora",
+   "pozycja": [
+    52.67,
+    13.9,
+    -45.494
+   ],
+   "cel": [
+    69.7,
+    3.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-NW-oko",
+   "dom": "D",
+   "azymut": 315,
+   "rodzaj": "oko",
+   "pozycja": [
+    57.965,
+    2.05,
+    -56.715
+   ],
+   "cel": [
+    69.7,
+    2.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "D-NW-gora",
+   "dom": "D",
+   "azymut": 315,
+   "rodzaj": "gora",
+   "pozycja": [
+    55.426,
+    13.9,
+    -58.46
+   ],
+   "cel": [
+    69.7,
+    3.9,
+    -48.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-N-oko",
+   "dom": "E",
+   "azymut": 0,
+   "rodzaj": "oko",
+   "pozycja": [
+    49.747,
+    2.35,
+    -65.186
+   ],
+   "cel": [
+    52.2,
+    3.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-N-gora",
+   "dom": "E",
+   "azymut": 0,
+   "rodzaj": "gora",
+   "pozycja": [
+    49.044,
+    14.2,
+    -68.98
+   ],
+   "cel": [
+    52.2,
+    4.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-NE-oko",
+   "dom": "E",
+   "azymut": 45,
+   "rodzaj": "oko",
+   "pozycja": [
+    60.214,
+    2.35,
+    -63.611
+   ],
+   "cel": [
+    52.2,
+    3.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-NE-gora",
+   "dom": "E",
+   "azymut": 45,
+   "rodzaj": "gora",
+   "pozycja": [
+    62.01,
+    14.2,
+    -66.224
+   ],
+   "cel": [
+    52.2,
+    4.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-E-oko",
+   "dom": "E",
+   "azymut": 90,
+   "rodzaj": "oko",
+   "pozycja": [
+    64.609,
+    2.35,
+    -54.25
+   ],
+   "cel": [
+    52.2,
+    3.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-E-gora",
+   "dom": "E",
+   "azymut": 90,
+   "rodzaj": "gora",
+   "pozycja": [
+    69.23,
+    14.2,
+    -55.106
+   ],
+   "cel": [
+    52.2,
+    4.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-SE-oko",
+   "dom": "E",
+   "azymut": 135,
+   "rodzaj": "oko",
+   "pozycja": [
+    63.638,
+    2.35,
+    -44.089
+   ],
+   "cel": [
+    52.2,
+    3.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-SE-gora",
+   "dom": "E",
+   "azymut": 135,
+   "rodzaj": "gora",
+   "pozycja": [
+    66.474,
+    14.2,
+    -42.14
+   ],
+   "cel": [
+    52.2,
+    4.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-S-oko",
+   "dom": "E",
+   "azymut": 180,
+   "rodzaj": "oko",
+   "pozycja": [
+    54.653,
+    2.35,
+    -38.714
+   ],
+   "cel": [
+    52.2,
+    3.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-S-gora",
+   "dom": "E",
+   "azymut": 180,
+   "rodzaj": "gora",
+   "pozycja": [
+    55.356,
+    14.2,
+    -34.92
+   ],
+   "cel": [
+    52.2,
+    4.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-SW-oko",
+   "dom": "E",
+   "azymut": 225,
+   "rodzaj": "oko",
+   "pozycja": [
+    44.186,
+    2.35,
+    -40.289
+   ],
+   "cel": [
+    52.2,
+    3.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "E-SW-gora",
+   "dom": "E",
+   "azymut": 225,
+   "rodzaj": "gora",
+   "pozycja": [
+    42.39,
+    14.2,
+    -37.676
+   ],
+   "cel": [
+    52.2,
+    4.2,
+    -51.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "F-N-oko",
+   "dom": "F",
+   "azymut": 0,
+   "rodzaj": "oko",
+   "pozycja": [
+    42.247,
+    2.35,
+    -66.686
+   ],
+   "cel": [
+    44.7,
+    3.2,
+    -53.45
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "F-N-gora",
+   "dom": "F",
+   "azymut": 0,
+   "rodzaj": "gora",
+   "pozycja": [
+    41.544,
+    14.2,
+    -70.48
+   ],
+   "cel": [
+    44.7,
+    4.2,
+    -53.45
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "F-NE-oko",
+   "dom": "F",
+   "azymut": 45,
+   "rodzaj": "oko",
+   "pozycja": [
+    52.714,
+    2.35,
+    -65.111
+   ],
+   "cel": [
+    44.7,
+    3.2,
+    -53.45
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "F-NE-gora",
+   "dom": "F",
+   "azymut": 45,
+   "rodzaj": "gora",
+   "pozycja": [
+    54.51,
+    14.2,
+    -67.724
+   ],
+   "cel": [
+    44.7,
+    4.2,
+    -53.45
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "F-S-oko",
+   "dom": "F",
+   "azymut": 180,
+   "rodzaj": "oko",
+   "pozycja": [
+    47.153,
+    2.35,
+    -40.214
+   ],
+   "cel": [
+    44.7,
+    3.2,
+    -53.45
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "F-S-gora",
+   "dom": "F",
+   "azymut": 180,
+   "rodzaj": "gora",
+   "pozycja": [
+    47.856,
+    14.2,
+    -36.42
+   ],
+   "cel": [
+    44.7,
+    4.2,
+    -53.45
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "F-SW-oko",
+   "dom": "F",
+   "azymut": 225,
+   "rodzaj": "oko",
+   "pozycja": [
+    36.686,
+    2.35,
+    -41.789
+   ],
+   "cel": [
+    44.7,
+    3.2,
+    -53.45
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "F-SW-gora",
+   "dom": "F",
+   "azymut": 225,
+   "rodzaj": "gora",
+   "pozycja": [
+    34.89,
+    14.2,
+    -39.176
+   ],
+   "cel": [
+    44.7,
+    4.2,
+    -53.45
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-N-oko",
+   "dom": "G",
+   "azymut": 0,
+   "rodzaj": "oko",
+   "pozycja": [
+    34.747,
+    2.35,
+    -68.186
+   ],
+   "cel": [
+    37.2,
+    3.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-N-gora",
+   "dom": "G",
+   "azymut": 0,
+   "rodzaj": "gora",
+   "pozycja": [
+    34.044,
+    14.2,
+    -71.98
+   ],
+   "cel": [
+    37.2,
+    4.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-NE-oko",
+   "dom": "G",
+   "azymut": 45,
+   "rodzaj": "oko",
+   "pozycja": [
+    45.214,
+    2.35,
+    -66.611
+   ],
+   "cel": [
+    37.2,
+    3.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-NE-gora",
+   "dom": "G",
+   "azymut": 45,
+   "rodzaj": "gora",
+   "pozycja": [
+    47.01,
+    14.2,
+    -69.224
+   ],
+   "cel": [
+    37.2,
+    4.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-S-oko",
+   "dom": "G",
+   "azymut": 180,
+   "rodzaj": "oko",
+   "pozycja": [
+    39.653,
+    2.35,
+    -41.714
+   ],
+   "cel": [
+    37.2,
+    3.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-S-gora",
+   "dom": "G",
+   "azymut": 180,
+   "rodzaj": "gora",
+   "pozycja": [
+    40.356,
+    14.2,
+    -37.92
+   ],
+   "cel": [
+    37.2,
+    4.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-SW-oko",
+   "dom": "G",
+   "azymut": 225,
+   "rodzaj": "oko",
+   "pozycja": [
+    29.186,
+    2.35,
+    -43.289
+   ],
+   "cel": [
+    37.2,
+    3.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-SW-gora",
+   "dom": "G",
+   "azymut": 225,
+   "rodzaj": "gora",
+   "pozycja": [
+    27.39,
+    14.2,
+    -40.676
+   ],
+   "cel": [
+    37.2,
+    4.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-W-oko",
+   "dom": "G",
+   "azymut": 270,
+   "rodzaj": "oko",
+   "pozycja": [
+    24.791,
+    2.35,
+    -52.65
+   ],
+   "cel": [
+    37.2,
+    3.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-W-gora",
+   "dom": "G",
+   "azymut": 270,
+   "rodzaj": "gora",
+   "pozycja": [
+    20.17,
+    14.2,
+    -51.794
+   ],
+   "cel": [
+    37.2,
+    4.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-NW-oko",
+   "dom": "G",
+   "azymut": 315,
+   "rodzaj": "oko",
+   "pozycja": [
+    25.762,
+    2.35,
+    -62.811
+   ],
+   "cel": [
+    37.2,
+    3.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "G-NW-gora",
+   "dom": "G",
+   "azymut": 315,
+   "rodzaj": "gora",
+   "pozycja": [
+    22.926,
+    14.2,
+    -64.76
+   ],
+   "cel": [
+    37.2,
+    4.2,
+    -54.95
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Sceme_10",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    31.65,
+    2.12,
+    -36.84
+   ],
+   "cel": [
+    38.86,
+    2.12,
+    -43.77
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scena_4",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    23.91,
+    2.0,
+    -33.91
+   ],
+   "cel": [
+    31.27,
+    2.0,
+    -40.68
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scena_28",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    31.26,
+    2.44,
+    -42.49
+   ],
+   "cel": [
+    37.15,
+    2.44,
+    -50.57
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scene_2",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    124.8,
+    1.65,
+    -68.72
+   ],
+   "cel": [
+    116.58,
+    1.65,
+    -63.03
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scene_3",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    123.58,
+    1.65,
+    -51.4
+   ],
+   "cel": [
+    114.18,
+    1.65,
+    -48.0
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scene_5",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    28.19,
+    2.35,
+    -73.76
+   ],
+   "cel": [
+    34.5,
+    2.35,
+    -66.0
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scene_6",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    20.63,
+    2.5,
+    -67.4
+   ],
+   "cel": [
+    29.55,
+    2.5,
+    -62.88
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scene_7",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    121.94,
+    1.65,
+    -28.16
+   ],
+   "cel": [
+    113.11,
+    1.65,
+    -32.85
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scene_8",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    117.69,
+    1.35,
+    -22.58
+   ],
+   "cel": [
+    110.31,
+    1.35,
+    -29.32
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scene_9",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    64.06,
+    2.0,
+    -32.1
+   ],
+   "cel": [
+    56.87,
+    2.0,
+    -39.05
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_Scene_26",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    85.27,
+    1.82,
+    -31.56
+   ],
+   "cel": [
+    79.04,
+    1.82,
+    -39.38
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_W1",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    121.82,
+    1.65,
+    -69.21
+   ],
+   "cel": [
+    113.51,
+    1.65,
+    -63.65
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_W2",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    58.33,
+    2.2,
+    -67.58
+   ],
+   "cel": [
+    52.45,
+    2.2,
+    -59.49
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_W3",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    87.15,
+    1.65,
+    -27.22
+   ],
+   "cel": [
+    93.01,
+    1.65,
+    -35.32
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_W4",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    73.4,
+    1.95,
+    -71.15
+   ],
+   "cel": [
+    73.49,
+    1.95,
+    -61.15
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_W5",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    99.81,
+    1.78,
+    -26.18
+   ],
+   "cel": [
+    99.8,
+    1.78,
+    -36.18
+   ],
+   "yfov": 56.5
+  },
+  {
+   "id": "PKT_W7",
+   "dom": null,
+   "azymut": null,
+   "rodzaj": "spacer",
+   "pozycja": [
+    34.32,
+    2.37,
+    -25.21
+   ],
+   "cel": [
+    40.44,
+    2.37,
+    -33.12
+   ],
+   "yfov": 56.5
+  }
+ ],
+ "pominiete": [
+  {
+   "id": "A-W-oko",
+   "powod": "zasłania B"
+  },
+  {
+   "id": "A-W-gora",
+   "powod": "zasłania B"
+  },
+  {
+   "id": "A-NW-oko",
+   "powod": "zasłania B"
+  },
+  {
+   "id": "A-NW-gora",
+   "powod": "zasłania B"
+  },
+  {
+   "id": "B-E-oko",
+   "powod": "zasłania A"
+  },
+  {
+   "id": "B-E-gora",
+   "powod": "zasłania A"
+  },
+  {
+   "id": "B-SE-oko",
+   "powod": "zasłania A"
+  },
+  {
+   "id": "B-SE-gora",
+   "powod": "zasłania A"
+  },
+  {
+   "id": "C-W-oko",
+   "powod": "zasłania D"
+  },
+  {
+   "id": "C-W-gora",
+   "powod": "zasłania D"
+  },
+  {
+   "id": "C-NW-oko",
+   "powod": "zasłania D"
+  },
+  {
+   "id": "C-NW-gora",
+   "powod": "zasłania D"
+  },
+  {
+   "id": "D-E-oko",
+   "powod": "zasłania C"
+  },
+  {
+   "id": "D-E-gora",
+   "powod": "zasłania C"
+  },
+  {
+   "id": "D-SE-oko",
+   "powod": "zasłania C"
+  },
+  {
+   "id": "D-SE-gora",
+   "powod": "zasłania C"
+  },
+  {
+   "id": "E-W-oko",
+   "powod": "zasłania F"
+  },
+  {
+   "id": "E-W-gora",
+   "powod": "zasłania F"
+  },
+  {
+   "id": "E-NW-oko",
+   "powod": "kamera w G"
+  },
+  {
+   "id": "E-NW-gora",
+   "powod": "zasłania F"
+  },
+  {
+   "id": "F-E-oko",
+   "powod": "zasłania E"
+  },
+  {
+   "id": "F-E-gora",
+   "powod": "zasłania E"
+  },
+  {
+   "id": "F-SE-oko",
+   "powod": "zasłania E"
+  },
+  {
+   "id": "F-SE-gora",
+   "powod": "zasłania E"
+  },
+  {
+   "id": "F-W-oko",
+   "powod": "zasłania G"
+  },
+  {
+   "id": "F-W-gora",
+   "powod": "zasłania G"
+  },
+  {
+   "id": "F-NW-oko",
+   "powod": "zasłania G"
+  },
+  {
+   "id": "F-NW-gora",
+   "powod": "zasłania G"
+  },
+  {
+   "id": "G-E-oko",
+   "powod": "zasłania F"
+  },
+  {
+   "id": "G-E-gora",
+   "powod": "zasłania F"
+  },
+  {
+   "id": "G-SE-oko",
+   "powod": "kamera w E"
+  },
+  {
+   "id": "G-SE-gora",
+   "powod": "zasłania F"
+  }
+ ]
+}

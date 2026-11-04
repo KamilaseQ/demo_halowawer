@@ -1,0 +1,110 @@
+{
+ "opis": "Regiony pomiarowe scorecardu ΔE. Prostokąty [x0, y0, x1, y1] w ułamkach kadru (0–1, początek w lewym górnym rogu). 'ref' = render dewelopera, 'rt' = obraz runtime/GLB z kamery z ujecia-porownawcze.json (gdy brak, używany 'ref'). Regiony leżą wewnątrz płaszczyzn, z marginesem na niedokładność kadru.",
+ "miara": "de76",
+ "miara_opis": "Bramka: ΔE*ab (CIELAB 1976) median regionu — dosłownie wg zlecenia b6 i surowsza dla różnic nasycenia (np. pomarańczowe drewno). ΔE2000 raportowane pomocniczo.",
+ "progi": {"sciana": 10, "dach": 10, "podloga": 10, "sufit": 10, "szyba": 15, "zielen": 15, "niebo": 15, "info": null},
+ "typy": {
+  "sciana_jasna": "sciana", "sciana_taupe": "sciana", "sciana_ciemna": "sciana", "sciana_szczyt": "sciana",
+  "sciana_wn": "sciana", "zabudowa_drewno": "sciana", "brama": "sciana",
+  "dach": "dach", "podloga": "podloga", "sufit": "sufit",
+  "szyba": "szyba", "widok_za_szyba": "szyba", "zielen": "zielen", "niebo": "niebo",
+  "meble": "info", "tekstylia": "info"
+ },
+ "ujecia": {
+  "visualization-1": {"pora": "dzien", "regiony": [
+   {"id": "jasna", "typ": "sciana_jasna", "opis": "B, pas między kondygnacjami", "ref": [0.21, 0.665, 0.45, 0.70]},
+   {"id": "taupe", "typ": "sciana_taupe", "opis": "A, pas między kondygnacjami pod prawym oknem (bez ram i drzewa — decyzja b6)", "ref": [0.755, 0.665, 0.835, 0.69]},
+   {"id": "taupe-gora", "typ": "sciana_taupe", "opis": "A, pas pod okapem nad oknami piętra", "ref": [0.56, 0.372, 0.83, 0.402]},
+   {"id": "dachA", "typ": "dach", "opis": "dach A", "ref": [0.55, 0.415, 0.80, 0.445]},
+   {"id": "dachB", "typ": "dach", "opis": "dach B", "ref": [0.20, 0.44, 0.45, 0.465]},
+   {"id": "szyba", "typ": "szyba", "opis": "A, piętro, prawe okno", "ref": [0.75, 0.54, 0.80, 0.62], "rt": [0.765, 0.55, 0.80, 0.63]},
+   {"id": "zielen", "typ": "zielen", "opis": "pierwszy plan", "ref": [0.10, 0.92, 0.90, 0.99]},
+   {"id": "niebo", "typ": "niebo", "ref": [0.30, 0.05, 0.70, 0.25]}]},
+  "visualization-2": {"pora": "noc", "regiony": [
+   {"id": "jasna", "typ": "sciana_jasna", "opis": "lewy segment, pas między kondygnacjami", "ref": [0.40, 0.57, 0.60, 0.60]},
+   {"id": "ciemna", "typ": "sciana_ciemna", "opis": "prawy segment, lewa część", "ref": [0.665, 0.46, 0.70, 0.58]},
+   {"id": "dach", "typ": "dach", "ref": [0.40, 0.28, 0.50, 0.31]},
+   {"id": "okno", "typ": "szyba", "opis": "okno piętra, oświetlone", "ref": [0.42, 0.44, 0.48, 0.53]},
+   {"id": "zielen", "typ": "zielen", "ref": [0.10, 0.90, 0.90, 0.98]},
+   {"id": "niebo", "typ": "niebo", "ref": [0.30, 0.03, 0.70, 0.15]}]},
+  "visualization-3": {"pora": "dzien", "regiony": [
+   {"id": "taupe", "typ": "sciana_taupe", "opis": "D, pas między kondygnacjami", "ref": [0.21, 0.672, 0.47, 0.70]},
+   {"id": "jasna", "typ": "sciana_jasna", "opis": "C, pas między kondygnacjami", "ref": [0.52, 0.672, 0.80, 0.70]},
+   {"id": "dachD", "typ": "dach", "ref": [0.25, 0.44, 0.45, 0.47]},
+   {"id": "dachC", "typ": "dach", "ref": [0.55, 0.44, 0.78, 0.47]},
+   {"id": "brama", "typ": "brama", "opis": "brama garażowa D", "ref": [0.25, 0.74, 0.30, 0.83]},
+   {"id": "zielen", "typ": "zielen", "ref": [0.15, 0.91, 0.85, 0.98]},
+   {"id": "niebo", "typ": "niebo", "ref": [0.30, 0.05, 0.70, 0.25]}]},
+  "visualization-4": {"pora": "dzien", "regiony": [
+   {"id": "szczyt", "typ": "sciana_szczyt", "opis": "szczyt A (zielony)", "ref": [0.19, 0.60, 0.24, 0.68], "rt": [0.20, 0.58, 0.26, 0.66]},
+   {"id": "taupe", "typ": "sciana_taupe", "opis": "front A", "ref": [0.27, 0.655, 0.40, 0.69], "rt": [0.31, 0.625, 0.42, 0.655]},
+   {"id": "jasna", "typ": "sciana_jasna", "opis": "front B", "ref": [0.44, 0.655, 0.53, 0.69], "rt": [0.46, 0.625, 0.58, 0.655]},
+   {"id": "dach", "typ": "dach", "ref": [0.22, 0.43, 0.33, 0.47], "rt": [0.25, 0.40, 0.38, 0.45]},
+   {"id": "zielen", "typ": "zielen", "ref": [0.10, 0.85, 0.90, 0.98]},
+   {"id": "niebo", "typ": "niebo", "ref": [0.40, 0.05, 0.80, 0.30]}]},
+  "visualization-5": {"pora": "dzien", "regiony": [
+   {"id": "jasna", "typ": "sciana_jasna", "opis": "E, pas pod oknami piętra", "ref": [0.25, 0.54, 0.48, 0.60], "rt": [0.15, 0.725, 0.38, 0.75]},
+   {"id": "taupe", "typ": "sciana_taupe", "opis": "F, pas pod oknami piętra", "ref": [0.53, 0.545, 0.78, 0.60], "rt": [0.44, 0.725, 0.65, 0.75]},
+   {"id": "ciemna", "typ": "sciana_ciemna", "opis": "G, pas pod oknami piętra", "ref": [0.82, 0.55, 0.90, 0.60], "rt": [0.70, 0.725, 0.88, 0.75]},
+   {"id": "dach", "typ": "dach", "ref": [0.25, 0.31, 0.42, 0.36], "rt": [0.15, 0.48, 0.38, 0.55]},
+   {"id": "zielen", "typ": "zielen", "ref": [0.10, 0.92, 0.90, 0.99], "rt": [0.10, 0.95, 0.90, 0.99]},
+   {"id": "niebo", "typ": "niebo", "ref": [0.30, 0.05, 0.70, 0.25]}]},
+  "visualization-6": {"pora": "noc", "regiony": [
+   {"id": "taupe", "typ": "sciana_taupe", "opis": "G, nad oknami piętra", "ref": [0.10, 0.56, 0.25, 0.60], "rt": [0.10, 0.60, 0.28, 0.635]},
+   {"id": "jasna", "typ": "sciana_jasna", "opis": "E, nad oknami piętra", "ref": [0.43, 0.57, 0.52, 0.61], "rt": [0.45, 0.625, 0.55, 0.655]},
+   {"id": "dach", "typ": "dach", "ref": [0.10, 0.51, 0.24, 0.545], "rt": [0.11, 0.545, 0.26, 0.585]},
+   {"id": "okno", "typ": "szyba", "opis": "parter G, oświetlone", "ref": [0.11, 0.73, 0.16, 0.78], "rt": [0.14, 0.75, 0.17, 0.81]},
+   {"id": "zielen", "typ": "zielen", "ref": [0.10, 0.90, 0.90, 0.98]},
+   {"id": "niebo", "typ": "niebo", "ref": [0.10, 0.05, 0.50, 0.30]}]},
+  "interior-1": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.30, 0.03, 0.70, 0.12]},
+   {"id": "podloga", "typ": "podloga", "ref": [0.45, 0.90, 0.55, 0.98]},
+   {"id": "widok", "typ": "widok_za_szyba", "opis": "ogród za HS", "ref": [0.45, 0.38, 0.53, 0.52]},
+   {"id": "zaslona", "typ": "tekstylia", "ref": [0.24, 0.25, 0.30, 0.45], "rt": [0.21, 0.25, 0.28, 0.45]},
+   {"id": "sofa", "typ": "meble", "ref": [0.58, 0.72, 0.66, 0.82]}]},
+  "interior-2": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.30, 0.04, 0.60, 0.12]},
+   {"id": "sciana", "typ": "sciana_wn", "opis": "ściana TV", "ref": [0.39, 0.30, 0.45, 0.42]},
+   {"id": "dab", "typ": "zabudowa_drewno", "opis": "okładzina dębowa", "ref": [0.65, 0.30, 0.74, 0.55], "rt": [0.72, 0.25, 0.85, 0.55]},
+   {"id": "podloga", "typ": "podloga", "ref": [0.61, 0.76, 0.66, 0.86]},
+   {"id": "widok", "typ": "widok_za_szyba", "opis": "żywopłot za oknem", "ref": [0.21, 0.50, 0.26, 0.60]}]},
+  "interior-3": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.30, 0.04, 0.70, 0.14]},
+   {"id": "dab", "typ": "zabudowa_drewno", "opis": "ściana dębowa z grafiką", "ref": [0.36, 0.32, 0.48, 0.50]},
+   {"id": "sciana", "typ": "sciana_wn", "opis": "ściana TV (lewa)", "ref": [0.03, 0.25, 0.12, 0.40], "rt": [0.01, 0.28, 0.08, 0.42]},
+   {"id": "podloga", "typ": "podloga", "ref": [0.43, 0.89, 0.49, 0.98]}]},
+  "interior-4": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.30, 0.03, 0.70, 0.12]},
+   {"id": "sciana", "typ": "sciana_wn", "opis": "ściana przy drzwiach", "ref": [0.44, 0.30, 0.47, 0.45]},
+   {"id": "podloga", "typ": "podloga", "ref": [0.34, 0.80, 0.44, 0.94]},
+   {"id": "sofa", "typ": "meble", "ref": [0.52, 0.72, 0.62, 0.82]}]},
+  "interior-5": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.30, 0.03, 0.60, 0.10]},
+   {"id": "sciana", "typ": "sciana_wn", "opis": "ściana nad kuchnią", "ref": [0.76, 0.18, 0.81, 0.30], "rt": [0.81, 0.18, 0.86, 0.30]},
+   {"id": "dab", "typ": "zabudowa_drewno", "opis": "słupek kuchenny", "ref": [0.61, 0.25, 0.67, 0.50], "rt": [0.66, 0.25, 0.72, 0.50]},
+   {"id": "podloga", "typ": "podloga", "ref": [0.62, 0.63, 0.70, 0.67], "rt": [0.70, 0.78, 0.78, 0.86]},
+   {"id": "sofa", "typ": "meble", "ref": [0.15, 0.75, 0.35, 0.85]}]},
+  "interior-6": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.30, 0.03, 0.70, 0.10]},
+   {"id": "sciana", "typ": "sciana_wn", "opis": "nad TV", "ref": [0.10, 0.34, 0.24, 0.37], "rt": [0.01, 0.34, 0.15, 0.40]},
+   {"id": "podloga", "typ": "podloga", "ref": [0.76, 0.87, 0.94, 0.96]},
+   {"id": "widok", "typ": "widok_za_szyba", "opis": "żywopłot za HS", "ref": [0.57, 0.47, 0.62, 0.57]},
+   {"id": "sofa", "typ": "meble", "ref": [0.55, 0.72, 0.68, 0.80]}]},
+  "interior-7": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.30, 0.02, 0.60, 0.08], "rt": [0.50, 0.00, 0.65, 0.05]},
+   {"id": "szafa", "typ": "sciana_wn", "opis": "fronty szaf (szałwia)", "ref": [0.22, 0.25, 0.30, 0.45], "rt": [0.15, 0.25, 0.25, 0.45]},
+   {"id": "dab", "typ": "zabudowa_drewno", "opis": "ściana za łóżkiem", "ref": [0.55, 0.18, 0.62, 0.33], "rt": [0.62, 0.12, 0.75, 0.30]},
+   {"id": "podloga", "typ": "podloga", "ref": [0.05, 0.88, 0.18, 0.97], "rt": [0.15, 0.95, 0.30, 0.99]},
+   {"id": "posciel", "typ": "tekstylia", "ref": [0.40, 0.65, 0.60, 0.72], "rt": [0.45, 0.78, 0.65, 0.86]}]},
+  "interior-8": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.65, 0.00, 0.80, 0.05], "rt": [0.35, 0.00, 0.55, 0.04]},
+   {"id": "szafa", "typ": "sciana_wn", "opis": "fronty szaf", "ref": [0.45, 0.18, 0.52, 0.40]},
+   {"id": "nisza", "typ": "zabudowa_drewno", "opis": "nisza-domek (dąb)", "ref": [0.70, 0.28, 0.78, 0.42], "rt": [0.75, 0.25, 0.88, 0.40]},
+   {"id": "widok", "typ": "widok_za_szyba", "ref": [0.27, 0.38, 0.33, 0.52], "rt": [0.23, 0.30, 0.34, 0.46]}]},
+  "interior-10": {"pora": "dzien", "regiony": [
+   {"id": "sufit", "typ": "sufit", "ref": [0.30, 0.00, 0.50, 0.04]},
+   {"id": "sciana", "typ": "sciana_wn", "opis": "lamele za łóżkiem", "ref": [0.30, 0.20, 0.48, 0.31]},
+   {"id": "podloga", "typ": "podloga", "ref": [0.27, 0.90, 0.32, 0.98], "rt": [0.68, 0.90, 0.80, 0.97]},
+   {"id": "widok", "typ": "widok_za_szyba", "ref": [0.69, 0.42, 0.76, 0.55], "rt": [0.62, 0.42, 0.71, 0.55]}]}
+ }
+}

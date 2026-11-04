@@ -51,3 +51,7 @@ Every asset in `public/3d/` is licensed **CC0 1.0 Universal** (public domain ded
 - Textures: downloaded as JPG (Poly Haven `Diffuse` / `nor_gl` / `Rough` / `AO`; ambientCG `1K-JPG` `Color` / `NormalGL` / `Roughness` / `AmbientOcclusion`) and re-encoded for the web: colour, roughness and AO at JPEG q85 (roughness/AO as grayscale), normals at q90 4:4:4 (`fabric036` normal/AO at q80). `curly_teddy_natural` resampled from 1024x1009 to 1024x1024. `herringbone_parquet` kept at 2k, all others 1k.
 - HDRIs: Poly Haven 1k `.hdr` files unchanged. `*_bg.jpg` backgrounds are Poly Haven's tonemapped 8k JPG downscaled to 4096x2048 (JPEG q82).
 - Models: Poly Haven glTF (1k textures) optimized with glTF-Transform CLI v4.5.1: `optimize --compress meshopt --texture-compress webp --texture-size 1024`.
+
+## Neighbourhood (okolica/okolica-v1.glb)
+
+Buildings, streets and the football pitch around the estate: © OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright). A derived database (docs/inwestycja-3d/assets/okolica/README.md); kept as a separate file from the developer's BOR2 model. The attribution is shown on the /domy stage.

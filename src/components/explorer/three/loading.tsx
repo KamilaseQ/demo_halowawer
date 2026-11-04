@@ -33,6 +33,23 @@ manager.onLoad = () => {
 };
 manager.onError = () => notify();
 
+/* Diagnostics (dev, or ?debug=1 in production): what the gate is still waiting for. */
+const inflight = new Map<string, number>();
+if (typeof window !== "undefined") {
+  const start = manager.itemStart.bind(manager);
+  const end = manager.itemEnd.bind(manager);
+  manager.itemStart = (url: string) => {
+    inflight.set(url, performance.now());
+    start(url);
+  };
+  manager.itemEnd = (url: string) => {
+    inflight.delete(url);
+    end(url);
+  };
+  if (process.env.NODE_ENV !== "production" || new URLSearchParams(window.location.search).has("debug"))
+    (window as unknown as { __loading: unknown }).__loading = () => ({ ...state, inflight: [...inflight.keys()] });
+}
+
 export function subscribeLoading(fn: () => void) {
   listeners.add(fn);
   return () => void listeners.delete(fn);

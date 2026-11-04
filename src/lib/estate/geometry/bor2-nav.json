@@ -1,0 +1,599 @@
+{
+ "estate": {
+  "start": "wjazd",
+  "nodes": [
+   {
+    "id": "wjazd",
+    "label": "Wjazd",
+    "position": [
+     124.799,
+     -68.718
+    ],
+    "eyeY": 1.65,
+    "heading": 145.3,
+    "pitch": 0,
+    "camera": "PKT_Scene_2"
+   },
+   {
+    "id": "ulica",
+    "label": "Od ulicy",
+    "position": [
+     73.404,
+     -71.151
+    ],
+    "eyeY": 1.95,
+    "heading": 89.5,
+    "pitch": 0,
+    "camera": "PKT_W4"
+   },
+   {
+    "id": "ogrody-ab",
+    "label": "Ogrody A i B",
+    "position": [
+     87.147,
+     -27.224
+    ],
+    "eyeY": 1.65,
+    "heading": -54.1,
+    "pitch": 0,
+    "camera": "PKT_W3"
+   },
+   {
+    "id": "ogrody-cd",
+    "label": "Ogrody C i D",
+    "position": [
+     85.274,
+     -31.559
+    ],
+    "eyeY": 1.82,
+    "heading": -128.5,
+    "pitch": 0,
+    "camera": "PKT_Scene_26"
+   },
+   {
+    "id": "ogrody-efg",
+    "label": "Ogrody E, F, G",
+    "position": [
+     64.062,
+     -32.103
+    ],
+    "eyeY": 2,
+    "heading": -135.9,
+    "pitch": 0,
+    "camera": "PKT_Scene_9"
+   },
+   {
+    "id": "ogrod-g",
+    "label": "Ogród G",
+    "position": [
+     34.324,
+     -25.212
+    ],
+    "eyeY": 2.37,
+    "heading": -52.2,
+    "pitch": 0,
+    "camera": "PKT_W7"
+   }
+  ]
+ },
+ "G": {
+  "url": "/explorer/3d/bor2/wnetrza-v2/wnetrze-g.glb",
+  "bytes": 4929972,
+  "contract": true,
+  "floors": [
+   0.815,
+   3.787
+  ],
+  "bounds": [
+   33.385,
+   -59.776,
+   40.956,
+   -48.146
+  ],
+  "start": "salon",
+  "nodes": [
+   {
+    "id": "wejscie",
+    "label": "Wejście",
+    "level": 0,
+    "position": [
+     37,
+     -57.6
+    ],
+    "heading": 90,
+    "pitch": -4.6,
+    "eye": 1.66,
+    "camera": "PKT_WEJSCIE"
+   },
+   {
+    "id": "salon",
+    "label": "Salon",
+    "level": 0,
+    "position": [
+     39.3,
+     -55.6
+    ],
+    "heading": 106.7,
+    "pitch": -4.4,
+    "eye": 1.66,
+    "camera": "PKT_SALON"
+   },
+   {
+    "id": "jadalnia",
+    "label": "Jadalnia",
+    "level": 0,
+    "position": [
+     36.9,
+     -51.4
+    ],
+    "heading": -160.7,
+    "pitch": -4.3,
+    "eye": 1.66,
+    "camera": "PKT_JADALNIA"
+   },
+   {
+    "id": "kuchnia",
+    "label": "Kuchnia",
+    "level": 0,
+    "position": [
+     37.9,
+     -57.4
+    ],
+    "heading": -63.4,
+    "pitch": -4.1,
+    "eye": 1.66,
+    "camera": "PKT_KUCHNIA"
+   },
+   {
+    "id": "korytarz",
+    "label": "Korytarz",
+    "level": 1,
+    "position": [
+     37.4,
+     -54.9
+    ],
+    "heading": -90,
+    "pitch": -4.6,
+    "eye": 1.65,
+    "camera": "PKT_KORYTARZ"
+   },
+   {
+    "id": "sypialnia",
+    "label": "Sypialnia",
+    "level": 1,
+    "position": [
+     38,
+     -51.3
+    ],
+    "heading": -19.3,
+    "pitch": -4.3,
+    "eye": 1.65,
+    "camera": "PKT_SYPIALNIA"
+   },
+   {
+    "id": "pokoj-dziecka",
+    "label": "Pokój dziecka",
+    "level": 1,
+    "position": [
+     36.6,
+     -52.9
+    ],
+    "heading": 149,
+    "pitch": -3.9,
+    "eye": 1.65,
+    "camera": "PKT_POKOJ_DZIECKA"
+   },
+   {
+    "id": "pokoj",
+    "label": "Pokój",
+    "level": 1,
+    "position": [
+     36.4,
+     -57
+    ],
+    "heading": -125,
+    "pitch": -3.7,
+    "eye": 1.65,
+    "camera": "PKT_POKOJ_1"
+   },
+   {
+    "id": "pokoj-2",
+    "label": "Pokój 2",
+    "level": 1,
+    "position": [
+     38.1,
+     -57.2
+    ],
+    "heading": -59,
+    "pitch": -3.9,
+    "eye": 1.65,
+    "camera": "PKT_POKOJ_2"
+   },
+   {
+    "id": "lazienka",
+    "label": "Łazienka",
+    "level": 1,
+    "position": [
+     39,
+     -55.6
+    ],
+    "heading": 21.8,
+    "pitch": -4.2,
+    "eye": 1.65,
+    "camera": "PKT_LAZIENKA"
+   }
+  ],
+  "lenses": [
+   {
+    "camera": "PKT_JADALNIA",
+    "position": [
+     36.9,
+     2.48,
+     -51.4
+    ],
+    "heading": -160.7,
+    "pitch": -4.3,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_KORYTARZ",
+    "position": [
+     37.4,
+     5.44,
+     -54.9
+    ],
+    "heading": -90,
+    "pitch": -4.6,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_KUCHNIA",
+    "position": [
+     37.9,
+     2.48,
+     -57.4
+    ],
+    "heading": -63.4,
+    "pitch": -4.1,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_LAZIENKA",
+    "position": [
+     39,
+     5.44,
+     -55.6
+    ],
+    "heading": 21.8,
+    "pitch": -4.2,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_POKOJ_1",
+    "position": [
+     36.4,
+     5.44,
+     -57
+    ],
+    "heading": -125,
+    "pitch": -3.7,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_POKOJ_2",
+    "position": [
+     38.1,
+     5.44,
+     -57.2
+    ],
+    "heading": -59,
+    "pitch": -3.9,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_POKOJ_DZIECKA",
+    "position": [
+     36.6,
+     5.44,
+     -52.9
+    ],
+    "heading": 149,
+    "pitch": -3.9,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_SALON",
+    "position": [
+     39.3,
+     2.48,
+     -55.6
+    ],
+    "heading": 106.7,
+    "pitch": -4.4,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_SYPIALNIA",
+    "position": [
+     38,
+     5.44,
+     -51.3
+    ],
+    "heading": -19.3,
+    "pitch": -4.3,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_WEJSCIE",
+    "position": [
+     37,
+     2.48,
+     -57.6
+    ],
+    "heading": 90,
+    "pitch": -4.6,
+    "hfov": 75
+   }
+  ]
+ },
+ "B": {
+  "url": "/explorer/3d/bor2/wnetrza-v2/wnetrze-b.glb",
+  "bytes": 5466360,
+  "contract": true,
+  "floors": [
+   0.274,
+   3.23
+  ],
+  "bounds": [
+   89.551,
+   -49.006,
+   100.587,
+   -36.686
+  ],
+  "start": "salon",
+  "nodes": [
+   {
+    "id": "wejscie",
+    "label": "Wejście",
+    "level": 0,
+    "position": [
+     97.6,
+     -46.6
+    ],
+    "heading": 90,
+    "pitch": -4.6,
+    "eye": 1.65,
+    "camera": "PKT_WEJSCIE"
+   },
+   {
+    "id": "salon",
+    "label": "Salon",
+    "level": 0,
+    "position": [
+     94.6,
+     -43
+    ],
+    "heading": 68.2,
+    "pitch": -4.2,
+    "eye": 1.65,
+    "camera": "PKT_SALON"
+   },
+   {
+    "id": "kuchnia",
+    "label": "Kuchnia",
+    "level": 0,
+    "position": [
+     97.1,
+     -42
+    ],
+    "heading": 16.7,
+    "pitch": -4.4,
+    "eye": 1.65,
+    "camera": "PKT_KUCHNIA"
+   },
+   {
+    "id": "garaz",
+    "label": "Garaz",
+    "level": 0,
+    "position": [
+     94.6,
+     -44.4
+    ],
+    "heading": -111.8,
+    "pitch": -4.2,
+    "eye": 1.65,
+    "camera": "PKT_GARAZ"
+   },
+   {
+    "id": "korytarz",
+    "label": "Korytarz",
+    "level": 1,
+    "position": [
+     96,
+     -44.3
+    ],
+    "heading": -90,
+    "pitch": -4.6,
+    "eye": 1.65,
+    "camera": "PKT_KORYTARZ"
+   },
+   {
+    "id": "sypialnia",
+    "label": "Sypialnia",
+    "level": 1,
+    "position": [
+     96,
+     -39.8
+    ],
+    "heading": -36.9,
+    "pitch": -4.6,
+    "eye": 1.65,
+    "camera": "PKT_SYPIALNIA"
+   },
+   {
+    "id": "pokoj-dziecka",
+    "label": "Pokój dziecka",
+    "level": 1,
+    "position": [
+     93.2,
+     -41.6
+    ],
+    "heading": 116.6,
+    "pitch": -4.1,
+    "eye": 1.65,
+    "camera": "PKT_POKOJ_DZIECKA"
+   },
+   {
+    "id": "pokoj",
+    "label": "Pokój",
+    "level": 1,
+    "position": [
+     96.9,
+     -46.5
+    ],
+    "heading": -59,
+    "pitch": -3.9,
+    "eye": 1.65,
+    "camera": "PKT_POKOJ_2"
+   },
+   {
+    "id": "lazienka",
+    "label": "Łazienka",
+    "level": 1,
+    "position": [
+     93.9,
+     -44.6
+    ],
+    "heading": 168.7,
+    "pitch": -4.5,
+    "eye": 1.65,
+    "camera": "PKT_LAZIENKA"
+   },
+   {
+    "id": "pokoj-hobby",
+    "label": "Pokoj hobby",
+    "level": 1,
+    "position": [
+     94.3,
+     -46.6
+    ],
+    "heading": -121,
+    "pitch": -3.9,
+    "eye": 1.65,
+    "camera": "PKT_POKOJ_HOBBY"
+   }
+  ],
+  "lenses": [
+   {
+    "camera": "PKT_GARAZ",
+    "position": [
+     94.6,
+     1.92,
+     -44.4
+    ],
+    "heading": -111.8,
+    "pitch": -4.2,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_KORYTARZ",
+    "position": [
+     96,
+     4.88,
+     -44.3
+    ],
+    "heading": -90,
+    "pitch": -4.6,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_KUCHNIA",
+    "position": [
+     97.1,
+     1.92,
+     -42
+    ],
+    "heading": 16.7,
+    "pitch": -4.4,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_LAZIENKA",
+    "position": [
+     93.9,
+     4.88,
+     -44.6
+    ],
+    "heading": 168.7,
+    "pitch": -4.5,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_POKOJ_2",
+    "position": [
+     96.9,
+     4.88,
+     -46.5
+    ],
+    "heading": -59,
+    "pitch": -3.9,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_POKOJ_DZIECKA",
+    "position": [
+     93.2,
+     4.88,
+     -41.6
+    ],
+    "heading": 116.6,
+    "pitch": -4.1,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_POKOJ_HOBBY",
+    "position": [
+     94.3,
+     4.88,
+     -46.6
+    ],
+    "heading": -121,
+    "pitch": -3.9,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_SALON",
+    "position": [
+     94.6,
+     1.92,
+     -43
+    ],
+    "heading": 68.2,
+    "pitch": -4.2,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_SYPIALNIA",
+    "position": [
+     96,
+     4.88,
+     -39.8
+    ],
+    "heading": -36.9,
+    "pitch": -4.6,
+    "hfov": 75
+   },
+   {
+    "camera": "PKT_WEJSCIE",
+    "position": [
+     97.6,
+     1.92,
+     -46.6
+    ],
+    "heading": 90,
+    "pitch": -4.6,
+    "hfov": 75
+   }
+  ]
+ }
+}

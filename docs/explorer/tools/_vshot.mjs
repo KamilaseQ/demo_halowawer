@@ -3,7 +3,7 @@
 // Usage: node _vshot.mjs <origin> <outPrefix>   → <outPrefix>-{estate,estate-noc,house,house-noc,house-l0}.png
 import { chromium } from "playwright-core";
 const [, , origin, prefix] = process.argv;
-const browser = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"] });
+const browser = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--no-proxy-server"] });
 const shots = [
   { name: "estate", url: "/domy?debug=1", set: { entry: "model" } },
   { name: "estate-noc", url: "/domy?debug=1", set: { entry: "model", timeOfDay: "noc" } },

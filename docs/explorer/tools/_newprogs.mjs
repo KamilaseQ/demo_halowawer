@@ -1,7 +1,7 @@
 // Lists shader programs created after the scene gate opened (should be none), per phase. Scratch tool of the perf pass.
 import { chromium } from "playwright-core";
 const [, , url] = process.argv;
-const browser = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"] });
+const browser = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--no-proxy-server"] });
 const W = 1440, H = 900;
 const page = await browser.newPage({ viewport: { width: W, height: H } });
 page.on("pageerror", (e) => console.log("[pageerror]", e.message.slice(0, 200)));

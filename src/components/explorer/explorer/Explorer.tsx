@@ -28,6 +28,7 @@ const Stage = dynamic(() => import("../three/Stage"), { ssr: false });
 // UI that only matters once the scene runs or a mode is entered: split out of the first-load bundle.
 const StageControls = dynamic(() => import("./StageControls").then((m) => m.StageControls), { ssr: false });
 const WalkHud = dynamic(() => import("./WalkHud").then((m) => m.WalkHud), { ssr: false });
+const EstateWalkHud = dynamic(() => import("./EstateWalkHud").then((m) => m.EstateWalkHud), { ssr: false });
 const Gallery = dynamic(() => import("./Gallery").then((m) => m.Gallery), { ssr: false });
 const PlanView = dynamic(() => import("./PlanView").then((m) => m.PlanView), { ssr: false });
 
@@ -95,6 +96,7 @@ export function Explorer({ children }: { children: ReactNode }) {
   const progress = useExplorer((s) => s.progress);
   const settled = useExplorer((s) => s.settled);
   const dissolving = useExplorer((s) => !!s.dissolve);
+  const clean = useExplorer((s) => s.clean);
   const mounted = useSyncExternalStore(noSubscribe, webglSnapshot, serverFalse);
   const hydrated = useSyncExternalStore(noSubscribe, clientTrue, serverFalse);
   const [sheet, setSheet] = useState<SheetState>("peek");
@@ -116,7 +118,9 @@ export function Explorer({ children }: { children: ReactNode }) {
 
   const house = view === "house" ? getHouse(houseId) : undefined;
   const with3d = !!house && has3dInterior(house);
-  const immersive = with3d && mode === "walk";
+  // Walking (a house or the estate) takes the whole screen: panel and header step aside.
+  const estateWalk = view === "estate" && mode === "walk";
+  const immersive = (with3d && mode === "walk") || estateWalk;
 
   // Each new place starts with the sheet collapsed (name · price · CTA) so the model stays visible.
   // Adjusted during render (React's pattern for state derived from a changed prop), not in an effect.
@@ -181,7 +185,7 @@ export function Explorer({ children }: { children: ReactNode }) {
   /* The poster shows this place until the first 3D frame: the room's render when the link opens the walk,
      the house's plan or the estate's aerial render. */
   const model = house ? modelFor(house) : null;
-  const walkStill = with3d && mode === "walk" && model ? renderFor(node ?? model.walk.start, finish) : null;
+  const walkStill = with3d && mode === "walk" && model && model.source !== "bor2" ? renderFor(node ?? model.walk.start, finish) : null;
   const poster = walkStill ? walkStill.src : ESTATE_PHOTO.src;
   const finishName = FINISHES.find((f) => f.id === finish)?.name;
   const loading = mounted && !ready && (view === "house" || entry === "model");
@@ -193,6 +197,7 @@ export function Explorer({ children }: { children: ReactNode }) {
       data-immersive={immersive || undefined}
       data-view={view}
       data-panel={collapsed ? "collapsed" : undefined}
+      data-clean={clean || undefined}
       aria-label="Osiedle Halo Wawer w 3D"
     >
       <div className={styles.stage} data-lenis-prevent>
@@ -272,8 +277,11 @@ export function Explorer({ children }: { children: ReactNode }) {
             </p>
           )}
           {/* House positions in the maquette are drawn from the site plan, not surveyed. */}
-          {view === "estate" && entry === "model" && <p className={styles.caption}>Położenie domów poglądowe</p>}
-          {immersive && <WalkHud />}
+          {view === "estate" && entry === "model" && mode !== "walk" && <p className={styles.caption}>Położenie domów poglądowe</p>}
+          {/* ODbL: the neighbourhood is OpenStreetMap data (okolica.glb). */}
+          {ready && entry === "model" && <p className={styles.osm}>© OpenStreetMap contributors</p>}
+          {immersive && !estateWalk && <WalkHud />}
+          {estateWalk && ready && <EstateWalkHud />}
         </>
       )}
       <WhatsAppFab />

@@ -8,7 +8,7 @@ const mobile = profile === "mobile";
 const browser = await chromium.launch({
   executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
-  args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--disable-gpu-vsync", "--disable-frame-rate-limit"],
+  args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--no-proxy-server", "--disable-gpu-vsync", "--disable-frame-rate-limit"],
 });
 const W = mobile ? 390 : 1440, H = mobile ? 844 : 900;
 const context = await browser.newContext(mobile ? { viewport: { width: W, height: H }, deviceScaleFactor: 3, isMobile: true, hasTouch: true } : { viewport: { width: W, height: H } });

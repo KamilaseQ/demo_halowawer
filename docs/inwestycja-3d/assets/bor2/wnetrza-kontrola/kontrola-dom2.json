@@ -1,0 +1,342 @@
+{
+ "dom": "B",
+ "punkty": {
+  "PKT_GARAZ": {
+   "pozycja": [
+    94.6,
+    44.4,
+    1.92
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.636,
+   "sufit": "TYNK"
+  },
+  "PKT_KORYTARZ": {
+   "pozycja": [
+    96.0,
+    44.3,
+    4.88
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.596,
+   "sufit": "TYNK"
+  },
+  "PKT_KUCHNIA": {
+   "pozycja": [
+    97.1,
+    42.0,
+    1.92
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.64,
+   "sufit": "TYNK"
+  },
+  "PKT_LAZIENKA": {
+   "pozycja": [
+    93.9,
+    44.6,
+    4.88
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.59,
+   "sufit": "TYNK"
+  },
+  "PKT_POKOJ_2": {
+   "pozycja": [
+    96.9,
+    46.5,
+    4.88
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.588,
+   "sufit": "TYNK"
+  },
+  "PKT_POKOJ_DZIECKA": {
+   "pozycja": [
+    93.2,
+    41.6,
+    4.88
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.171,
+   "sufit": "TYNK"
+  },
+  "PKT_POKOJ_HOBBY": {
+   "pozycja": [
+    94.3,
+    46.6,
+    4.88
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.588,
+   "sufit": "TYNK"
+  },
+  "PKT_SALON": {
+   "pozycja": [
+    94.6,
+    43.0,
+    1.92
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.64,
+   "sufit": "TYNK"
+  },
+  "PKT_SYPIALNIA": {
+   "pozycja": [
+    96.0,
+    39.8,
+    4.88
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.6,
+   "sufit": "TYNK"
+  },
+  "PKT_WEJSCIE": {
+   "pozycja": [
+    96.6,
+    46.4,
+    1.92
+   ],
+   "dziury_promienie": 0,
+   "dziury_przyklady": [],
+   "wysokosc_w_swietle": 2.636,
+   "sufit": "TYNK"
+  }
+ },
+ "okna": [
+  {
+   "szyba": {
+    "x": [
+     91.86,
+     91.86
+    ],
+    "y": [
+     39.61,
+     40.34
+    ],
+    "z": [
+     0.38,
+     2.39
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.044,
+   "rama_zakres": [
+    39.845,
+    40.098
+   ],
+   "rama_z": [
+    0.289,
+    2.419
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     91.88,
+     91.88
+    ],
+    "y": [
+     43.64,
+     44.38
+    ],
+    "z": [
+     1.59,
+     2.34
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.017,
+   "rama_zakres": [
+    43.56,
+    44.46
+   ],
+   "rama_z": [
+    1.51,
+    2.42
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     91.88,
+     91.88
+    ],
+    "y": [
+     43.64,
+     44.38
+    ],
+    "z": [
+     4.54,
+     5.29
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.03,
+   "rama_zakres": [
+    43.56,
+    44.46
+   ],
+   "rama_z": [
+    4.46,
+    5.37
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     92.77,
+     95.11
+    ],
+    "y": [
+     48.79,
+     48.79
+    ],
+    "z": [
+     3.53,
+     5.34
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.009,
+   "rama_zakres": [
+    92.7,
+    95.21
+   ],
+   "rama_z": [
+    3.46,
+    5.41
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     92.8,
+     95.14
+    ],
+    "y": [
+     39.23,
+     39.23
+    ],
+    "z": [
+     3.53,
+     5.34
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.012,
+   "rama_zakres": [
+    93.077,
+    94.571
+   ],
+   "rama_z": [
+    3.404,
+    5.38
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     92.8,
+     96.08
+    ],
+    "y": [
+     39.23,
+     39.23
+    ],
+    "z": [
+     0.35,
+     2.39
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.022,
+   "rama_zakres": [
+    92.756,
+    95.602
+   ],
+   "rama_z": [
+    0.276,
+    2.354
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     96.28,
+     98.62
+    ],
+    "y": [
+     39.23,
+     39.23
+    ],
+    "z": [
+     3.53,
+     5.34
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.012,
+   "rama_zakres": [
+    96.557,
+    98.051
+   ],
+   "rama_z": [
+    3.404,
+    5.38
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     96.32,
+     98.66
+    ],
+    "y": [
+     48.79,
+     48.79
+    ],
+    "z": [
+     3.53,
+     5.34
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": 0.009,
+   "rama_zakres": [
+    96.21,
+    98.73
+   ],
+   "rama_z": [
+    3.46,
+    5.41
+   ]
+  },
+  {
+   "szyba": {
+    "x": [
+     97.27,
+     98.62
+    ],
+    "y": [
+     39.23,
+     39.23
+    ],
+    "z": [
+     0.38,
+     2.39
+    ]
+   },
+   "rama_plaszczyzna_odchylka_m": -0.044,
+   "rama_zakres": [
+    97.794,
+    98.224
+   ],
+   "rama_z": [
+    0.289,
+    2.419
+   ]
+  }
+ ]
+}

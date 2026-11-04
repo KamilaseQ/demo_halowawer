@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>html,body{margin:0;background:#d9e1e4}canvas{display:block}</style>
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<script type="module">
+// Podgląd GLB dla scorecardu (zrzuty.mjs). Same look as docs/inwestycja-3d/assets/bor2/verify.html (GLTFLoader + Meshopt, NeutralToneMapping, RoomEnvironment,
+// warm sun + hemisphere), plus: several GLBs (?glb=a,b), any frame size, manual cameras.
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+
+window.errors = [];
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.shadowMap.enabled = true;
+renderer.toneMapping = THREE.NeutralToneMapping;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color("#d9e1e4");
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.6;
+const camera = new THREE.PerspectiveCamera(35, 16 / 9, 0.05, 5000);
+const sun = new THREE.DirectionalLight("#ffe7c7", 3.0);
+sun.castShadow = true;
+sun.shadow.mapSize.set(4096, 4096);
+sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.05;
+scene.add(sun, sun.target, new THREE.HemisphereLight("#dbe6ef", "#7d8a5c", 0.8));
+
+const urls = new URLSearchParams(location.search).get("glb").split(",");
+const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+const cams = new Map();
+const box = new THREE.Box3();
+for (const url of urls) {
+  try {
+    const gltf = await loader.loadAsync(url);
+    gltf.scene.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+    scene.add(gltf.scene);
+    box.expandByObject(gltf.scene);
+    for (const c of gltf.cameras) cams.set(c.name || c.parent?.name, c);
+  } catch (e) { window.errors.push(url + ": " + String(e && e.message || e)); }
+}
+scene.updateMatrixWorld(true);
+const size = box.getSize(new THREE.Vector3()), center = box.getCenter(new THREE.Vector3());
+const radius = size.length() / 2;
+sun.position.copy(center).add(new THREE.Vector3(-0.71, 0.6, 0.55).multiplyScalar(radius * 1.5));
+sun.target.position.copy(center);
+Object.assign(sun.shadow.camera, { left: -radius, right: radius, top: radius, bottom: -radius, near: 0.5, far: radius * 4 });
+sun.shadow.camera.updateProjectionMatrix();
+
+window.boxes = () => {
+  const out = [];
+  scene.traverse((o) => {
+    if (!o.isMesh && !(o.children.length && o.parent && o.parent.parent === scene)) return;
+    if (o.parent?.parent !== scene && o.parent !== scene && o.parent?.parent?.parent !== scene) return;
+    const b = new THREE.Box3().setFromObject(o);
+    if (b.isEmpty()) return;
+    out.push({ name: o.name, min: b.min.toArray().map((v) => +v.toFixed(1)), max: b.max.toArray().map((v) => +v.toFixed(1)) });
+  });
+  return out;
+};
+window.cameraList = () => [...cams.entries()].map(([name, c]) => {
+  const p = c.getWorldPosition(new THREE.Vector3()), d = c.getWorldDirection(new THREE.Vector3());
+  return { name, type: c.type, position: p.toArray().map((v) => +v.toFixed(3)), direction: d.toArray().map((v) => +v.toFixed(4)), yfov: c.isPerspectiveCamera ? +c.fov.toFixed(2) : null };
+});
+
+/**
+ * spec: { camera: name } or { position:[x,y,z], target:[x,y,z], yfov } ; frame: { w, h, fit: "v"|"h" }
+ * fit "v" keeps the camera's vertical FOV (glTF), "h" keeps the horizontal FOV the camera had at 16:9.
+ */
+window.shot = (spec, frame) => {
+  const { w = 1600, h = 900, fit = "v" } = frame || {};
+  renderer.setSize(w, h, false);
+  let cam;
+  if (spec.camera) {
+    const src = cams.get(spec.camera) ?? cams.get(THREE.PropertyBinding.sanitizeNodeName(spec.camera));
+    if (!src || !src.isPerspectiveCamera) return null;
+    cam = camera;
+    cam.position.copy(src.getWorldPosition(new THREE.Vector3()));
+    cam.quaternion.copy(src.getWorldQuaternion(new THREE.Quaternion()));
+    let fov = spec.yfov ?? src.fov;
+    if (fit === "h") {
+      const hf = 2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(fov) / 2) * (16 / 9));
+      fov = THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(hf / 2) / (w / h)));
+    }
+    cam.fov = fov;
+    if (spec.dolly) cam.position.addScaledVector(src.getWorldDirection(new THREE.Vector3()), -spec.dolly);
+    if (spec.offset) cam.position.add(new THREE.Vector3().fromArray(spec.offset));
+    if (spec.yaw) cam.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(spec.yaw)); // + = turn left
+  } else if (spec.orbit) {
+    // Compass framing: look toward bearing `az` (deg, 0 = N, 90 = E; model +X = 100.5°), `el` deg down, `dist` m from target.
+    const { target, az, el, dist } = spec.orbit;
+    const a = THREE.MathUtils.degToRad(az - 100.5), e = THREE.MathUtils.degToRad(el);
+    const d = new THREE.Vector3(Math.cos(a) * Math.cos(e), -Math.sin(e), Math.sin(a) * Math.cos(e));
+    const t = new THREE.Vector3().fromArray(target);
+    cam = camera;
+    cam.position.copy(t).addScaledVector(d, -dist);
+    cam.up.set(0, 1, 0);
+    cam.lookAt(t);
+    cam.fov = spec.yfov;
+  } else {
+    cam = camera;
+    cam.position.fromArray(spec.position);
+    cam.up.set(0, 1, 0);
+    cam.lookAt(new THREE.Vector3().fromArray(spec.target));
+    cam.fov = spec.yfov;
+  }
+  cam.near = spec.near ?? 0.05; cam.far = 5000;
+  cam.aspect = w / h;
+  cam.updateProjectionMatrix();
+  // Vertical lens shift (architectural 2-point perspective): fraction of frame height, + = horizon lower / more sky.
+  if (spec.shift) { cam.projectionMatrix.elements[9] += 2 * spec.shift; cam.projectionMatrixInverse.copy(cam.projectionMatrix).invert(); }
+  const hidden = [];
+  for (const n of spec.hide || []) { const o = scene.getObjectByName(n) ?? scene.getObjectByName(THREE.PropertyBinding.sanitizeNodeName(n)); if (o) { o.visible = false; hidden.push(o); } else window.errors.push("hide: no " + n); }
+  setTimeout(() => hidden.forEach((o) => (o.visible = true)), 0);
+  window.lastCam = { position: cam.position.toArray().map((v) => +v.toFixed(3)), direction: cam.getWorldDirection(new THREE.Vector3()).toArray().map((v) => +v.toFixed(4)), yfov: +cam.fov.toFixed(2) };
+  renderer.render(scene, cam);
+  return renderer.domElement.toDataURL("image/jpeg", 0.9);
+};
+window.ready = true;
+</script>
+</body>
+</html>

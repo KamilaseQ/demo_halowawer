@@ -955,3 +955,15 @@
     background: var(--chip);
   }
 }
+
+/* Estate walk: next to a house, the way in (bottom centre, above the time-of-day bar). */
+.enterHouse {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  bottom: calc(var(--dock) + var(--inset) + 72px);
+  display: flex;
+  gap: 8px;
+  translate: -50% 0;
+  animation: hud-in 420ms var(--ease-out) both;
+}

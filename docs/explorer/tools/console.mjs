@@ -11,7 +11,7 @@ const NOISE = /X3595|X4122|THREE\.Clock|Program Info Log/;
 const browser = await chromium.launch({
   executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
-  args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"],
+  args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--no-proxy-server"],
 });
 let total = 0;
 for (const [vp, size] of Object.entries(VIEWPORTS)) {

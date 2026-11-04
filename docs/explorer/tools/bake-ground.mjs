@@ -13,7 +13,7 @@ const [, , origin, outDir] = process.argv;
 const browser = await chromium.launch({
   executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
   headless: true,
-  args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"],
+  args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--no-proxy-server"],
 });
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 await page.goto(`${origin}/domy?debug=1&paintground`, { waitUntil: "domcontentloaded" });

@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>html,body{margin:0;background:#dfe6ec}canvas{display:block}</style>
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<script type="module">
+// Podgląd wnętrza BOR2 jak w runtime (sesja 55): słońce "Dzień" + niebo (HDRI) + odbicie (hemisphere),
+// lightmapy z extras węzłów (uv1, sRGB, flipY=false, envMapIntensity <= 0,25), tone mapping Neutral.
+// Bez N8AO/bloom/winiety runtime'u. ?glb=...&lm=1|0
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
+import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
+
+const q = new URLSearchParams(location.search);
+const W = 1280, H = 720;
+window.errors = [];
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.VSMShadowMap;
+renderer.toneMapping = THREE.NeutralToneMapping;
+renderer.toneMappingExposure = 1.0;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+
+// Niebo i "ogród" widoczny przez okna (zastępuje zewnętrze: runtime pokazuje tam sąsiednie domy i trawnik).
+const skyTex = (() => {
+  const c = document.createElement("canvas"); c.width = 2; c.height = 256;
+  const g = c.getContext("2d"), gr = g.createLinearGradient(0, 0, 0, 256);
+  gr.addColorStop(0, "#5a8fd0"); gr.addColorStop(0.5, "#dfe6ec"); gr.addColorStop(0.52, "#7f9a5a"); gr.addColorStop(1, "#5d7a3f");
+  g.fillStyle = gr; g.fillRect(0, 0, 2, 256);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.mapping = THREE.EquirectangularReflectionMapping; return t;
+})();
+scene.background = skyTex;
+
+// Słońce "Dzień" (daylight.ts): wektor DO słońca w układzie modelu (Blender X,Y,Z-góra) (-0,711,-0,548,0,440)
+const sunDir = new THREE.Vector3(-0.711, 0.440, 0.548).normalize();
+const sun = new THREE.DirectionalLight("#ffe2c2", 4.4);
+sun.castShadow = true;
+sun.shadow.mapSize.set(4096, 4096);
+sun.shadow.radius = 5; sun.shadow.blurSamples = 12;
+sun.shadow.bias = -0.0003; sun.shadow.normalBias = 0.025;
+const hemi = new THREE.HemisphereLight("#c9d8ee", "#a8916e", 1.5);
+scene.add(sun, sun.target, hemi);
+const lmOn = q.get("lm") !== "0";
+hemi.intensity = lmOn ? 1.5 * (parseFloat(q.get("hemi") ?? "1")) : 1.5;
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+try {
+  const hdr = await new HDRLoader().loadAsync("/public/explorer/3d/hdri/zawiszy_czarnego_512.hdr");
+  hdr.mapping = THREE.EquirectangularReflectionMapping;
+  scene.environment = pmrem.fromEquirectangular(hdr).texture;
+} catch (e) { window.errors.push("hdr: " + e.message); }
+scene.environmentIntensity = 0.95;
+
+const url = q.get("glb");
+let gltf;
+try {
+  gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url);
+} catch (e) { window.errors.push(String(e && e.message || e)); window.ready = true; throw e; }
+const model = gltf.scene;
+scene.add(model);
+const base = url.substring(0, url.lastIndexOf("/") + 1);
+const texLoader = new THREE.TextureLoader();
+const lmCache = new Map();
+const lmJobs = [];
+let lmNodes = 0;
+// extras węzła glTF trafiają do userData obiektu węzła: przy wielu prymitywach to Group z dziećmi Mesh.
+const lmOf = (o) => { for (let p = o; p; p = p.parent) if (p.userData && p.userData.lightMap) return p.userData; return null; };
+model.traverse((o) => {
+  if (!o.isMesh) return;
+  const mats = [].concat(o.material);
+  const transparent = mats.every((m) => m.transparent);
+  o.castShadow = !transparent; o.receiveShadow = true;
+  const ex = lmOf(o);
+  if (lmOn && ex) {
+    lmNodes++;
+    let t = lmCache.get(ex.lightMap);
+    if (!t) {
+      t = texLoader.loadAsync(base + ex.lightMap).then((tx) => { tx.colorSpace = THREE.SRGBColorSpace; tx.flipY = false; tx.channel = 1; tx.needsUpdate = true; return tx; });
+      lmCache.set(ex.lightMap, t); lmJobs.push(t);
+    }
+    const copy = (m) => { const c = m.clone(); t.then((tx) => { c.lightMap = tx; c.lightMapIntensity = (ex.lightMapIntensity ?? 1) * parseFloat(q.get("lmk") ?? "1"); c.needsUpdate = true; }); c.envMapIntensity = Math.min(c.envMapIntensity ?? 1, 0.25); return c; };
+    o.material = Array.isArray(o.material) ? o.material.map(copy) : copy(o.material);
+  }
+});
+try { await Promise.all(lmJobs); } catch (e) { window.errors.push("lightmap: " + e.message); }
+
+const box = new THREE.Box3().setFromObject(model);
+const center = box.getCenter(new THREE.Vector3());
+sun.position.copy(center).addScaledVector(sunDir, 80);
+sun.target.position.copy(center);
+Object.assign(sun.shadow.camera, { left: -14, right: 14, top: 14, bottom: -14, near: 1, far: 200 });
+sun.shadow.camera.updateProjectionMatrix();
+
+// Trawnik na wysokości terenu (pod podłogą parteru).
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: "#6f8b4a", roughness: 1 }));
+ground.position.set(center.x, box.min.y - 0.02, center.z); ground.receiveShadow = true;
+scene.add(ground);
+
+const mats = new Map(); let meshes = 0, tris = 0;
+model.traverse((o) => { if (!o.isMesh) return; meshes++; tris += (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3; for (const m of [].concat(o.material)) mats.set(m.name, m); });
+window.info = { meshes, tris: Math.round(tris), materials: mats.size, lmNodes, names: model.children.map((c) => c.name), cameras: gltf.cameras.map((c) => c.name || c.parent?.name) };
+
+const cam = new THREE.PerspectiveCamera(50, W / H, 0.05, 1000);
+const refImg = async (src) => { const im = new Image(); im.src = src; await im.decode(); return im; };
+// shot: {pos:[x,y,z] (GLB), dir:[...], yfov, near, render: url | null, label}
+window.shot = async (s) => {
+  if (s.cam) {
+    const c = gltf.cameras.find((c) => (c.name || c.parent?.name) === s.cam || c.parent?.name === s.cam);
+    if (!c) return null;
+    c.updateWorldMatrix(true, false);
+    s.pos = c.getWorldPosition(new THREE.Vector3()).toArray();
+    const d = c.getWorldDirection(new THREE.Vector3());
+    d.y = 0; d.normalize().applyAxisAngle(new THREE.Vector3(0, 1, 0), ((s.yaw || 0) * Math.PI) / 180);
+    d.y = -0.12; s.dir = d.toArray();
+    s.yfov = s.yfov ?? 60;
+  }
+  cam.position.fromArray(s.pos);
+  cam.fov = s.yfov; cam.near = s.near ?? 0.05; cam.aspect = W / H;
+  cam.up.set(0, 1, 0);
+  cam.lookAt(cam.position.clone().add(new THREE.Vector3().fromArray(s.dir)));
+  cam.updateProjectionMatrix();
+  if (s.shift) cam.projectionMatrix.elements[9] += 2 * s.shift;
+  renderer.render(scene, cam);
+  const out = document.createElement("canvas");
+  const pair = !!s.render;
+  out.width = pair ? W * 2 + 8 : W; out.height = H + 34;
+  const g = out.getContext("2d");
+  g.fillStyle = "#fff"; g.fillRect(0, 0, out.width, out.height);
+  g.drawImage(renderer.domElement, 0, 34);
+  if (pair) g.drawImage(await refImg(s.render), W + 8, 34, W, H);
+  g.fillStyle = "#111"; g.font = "20px sans-serif";
+  g.fillText(s.label || "", 8, 24);
+  if (pair) g.fillText("render dewelopera", W + 16, 24);
+  return out.toDataURL("image/jpeg", 0.9);
+};
+window.ready = true;
+</script>
+</body>
+</html>

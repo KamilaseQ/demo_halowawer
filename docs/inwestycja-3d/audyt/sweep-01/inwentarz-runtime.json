@@ -1,0 +1,2182 @@
+[
+ {
+  "name": "ground",
+  "path": "estate/ground",
+  "source": "proc",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   -584,
+   0,
+   -608,
+   656,
+   0,
+   632
+  ],
+  "triangles": 160,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "forest",
+  "path": "estate/forest",
+  "source": "proc",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   -296.28,
+   0,
+   -316,
+   368.77,
+   32.56,
+   342.69
+  ],
+  "triangles": 18800,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_A_1",
+  "path": "estate/bor2/Scene/DOM_A/DOM_A_1",
+  "source": "bor2",
+  "material": [
+   "TYNK A·A"
+  ],
+  "bbox": [
+   65.96,
+   0.12,
+   12.19,
+   74.11,
+   9.12,
+   22.19
+  ],
+  "triangles": 75,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_A_2",
+  "path": "estate/bor2/Scene/DOM_A/DOM_A_2",
+  "source": "bor2",
+  "material": [
+   "BLACHA A·A"
+  ],
+  "bbox": [
+   65.94,
+   1.17,
+   12.17,
+   74.13,
+   9.35,
+   22.21
+  ],
+  "triangles": 1746,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_A_3",
+  "path": "estate/bor2/Scene/DOM_A/DOM_A_3",
+  "source": "bor2",
+  "material": [
+   "TYNK A2·A"
+  ],
+  "bbox": [
+   66.34,
+   0.12,
+   12.19,
+   74.11,
+   5.42,
+   22.19
+  ],
+  "triangles": 74,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_A_4",
+  "path": "estate/bor2/Scene/DOM_A/DOM_A_4",
+  "source": "bor2",
+  "material": [
+   "OKNA A·A"
+  ],
+  "bbox": [
+   67.04,
+   0.12,
+   12.14,
+   74.16,
+   5.42,
+   22.24
+  ],
+  "triangles": 542,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_A_5",
+  "path": "estate/bor2/Scene/DOM_A/DOM_A_5",
+  "source": "bor2",
+  "material": [
+   "bor2-szyba·A"
+  ],
+  "bbox": [
+   66.96,
+   0.35,
+   12.41,
+   73.87,
+   7.78,
+   21.97
+  ],
+  "triangles": 46,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_B_1",
+  "path": "estate/bor2/Scene/DOM_B/DOM_B_1",
+  "source": "bor2",
+  "material": [
+   "TYNK B·B"
+  ],
+  "bbox": [
+   57.79,
+   0.12,
+   10.69,
+   65.94,
+   9.12,
+   20.69
+  ],
+  "triangles": 81,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_B_2",
+  "path": "estate/bor2/Scene/DOM_B/DOM_B_2",
+  "source": "bor2",
+  "material": [
+   "BLACHA B·B"
+  ],
+  "bbox": [
+   57.77,
+   1.17,
+   10.67,
+   65.96,
+   9.35,
+   20.71
+  ],
+  "triangles": 1728,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_B_3",
+  "path": "estate/bor2/Scene/DOM_B/DOM_B_3",
+  "source": "bor2",
+  "material": [
+   "TYNK B2·B"
+  ],
+  "bbox": [
+   57.79,
+   0.12,
+   10.69,
+   65.33,
+   5.42,
+   20.69
+  ],
+  "triangles": 86,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_B_4",
+  "path": "estate/bor2/Scene/DOM_B/DOM_B_4",
+  "source": "bor2",
+  "material": [
+   "OKNA B·B"
+  ],
+  "bbox": [
+   57.74,
+   0.12,
+   10.64,
+   65.17,
+   9.33,
+   20.74
+  ],
+  "triangles": 592,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_B_5",
+  "path": "estate/bor2/Scene/DOM_B/DOM_B_5",
+  "source": "bor2",
+  "material": [
+   "bor2-szyba·B"
+  ],
+  "bbox": [
+   58.01,
+   0.35,
+   10.91,
+   64.93,
+   7.78,
+   20.47
+  ],
+  "triangles": 48,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_C_1",
+  "path": "estate/bor2/Scene/DOM_C/DOM_C_1",
+  "source": "bor2",
+  "material": [
+   "TYNK C·C"
+  ],
+  "bbox": [
+   39.96,
+   0.43,
+   7.59,
+   48.11,
+   9.43,
+   17.59
+  ],
+  "triangles": 76,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_C_2",
+  "path": "estate/bor2/Scene/DOM_C/DOM_C_2",
+  "source": "bor2",
+  "material": [
+   "BLACHA C·C"
+  ],
+  "bbox": [
+   39.94,
+   1.47,
+   7.57,
+   48.13,
+   9.66,
+   17.61
+  ],
+  "triangles": 1746,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_C_3",
+  "path": "estate/bor2/Scene/DOM_C/DOM_C_3",
+  "source": "bor2",
+  "material": [
+   "TYNK C2·C"
+  ],
+  "bbox": [
+   40.34,
+   0.43,
+   7.59,
+   48.11,
+   5.73,
+   17.59
+  ],
+  "triangles": 74,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_C_4",
+  "path": "estate/bor2/Scene/DOM_C/DOM_C_4",
+  "source": "bor2",
+  "material": [
+   "OKNA C·C"
+  ],
+  "bbox": [
+   41.04,
+   0.43,
+   7.54,
+   48.16,
+   5.73,
+   17.64
+  ],
+  "triangles": 542,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_C_5",
+  "path": "estate/bor2/Scene/DOM_C/DOM_C_5",
+  "source": "bor2",
+  "material": [
+   "bor2-szyba·C"
+  ],
+  "bbox": [
+   40.96,
+   0.66,
+   7.81,
+   47.87,
+   8.08,
+   17.37
+  ],
+  "triangles": 46,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_D_1",
+  "path": "estate/bor2/Scene/DOM_D/DOM_D_1",
+  "source": "bor2",
+  "material": [
+   "TYNK B·D"
+  ],
+  "bbox": [
+   31.79,
+   0.43,
+   6.09,
+   39.94,
+   9.43,
+   16.09
+  ],
+  "triangles": 81,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_D_2",
+  "path": "estate/bor2/Scene/DOM_D/DOM_D_2",
+  "source": "bor2",
+  "material": [
+   "BLACHA B·D"
+  ],
+  "bbox": [
+   31.77,
+   1.47,
+   6.07,
+   39.96,
+   9.66,
+   16.11
+  ],
+  "triangles": 1728,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_D_3",
+  "path": "estate/bor2/Scene/DOM_D/DOM_D_3",
+  "source": "bor2",
+  "material": [
+   "TYNK B2·D"
+  ],
+  "bbox": [
+   31.79,
+   0.43,
+   6.09,
+   39.33,
+   5.76,
+   16.09
+  ],
+  "triangles": 86,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_D_4",
+  "path": "estate/bor2/Scene/DOM_D/DOM_D_4",
+  "source": "bor2",
+  "material": [
+   "OKNA B·D"
+  ],
+  "bbox": [
+   31.74,
+   0.43,
+   6.04,
+   39.17,
+   9.64,
+   16.14
+  ],
+  "triangles": 592,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_D_5",
+  "path": "estate/bor2/Scene/DOM_D/DOM_D_5",
+  "source": "bor2",
+  "material": [
+   "bor2-szyba·D"
+  ],
+  "bbox": [
+   32.01,
+   0.66,
+   6.31,
+   38.93,
+   8.08,
+   15.87
+  ],
+  "triangles": 48,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_E_1",
+  "path": "estate/bor2/Scene/DOM_E/DOM_E_1",
+  "source": "bor2",
+  "material": [
+   "TYNK B2·E"
+  ],
+  "bbox": [
+   14.61,
+   0.66,
+   2.99,
+   22.11,
+   6.04,
+   12.52
+  ],
+  "triangles": 86,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_E_2",
+  "path": "estate/bor2/Scene/DOM_E/DOM_E_2",
+  "source": "bor2",
+  "material": [
+   "BLACHA B·E"
+  ],
+  "bbox": [
+   14.59,
+   1.75,
+   2.97,
+   22.13,
+   9.86,
+   12.54
+  ],
+  "triangles": 1634,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_E_3",
+  "path": "estate/bor2/Scene/DOM_E/DOM_E_3",
+  "source": "bor2",
+  "material": [
+   "TYNK B·E"
+  ],
+  "bbox": [
+   14.61,
+   0.66,
+   2.99,
+   22.11,
+   9.71,
+   12.52
+  ],
+  "triangles": 72,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_E_4",
+  "path": "estate/bor2/Scene/DOM_E/DOM_E_4",
+  "source": "bor2",
+  "material": [
+   "OKNA B·E"
+  ],
+  "bbox": [
+   14.56,
+   0.71,
+   2.94,
+   22.16,
+   9.84,
+   12.57
+  ],
+  "triangles": 601,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_E_5",
+  "path": "estate/bor2/Scene/DOM_E/DOM_E_5",
+  "source": "bor2",
+  "material": [
+   "bor2-szyba·E"
+  ],
+  "bbox": [
+   14.85,
+   0.97,
+   3.21,
+   21.87,
+   8.25,
+   12.3
+  ],
+  "triangles": 49,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_F_1",
+  "path": "estate/bor2/Scene/DOM_F/DOM_F_1",
+  "source": "bor2",
+  "material": [
+   "TYNK A2·F"
+  ],
+  "bbox": [
+   7.47,
+   0.71,
+   1.49,
+   14.59,
+   6.04,
+   11.02
+  ],
+  "triangles": 81,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_F_2",
+  "path": "estate/bor2/Scene/DOM_F/DOM_F_2",
+  "source": "bor2",
+  "material": [
+   "TYNK A·F"
+  ],
+  "bbox": [
+   7.09,
+   0.71,
+   1.49,
+   14.59,
+   9.71,
+   11.02
+  ],
+  "triangles": 65,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_F_3",
+  "path": "estate/bor2/Scene/DOM_F/DOM_F_3",
+  "source": "bor2",
+  "material": [
+   "BLACHA A·F"
+  ],
+  "bbox": [
+   7.07,
+   1.75,
+   1.47,
+   14.61,
+   9.86,
+   11.04
+  ],
+  "triangles": 1646,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_F_4",
+  "path": "estate/bor2/Scene/DOM_F/DOM_F_4",
+  "source": "bor2",
+  "material": [
+   "OKNA A·F"
+  ],
+  "bbox": [
+   8.17,
+   0.71,
+   1.44,
+   14.64,
+   6.04,
+   11.07
+  ],
+  "triangles": 543,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_F_5",
+  "path": "estate/bor2/Scene/DOM_F/DOM_F_5",
+  "source": "bor2",
+  "material": [
+   "bor2-szyba·F"
+  ],
+  "bbox": [
+   8.25,
+   0.97,
+   1.71,
+   14.35,
+   8.23,
+   10.8
+  ],
+  "triangles": 47,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_G_1",
+  "path": "estate/bor2/Scene/DOM_G/DOM_G_1",
+  "source": "bor2",
+  "material": [
+   "OKNA C·G"
+  ],
+  "bbox": [
+   -0.48,
+   0.71,
+   -0.06,
+   7.12,
+   6.01,
+   9.57
+  ],
+  "triangles": 699,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_G_2",
+  "path": "estate/bor2/Scene/DOM_G/DOM_G_2",
+  "source": "bor2",
+  "material": [
+   "BLACHA C·G"
+  ],
+  "bbox": [
+   -0.45,
+   1.75,
+   -0.03,
+   7.09,
+   9.86,
+   9.54
+  ],
+  "triangles": 1630,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_G_3",
+  "path": "estate/bor2/Scene/DOM_G/DOM_G_3",
+  "source": "bor2",
+  "material": [
+   "TYNK C·G"
+  ],
+  "bbox": [
+   -0.43,
+   0.71,
+   -0.01,
+   7.07,
+   9.71,
+   9.52
+  ],
+  "triangles": 84,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_G_4",
+  "path": "estate/bor2/Scene/DOM_G/DOM_G_4",
+  "source": "bor2",
+  "material": [
+   "TYNK C2·G"
+  ],
+  "bbox": [
+   -0.43,
+   0.71,
+   -0.01,
+   7.07,
+   6.01,
+   9.52
+  ],
+  "triangles": 66,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "DOM_G_5",
+  "path": "estate/bor2/Scene/DOM_G/DOM_G_5",
+  "source": "bor2",
+  "material": [
+   "bor2-szyba·G"
+  ],
+  "bbox": [
+   -0.21,
+   0.97,
+   0.21,
+   6.85,
+   8.23,
+   9.3
+  ],
+  "triangles": 56,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "KONTEKST_1",
+  "path": "estate/bor2/Scene/KONTEKST_1",
+  "source": "bor2",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   48.72,
+   0.25,
+   39.1,
+   60.73,
+   9.68,
+   48.8
+  ],
+  "triangles": 116,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "KONTEKST_2",
+  "path": "estate/bor2/Scene/KONTEKST_2",
+  "source": "bor2",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   47.63,
+   0.25,
+   46.53,
+   59.91,
+   9.68,
+   56.22
+  ],
+  "triangles": 116,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "KONTEKST_3",
+  "path": "estate/bor2/Scene/KONTEKST_3",
+  "source": "bor2",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   68.11,
+   0,
+   42.97,
+   80.39,
+   9.43,
+   52.66
+  ],
+  "triangles": 116,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "KONTEKST_4",
+  "path": "estate/bor2/Scene/KONTEKST_4",
+  "source": "bor2",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   67.29,
+   0,
+   50.4,
+   79.3,
+   9.43,
+   60.09
+  ],
+  "triangles": 116,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "KONTEKST_5",
+  "path": "estate/bor2/Scene/KONTEKST_5",
+  "source": "bor2",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   -9.12,
+   0,
+   -49.55,
+   5.41,
+   5,
+   -40.87
+  ],
+  "triangles": 16,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "KONTEKST_6",
+  "path": "estate/bor2/Scene/KONTEKST_6",
+  "source": "bor2",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   10.01,
+   0.6,
+   -19.92,
+   25.26,
+   8.6,
+   -8.37
+  ],
+  "triangles": 1359,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "KONTEKST_7",
+  "path": "estate/bor2/Scene/KONTEKST_7",
+  "source": "bor2",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   -11.72,
+   0.93,
+   -15.4,
+   -5.53,
+   4.93,
+   -7.26
+  ],
+  "triangles": 20,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "KONTEKST_8",
+  "path": "estate/bor2/Scene/KONTEKST_8",
+  "source": "bor2",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   -34.6,
+   1,
+   -10.24,
+   -18.16,
+   10.3,
+   3.63
+  ],
+  "triangles": 850,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_1",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_1",
+  "source": "bor2",
+  "material": [
+   "[Translucent Glass Gray]"
+  ],
+  "bbox": [
+   -17.69,
+   0,
+   -17.77,
+   79.95,
+   2.1,
+   29.78
+  ],
+  "triangles": 219,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_2",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_2",
+  "source": "bor2",
+  "material": [
+   "OGRODZENIE_SLUPKI"
+  ],
+  "bbox": [
+   -16.31,
+   0,
+   -8.98,
+   74.14,
+   2.1,
+   27.15
+  ],
+  "triangles": 71,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_3",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_3",
+  "source": "bor2",
+  "material": [
+   "TYNK A"
+  ],
+  "bbox": [
+   -14.88,
+   -0.08,
+   -6.04,
+   80.71,
+   2.11,
+   20.51
+  ],
+  "triangles": 636,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_4",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_4",
+  "source": "bor2",
+  "material": [
+   "BLACHA A"
+  ],
+  "bbox": [
+   -14.9,
+   1.19,
+   -6.06,
+   78.68,
+   2.16,
+   19.54
+  ],
+  "triangles": 64,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_5",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_5",
+  "source": "bor2",
+  "material": [
+   "TYNK B"
+  ],
+  "bbox": [
+   23.57,
+   0.29,
+   9.69,
+   56.6,
+   1.71,
+   14.97
+  ],
+  "triangles": 120,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_6",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_6",
+  "source": "bor2",
+  "material": [
+   "OKNA B"
+  ],
+  "bbox": [
+   -14.87,
+   0.06,
+   -2.9,
+   79.73,
+   2.16,
+   19.56
+  ],
+  "triangles": 298,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_7",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_7",
+  "source": "bor2",
+  "material": [
+   "TYNK C"
+  ],
+  "bbox": [
+   -14.28,
+   0.35,
+   -8.93,
+   52.48,
+   2.11,
+   14.97
+  ],
+  "triangles": 80,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_8",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_8",
+  "source": "bor2",
+  "material": [
+   "BLACHA C"
+  ],
+  "bbox": [
+   -14.3,
+   1.45,
+   -8.95,
+   52.5,
+   2.16,
+   14.99
+  ],
+  "triangles": 64,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "OGRODZENIA_9",
+  "path": "estate/bor2/Scene/OGRODZENIA/OGRODZENIA_9",
+  "source": "bor2",
+  "material": [
+   "A03_Pink_Ember"
+  ],
+  "bbox": [
+   0.14,
+   0.19,
+   -0.6,
+   66.58,
+   1.95,
+   11.93
+  ],
+  "triangles": 490,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "TARASY",
+  "path": "estate/bor2/Scene/TARASY",
+  "source": "bor2",
+  "material": [
+   "DREWNO"
+  ],
+  "bbox": [
+   0.65,
+   0.12,
+   9.32,
+   73.02,
+   0.86,
+   24.49
+  ],
+  "triangles": 2124,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIELEN_1",
+  "path": "estate/bor2/Scene/ZIELEN/ZIELEN_1",
+  "source": "bor2",
+  "material": [
+   "[0035_Tan]"
+  ],
+  "bbox": [
+   -25.97,
+   -9.13,
+   -10.87,
+   27.33,
+   4.26,
+   9.39
+  ],
+  "triangles": 940,
+  "instances": 1,
+  "visible": false,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIELEN_2",
+  "path": "estate/bor2/Scene/ZIELEN/ZIELEN_2",
+  "source": "bor2",
+  "material": [
+   "[0014_DarkSalmon]"
+  ],
+  "bbox": [
+   -27.77,
+   -8.07,
+   -12.69,
+   29.25,
+   8.53,
+   10.8
+  ],
+  "triangles": 570,
+  "instances": 1,
+  "visible": false,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIELEN_3",
+  "path": "estate/bor2/Scene/ZIELEN/ZIELEN_3",
+  "source": "bor2",
+  "material": [
+   "[0077_DarkGreen]"
+  ],
+  "bbox": [
+   -17.51,
+   3.28,
+   -5.85,
+   -14.29,
+   5.41,
+   3.25
+  ],
+  "triangles": 320,
+  "instances": 1,
+  "visible": false,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIEMIA_1",
+  "path": "estate/bor2/Scene/ZIEMIA/ZIEMIA_1",
+  "source": "bor2",
+  "material": [
+   "bor2-kostka"
+  ],
+  "bbox": [
+   -0.05,
+   0.12,
+   -0.01,
+   69.51,
+   0.86,
+   13.59
+  ],
+  "triangles": 276,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIEMIA_2",
+  "path": "estate/bor2/Scene/ZIEMIA/ZIEMIA_2",
+  "source": "bor2",
+  "material": [
+   "SKP Default"
+  ],
+  "bbox": [
+   22.79,
+   -0.76,
+   4.55,
+   79.89,
+   0.62,
+   18.64
+  ],
+  "triangles": 48,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIEMIA_3",
+  "path": "estate/bor2/Scene/ZIEMIA/ZIEMIA_3",
+  "source": "bor2",
+  "material": [
+   "bor2-trawnik"
+  ],
+  "bbox": [
+   -17.69,
+   0.04,
+   -1.66,
+   79.89,
+   1,
+   29.77
+  ],
+  "triangles": 73,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIEMIA_4",
+  "path": "estate/bor2/Scene/ZIEMIA/ZIEMIA_4",
+  "source": "bor2",
+  "material": [
+   "bor2-kostka"
+  ],
+  "bbox": [
+   -15.19,
+   0.04,
+   -8.95,
+   80.46,
+   1,
+   29.77
+  ],
+  "triangles": 126,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIEMIA_5",
+  "path": "estate/bor2/Scene/ZIEMIA/ZIEMIA_5",
+  "source": "bor2",
+  "material": [
+   "bor2-geokrata"
+  ],
+  "bbox": [
+   -14.27,
+   0.05,
+   -8.77,
+   80.71,
+   0.99,
+   18.64
+  ],
+  "triangles": 20,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "ZIEMIA_6",
+  "path": "estate/bor2/Scene/ZIEMIA/ZIEMIA_6",
+  "source": "bor2",
+  "material": [
+   "bor2-kostka"
+  ],
+  "bbox": [
+   79.18,
+   0,
+   8.2,
+   86.65,
+   0.06,
+   30.93
+  ],
+  "triangles": 5,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "bor2-tufts",
+  "path": "estate/bor2/bor2-planting/bor2-tufts",
+  "source": "zielen",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   -18.88,
+   0.02,
+   -11.7,
+   80.16,
+   2.24,
+   32.59
+  ],
+  "triangles": 159354,
+  "instances": 2043,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "bor2-shrubs",
+  "path": "estate/bor2/bor2-planting/bor2-shrubs",
+  "source": "zielen",
+  "material": [
+   "MeshStandardMaterial"
+  ],
+  "bbox": [
+   -0.79,
+   -0.17,
+   8.98,
+   79.35,
+   1.78,
+   27.19
+  ],
+  "triangles": 2276,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -13.96,
+   0,
+   7.06,
+   -9.38,
+   14.42,
+   11.18
+  ],
+  "triangles": 7232,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -14.95,
+   7.06,
+   6.01,
+   -8.13,
+   15.28,
+   12.41
+  ],
+  "triangles": 4480,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -106.64,
+   0,
+   -117.29,
+   155.46,
+   21.9,
+   139
+  ],
+  "triangles": 122944,
+  "instances": 17,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -107.91,
+   6.55,
+   -118.43,
+   156.89,
+   23.22,
+   140.78
+  ],
+  "triangles": 76160,
+  "instances": 17,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -8.47,
+   0,
+   9.41,
+   54.32,
+   13.25,
+   22.46
+  ],
+  "triangles": 14464,
+  "instances": 2,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -9.24,
+   6.51,
+   8.56,
+   55.33,
+   14.16,
+   23.51
+  ],
+  "triangles": 8960,
+  "instances": 2,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -93.11,
+   0,
+   -137.96,
+   185.05,
+   22.51,
+   158.09
+  ],
+  "triangles": 180800,
+  "instances": 25,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -94.13,
+   6.64,
+   -138.84,
+   186.15,
+   24.07,
+   160.04
+  ],
+  "triangles": 112000,
+  "instances": 25,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -16.19,
+   0,
+   4.1,
+   55.98,
+   12.74,
+   19.3
+  ],
+  "triangles": 14464,
+  "instances": 2,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -17.37,
+   5.65,
+   3.07,
+   56.77,
+   13.58,
+   20.09
+  ],
+  "triangles": 8960,
+  "instances": 2,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -92.41,
+   0,
+   -130.69,
+   161.36,
+   21.99,
+   132.69
+  ],
+  "triangles": 101248,
+  "instances": 14,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -94.23,
+   6.91,
+   -132.34,
+   163.01,
+   23.43,
+   134.13
+  ],
+  "triangles": 62720,
+  "instances": 14,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -8.05,
+   0,
+   7.91,
+   -0.31,
+   9.54,
+   15.58
+  ],
+  "triangles": 12032,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -8.62,
+   2.41,
+   7.27,
+   0.31,
+   10,
+   16.18
+  ],
+  "triangles": 12512,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -103.08,
+   0,
+   -140.81,
+   186.87,
+   14.54,
+   135.81
+  ],
+  "triangles": 300800,
+  "instances": 25,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -103.76,
+   2.18,
+   -141.37,
+   187.59,
+   15.23,
+   136.54
+  ],
+  "triangles": 312800,
+  "instances": 25,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   23.44,
+   0,
+   12.85,
+   31.33,
+   10.71,
+   20.73
+  ],
+  "triangles": 10656,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   22.63,
+   1.96,
+   12.12,
+   32.06,
+   11.2,
+   21.5
+  ],
+  "triangles": 11040,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -101.04,
+   0,
+   -141.21,
+   186.85,
+   14.82,
+   130.64
+  ],
+  "triangles": 159840,
+  "instances": 15,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -101.79,
+   1.6,
+   -142.17,
+   187.43,
+   15.5,
+   131.42
+  ],
+  "triangles": 165600,
+  "instances": 15,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   19.03,
+   0,
+   -5.36,
+   30.58,
+   10.3,
+   7.31
+  ],
+  "triangles": 12006,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   18.11,
+   0.92,
+   -6.04,
+   31.4,
+   11.09,
+   8.09
+  ],
+  "triangles": 10560,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   30.36,
+   0,
+   9.46,
+   86.62,
+   10.56,
+   28.36
+  ],
+  "triangles": 35496,
+  "instances": 3,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   29.88,
+   0.8,
+   8.35,
+   87.7,
+   11.22,
+   28.89
+  ],
+  "triangles": 29040,
+  "instances": 3,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "branches"
+  ],
+  "bbox": [
+   -90.52,
+   0,
+   -110.71,
+   149.21,
+   14.46,
+   140.91
+  ],
+  "triangles": 165648,
+  "instances": 14,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "estate-trees",
+  "path": "estate/bor2/bor2-planting/estate-trees",
+  "source": "zielen",
+  "material": [
+   "leaves"
+  ],
+  "bbox": [
+   -91.61,
+   1.52,
+   -112.19,
+   150.47,
+   15.37,
+   142.26
+  ],
+  "triangles": 135520,
+  "instances": 14,
+  "visible": true,
+  "pickOnly": false
+ },
+ {
+  "name": "pick-A",
+  "path": "estate/bor2/pick-A",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   65.94,
+   0.12,
+   12.14,
+   74.16,
+   9.35,
+   22.24
+  ],
+  "triangles": 12,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "pick-B",
+  "path": "estate/bor2/pick-B",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   57.74,
+   0.12,
+   10.64,
+   65.96,
+   9.35,
+   20.74
+  ],
+  "triangles": 12,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "pick-C",
+  "path": "estate/bor2/pick-C",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   39.94,
+   0.43,
+   7.54,
+   48.16,
+   9.66,
+   17.64
+  ],
+  "triangles": 12,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "pick-D",
+  "path": "estate/bor2/pick-D",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   31.74,
+   0.43,
+   6.04,
+   39.96,
+   9.66,
+   16.14
+  ],
+  "triangles": 12,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "pick-E",
+  "path": "estate/bor2/pick-E",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   14.56,
+   0.66,
+   2.94,
+   22.16,
+   9.86,
+   12.57
+  ],
+  "triangles": 12,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "pick-F",
+  "path": "estate/bor2/pick-F",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   7.07,
+   0.71,
+   1.44,
+   14.64,
+   9.86,
+   11.07
+  ],
+  "triangles": 12,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "pick-G",
+  "path": "estate/bor2/pick-G",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   -0.48,
+   0.71,
+   -0.06,
+   7.12,
+   9.86,
+   9.57
+  ],
+  "triangles": 12,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "estate-walk",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   -0.05,
+   0.12,
+   -0.01,
+   69.51,
+   0.86,
+   13.59
+  ],
+  "triangles": 276,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "estate-walk",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   22.79,
+   -0.76,
+   4.55,
+   79.89,
+   0.62,
+   18.64
+  ],
+  "triangles": 48,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "estate-walk",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   -17.69,
+   0.04,
+   -1.66,
+   79.89,
+   1,
+   29.77
+  ],
+  "triangles": 73,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "estate-walk",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   -15.19,
+   0.04,
+   -8.95,
+   80.46,
+   1,
+   29.77
+  ],
+  "triangles": 126,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "estate-walk",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   -14.27,
+   0.05,
+   -8.77,
+   80.71,
+   0.99,
+   18.64
+  ],
+  "triangles": 20,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "estate-walk",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   79.18,
+   0,
+   8.2,
+   86.65,
+   0.06,
+   30.93
+  ],
+  "triangles": 5,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "estate-walk",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   -264,
+   0,
+   -288,
+   336,
+   0,
+   312
+  ],
+  "triangles": 2,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": true
+ },
+ {
+  "name": "",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   0,
+   0.01,
+   0,
+   0,
+   0.01,
+   0
+  ],
+  "triangles": 96,
+  "instances": 1,
+  "visible": false,
+  "pickOnly": false
+ },
+ {
+  "name": "",
+  "path": "estate-walk",
+  "source": "ui",
+  "material": [
+   "MeshBasicMaterial"
+  ],
+  "bbox": [
+   0,
+   0.01,
+   0,
+   0,
+   0.01,
+   0
+  ],
+  "triangles": 48,
+  "instances": 1,
+  "visible": false,
+  "pickOnly": false
+ },
+ {
+  "name": "",
+  "path": "",
+  "source": "proc",
+  "material": [
+   "ShaderMaterial"
+  ],
+  "bbox": [
+   -461.51,
+   -484.73,
+   -465.17,
+   538.49,
+   515.27,
+   534.83
+  ],
+  "triangles": 2208,
+  "instances": 1,
+  "visible": true,
+  "pickOnly": false
+ }
+]

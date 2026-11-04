@@ -1,0 +1,417 @@
+{
+ "opis": "Elewacje z bliska",
+ "kadr": {
+  "w": 960,
+  "h": 600
+ },
+ "pozy": [
+  {
+   "id": "el-A-ogrod-8m",
+   "pozycja": [
+    103.9,
+    1.77,
+    -29.46
+   ],
+   "cel": [
+    103.9,
+    2.52,
+    -37.46
+   ],
+   "yfov": 50,
+   "dom": "A",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-A-front-8m",
+   "pozycja": [
+    103.9,
+    1.77,
+    -55.56
+   ],
+   "cel": [
+    103.9,
+    2.32,
+    -47.56
+   ],
+   "yfov": 50,
+   "dom": "A",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-A-naroznik-8m",
+   "pozycja": [
+    114.41,
+    1.77,
+    -32.66
+   ],
+   "cel": [
+    108.01,
+    2.92,
+    -40.49
+   ],
+   "yfov": 50,
+   "dom": "A",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-A-ogrod-3m",
+   "pozycja": [
+    103.9,
+    1.77,
+    -34.46
+   ],
+   "cel": [
+    103.9,
+    2.02,
+    -37.46
+   ],
+   "yfov": 62,
+   "dom": "A",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-A-front-3m",
+   "pozycja": [
+    103.9,
+    1.77,
+    -50.56
+   ],
+   "cel": [
+    103.9,
+    1.62,
+    -47.56
+   ],
+   "yfov": 62,
+   "dom": "A",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-A-naroznik-3m",
+   "pozycja": [
+    110.41,
+    1.77,
+    -35.66
+   ],
+   "cel": [
+    108.01,
+    2.12,
+    -40.49
+   ],
+   "yfov": 62,
+   "dom": "A",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-C-ogrod-8m",
+   "pozycja": [
+    77.9,
+    2.08,
+    -34.06
+   ],
+   "cel": [
+    77.9,
+    2.83,
+    -42.06
+   ],
+   "yfov": 50,
+   "dom": "C",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-C-front-8m",
+   "pozycja": [
+    77.9,
+    2.08,
+    -60.16
+   ],
+   "cel": [
+    77.9,
+    2.63,
+    -52.16
+   ],
+   "yfov": 50,
+   "dom": "C",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-C-naroznik-8m",
+   "pozycja": [
+    88.41,
+    2.08,
+    -37.26
+   ],
+   "cel": [
+    82.01,
+    3.23,
+    -45.09
+   ],
+   "yfov": 50,
+   "dom": "C",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-C-ogrod-3m",
+   "pozycja": [
+    77.9,
+    2.08,
+    -39.06
+   ],
+   "cel": [
+    77.9,
+    2.33,
+    -42.06
+   ],
+   "yfov": 62,
+   "dom": "C",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-C-front-3m",
+   "pozycja": [
+    77.9,
+    2.08,
+    -55.16
+   ],
+   "cel": [
+    77.9,
+    1.93,
+    -52.16
+   ],
+   "yfov": 62,
+   "dom": "C",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-C-naroznik-3m",
+   "pozycja": [
+    84.41,
+    2.08,
+    -40.26
+   ],
+   "cel": [
+    82.01,
+    2.43,
+    -45.09
+   ],
+   "yfov": 62,
+   "dom": "C",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-E-ogrod-8m",
+   "pozycja": [
+    52.22,
+    2.31,
+    -39.13
+   ],
+   "cel": [
+    52.22,
+    3.06,
+    -47.13
+   ],
+   "yfov": 50,
+   "dom": "E",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-E-front-8m",
+   "pozycja": [
+    52.22,
+    2.31,
+    -64.76
+   ],
+   "cel": [
+    52.22,
+    2.86,
+    -56.76
+   ],
+   "yfov": 50,
+   "dom": "E",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-E-naroznik-8m",
+   "pozycja": [
+    62.41,
+    2.31,
+    -42.33
+   ],
+   "cel": [
+    56.01,
+    3.46,
+    -50.02
+   ],
+   "yfov": 50,
+   "dom": "E",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-E-ogrod-3m",
+   "pozycja": [
+    52.22,
+    2.31,
+    -44.13
+   ],
+   "cel": [
+    52.22,
+    2.56,
+    -47.13
+   ],
+   "yfov": 62,
+   "dom": "E",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-E-front-3m",
+   "pozycja": [
+    52.22,
+    2.31,
+    -59.76
+   ],
+   "cel": [
+    52.22,
+    2.16,
+    -56.76
+   ],
+   "yfov": 62,
+   "dom": "E",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-E-naroznik-3m",
+   "pozycja": [
+    58.41,
+    2.31,
+    -45.33
+   ],
+   "cel": [
+    56.01,
+    2.66,
+    -50.02
+   ],
+   "yfov": 62,
+   "dom": "E",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-G-ogrod-8m",
+   "pozycja": [
+    37.15,
+    2.36,
+    -42.13
+   ],
+   "cel": [
+    37.15,
+    3.11,
+    -50.13
+   ],
+   "yfov": 50,
+   "dom": "G",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-G-front-8m",
+   "pozycja": [
+    37.15,
+    2.36,
+    -67.76
+   ],
+   "cel": [
+    37.15,
+    2.91,
+    -59.76
+   ],
+   "yfov": 50,
+   "dom": "G",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-G-naroznik-8m",
+   "pozycja": [
+    26.97,
+    2.36,
+    -45.33
+   ],
+   "cel": [
+    33.37,
+    3.51,
+    -53.02
+   ],
+   "yfov": 50,
+   "dom": "G",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-G-ogrod-3m",
+   "pozycja": [
+    37.15,
+    2.36,
+    -47.13
+   ],
+   "cel": [
+    37.15,
+    2.61,
+    -50.13
+   ],
+   "yfov": 62,
+   "dom": "G",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-G-front-3m",
+   "pozycja": [
+    37.15,
+    2.36,
+    -62.76
+   ],
+   "cel": [
+    37.15,
+    2.21,
+    -59.76
+   ],
+   "yfov": 62,
+   "dom": "G",
+   "rodzaj": "elewacja",
+   "azymut": null
+  },
+  {
+   "id": "el-G-naroznik-3m",
+   "pozycja": [
+    30.97,
+    2.36,
+    -48.33
+   ],
+   "cel": [
+    33.37,
+    2.71,
+    -53.02
+   ],
+   "yfov": 62,
+   "dom": "G",
+   "rodzaj": "elewacja",
+   "azymut": null
+  }
+ ]
+}

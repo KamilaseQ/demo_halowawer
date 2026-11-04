@@ -1,0 +1,1408 @@
+{
+ "etykieta": "iteracja 01: zewnętrze v5, wnętrze G placeholder",
+ "stan": "2026-11-04 18:13",
+ "miara": "de76",
+ "w_progu": 13,
+ "regionow": 57,
+ "srednia": 22.89628637130482,
+ "pominiete": [
+  [
+   "interior-1",
+   "brak obrazu runtime"
+  ],
+  [
+   "interior-2",
+   "brak obrazu runtime"
+  ],
+  [
+   "interior-3",
+   "brak obrazu runtime"
+  ],
+  [
+   "interior-7",
+   "brak obrazu runtime"
+  ]
+ ],
+ "regiony": [
+  {
+   "shot": "visualization-1",
+   "id": "jasna",
+   "typ": "sciana_jasna",
+   "klasa": "sciana",
+   "opis": "B, pas między kondygnacjami",
+   "g": 1.19,
+   "de2000": 0.83,
+   "dL": -1.1,
+   "dC": 0.5,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    83.3,
+    1.9,
+    5.6
+   ],
+   "lab_rt": [
+    82.2,
+    1.9,
+    6.1
+   ]
+  },
+  {
+   "shot": "visualization-1",
+   "id": "taupe",
+   "typ": "sciana_taupe",
+   "klasa": "sciana",
+   "opis": "A, pas między kondygnacjami",
+   "g": 7.63,
+   "de2000": 9.3,
+   "dL": -0.9,
+   "dC": -3.6,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    71.1,
+    3.1,
+    10.4
+   ],
+   "lab_rt": [
+    70.2,
+    -3.4,
+    6.4
+   ]
+  },
+  {
+   "shot": "visualization-1",
+   "id": "dachA",
+   "typ": "dach",
+   "klasa": "dach",
+   "opis": "dach A",
+   "g": 8.85,
+   "de2000": 9.28,
+   "dL": 5.0,
+   "dC": -3.7,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    67.4,
+    2.2,
+    6.5
+   ],
+   "lab_rt": [
+    72.4,
+    -2.9,
+    1.3
+   ]
+  },
+  {
+   "shot": "visualization-1",
+   "id": "dachB",
+   "typ": "dach",
+   "klasa": "dach",
+   "opis": "dach B",
+   "g": 14.01,
+   "de2000": 10.32,
+   "dL": 12.7,
+   "dC": -1.8,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    76.3,
+    0.7,
+    3.8
+   ],
+   "lab_rt": [
+    89.0,
+    -0.8,
+    -1.9
+   ]
+  },
+  {
+   "shot": "visualization-1",
+   "id": "szyba",
+   "typ": "szyba",
+   "klasa": "szyba",
+   "opis": "A, piętro, prawe okno",
+   "g": 20.67,
+   "de2000": 18.02,
+   "dL": -20.4,
+   "dC": 2.9,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    49.6,
+    -3.2,
+    -2.3
+   ],
+   "lab_rt": [
+    29.1,
+    -4.6,
+    -5.0
+   ]
+  },
+  {
+   "shot": "visualization-1",
+   "id": "zielen",
+   "typ": "zielen",
+   "klasa": "zielen",
+   "opis": "pierwszy plan",
+   "g": 6.06,
+   "de2000": 4.82,
+   "dL": -5.1,
+   "dC": 3.2,
+   "limit": 15,
+   "ok": true,
+   "lab_ref": [
+    63.1,
+    -7.9,
+    17.5
+   ],
+   "lab_rt": [
+    58.0,
+    -10.0,
+    20.2
+   ]
+  },
+  {
+   "shot": "visualization-1",
+   "id": "niebo",
+   "typ": "niebo",
+   "klasa": "niebo",
+   "opis": "",
+   "g": 33.55,
+   "de2000": 17.07,
+   "dL": -17.5,
+   "dC": 24.8,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    66.6,
+    -6.9,
+    -25.4
+   ],
+   "lab_rt": [
+    49.1,
+    6.4,
+    -50.8
+   ]
+  },
+  {
+   "shot": "visualization-2",
+   "id": "jasna",
+   "typ": "sciana_jasna",
+   "klasa": "sciana",
+   "opis": "lewy segment, pas między kondygnacjami",
+   "g": 22.11,
+   "de2000": 21.54,
+   "dL": -19.9,
+   "dC": 1.4,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    64.6,
+    6.0,
+    0.4
+   ],
+   "lab_rt": [
+    44.7,
+    0.4,
+    -7.4
+   ]
+  },
+  {
+   "shot": "visualization-2",
+   "id": "ciemna",
+   "typ": "sciana_ciemna",
+   "klasa": "sciana",
+   "opis": "prawy segment, lewa część",
+   "g": 1.95,
+   "de2000": 2.19,
+   "dL": 1.4,
+   "dC": -0.4,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    34.9,
+    2.3,
+    -7.0
+   ],
+   "lab_rt": [
+    36.3,
+    1.0,
+    -6.9
+   ]
+  },
+  {
+   "shot": "visualization-2",
+   "id": "dach",
+   "typ": "dach",
+   "klasa": "dach",
+   "opis": "",
+   "g": 31.34,
+   "de2000": 31.56,
+   "dL": -30.3,
+   "dC": -4.6,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    65.3,
+    0.3,
+    -14.8
+   ],
+   "lab_rt": [
+    35.0,
+    5.4,
+    -8.6
+   ]
+  },
+  {
+   "shot": "visualization-2",
+   "id": "okno",
+   "typ": "szyba",
+   "klasa": "szyba",
+   "opis": "okno piętra, oświetlone",
+   "g": 44.68,
+   "de2000": 39.05,
+   "dL": -42.9,
+   "dC": 0.6,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    58.5,
+    7.5,
+    0.4
+   ],
+   "lab_rt": [
+    15.6,
+    -1.6,
+    -8.0
+   ]
+  },
+  {
+   "shot": "visualization-2",
+   "id": "zielen",
+   "typ": "zielen",
+   "klasa": "zielen",
+   "opis": "",
+   "g": 11.68,
+   "de2000": 9.2,
+   "dL": 11.2,
+   "dC": 3.0,
+   "limit": 15,
+   "ok": true,
+   "lab_ref": [
+    26.9,
+    -7.9,
+    8.3
+   ],
+   "lab_rt": [
+    38.1,
+    -9.1,
+    11.3
+   ]
+  },
+  {
+   "shot": "visualization-2",
+   "id": "niebo",
+   "typ": "niebo",
+   "klasa": "niebo",
+   "opis": "",
+   "g": 37.19,
+   "de2000": 29.95,
+   "dL": -34.8,
+   "dC": 11.0,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    54.0,
+    1.0,
+    -18.1
+   ],
+   "lab_rt": [
+    19.2,
+    10.3,
+    -27.3
+   ]
+  },
+  {
+   "shot": "visualization-3",
+   "id": "taupe",
+   "typ": "sciana_taupe",
+   "klasa": "sciana",
+   "opis": "D, pas między kondygnacjami",
+   "g": 19.92,
+   "de2000": 18.51,
+   "dL": -19.3,
+   "dC": -5.0,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    65.3,
+    3.2,
+    10.1
+   ],
+   "lab_rt": [
+    46.0,
+    1.2,
+    5.5
+   ]
+  },
+  {
+   "shot": "visualization-3",
+   "id": "jasna",
+   "typ": "sciana_jasna",
+   "klasa": "sciana",
+   "opis": "C, pas między kondygnacjami",
+   "g": 20.27,
+   "de2000": 16.24,
+   "dL": -20.0,
+   "dC": -2.0,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    78.7,
+    2.3,
+    3.6
+   ],
+   "lab_rt": [
+    58.6,
+    -0.4,
+    2.3
+   ]
+  },
+  {
+   "shot": "visualization-3",
+   "id": "dachD",
+   "typ": "dach",
+   "klasa": "dach",
+   "opis": "",
+   "g": 13.09,
+   "de2000": 11.54,
+   "dL": 2.6,
+   "dC": -0.8,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    65.1,
+    0.9,
+    6.8
+   ],
+   "lab_rt": [
+    67.7,
+    -0.5,
+    -6.0
+   ]
+  },
+  {
+   "shot": "visualization-3",
+   "id": "dachC",
+   "typ": "dach",
+   "klasa": "dach",
+   "opis": "",
+   "g": 19.0,
+   "de2000": 16.33,
+   "dL": 3.7,
+   "dC": -1.8,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    73.3,
+    2.8,
+    9.8
+   ],
+   "lab_rt": [
+    77.0,
+    -2.2,
+    -8.2
+   ]
+  },
+  {
+   "shot": "visualization-3",
+   "id": "brama",
+   "typ": "brama",
+   "klasa": "sciana",
+   "opis": "brama garażowa D",
+   "g": 25.21,
+   "de2000": 17.1,
+   "dL": -24.9,
+   "dC": 3.7,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    29.6,
+    5.8,
+    4.3
+   ],
+   "lab_rt": [
+    4.7,
+    9.3,
+    5.8
+   ]
+  },
+  {
+   "shot": "visualization-3",
+   "id": "zielen",
+   "typ": "zielen",
+   "klasa": "zielen",
+   "opis": "",
+   "g": 15.61,
+   "de2000": 9.8,
+   "dL": 2.6,
+   "dC": -10.9,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    52.3,
+    -6.1,
+    32.9
+   ],
+   "lab_rt": [
+    55.0,
+    -12.4,
+    18.9
+   ]
+  },
+  {
+   "shot": "visualization-3",
+   "id": "niebo",
+   "typ": "niebo",
+   "klasa": "niebo",
+   "opis": "",
+   "g": 34.02,
+   "de2000": 14.43,
+   "dL": -12.8,
+   "dC": 27.9,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    66.4,
+    -6.5,
+    -16.1
+   ],
+   "lab_rt": [
+    53.6,
+    6.5,
+    -44.8
+   ]
+  },
+  {
+   "shot": "visualization-4",
+   "id": "szczyt",
+   "typ": "sciana_szczyt",
+   "klasa": "sciana",
+   "opis": "szczyt A (zielony)",
+   "g": 17.96,
+   "de2000": 17.57,
+   "dL": 11.2,
+   "dC": -11.9,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    33.1,
+    -10.1,
+    9.2
+   ],
+   "lab_rt": [
+    44.3,
+    1.4,
+    1.1
+   ]
+  },
+  {
+   "shot": "visualization-4",
+   "id": "taupe",
+   "typ": "sciana_taupe",
+   "klasa": "sciana",
+   "opis": "front A",
+   "g": 26.96,
+   "de2000": 22.85,
+   "dL": -26.5,
+   "dC": -5.0,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    76.0,
+    0.9,
+    7.3
+   ],
+   "lab_rt": [
+    49.6,
+    -0.4,
+    2.3
+   ]
+  },
+  {
+   "shot": "visualization-4",
+   "id": "jasna",
+   "typ": "sciana_jasna",
+   "klasa": "sciana",
+   "opis": "front B",
+   "g": 32.45,
+   "de2000": 23.87,
+   "dL": -32.4,
+   "dC": -1.5,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    90.6,
+    -0.2,
+    3.8
+   ],
+   "lab_rt": [
+    58.2,
+    -0.4,
+    2.3
+   ]
+  },
+  {
+   "shot": "visualization-4",
+   "id": "dach",
+   "typ": "dach",
+   "klasa": "dach",
+   "opis": "",
+   "g": 17.49,
+   "de2000": 13.25,
+   "dL": 17.4,
+   "dC": 0.4,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    64.8,
+    0.9,
+    1.2
+   ],
+   "lab_rt": [
+    82.2,
+    -1.2,
+    1.5
+   ]
+  },
+  {
+   "shot": "visualization-4",
+   "id": "zielen",
+   "typ": "zielen",
+   "klasa": "zielen",
+   "opis": "",
+   "g": 23.98,
+   "de2000": 18.67,
+   "dL": 21.3,
+   "dC": -10.7,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    52.4,
+    -14.7,
+    31.4
+   ],
+   "lab_rt": [
+    73.8,
+    -8.3,
+    22.5
+   ]
+  },
+  {
+   "shot": "visualization-4",
+   "id": "niebo",
+   "typ": "niebo",
+   "klasa": "niebo",
+   "opis": "",
+   "g": 24.55,
+   "de2000": 21.88,
+   "dL": 14.3,
+   "dC": -11.6,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    76.0,
+    -3.7,
+    -17.9
+   ],
+   "lab_rt": [
+    90.4,
+    6.6,
+    -0.8
+   ]
+  },
+  {
+   "shot": "visualization-5",
+   "id": "jasna",
+   "typ": "sciana_jasna",
+   "klasa": "sciana",
+   "opis": "E, pas pod oknami piętra",
+   "g": 33.79,
+   "de2000": 28.52,
+   "dL": -33.1,
+   "dC": -3.7,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    80.8,
+    1.9,
+    5.7
+   ],
+   "lab_rt": [
+    47.7,
+    -2.4,
+    0.3
+   ]
+  },
+  {
+   "shot": "visualization-5",
+   "id": "taupe",
+   "typ": "sciana_taupe",
+   "klasa": "sciana",
+   "opis": "F, pas pod oknami piętra",
+   "g": 8.82,
+   "de2000": 7.99,
+   "dL": 5.2,
+   "dC": -2.2,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    35.4,
+    -1.5,
+    4.7
+   ],
+   "lab_rt": [
+    40.6,
+    -1.3,
+    -2.4
+   ]
+  },
+  {
+   "shot": "visualization-5",
+   "id": "ciemna",
+   "typ": "sciana_ciemna",
+   "klasa": "sciana",
+   "opis": "G, pas pod oknami piętra",
+   "g": 22.21,
+   "de2000": 21.28,
+   "dL": -22.2,
+   "dC": -0.0,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    65.4,
+    0.8,
+    -0.9
+   ],
+   "lab_rt": [
+    43.2,
+    -0.0,
+    -1.2
+   ]
+  },
+  {
+   "shot": "visualization-5",
+   "id": "dach",
+   "typ": "dach",
+   "klasa": "dach",
+   "opis": "",
+   "g": 11.86,
+   "de2000": 10.97,
+   "dL": 1.9,
+   "dC": 1.2,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    75.3,
+    1.6,
+    5.0
+   ],
+   "lab_rt": [
+    77.1,
+    -1.7,
+    -6.2
+   ]
+  },
+  {
+   "shot": "visualization-5",
+   "id": "zielen",
+   "typ": "zielen",
+   "klasa": "zielen",
+   "opis": "",
+   "g": 30.97,
+   "de2000": 18.57,
+   "dL": 5.8,
+   "dC": -27.1,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    48.6,
+    -9.8,
+    30.8
+   ],
+   "lab_rt": [
+    54.4,
+    -5.2,
+    0.7
+   ]
+  },
+  {
+   "shot": "visualization-5",
+   "id": "niebo",
+   "typ": "niebo",
+   "klasa": "niebo",
+   "opis": "",
+   "g": 14.28,
+   "de2000": 10.92,
+   "dL": -9.5,
+   "dC": 7.1,
+   "limit": 15,
+   "ok": true,
+   "lab_ref": [
+    84.1,
+    -3.3,
+    -14.2
+   ],
+   "lab_rt": [
+    74.6,
+    4.7,
+    -21.1
+   ]
+  },
+  {
+   "shot": "visualization-6",
+   "id": "taupe",
+   "typ": "sciana_taupe",
+   "klasa": "sciana",
+   "opis": "G, nad oknami piętra",
+   "g": 10.78,
+   "de2000": 9.54,
+   "dL": -9.5,
+   "dC": 5.1,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    44.9,
+    -0.1,
+    -0.3
+   ],
+   "lab_rt": [
+    35.5,
+    0.6,
+    -5.4
+   ]
+  },
+  {
+   "shot": "visualization-6",
+   "id": "jasna",
+   "typ": "sciana_jasna",
+   "klasa": "sciana",
+   "opis": "E, nad oknami piętra",
+   "g": 8.82,
+   "de2000": 8.02,
+   "dL": -7.3,
+   "dC": -5.0,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    54.3,
+    0.3,
+    -12.9
+   ],
+   "lab_rt": [
+    47.1,
+    -0.1,
+    -7.9
+   ]
+  },
+  {
+   "shot": "visualization-6",
+   "id": "dach",
+   "typ": "dach",
+   "klasa": "dach",
+   "opis": "",
+   "g": 4.19,
+   "de2000": 4.32,
+   "dL": -0.5,
+   "dC": -3.4,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    45.7,
+    -1.7,
+    -8.1
+   ],
+   "lab_rt": [
+    45.2,
+    0.8,
+    -4.8
+   ]
+  },
+  {
+   "shot": "visualization-6",
+   "id": "okno",
+   "typ": "szyba",
+   "klasa": "szyba",
+   "opis": "parter G, oświetlone",
+   "g": 77.7,
+   "de2000": 69.01,
+   "dL": -75.9,
+   "dC": -5.8,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    78.6,
+    5.5,
+    9.8
+   ],
+   "lab_rt": [
+    2.7,
+    -0.7,
+    -5.4
+   ]
+  },
+  {
+   "shot": "visualization-6",
+   "id": "zielen",
+   "typ": "zielen",
+   "klasa": "zielen",
+   "opis": "",
+   "g": 17.48,
+   "de2000": 12.23,
+   "dL": 11.9,
+   "dC": 11.5,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    20.5,
+    -7.8,
+    2.7
+   ],
+   "lab_rt": [
+    32.4,
+    -13.9,
+    14.0
+   ]
+  },
+  {
+   "shot": "visualization-6",
+   "id": "niebo",
+   "typ": "niebo",
+   "klasa": "niebo",
+   "opis": "",
+   "g": 41.62,
+   "de2000": 35.18,
+   "dL": -40.7,
+   "dC": 8.3,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    58.9,
+    3.1,
+    -23.0
+   ],
+   "lab_rt": [
+    18.3,
+    8.0,
+    -30.4
+   ]
+  },
+  {
+   "shot": "interior-4",
+   "id": "sufit",
+   "typ": "sufit",
+   "klasa": "sufit",
+   "opis": "",
+   "g": 33.16,
+   "de2000": 24.86,
+   "dL": -32.9,
+   "dC": 4.5,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    89.2,
+    1.0,
+    4.8
+   ],
+   "lab_rt": [
+    56.3,
+    0.7,
+    9.3
+   ]
+  },
+  {
+   "shot": "interior-4",
+   "id": "sciana",
+   "typ": "sciana_wn",
+   "klasa": "sciana",
+   "opis": "ściana przy drzwiach",
+   "g": 14.42,
+   "de2000": 12.48,
+   "dL": -1.8,
+   "dC": 2.7,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    78.2,
+    1.6,
+    5.7
+   ],
+   "lab_rt": [
+    76.3,
+    -0.1,
+    -8.6
+   ]
+  },
+  {
+   "shot": "interior-4",
+   "id": "podloga",
+   "typ": "podloga",
+   "klasa": "podloga",
+   "opis": "",
+   "g": 23.77,
+   "de2000": 16.46,
+   "dL": 17.1,
+   "dC": -16.5,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    78.1,
+    2.7,
+    16.3
+   ],
+   "lab_rt": [
+    95.1,
+    -0.0,
+    0.0
+   ]
+  },
+  {
+   "shot": "interior-4",
+   "id": "sofa",
+   "typ": "meble",
+   "klasa": "info",
+   "opis": "",
+   "g": 20.37,
+   "de2000": 16.39,
+   "dL": -13.1,
+   "dC": -3.7,
+   "limit": null,
+   "ok": null,
+   "lab_ref": [
+    82.0,
+    1.7,
+    9.6
+   ],
+   "lab_rt": [
+    68.9,
+    0.3,
+    -6.0
+   ]
+  },
+  {
+   "shot": "interior-5",
+   "id": "sufit",
+   "typ": "sufit",
+   "klasa": "sufit",
+   "opis": "",
+   "g": 26.64,
+   "de2000": 20.83,
+   "dL": -26.5,
+   "dC": 2.8,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    82.4,
+    1.4,
+    6.4
+   ],
+   "lab_rt": [
+    55.9,
+    0.7,
+    9.3
+   ]
+  },
+  {
+   "shot": "interior-5",
+   "id": "sciana",
+   "typ": "sciana_wn",
+   "klasa": "sciana",
+   "opis": "ściana nad kuchnią",
+   "g": 7.44,
+   "de2000": 6.84,
+   "dL": -7.3,
+   "dC": -1.0,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    61.6,
+    2.1,
+    10.1
+   ],
+   "lab_rt": [
+    54.4,
+    0.7,
+    9.3
+   ]
+  },
+  {
+   "shot": "interior-5",
+   "id": "dab",
+   "typ": "zabudowa_drewno",
+   "klasa": "sciana",
+   "opis": "słupek kuchenny",
+   "g": 8.73,
+   "de2000": 7.14,
+   "dL": -7.4,
+   "dC": 4.2,
+   "limit": 10,
+   "ok": true,
+   "lab_ref": [
+    62.8,
+    4.7,
+    21.2
+   ],
+   "lab_rt": [
+    55.4,
+    3.6,
+    25.6
+   ]
+  },
+  {
+   "shot": "interior-5",
+   "id": "podloga",
+   "typ": "podloga",
+   "klasa": "podloga",
+   "opis": "",
+   "g": 46.11,
+   "de2000": 32.89,
+   "dL": 39.6,
+   "dC": -23.5,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    55.5,
+    6.3,
+    22.7
+   ],
+   "lab_rt": [
+    95.1,
+    -0.0,
+    0.0
+   ]
+  },
+  {
+   "shot": "interior-5",
+   "id": "sofa",
+   "typ": "meble",
+   "klasa": "info",
+   "opis": "",
+   "g": 46.56,
+   "de2000": 39.71,
+   "dL": -44.4,
+   "dC": -8.0,
+   "limit": null,
+   "ok": null,
+   "lab_ref": [
+    84.4,
+    0.9,
+    11.0
+   ],
+   "lab_rt": [
+    40.0,
+    0.5,
+    -3.0
+   ]
+  },
+  {
+   "shot": "interior-6",
+   "id": "sufit",
+   "typ": "sufit",
+   "klasa": "sufit",
+   "opis": "",
+   "g": 34.27,
+   "de2000": 25.61,
+   "dL": -34.1,
+   "dC": 3.6,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    90.0,
+    0.7,
+    5.7
+   ],
+   "lab_rt": [
+    55.9,
+    0.7,
+    9.3
+   ]
+  },
+  {
+   "shot": "interior-6",
+   "id": "sciana",
+   "typ": "sciana_wn",
+   "klasa": "sciana",
+   "opis": "nad TV",
+   "g": 22.51,
+   "de2000": 17.49,
+   "dL": -21.1,
+   "dC": -3.7,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    83.2,
+    1.5,
+    5.6
+   ],
+   "lab_rt": [
+    62.2,
+    -0.6,
+    -2.1
+   ]
+  },
+  {
+   "shot": "interior-6",
+   "id": "podloga",
+   "typ": "podloga",
+   "klasa": "podloga",
+   "opis": "",
+   "g": 29.0,
+   "de2000": 21.88,
+   "dL": 19.9,
+   "dC": -12.2,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    72.5,
+    3.6,
+    16.7
+   ],
+   "lab_rt": [
+    92.4,
+    -3.7,
+    -3.2
+   ]
+  },
+  {
+   "shot": "interior-6",
+   "id": "widok",
+   "typ": "widok_za_szyba",
+   "klasa": "szyba",
+   "opis": "żywopłot za HS",
+   "g": 26.59,
+   "de2000": 21.42,
+   "dL": 21.8,
+   "dC": -15.2,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    47.1,
+    -14.2,
+    24.0
+   ],
+   "lab_rt": [
+    69.0,
+    -6.3,
+    11.1
+   ]
+  },
+  {
+   "shot": "interior-6",
+   "id": "sofa",
+   "typ": "meble",
+   "klasa": "info",
+   "opis": "",
+   "g": 20.55,
+   "de2000": 16.3,
+   "dL": 2.2,
+   "dC": -10.5,
+   "limit": null,
+   "ok": null,
+   "lab_ref": [
+    61.1,
+    2.8,
+    15.2
+   ],
+   "lab_rt": [
+    63.3,
+    0.4,
+    -5.0
+   ]
+  },
+  {
+   "shot": "interior-8",
+   "id": "sufit",
+   "typ": "sufit",
+   "klasa": "sufit",
+   "opis": "",
+   "g": 27.33,
+   "de2000": 24.14,
+   "dL": -27.3,
+   "dC": 1.9,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    73.3,
+    0.9,
+    6.6
+   ],
+   "lab_rt": [
+    46.0,
+    0.8,
+    8.5
+   ]
+  },
+  {
+   "shot": "interior-8",
+   "id": "szafa",
+   "typ": "sciana_wn",
+   "klasa": "sciana",
+   "opis": "fronty szaf",
+   "g": 15.21,
+   "de2000": 12.65,
+   "dL": -8.7,
+   "dC": -7.1,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    74.3,
+    1.8,
+    9.7
+   ],
+   "lab_rt": [
+    65.6,
+    0.6,
+    -2.7
+   ]
+  },
+  {
+   "shot": "interior-8",
+   "id": "nisza",
+   "typ": "zabudowa_drewno",
+   "klasa": "sciana",
+   "opis": "nisza-domek (dąb)",
+   "g": 55.6,
+   "de2000": 41.31,
+   "dL": -51.6,
+   "dC": -17.7,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    52.4,
+    5.7,
+    18.4
+   ],
+   "lab_rt": [
+    0.8,
+    0.3,
+    -1.6
+   ]
+  },
+  {
+   "shot": "interior-8",
+   "id": "widok",
+   "typ": "widok_za_szyba",
+   "klasa": "szyba",
+   "opis": "",
+   "g": 16.25,
+   "de2000": 13.59,
+   "dL": 11.1,
+   "dC": 0.8,
+   "limit": 15,
+   "ok": false,
+   "lab_ref": [
+    75.1,
+    -1.6,
+    5.3
+   ],
+   "lab_rt": [
+    86.2,
+    1.6,
+    -6.1
+   ]
+  },
+  {
+   "shot": "interior-10",
+   "id": "sufit",
+   "typ": "sufit",
+   "klasa": "sufit",
+   "opis": "",
+   "g": 27.14,
+   "de2000": 22.55,
+   "dL": -27.0,
+   "dC": 3.0,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    77.7,
+    0.9,
+    6.5
+   ],
+   "lab_rt": [
+    50.7,
+    2.1,
+    9.4
+   ]
+  },
+  {
+   "shot": "interior-10",
+   "id": "sciana",
+   "typ": "sciana_wn",
+   "klasa": "sciana",
+   "opis": "lamele za łóżkiem",
+   "g": 19.83,
+   "de2000": 16.58,
+   "dL": -15.9,
+   "dC": -1.4,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    74.8,
+    0.9,
+    6.6
+   ],
+   "lab_rt": [
+    58.9,
+    0.4,
+    -5.3
+   ]
+  },
+  {
+   "shot": "interior-10",
+   "id": "podloga",
+   "typ": "podloga",
+   "klasa": "podloga",
+   "opis": "",
+   "g": 42.79,
+   "de2000": 32.06,
+   "dL": 31.8,
+   "dC": -10.3,
+   "limit": 10,
+   "ok": false,
+   "lab_ref": [
+    57.1,
+    3.3,
+    19.2
+   ],
+   "lab_rt": [
+    88.9,
+    -0.9,
+    -9.1
+   ]
+  },
+  {
+   "shot": "interior-10",
+   "id": "widok",
+   "typ": "widok_za_szyba",
+   "klasa": "szyba",
+   "opis": "",
+   "g": 14.3,
+   "de2000": 10.51,
+   "dL": 10.5,
+   "dC": -9.6,
+   "limit": 15,
+   "ok": true,
+   "lab_ref": [
+    67.4,
+    -6.1,
+    13.7
+   ],
+   "lab_rt": [
+    77.9,
+    -2.5,
+    4.7
+   ]
+  }
+ ]
+}

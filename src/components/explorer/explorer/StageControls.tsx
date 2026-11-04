@@ -1,6 +1,7 @@
 "use client";
 
 import { FINISHES, getHouse, has3dInterior, type FinishId } from "@/lib/estate";
+import { modelFor } from "@/lib/estate/geometry";
 import { DAYLIGHT } from "../three/lighting/daylight";
 import { stage, useExplorer, withDissolve, type TimeOfDay } from "../state/store";
 import ui from "../ui/ui.module.css";
@@ -26,7 +27,8 @@ export function StageControls() {
   if (view === "estate" && entry === "photo") return null;
   const walking = interior && mode === "walk";
   // The style only shows when the interior does: an opened storey or the walk, not the closed house.
-  const insideVisible = interior && (level !== null || mode === "walk");
+  // BOR2 interiors are the developer's own design: no style switch there.
+  const insideVisible = interior && modelFor(house)?.source !== "bor2" && (level !== null || mode === "walk");
 
   return (
     <div className={`${styles.bottomBar} ${ui.glass}`} data-walk={walking || undefined} data-estate={view === "estate" || undefined} data-entry-controls>

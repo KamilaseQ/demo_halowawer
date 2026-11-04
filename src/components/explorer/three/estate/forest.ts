@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { coverage } from "../coverage";
 import { ESTATE_CENTER } from "@/lib/estate/geometry/site";
 import { deviceTier } from "../../tier";
 import { lazyTexture } from "../loading";
@@ -81,8 +82,12 @@ const BIRCHES: Cell[] = [
 
 const UP = new THREE.Vector3(0, 1, 0);
 
-/** Deep-woodland impostor geometry (positions, up-leaning normals, atlas UVs, per-tree tint). */
-function impostors() {
+/**
+ * Deep-woodland impostor geometry (positions, up-leaning normals, atlas UVs, per-tree tint). With `woods`
+ * (the real woods around the estate from OpenStreetMap, estate XZ) the trees stand there, plus a thin ring
+ * far out (440–640 m) that closes the horizon behind the neighbourhood; without, the procedural pine belt.
+ */
+function impostors(woods?: { x: number; z: number }[]) {
   const lite = deviceTier() === "lite";
   const trees = lite ? 1500 : 3400;
   const underwood = lite ? 450 : 1300;
@@ -127,6 +132,23 @@ function impostors() {
     quad(x, z, yaw + Math.PI / 2, w, h, cell, tint);
   };
 
+  if (woods) {
+    for (const p of woods) {
+      const birch = r() < 0.22;
+      if (birch) tree(p.x, p.z, BIRCHES[Math.floor(r() * 2)], 10 + r() * 6);
+      else tree(p.x, p.z, PINES[Math.floor(r() * 6)], 14 + r() * 9);
+    }
+    for (let i = 0; i < (lite ? 500 : 1100); i++) {
+      const a = r() * Math.PI * 2;
+      const d = 440 + r() * 200;
+      const x = CX + Math.cos(a) * d;
+      const z = CZ + Math.sin(a) * d;
+      if (stand(x, z, 3.1) < 0.4) continue;
+      tree(x, z, PINES[Math.floor(r() * 6)], 15 + r() * 10);
+    }
+    return finishGeometry(pos, nrm, uv, col, idx);
+  }
+
   let placed = 0;
   let guard = 0;
   while (placed < trees && guard++ < trees * 12) {
@@ -156,6 +178,10 @@ function impostors() {
     low++;
   }
 
+  return finishGeometry(pos, nrm, uv, col, idx);
+}
+
+function finishGeometry(pos: number[], nrm: number[], uv: number[], col: number[], idx: number[]) {
   const g = new THREE.BufferGeometry();
   g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
   g.setAttribute("normal", new THREE.Float32BufferAttribute(nrm, 3));
@@ -167,7 +193,7 @@ function impostors() {
 }
 
 /** The deep woodland: one impostor mesh and its material (alpha-tested, fogged, no shadows). */
-export function buildForest() {
+export function buildForest(woods?: { x: number; z: number }[]) {
   const map = lazyTexture("/explorer/3d/models/las-impostory.webp");
   map.colorSpace = THREE.SRGBColorSpace;
   map.anisotropy = 4;
@@ -181,7 +207,7 @@ export function buildForest() {
     envMapIntensity: 0.5,
   });
   // With MSAA on, the cut-out edges resolve smoothly instead of shimmering.
-  material.alphaToCoverage = true;
+  coverage(material);
   material.onBeforeCompile = (shader) => {
     patchNoFlip(shader);
     patchCoverage(shader);
@@ -190,5 +216,5 @@ export function buildForest() {
     shader.fragmentShader = shader.fragmentShader.replace("#include <fog_fragment>", "#ifdef USE_FOG\n  #ifdef FOG_EXP2\n    float fogFactor = 1.0 - exp(-fogDensity * fogDensity * vFogDepth * vFogDepth);\n  #else\n    float fogFactor = smoothstep(fogNear, fogFar, vFogDepth);\n  #endif\n  gl_FragColor.rgb = mix(gl_FragColor.rgb, fogColor, fogFactor * 0.55);\n#endif");
   };
   material.customProgramCacheKey = () => "estate-impostors";
-  return { geometry: impostors(), material };
+  return { geometry: impostors(woods), material };
 }

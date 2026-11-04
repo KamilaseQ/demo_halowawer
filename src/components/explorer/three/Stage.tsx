@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from "react";
 import * as THREE from "three";
 import { ARRANGEMENTS, getHouse, has3dInterior, houses, houseTag, type FinishId, type HouseId } from "@/lib/estate";
 import { modelFor } from "@/lib/estate/geometry";
@@ -11,7 +11,12 @@ import { cameraControls } from "./camera/controls";
 import { Effects } from "./Effects";
 import { EstateWorld } from "./estate/EstateWorld";
 import { labelAnchor } from "./estate/labels";
+import { bor2Version, subscribeBor2 } from "./bor2/exterior";
 import { HouseWorld } from "./house/HouseWorld";
+import { Bor2HouseWorld } from "./bor2/Bor2HouseWorld";
+import { EstateWalk } from "./bor2/EstateWalk";
+import { bor2Enabled } from "./bor2/exterior";
+import { BOR2_OFFSET } from "@/lib/estate/geometry/bor2";
 import { SceneLabels, type SceneLabel } from "./labels/SceneLabels";
 import { Lighting } from "./lighting/Lighting";
 import { Deferred } from "./loading";
@@ -21,6 +26,8 @@ import { SceneGate } from "./SceneGate";
 import { houseFrame } from "./space";
 import { registerStageCommands, useExplorer, withDissolve } from "../state/store";
 import { deviceTier } from "../tier";
+import { perfFlag } from "../perf";
+import { setCoverage } from "./coverage";
 
 /** A GPU copy of the frame just drawn (still intact in the drawing buffer at this point). */
 function copyCanvas(source: HTMLCanvasElement) {
@@ -31,6 +38,72 @@ function copyCanvas(source: HTMLCanvasElement) {
   if (!ctx) return null;
   ctx.drawImage(source, 0, 0);
   return copy;
+}
+
+/**
+ * QA/audit API (dev, or ?debug=1): every object's origin (userData.source on its nearest tagged ancestor:
+ * bor2 · proc · zielen · wnetrze · okolica · ui), visibility switches by name, and a free camera.
+ */
+function explorerDebug(scene: THREE.Scene, invalidate: () => void) {
+  const sourceOf = (o: THREE.Object3D) => {
+    for (let p: THREE.Object3D | null = o; p; p = p.parent) if (p.userData?.source) return p.userData.source as string;
+    return "proc";
+  };
+  const visible = (o: THREE.Object3D) => {
+    for (let p: THREE.Object3D | null = o; p; p = p.parent) if (!p.visible) return false;
+    return true;
+  };
+  const round = (v: number) => Math.round(v * 100) / 100;
+  const pathOf = (o: THREE.Object3D) => {
+    const parts: string[] = [];
+    for (let p: THREE.Object3D | null = o; p && p !== scene; p = p.parent) if (p.name) parts.unshift(p.name);
+    return parts.join("/");
+  };
+  return {
+    /** What the visitor is looking at: device tier and post quality (screenshots from the client). */
+    info() {
+      const s = useExplorer.getState();
+      return { tier: deviceTier(), postQuality: deviceTier() === "lite" ? "low" : s.postQuality, view: s.view, house: s.house, mode: s.mode, timeOfDay: s.timeOfDay };
+    },
+    dumpScene() {
+      scene.updateMatrixWorld(true);
+      const out: unknown[] = [];
+      const box = new THREE.Box3();
+      scene.traverse((o) => {
+        const mesh = o as THREE.Mesh;
+        if (!mesh.isMesh) return;
+        const g = mesh.geometry;
+        const count = g.index ? g.index.count : (g.attributes.position?.count ?? 0);
+        const instances = (mesh as THREE.InstancedMesh).isInstancedMesh ? (mesh as THREE.InstancedMesh).count : 1;
+        box.setFromObject(mesh);
+        const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        out.push({
+          name: mesh.name || mesh.parent?.name || "",
+          path: pathOf(mesh),
+          source: sourceOf(mesh),
+          material: mats.map((m) => m.name || m.type),
+          sourceMaterial: (mesh.userData.sourceMaterial as string[] | undefined) ?? null,
+          bbox: box.isEmpty() ? null : [box.min.x, box.min.y, box.min.z, box.max.x, box.max.y, box.max.z].map(round),
+          triangles: Math.round((count / 3) * instances),
+          instances,
+          visible: visible(mesh),
+          pickOnly: mats.every((m) => !m.visible),
+        });
+      });
+      return out;
+    },
+    setFlags({ ukryj = [], pokaz = [] }: { ukryj?: string[]; pokaz?: string[] }) {
+      for (const n of ukryj) scene.getObjectsByProperty("name", n).forEach((o) => (o.visible = false));
+      for (const n of pokaz) scene.getObjectsByProperty("name", n).forEach((o) => (o.visible = true));
+      invalidate();
+    },
+    /** GLB frame (like ujecia-porownawcze.json) unless `estate: true`; fov = vertical degrees; shift = lens shift. */
+    setCamera({ pos, target, fov = 45, shift = 0, near = 0.05, estate = false }: { pos: number[]; target: number[]; fov?: number; shift?: number; near?: number; estate?: boolean }) {
+      const o = estate ? [0, 0, 0] : BOR2_OFFSET;
+      const to = (p: number[]): [number, number, number] => [p[0] + o[0], p[1] + o[1], p[2] + o[2]];
+      useExplorer.setState({ shot: { id: "debug", position: to(pos), target: to(target), yfov: fov, shift, near }, shotReady: false, introDone: true, entry: "model" });
+    },
+  };
 }
 
 /** Wires imperative commands (frame freeze/capture, zoom). */
@@ -69,9 +142,19 @@ function StageBridge() {
   // Measurement handle for production builds (?debug=1): renderer + scene for GPU-memory and draw-call probes.
   const scene = useThree((s) => s.scene);
   useEffect(() => {
-    if (!new URLSearchParams(window.location.search).has("debug")) return;
-    (window as unknown as { __probe: unknown }).__probe = { gl, scene, state: useExplorer };
-  }, [gl, scene]);
+    const debug = new URLSearchParams(window.location.search).has("debug");
+    if (debug) (window as unknown as { __probe: unknown }).__probe = { gl, scene, state: useExplorer };
+    if (debug || process.env.NODE_ENV !== "production") (window as unknown as { __explorerDebug: unknown }).__explorerDebug = explorerDebug(scene, invalidate);
+  }, [gl, scene, invalidate]);
+
+  // QA framing: objects the developer's render does not show ("ukryj"), hidden while the shot holds.
+  const shot = useExplorer((s) => s.shot);
+  useEffect(() => {
+    const hidden = (shot?.hide ?? []).flatMap((n) => scene.getObjectsByProperty("name", n));
+    hidden.forEach((o) => (o.visible = false));
+    invalidate();
+    return () => hidden.forEach((o) => (o.visible = true));
+  }, [shot, scene, invalidate]);
 
   // Priority 2 runs after the EffectComposer (priority 1), while the drawing buffer is still intact.
   useFrame(() => {
@@ -141,6 +224,8 @@ function EstateScene({ detailed, highlight, onSelect }: { detailed: HouseId | nu
 /** Glass pills over the roofs: "Dom B · 119,8 m² · 1,60 mln zł" (sold houses: a quiet "sprzedany"). */
 function HouseLabels({ visible, onSelect }: { visible: boolean; onSelect: (id: HouseId) => void }) {
   const hovered = useExplorer((s) => s.hovered);
+  // Anchors move onto the BOR2 volumes once the model is in.
+  const bor2 = useSyncExternalStore(subscribeBor2, bor2Version, bor2Version);
   const items: SceneLabel[] = useMemo(
     () =>
       houses.map((h) => ({
@@ -153,7 +238,8 @@ function HouseLabels({ visible, onSelect }: { visible: boolean; onSelect: (id: H
         active: hovered === h.id,
         muted: h.status === "sold",
       })),
-    [hovered, onSelect],
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- bor2: anchors read the loaded model's boxes
+    [hovered, onSelect, bor2],
   );
   return <SceneLabels items={items} visible={visible} stack />;
 }
@@ -173,11 +259,27 @@ export default function Stage({ onSelect }: { onSelect: (id: HouseId) => void })
   const lite = deviceTier() === "lite";
   const postQuality = useExplorer((s) => s.postQuality);
   const quality = lite ? "low" : postQuality;
+  // Cut-out edges: alpha-to-coverage only where the post stack multisamples (see coverage.ts).
+  useMemo(() => setCoverage(quality === "high" && !perfFlag("nomsaa")), [quality]);
+  useEffect(() => console.info(`[explorer] quality ${quality} (tier ${deviceTier()})`), [quality]);
 
   const house = view === "house" && houseId ? getHouse(houseId) : undefined;
   const model = useMemo(() => (house && has3dInterior(house) ? modelFor(house) : null), [house]);
   const frame = useMemo(() => (house ? houseFrame(house.id, model) : null), [house, model]);
   const interior = !!model;
+  // BOR2: the developer's interior GLB in estate space; otherwise the traced layout with finish styles.
+  const bor2 = model?.source === "bor2";
+  const procedural = interior && !bor2;
+  const mode = useExplorer((s) => s.mode);
+  const level = useExplorer((s) => s.level);
+  // A BOR2 house keeps its exterior body until you look inside (dollhouse cut or walk).
+  const inside = mode === "walk" || (mode === "model" && level !== null);
+  const detailed = frame && model ? (bor2 ? (inside ? frame.id : null) : frame.id) : null;
+  const focus = useMemo(() => {
+    if (!bor2 || !model) return null;
+    const [x0, z0, x1, z1] = model.bounds;
+    return new THREE.Vector3((x0 + x1) / 2, model.levels[0]?.elevation ?? 0, (z0 + z1) / 2);
+  }, [bor2, model]);
   // New scene content (space, house, furniture) goes through the gate again, under the dissolve. So does a new
   // post-stack quality: its passes compile in the frames the gate draws under the cover, not in the next gesture.
   const arrangement = model ? (arrangementState ?? ARRANGEMENTS[model.layout]?.[0]?.id ?? "") : "";
@@ -209,20 +311,23 @@ export default function Stage({ onSelect }: { onSelect: (id: HouseId) => void })
       {!lite && postQuality === "high" && <QualityGovernor />}
 
       {/* Interior textures load only where an interior is shown; the estate prefetches them when idle. */}
-      <MaterialsProvider finish={finish} textures={interior} onApplied={onApplied} tint={tint}>
+      <MaterialsProvider finish={finish} textures={procedural} onApplied={onApplied} tint={tint}>
         <Deferred>
           {frame ? (
             <>
               {/* The estate around the house, drawn in house space (inverse placement). */}
               <group rotation-y={-frame.rotationY}>
                 <group position={[-frame.origin.x, -frame.origin.y, -frame.origin.z]}>
-                  <EstateScene detailed={model ? frame.id : null} highlight={false} onSelect={onSelect} />
+                  <EstateScene detailed={detailed} highlight={false} onSelect={onSelect} />
                 </group>
               </group>
-              {model && house && <HouseWorld house={house} model={model} />}
+              {model && house && (bor2 ? <Bor2HouseWorld house={house} model={model} /> : <HouseWorld house={house} model={model} />)}
             </>
           ) : (
-            <EstateScene detailed={null} highlight={entry === "model"} onSelect={onSelect} />
+            <>
+              <EstateScene detailed={null} highlight={entry === "model"} onSelect={onSelect} />
+              {view === "estate" && mode === "walk" && bor2Enabled() && <EstateWalk />}
+            </>
           )}
         </Deferred>
       </MaterialsProvider>
@@ -230,13 +335,13 @@ export default function Stage({ onSelect }: { onSelect: (id: HouseId) => void })
 
       <Lighting
         interior={interior}
-        center={frame ? HOUSE_CENTER : ESTATE_FOCUS}
+        center={focus ?? (frame ? HOUSE_CENTER : ESTATE_FOCUS)}
         extent={frame ? 16 : 62}
         spaceRotation={frame ? -frame.rotationY : 0}
       />
       <CameraRig model={model} />
-      <Effects interior={interior} quality={quality} />
-      <SceneGate gateKey={gateKey} needsFinish={interior} />
+      {!perfFlag("nopost") && <Effects interior={interior} quality={quality} />}
+      <SceneGate gateKey={gateKey} needsFinish={procedural} />
       <Prefetch interior={interior} />
       <StageBridge />
     </Canvas>

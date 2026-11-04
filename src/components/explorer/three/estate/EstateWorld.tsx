@@ -10,6 +10,9 @@ import { HORIZON, INTERIOR_DAY, INTERIOR_NIGHT, SOLD_MIX } from "./materials";
 import { useExplorer } from "../../state/store";
 import { EstateTrees } from "./trees";
 import { HOUSE_INDEX, houseGroup } from "./siteMeshes";
+import { Bor2Exterior } from "../bor2/Bor2Exterior";
+import { bor2Enabled } from "../bor2/exterior";
+import { groundNearField } from "./ground";
 
 /* ==========================================================================
    The estate maquette: seven houses (warm clay, real roof colours), their
@@ -109,42 +112,64 @@ export function EstateWorld({ detailed, hovered, selected, highlight, onHover, o
         }
       : {};
 
+  // BOR2 (the developer's SketchUp model) brings the houses, drive, fences and neighbours; the procedural
+  // ground, planting, trees, meadow and forest stay around it.
+  const bor2 = bor2Enabled();
+  // Under BOR2 nothing procedural stays inside the estate's boundary but the terrain itself (05-odbior, L0):
+  // no painted procedural lawns/beds/contact shading, no meadow hem along the old fences.
+  useMemo(() => groundNearField(build.ground.material, !bor2), [build, bor2]);
+
   return (
-    <group name="estate">
+    <group name="estate" userData={{ source: "proc" }}>
       <mesh name="ground" geometry={build.ground.geometry} material={build.ground.material} receiveShadow />
-      <mesh name="paving" geometry={build.paving} material={m.paving} receiveShadow />
-      <mesh name="grass-pavers" geometry={build.grassPavers} material={m.grassPavers} receiveShadow />
-      <mesh name="site" geometry={build.site} material={m.site} castShadow receiveShadow />
-      <mesh name="neighbours" geometry={build.neighbours} material={m.clay} castShadow receiveShadow />
-      <mesh name="veg-bark" geometry={build.bark} material={m.bark} castShadow receiveShadow />
-      <mesh name="veg-foliage" geometry={build.foliage} material={m.foliage} castShadow receiveShadow />
-      <primitive object={build.tufts} name="veg-grasses" receiveShadow />
-      <EstateTrees />
-      <primitive object={build.meadow} name="meadow" />
+      {!bor2 && (
+        <>
+          <mesh name="paving" geometry={build.paving} material={m.paving} receiveShadow />
+          <mesh name="grass-pavers" geometry={build.grassPavers} material={m.grassPavers} receiveShadow />
+          <mesh name="site" geometry={build.site} material={m.site} castShadow receiveShadow />
+          <mesh name="neighbours" geometry={build.neighbours} material={m.clay} castShadow receiveShadow />
+        </>
+      )}
+      {/* Planting of the procedural plots; with BOR2 the model's own markers place it (Bor2Planting). */}
+      {!bor2 && (
+        <>
+          <mesh name="veg-bark" geometry={build.bark} material={m.bark} castShadow receiveShadow />
+          <mesh name="veg-foliage" geometry={build.foliage} material={m.foliage} castShadow receiveShadow />
+          <primitive object={build.tufts} name="veg-grasses" receiveShadow />
+          <EstateTrees />
+        </>
+      )}
+      {!bor2 && <primitive object={build.meadow} name="meadow" />}
       {/* Background woodland (far, no shadows): the estate sits in the Wawer pine belt, not on a plain. */}
-      <mesh name="forest" geometry={build.forest.geometry} material={build.forest.material} />
+      {!bor2 && <mesh name="forest" geometry={build.forest.geometry} material={build.forest.material} />}
 
-      {HOUSE_IDS.map((id) => {
-        const g = houseGroup(id);
-        const geo = build.houses[id];
-        return (
-          <group key={id} name={`dom-${id}`} position={g.position} rotation-y={g.rotationY} visible={id !== detailed}>
-            <group scale-z={g.mirror}>
-              <mesh name="house-body" geometry={geo.opaque} material={m.house} castShadow receiveShadow />
-              <mesh name="house-glass" geometry={geo.glass} material={m.glass} receiveShadow />
-            </group>
-          </group>
-        );
-      })}
+      {bor2 ? (
+        <Bor2Exterior detailed={detailed} hovered={hovered} selected={selected} highlight={highlight} onHover={onHover} onSelect={onSelect} />
+      ) : (
+        <>
+          {HOUSE_IDS.map((id) => {
+            const g = houseGroup(id);
+            const geo = build.houses[id];
+            return (
+              <group key={id} name={`dom-${id}`} position={g.position} rotation-y={g.rotationY} visible={id !== detailed}>
+                <group scale-z={g.mirror}>
+                  <mesh name="house-body" geometry={geo.opaque} material={m.house} castShadow receiveShadow />
+                  <mesh name="house-glass" geometry={geo.glass} material={m.glass} receiveShadow />
+                </group>
+              </group>
+            );
+          })}
 
-      {/* Invisible pick volumes (envelope of each house): cheap raycasts, stable hover across details. */}
-      {HOUSE_IDS.filter((id) => id !== detailed).map((id) => (
-        <mesh key={`pick-${id}`} name="pick" geometry={build.houses[id].proxy} material={build.proxyMaterial} {...handlers(id)} />
-      ))}
+          {/* Invisible pick volumes (envelope of each house): cheap raycasts, stable hover across details. */}
+          {HOUSE_IDS.filter((id) => id !== detailed).map((id) => (
+            <mesh key={`pick-${id}`} name="pick" geometry={build.houses[id].proxy} material={build.proxyMaterial} {...handlers(id)} />
+          ))}
 
-      {/* Transparent last: fence mesh, then the highlight glass. */}
-      <mesh name="fences" geometry={build.fences} material={m.fence} receiveShadow renderOrder={1} />
-      <mesh name="highlight" geometry={build.shell.geometry} material={build.shell.material} renderOrder={2} frustumCulled={false} />
+          {/* Transparent last: fence mesh, then the highlight glass. */}
+          <mesh name="fences" geometry={build.fences} material={m.fence} receiveShadow renderOrder={1} />
+          <mesh name="highlight" geometry={build.shell.geometry} material={build.shell.material} renderOrder={2} frustumCulled={false} />
+        </>
+      )}
     </group>
   );
 }

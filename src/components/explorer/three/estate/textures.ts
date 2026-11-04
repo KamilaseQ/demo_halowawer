@@ -72,7 +72,7 @@ export function makeGrassPaverTexture() {
   const r = rng(19);
   ctx.fillStyle = hsl(40, 8, 72);
   ctx.fillRect(0, 0, S, S);
-  // 0.6 × 0.4 m blocks, each with 3 × 2 square grass cells.
+  // 0.6 × 0.4 m blocks, each with 4 × 2 square grass cells of ~10 cm (D-005: real pavers have 8 openings).
   const bw = 0.6 * px;
   const bh = 0.4 * px;
   for (let by = 0; by < S / bh; by++) {
@@ -81,10 +81,10 @@ export function makeGrassPaverTexture() {
       const y0 = by * bh;
       ctx.fillStyle = hsl(38, 7, 69 + (r() - 0.5) * 5);
       ctx.fillRect(x0 + 1, y0 + 1, bw - 2, bh - 2);
-      const cell = 0.135 * px;
-      for (let i = 0; i < 3; i++)
+      const cell = 0.1 * px;
+      for (let i = 0; i < 4; i++)
         for (let j = 0; j < 2; j++) {
-          const cx = x0 + (bw / 3) * (i + 0.5) - cell / 2;
+          const cx = x0 + (bw / 4) * (i + 0.5) - cell / 2;
           const cy = y0 + (bh / 2) * (j + 0.5) - cell / 2;
           ctx.fillStyle = hsl(78 + (r() - 0.5) * 14, 22 + r() * 10, 42 + (r() - 0.5) * 10);
           ctx.fillRect(cx, cy, cell, cell);

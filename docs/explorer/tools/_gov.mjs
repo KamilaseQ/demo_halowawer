@@ -2,7 +2,7 @@
 // gestures, when postQuality flips and whether a dissolve covers it. Scratch tool of the perf pass.
 import { chromium } from "playwright-core";
 const [, , origin, cpu = "3"] = process.argv;
-const browser = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"] });
+const browser = await chromium.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: true, args: ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist", "--no-proxy-server"] });
 const W = 1440, H = 900;
 const page = await browser.newPage({ viewport: { width: W, height: H } });
 await page.addInitScript(() => {

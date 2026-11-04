@@ -53,7 +53,19 @@ type State = {
   leadOpen: boolean;
   /** Post stack quality on capable devices; drops to "low" (under a dissolve, camera at rest) if the GPU can't keep up. */
   postQuality: "high" | "low";
+  /** Estate walk: the house the walker stands next to ("Wejdź do domu"). */
+  nearHouse: HouseId | null;
+  /**
+   * QA framing (?kadr=<render>): the developer's render camera from ujecia-porownawcze.json, estate space.
+   * The rig holds it (fov, near, vertical lens shift) and flags `shotReady` once a frame shows it.
+   */
+  shot: Shot | null;
+  shotReady: boolean;
+  /** ?czysty=1: only the canvas (measurements over the whole frame). */
+  clean: boolean;
 };
+
+export type Shot = { id: string; position: [number, number, number]; target: [number, number, number]; yfov: number; shift: number; near: number; hide?: string[] };
 
 type Actions = {
   set: (partial: Partial<State>) => void;
@@ -86,6 +98,10 @@ export const useExplorer = create<State & Actions>()((set) => ({
   panelCollapsed: false,
   leadOpen: false,
   postQuality: "high",
+  nearHouse: null,
+  shot: null,
+  shotReady: false,
+  clean: false,
 
   set: (partial) => set(partial),
   setMode: (mode) => set({ mode, photo: false }),

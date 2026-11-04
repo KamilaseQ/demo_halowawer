@@ -708,3 +708,23 @@ p.start[data-delayed] {
     --line: rgba(31, 31, 31, 0.35);
   }
 }
+
+/* ?czysty=1 (QA framing): the canvas alone, full frame. */
+.root[data-clean] > :not(.stage),
+.root[data-clean] .stage > :not(:has(canvas)) {
+  display: none !important;
+}
+
+/* ODbL attribution of the OpenStreetMap neighbourhood: quiet, bottom right above the dock. */
+.osm {
+  position: absolute;
+  z-index: 6;
+  right: calc(var(--inset) + var(--fab) + 16px);
+  bottom: calc(var(--dock) + var(--inset) + 4px);
+  margin: 0;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: rgba(31, 31, 31, 0.62);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
